@@ -1,0 +1,2006 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Futurera Institute — AI education for high school students | Toronto</title>
+<meta name="description" content="Futurera Institute teaches Grade 9–12 students the AI skills universities and employers expect. Toronto-based. Core team includes faculty affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     Futurera Institute · Edufy-inspired layout
+     · One typeface (Inter)
+     · Negative tracking on display sizes
+     · Pill buttons, calm motion
+     · Alternating white / surface backgrounds
+     · 1300px container, 120px section rhythm
+     ============================================================ */
+
+  :root {
+    /* Type */
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --fs-h1: clamp(40px, 6vw, 72px);
+    --fs-h2: clamp(32px, 4.5vw, 56px);
+    --fs-h3: clamp(22px, 2.4vw, 28px);
+    --fs-h4: 18px;
+    --fs-body: 16px;
+    --fs-sm: 14px;
+    --fs-xs: 12px;
+    --lh-display: 1.1;
+    --lh-heading: 1.2;
+    --lh-body: 1.7;
+    --ls-display: -2px;
+    --ls-heading: -1.5px;
+    --ls-eyebrow: 0.16em;
+
+    /* Color — Futurera brand palette */
+    --ink: #0E0E0F;              /* text-dark */
+    --ink-muted: #535353;        /* paragraph-gray */
+    --ink-soft: #616163;         /* light-grey */
+    --ink-faint: #AFAFAF;        /* dark-gray */
+    --bg: #FFFFFF;               /* white */
+    --surface: #E5E7F1;          /* soft cool lavender-gray · alternating section bg */
+    --surface-2: #D8DBE8;        /* derived: deeper lavender-gray for hover/secondary */
+    --line: #D4D7E3;             /* cool gray line, derived from surface */
+    --brand-deep: #353447;       /* primary-dark · slate */
+    --brand-deep-2: #28283A;     /* derived: darker slate */
+    --brand-accent: #F4B400;     /* primary · Futurera logo gold */
+    --brand-accent-2: #D19A00;   /* derived: darker gold for hover */
+    --grey-30: #6161634D;        /* grey-opacity-30 */
+    --success: #15803D;
+    --success-bg: #DCFCE7;
+
+    /* Spacing scale */
+    --sp-1: 8px;
+    --sp-2: 16px;
+    --sp-3: 24px;
+    --sp-4: 32px;
+    --sp-5: 48px;
+    --sp-6: 64px;
+    --sp-7: 80px;
+    --sp-8: 120px;
+    --sp-9: 160px;
+
+    /* Layout */
+    --container: 1300px;
+    --gutter: 30px;
+    --radius-sm: 10px;
+    --radius-md: 20px;
+    --radius-pill: 60px;
+    --radius-chip: 100px;
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur-micro: 200ms;
+    --dur-enter: 600ms;
+
+    /* Focus */
+    --focus-ring: 0 0 0 3px rgba(244, 180, 0, 0.45);
+
+    /* Z layers */
+    --z-nav: 50;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; transition: color var(--dur-micro) var(--ease-out); }
+  a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    font-weight: 600;
+    margin: 0;
+  }
+  h1 { font-size: var(--fs-h1); line-height: var(--lh-display); letter-spacing: var(--ls-display); }
+  h2 { font-size: var(--fs-h2); line-height: var(--lh-heading); letter-spacing: var(--ls-heading); }
+  h3 { font-size: var(--fs-h3); line-height: 1.25; letter-spacing: -1px; font-weight: 600; }
+  h4 { font-size: var(--fs-h4); line-height: 1.3; letter-spacing: -0.4px; font-weight: 600; }
+
+  p { margin: 0 0 var(--sp-2); }
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  .container {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  @media (max-width: 640px) {
+    .container { padding-inline: 24px; }
+    :root { --gutter: 24px; }
+  }
+
+  .section { padding-block: var(--sp-8); }
+  .section--alt { background: var(--surface); }
+  .section--dark { background: var(--brand-deep); color: #fff; }
+  .section--tight { padding-block: var(--sp-6); }
+  @media (max-width: 760px) {
+    .section { padding-block: var(--sp-7); }
+  }
+
+  /* Eyebrow — plain editorial kicker, no chip background */
+  .eyebrow {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: transparent;
+    padding: 0;
+    margin: 0 0 var(--sp-3);
+  }
+  .section--dark .eyebrow { color: rgba(255,255,255,0.85); }
+  .eyebrow.gold { color: var(--brand-accent-2); }
+  .section--dark .eyebrow.gold { color: var(--brand-accent); }
+
+  /* ============================================================
+     Section header pattern — single source of truth for every
+     section across the page. Eyebrow → H2 → description.
+     ============================================================ */
+  .section-head {
+    max-width: 760px; margin: 0 auto var(--sp-6);
+    text-align: center;
+  }
+  .section-head h2 {
+    font-size: var(--fs-h2);                 /* clamp(32px, 4.5vw, 56px) */
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);                 /* 24px gap to description */
+    text-wrap: balance;
+  }
+  .section-head p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .section--dark .section-head h2 { color: #fff; }
+  .section--dark .section-head p { color: rgba(255,255,255,0.7); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px;
+    font-family: inherit; font-size: var(--fs-sm); font-weight: 500;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    cursor: pointer; text-decoration: none;
+    transition: background-color var(--dur-micro) var(--ease-out),
+                color var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out),
+                transform var(--dur-micro) var(--ease-out);
+  }
+  .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .btn-primary { background: var(--brand-deep); color: #fff; }
+  .btn-primary:hover { background: var(--brand-deep-2); }
+  .btn-accent { background: var(--brand-accent); color: var(--ink); }
+  .btn-accent:hover { background: var(--brand-accent-2); color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(13,23,20,0.15); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .section--dark .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.3); }
+  .section--dark .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
+  .btn-chip { padding: 8px 18px; font-size: var(--fs-sm); border-radius: var(--radius-chip); background: var(--surface); color: var(--ink); }
+  .btn-chip:hover { background: var(--surface-2); }
+
+  /* ---------- Header (Edufy-style, transparent over dark hero) ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: transparent;
+    transition: background var(--dur-micro) var(--ease-out),
+                box-shadow var(--dur-micro) var(--ease-out);
+  }
+  header.site.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    box-shadow: 0 1px 0 rgba(13,23,20,0.06);
+  }
+  /* Over-hero (transparent) state — invert text to white */
+  header.site:not(.scrolled) nav.primary {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.18);
+  }
+  header.site:not(.scrolled) nav.primary a.link,
+  header.site:not(.scrolled) nav.primary button.link {
+    color: #fff;
+  }
+  header.site:not(.scrolled) nav.primary a.link:hover,
+  header.site:not(.scrolled) nav.primary button.link:hover,
+  header.site:not(.scrolled) nav.primary .item:hover > .link {
+    background: rgba(255,255,255,0.14);
+  }
+  header.site:not(.scrolled) .nav-cta .btn-chip {
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+  }
+  header.site:not(.scrolled) .nav-cta .btn-chip:hover {
+    background: rgba(255,255,255,0.22);
+  }
+  header.site:not(.scrolled) .mobile-toggle { color: #fff; }
+
+  /* Scrolled state — gold "Join AI Bootcamp" CTA · matches hero primary */
+  header.site.scrolled .nav-cta .btn-chip {
+    background: var(--brand-accent);
+    color: var(--ink);
+  }
+  header.site.scrolled .nav-cta .btn-chip:hover {
+    background: var(--brand-accent-2);
+  }
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: var(--sp-3);
+    height: 95px;
+  }
+  .brand-link { display: flex; align-items: center; justify-self: start; }
+  .brand-link img {
+    height: 50px; width: auto; display: block;
+    transition: filter var(--dur-micro) var(--ease-out);
+  }
+  /* Over the dark hero: render the logo all-white */
+  header.site:not(.scrolled) .brand-link img {
+    filter: brightness(0) invert(1);
+  }
+
+  nav.primary {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(13,23,20,0.06);
+    border-radius: var(--radius-chip);
+    padding: 6px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    justify-self: center;
+  }
+  nav.primary > .item { position: relative; }
+  nav.primary a.link, nav.primary button.link {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 11px 20px; font-size: 15px; font-weight: 500;
+    color: var(--ink); background: transparent; border: 0; cursor: pointer;
+    border-radius: var(--radius-chip);
+    transition: background-color var(--dur-micro) var(--ease-out),
+                color var(--dur-micro) var(--ease-out);
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  nav.primary a.link:hover, nav.primary button.link:hover,
+  nav.primary .item:hover > .link, nav.primary .item:focus-within > .link {
+    background: var(--surface);
+  }
+  nav.primary .caret { font-size: 10px; opacity: 0.55; transition: transform var(--dur-micro) var(--ease-out); }
+  nav.primary .item:hover > .link .caret,
+  nav.primary .item:focus-within > .link .caret { transform: rotate(180deg); }
+
+  .dropdown {
+    position: absolute; top: calc(100% + 8px); left: 0; min-width: 220px;
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 10px 30px rgba(13,23,20,0.08);
+    padding: 8px; opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out), visibility var(--dur-micro);
+  }
+  nav.primary .item:hover .dropdown,
+  nav.primary .item:focus-within .dropdown {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+  .dropdown a {
+    display: block; padding: 10px 14px; font-size: var(--fs-sm); font-weight: 500;
+    color: var(--ink); border-radius: 8px;
+  }
+  .dropdown a:hover { background: var(--surface); }
+
+  .nav-cta { display: flex; gap: 10px; align-items: center; justify-self: end; }
+  .nav-cta .btn { padding: 13px 26px; font-size: 15px; }
+  .nav-cta .cta-short { display: none; }
+  .mobile-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--ink); }
+  .mobile-toggle svg { width: 26px; height: 26px; }
+
+  @media (max-width: 980px) {
+    .nav { grid-template-columns: auto 1fr auto; height: 80px; }
+    nav.primary { display: none; }
+    .mobile-toggle { display: block; }
+    .nav-cta .btn-chip { padding: 10px 18px; font-size: 13px; }
+  }
+  @media (max-width: 640px) {
+    .nav-cta .btn-chip { padding: 8px 14px; font-size: 12px; }
+    .nav-cta .cta-full { display: none; }
+    .nav-cta .cta-short { display: inline; }
+  }
+  @media (max-width: 980px) {
+    nav.primary.open {
+      display: flex; flex-direction: column; align-items: stretch; gap: 0;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: #fff; border-bottom: 1px solid var(--line);
+      padding: 16px var(--gutter); box-shadow: 0 10px 24px rgba(13,23,20,0.06);
+      border-radius: 0; border-top: 1px solid var(--line);
+    }
+    nav.primary.open .item { width: 100%; }
+    nav.primary.open .dropdown {
+      position: static; opacity: 1; visibility: visible; transform: none;
+      box-shadow: none; border: 0; padding: 0 0 0 16px;
+    }
+    nav.primary.open a.link, nav.primary.open button.link {
+      width: 100%; padding: 14px 0; border-radius: 0;
+      justify-content: flex-start;
+    }
+  }
+
+  /* ---------- Hero (full-bleed dark, extends through header) ---------- */
+  .hero {
+    margin-top: -95px;
+    padding: calc(95px + var(--sp-7)) var(--gutter) var(--sp-7);
+    min-height: calc(100vh - 76px); /* 76px = ticker height; together they fill the viewport */
+    display: flex; align-items: center;
+    position: relative;
+    color: #fff;
+    background-color: var(--brand-deep);
+    background-image:
+      linear-gradient(135deg, rgba(53, 52, 71, 0.85) 0%, rgba(40, 40, 58, 0.92) 60%, rgba(53, 52, 71, 0.88) 100%),
+      url("assets/hero-bg.jpg");
+    background-size: cover;
+    background-position: center 40%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  @media (max-width: 980px) {
+    .hero {
+      margin-top: -80px;
+      padding: calc(80px + var(--sp-6)) var(--gutter) var(--sp-6);
+      min-height: calc(100vh - 76px);
+    }
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    right: -120px; top: -120px;
+    width: 460px; height: 460px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,180,0,0.22), transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute;
+    left: -100px; bottom: -100px;
+    width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(202,220,252,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  /* Gold accent line at hero / next-section boundary */
+  .hero-edge {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(244,180,0,0.0) 8%,
+      rgba(244,180,0,0.7) 50%,
+      rgba(244,180,0,0.0) 92%,
+      transparent 100%);
+    margin-top: -1px;
+    z-index: 2;
+  }
+  .hero-grid {
+    max-width: 1200px; margin-inline: auto;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+  .hero .eyebrow {
+    background: transparent;
+    color: rgba(255,255,255,0.95);
+    font-size: 13px;
+    padding: 0;
+    margin-bottom: var(--sp-3);
+    border: 0;
+  }
+  .hero .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--brand-accent);
+    margin-right: 9px;
+    vertical-align: middle;
+    box-shadow: 0 0 8px rgba(244,180,0,0.6);
+  }
+  /* Hero typography: h1 is the size anchor; subtitle scales with it via em.
+     This keeps the headline-to-subtitle ratio constant across viewports. */
+  .hero h1 {
+    color: #fff;
+    margin: 0 auto var(--sp-2);
+    font-size: clamp(34px, 5.6vw, 68px);
+    font-weight: 600;
+    letter-spacing: -0.03em;             /* tracking scales with size */
+    line-height: 1.08;
+    max-width: 38ch;
+    white-space: nowrap;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.35);
+  }
+  @media (max-width: 640px) {
+    .hero h1 { white-space: normal; text-wrap: balance; }
+  }
+  .hero h1 .h1-sub {
+    display: block;
+    margin-top: 0.18em;                  /* gap scales with h1 */
+    font-size: 0.55em;                   /* always 55% of h1 → constant ratio */
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+    white-space: normal;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--brand-accent);
+    background: none; padding: 0;
+  }
+  .hero .lede {
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.6;
+    color: rgba(255,255,255,0.88);
+    max-width: 60ch; margin: 0 auto var(--sp-4);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  }
+  .hero .actions {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero .btn-primary { background: var(--brand-accent); color: var(--ink); }
+  .hero .btn-primary:hover { background: var(--brand-accent-2); }
+  .hero .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.35); }
+  .hero .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.14); }
+
+  /* Text link + arrow circle (hover slides arrow right)
+     Default = dark text on light bg. Hero overrides to white. */
+  .text-arrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    color: var(--ink); font-weight: 500; font-size: 15px;
+    text-decoration: none;
+    padding: 6px 4px;
+    transition: opacity var(--dur-micro) var(--ease-out);
+  }
+  .arrow-circle {
+    display: grid; place-items: center;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(14,14,15,0.2);
+    background: rgba(14,14,15,0.03);
+    transition: background var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out);
+  }
+  .arrow-circle svg {
+    width: 18px; height: 18px; color: var(--ink);
+    transition: transform var(--dur-micro) var(--ease-out);
+  }
+  .text-arrow:hover .arrow-circle {
+    background: rgba(14,14,15,0.08);
+    border-color: var(--ink);
+  }
+  .text-arrow:hover .arrow-circle svg {
+    transform: translateX(3px);
+  }
+  .text-arrow:focus-visible { outline: none; }
+  .text-arrow:focus-visible .arrow-circle { box-shadow: var(--focus-ring); }
+
+  /* Dark-bg variant (hero, featured cohort, final CTA) — white text + circle */
+  .hero .text-arrow,
+  .featured .text-arrow,
+  .final-cta .text-arrow { color: #fff; }
+  .hero .text-arrow > span:first-child,
+  .featured .text-arrow > span:first-child,
+  .final-cta .text-arrow > span:first-child { text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+  .hero .arrow-circle,
+  .featured .arrow-circle,
+  .final-cta .arrow-circle {
+    border-color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.06);
+  }
+  .hero .arrow-circle svg,
+  .featured .arrow-circle svg,
+  .final-cta .arrow-circle svg { color: #fff; }
+  .hero .text-arrow:hover .arrow-circle,
+  .featured .text-arrow:hover .arrow-circle,
+  .final-cta .text-arrow:hover .arrow-circle {
+    background: rgba(255,255,255,0.18);
+    border-color: #fff;
+  }
+
+  /* ---------- Trust ticker (continues the navy block) ---------- */
+  .ticker {
+    background: var(--brand-deep);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: var(--sp-3) 0;
+    overflow: hidden;
+  }
+  .ticker-row {
+    display: flex; align-items: center; gap: 60px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  @media (max-width: 880px) {
+    .ticker-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 20px;
+      justify-items: start;
+    }
+  }
+  @media (max-width: 520px) {
+    .ticker-row { grid-template-columns: 1fr; gap: 12px; }
+  }
+  .ticker-item {
+    font-size: var(--fs-sm); font-weight: 500;
+    color: rgba(255,255,255,0.78);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .ticker-item .ico {
+    width: 22px; height: 22px;
+    color: var(--brand-accent);
+  }
+  .ticker-item strong { color: #fff; font-weight: 600; }
+
+  /* "Why it matters" section — compact so it fits in one viewport */
+  #why.section { padding-block: var(--sp-6); }
+  #why .section-head { margin-bottom: var(--sp-5); }
+  #why .stat { padding: var(--sp-4) var(--sp-3); }
+
+  /* Team section headline — keep "Faculty. Practitioners. Mentors." on one line */
+  #team .section-head { max-width: 1000px; }
+  #team .section-head h2 {
+    white-space: nowrap;
+    font-size: clamp(26px, 3.8vw, 46px);
+  }
+  @media (max-width: 720px) {
+    #team .section-head h2 { white-space: normal; }
+  }
+
+  /* "Open for applications" — live-announcement treatment */
+  #programs.section--alt {
+    background: linear-gradient(180deg, rgba(244,180,0,0.07), rgba(244,180,0,0.04));
+    position: relative;
+  }
+  #programs.section--alt::before,
+  #programs.section--alt::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(244,180,0,0.5), transparent);
+  }
+  #programs.section--alt::before { top: 0; }
+  #programs.section--alt::after { bottom: 0; }
+
+  /* Live badge with pulsing dot */
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--brand-deep);
+    margin: 0 0 var(--sp-3);
+  }
+  .live-dot {
+    position: relative;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--brand-accent);
+    box-shadow: 0 0 0 0 rgba(244,180,0,0.6);
+    flex-shrink: 0;
+  }
+  .live-dot::after {
+    content: ""; position: absolute; inset: 0;
+    border-radius: 50%;
+    background: var(--brand-accent);
+    animation: live-pulse 2s ease-out infinite;
+  }
+  @keyframes live-pulse {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(3);   opacity: 0;   }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot::after { animation: none; }
+  }
+
+  /* ---------- Stats (editorial · separate cards with gold-top accent) ---------- */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px;                                     /* even tighter card spacing */
+    max-width: 1180px; margin: 0 auto;
+  }
+  @media (max-width: 880px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .stats-row { grid-template-columns: 1fr; } }
+  .stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--brand-accent);     /* gold accent on top */
+    border-radius: var(--radius-sm);
+    padding: var(--sp-5) var(--sp-4);
+    display: flex; flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out);
+  }
+  .stat:hover { transform: translateY(-2px); border-color: var(--brand-deep); border-top-color: var(--brand-accent); }
+  .stat .num {
+    font-size: clamp(30px, 3.6vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--brand-deep);
+    margin-bottom: 0.4em;
+    font-variant-numeric: tabular-nums;
+    min-height: 1.05em;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .stat .label {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);
+  }
+  .stat .label em { font-style: italic; color: var(--brand-deep-2); }
+  .stat .source {
+    border: 0; padding: 0;
+    margin-top: auto;
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .stats-conclusion {
+    max-width: 1080px; margin: var(--sp-5) auto 0;
+    text-align: center;
+    font-size: clamp(15px, 1.6vw, 19px);
+    line-height: 1.5;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    font-weight: 500;
+  }
+  .stats-conclusion strong {
+    color: var(--brand-deep); font-weight: 600;
+    background: linear-gradient(180deg, transparent 70%, rgba(244,180,0,0.4) 70%);
+    padding: 0 4px;
+  }
+  .stats-link {
+    text-align: center; margin: var(--sp-4) 0 0;
+  }
+
+  /* ---------- Mission / Vision · two-column editorial layout ---------- */
+  .mv-layout {
+    display: grid; grid-template-columns: 5fr 7fr;
+    gap: var(--sp-7);
+    align-items: start;
+    max-width: 1180px; margin: 0 auto;
+  }
+  @media (max-width: 980px) {
+    .mv-layout { grid-template-columns: 1fr; gap: var(--sp-5); }
+  }
+  .mv-intro {
+    text-align: left;
+    position: sticky; top: calc(95px + var(--sp-4));
+  }
+  @media (max-width: 980px) {
+    .mv-intro { position: static; }
+  }
+  .mv-intro h2 {
+    font-size: var(--fs-h2);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);
+    text-wrap: balance;
+  }
+  .mv-intro p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 50ch;
+  }
+  .mv-cards {
+    display: grid; grid-template-columns: 1fr; gap: var(--sp-4);
+  }
+
+  /* ---------- Mission / Vision card ---------- */
+  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+  @media (max-width: 880px) { .mv-grid { grid-template-columns: 1fr; } }
+  .mv-card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: var(--sp-6);
+  }
+  .section--alt .mv-card { background: #fff; }
+  .mv-card .label {
+    display: inline-block;
+    position: relative;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--brand-deep);
+    margin-bottom: var(--sp-3);
+    padding: 6px 12px;
+    margin-left: -8px;
+  }
+  /* Mission splash — wide horizontal sweep, heavier on the right */
+  .mv-card .label {
+    background:
+      radial-gradient(ellipse 70% 55% at 35% 30%, rgba(244,180,0,0.5), transparent 72%),
+      radial-gradient(ellipse 55% 70% at 80% 60%, rgba(244,180,0,0.45), transparent 72%),
+      radial-gradient(ellipse 30% 35% at 15% 75%, rgba(244,180,0,0.32), transparent 70%);
+  }
+  /* Vision splash — different shape: heavier on the left, drifts across diagonally */
+  .mv-card.vision .label {
+    background:
+      radial-gradient(ellipse 60% 80% at 22% 45%, rgba(244,180,0,0.55), transparent 72%),
+      radial-gradient(ellipse 50% 65% at 78% 60%, rgba(244,180,0,0.42), transparent 72%),
+      radial-gradient(ellipse 40% 50% at 50% 30%, rgba(244,180,0,0.3), transparent 70%);
+  }
+  .mv-card h3 {
+    font-size: clamp(17px, 1.8vw, 21px);
+    line-height: 1.35; letter-spacing: -0.3px;
+    font-weight: 600;
+    margin-bottom: var(--sp-2);
+  }
+  .mv-card p {
+    font-size: 18px; line-height: 1.6;
+    color: var(--ink-muted); margin: 0;
+  }
+
+  /* ---------- Featured cohort ---------- */
+  .featured {
+    background: var(--brand-deep);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--sp-6);
+    position: relative;
+    overflow: hidden;
+    max-width: 1080px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .featured { padding: var(--sp-4); } }
+  .featured::before {
+    content: ""; position: absolute; right: -100px; top: -100px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,180,0,0.25), transparent 70%);
+    pointer-events: none;
+  }
+  .featured-grid {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--sp-5);
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 880px) { .featured-grid { grid-template-columns: 1fr; gap: var(--sp-4); } }
+
+  .badge-open {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--brand-accent); color: var(--ink);
+    font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+    padding: 6px 14px; border-radius: var(--radius-chip);
+    margin-bottom: var(--sp-3);
+  }
+  .featured h3 {
+    color: #fff; margin-bottom: var(--sp-3);
+    font-size: clamp(26px, 3vw, 36px); letter-spacing: -1px;
+  }
+  .builds-list { margin: 0 0 var(--sp-3); }
+  .builds-list li {
+    color: rgba(255,255,255,0.92);
+    padding: 8px 0 8px 28px; font-size: var(--fs-body); line-height: 1.55;
+    position: relative;
+  }
+  .builds-list li::before {
+    content: "→"; position: absolute; left: 0; top: 8px;
+    color: var(--brand-accent); font-weight: 700;
+  }
+  .builds-list li strong { color: #fff; }
+
+  .featured-side {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-3);
+    backdrop-filter: blur(8px);
+    align-self: start;
+  }
+  .featured-specs { display: grid; grid-template-columns: 1fr; gap: var(--sp-2); margin-bottom: var(--sp-3); }
+  .featured-specs .spec { display: flex; flex-direction: column; gap: 2px; }
+  .featured-specs .spec-label {
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+    color: var(--brand-accent);
+  }
+  .featured-specs .spec-value { font-size: var(--fs-sm); color: #fff; }
+  .featured-actions { display: flex; flex-direction: column; gap: 10px; }
+  .featured-actions .btn-accent { width: 100%; justify-content: center; }
+  .featured-actions .btn-ghost { width: 100%; justify-content: center; }
+
+  /* ---------- Ecosystem · 3-step journey ---------- */
+  .eco-journey {
+    max-width: 980px; margin: 0 auto;
+    display: flex; flex-direction: column;
+    gap: var(--sp-4);                              /* tighter stage spacing */
+    position: relative;
+  }
+  .eco-stage {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--sp-5);
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .eco-stage { grid-template-columns: 1fr; gap: var(--sp-3); }
+  }
+  .eco-stage-marker {
+    display: flex; flex-direction: column; gap: 4px;
+    padding-top: var(--sp-2);
+    position: relative;
+  }
+  .eco-stage-marker::before {
+    content: ""; position: absolute; left: 0; top: 0;
+    width: 32px; height: 2px; background: var(--brand-accent);
+  }
+  .eco-stage-num {
+    font-size: clamp(28px, 3.2vw, 38px);
+    font-weight: 600; letter-spacing: -1px;
+    color: var(--ink);
+    line-height: 1;
+    margin-top: var(--sp-2);
+  }
+  .eco-stage-label {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 6px;
+  }
+  .eco-you-here {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brand-deep);
+    background: rgba(244,180,0,0.16);
+    padding: 5px 11px;
+    border-radius: var(--radius-chip);
+    margin-top: var(--sp-2);
+    align-self: flex-start;
+    border: 1px solid rgba(244,180,0,0.3);
+  }
+  .here-dot {
+    position: relative;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brand-accent);
+    flex-shrink: 0;
+  }
+  .here-dot::after {
+    content: ""; position: absolute; inset: 0;
+    border-radius: 50%; background: var(--brand-accent);
+    animation: live-pulse 2s ease-out infinite;
+  }
+
+  /* Outcome chips — concrete deliverables under each card */
+  .eco-outcomes {
+    display: flex; flex-wrap: wrap; gap: 6px 8px;
+    margin: var(--sp-2) 0 var(--sp-3);
+    padding: 0; list-style: none;
+  }
+  .eco-outcomes li {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-chip);
+    background: #fff;
+  }
+  .eco-card.current .eco-outcomes li {
+    border-color: rgba(244,180,0,0.4);
+    color: var(--brand-deep);
+    background: rgba(244,180,0,0.05);
+  }
+
+  /* Vertical connector line between stages — solid gold thread + chevron */
+  .eco-stage:not(:last-child)::after {
+    content: ""; position: absolute;
+    left: 14px; bottom: calc(var(--sp-4) * -1 + 6px);
+    width: 2px; height: calc(var(--sp-4) - 14px);
+    background: var(--brand-accent);
+    border-radius: 1px;
+  }
+  .eco-stage:not(:last-child) .eco-stage-marker::after {
+    content: ""; position: absolute;
+    left: 9px; bottom: calc(var(--sp-4) * -1 - 4px);
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--brand-accent);
+  }
+  @media (max-width: 760px) {
+    .eco-stage:not(:last-child)::after,
+    .eco-stage:not(:last-child) .eco-stage-marker::after { display: none; }
+  }
+
+  .eco-stage-cards {
+    display: grid; grid-template-columns: 1fr; gap: var(--sp-3);
+    position: relative;
+  }
+  .eco-stage-cards--split {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* "OR" connector pill between the two specialize cards */
+  .eco-stage-cards--split::before {
+    content: "OR";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em;
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: var(--radius-pill);
+    color: var(--brand-deep);
+    border: 1px solid rgba(244,180,0,0.45);
+    box-shadow: 0 0 0 4px var(--surface);
+    z-index: 2;
+  }
+  @media (max-width: 760px) {
+    .eco-stage-cards--split { grid-template-columns: 1fr; }
+    .eco-stage-cards--split::before { display: none; }
+  }
+
+  .eco-card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); padding: var(--sp-3);
+    display: flex; flex-direction: column;
+    transition: transform var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out),
+                box-shadow var(--dur-micro) var(--ease-out);
+  }
+  .eco-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14,14,15,0.06); }
+  .eco-card.current { border-color: var(--brand-accent); border-width: 2px; }
+  /* Future cards — solid (not dashed), soft white tint, visible but quieter than current */
+  .eco-card.future {
+    background: rgba(255,255,255,0.65);
+    border-style: solid;
+    border-color: rgba(14,14,15,0.1);
+  }
+
+  .status-pill {
+    display: inline-flex; align-self: flex-start;
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: var(--radius-chip);
+    margin-bottom: var(--sp-2);
+  }
+  .status-pill.open { background: var(--success-bg); color: var(--success); }
+  .status-pill.future { background: var(--surface); color: var(--ink-muted); }
+
+  .eco-card h4 { margin: 0 0 4px; }
+  .eco-card .eco-tag {
+    font-size: var(--fs-xs); font-weight: 500;
+    color: var(--ink-muted); margin: 0 0 var(--sp-2);
+    letter-spacing: 0;
+  }
+  .eco-card p {
+    font-size: var(--fs-sm); color: var(--ink-muted);
+    margin: 0 0 var(--sp-2); line-height: 1.5;
+  }
+  .eco-card .eco-current-note {
+    background: rgba(244,180,0,0.08);
+    border-left: 3px solid var(--brand-accent);
+    padding: 8px 12px;
+    margin: 0 0 var(--sp-3);
+    border-radius: 4px;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+  }
+  .eco-card .eco-current-note strong {
+    color: var(--brand-deep);
+    letter-spacing: 0.04em;
+  }
+  .eco-card .eco-link {
+    margin-top: auto;
+    font-size: var(--fs-sm); font-weight: 600; color: var(--brand-deep);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .eco-card .eco-link:hover { color: var(--brand-deep-2); }
+  .eco-note {
+    text-align: center; max-width: 720px; margin: var(--sp-5) auto 0;
+    color: var(--ink-muted); font-size: var(--fs-sm);
+  }
+  .eco-note a { color: var(--brand-deep); font-weight: 600; }
+
+  /* ---------- Parents note ---------- */
+  .parents-note {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md); padding: var(--sp-6);
+    max-width: 800px; margin: 0 auto;
+    position: relative;
+  }
+  .parents-note::before {
+    content: ""; position: absolute; left: 0; top: var(--sp-5); bottom: var(--sp-5);
+    width: 4px; background: var(--brand-accent); border-radius: 0 4px 4px 0;
+  }
+  @media (max-width: 760px) { .parents-note { padding: var(--sp-4); } }
+  .parents-note .salutation {
+    font-size: 20px; font-weight: 600; letter-spacing: -0.5px;
+    color: var(--brand-deep); margin-bottom: var(--sp-3);
+  }
+  .parents-note p {
+    font-size: var(--fs-body); line-height: 1.7; color: var(--ink);
+  }
+  .parents-note .signoff {
+    margin-top: var(--sp-4); padding-top: var(--sp-3);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm); color: var(--ink-muted);
+  }
+  .parents-note .signoff strong { color: var(--ink); display: block; }
+
+  /* ---------- Team · framed photo with floating info-overlay ---------- */
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-3);
+    max-width: 940px; margin: 0 auto;
+  }
+  @media (max-width: 880px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .team-grid { grid-template-columns: 1fr; } }
+
+  .team-card { text-align: left; }
+  .photo-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform var(--dur-micro) var(--ease-out),
+                box-shadow var(--dur-micro) var(--ease-out);
+  }
+  .team-card:hover .photo-frame {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(14,14,15,0.1);
+  }
+  /* Gradient placeholder — visible until a real photo loads */
+  .photo-placeholder {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(255,255,255,0.7) 0 17%, transparent 17%),
+      radial-gradient(ellipse 60% 35% at 50% 96%, rgba(255,255,255,0.7) 0 60%, transparent 60%),
+      linear-gradient(160deg, var(--surface-2), var(--surface));
+  }
+  .photo-frame .photo {
+    position: absolute; inset: 0; z-index: 1;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  /* Subtle inset border for the "framed picture" feel */
+  .photo-frame::after {
+    content: ""; position: absolute; inset: 0; z-index: 3;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(14,14,15,0.08);
+    pointer-events: none;
+  }
+
+  /* Floating glass info panel anchored to the bottom of the photo */
+  .info-overlay {
+    position: absolute; left: 12px; right: 12px; bottom: 12px;
+    z-index: 2;
+    display: flex; align-items: center; gap: var(--sp-2);
+    padding: 10px 12px 10px 14px;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(14,14,15,0.08);
+  }
+  .info-text { flex: 1; min-width: 0; }
+  .info-overlay h3 {
+    font-size: 15px; font-weight: 600;
+    letter-spacing: -0.3px; line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .info-overlay .title {
+    font-size: 12px; font-weight: 500;
+    color: var(--ink-muted);
+    line-height: 1.3;
+    margin: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .linkedin-link {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--brand-deep);
+    text-decoration: none;
+    transition: background var(--dur-micro) var(--ease-out),
+                color var(--dur-micro) var(--ease-out);
+  }
+  .linkedin-link:hover {
+    background: var(--brand-deep);
+    color: #fff;
+  }
+  .linkedin-link svg { width: 16px; height: 16px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 840px; margin: 0 auto; display: grid; gap: 10px; }
+  details.faq-item {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); overflow: hidden;
+    transition: border-color var(--dur-micro) var(--ease-out);
+  }
+  details.faq-item[open] { border-color: var(--brand-deep); }
+  details.faq-item summary {
+    list-style: none; cursor: pointer;
+    padding: var(--sp-3) var(--sp-4);
+    font-size: var(--fs-body); font-weight: 600; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    letter-spacing: -0.3px;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: "+"; color: var(--brand-deep);
+    font-size: 24px; font-weight: 300; line-height: 1;
+    transition: transform var(--dur-micro) var(--ease-out);
+  }
+  details.faq-item[open] summary::after { content: "−"; }
+  details.faq-item .answer {
+    padding: 0 var(--sp-4) var(--sp-3);
+    font-size: var(--fs-body); color: var(--ink-muted); line-height: 1.65;
+  }
+  details.faq-item .answer p { margin: 0 0 12px; }
+  details.faq-item .answer p:last-child { margin: 0; }
+  details.faq-item .answer strong { color: var(--ink); }
+
+  /* ---------- Final CTA (dark inverted) ---------- */
+  .final-cta {
+    background: var(--brand-deep);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--sp-6);
+    text-align: center;
+    max-width: 1080px; margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  @media (max-width: 760px) { .final-cta { padding: var(--sp-4); } }
+  .final-cta::before {
+    content: ""; position: absolute; left: 50%; top: -120px; transform: translateX(-50%);
+    width: 480px; height: 480px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,180,0,0.25), transparent 70%);
+    pointer-events: none;
+  }
+  .final-cta-body { position: relative; z-index: 1; }
+  .final-cta h2 {
+    color: #fff; margin: 0 auto var(--sp-2);
+    max-width: 22ch;
+  }
+  .final-cta p {
+    color: rgba(255,255,255,0.78);
+    max-width: 56ch; margin: 0 auto var(--sp-4);
+    font-size: 18px; line-height: 1.55;
+  }
+  .final-cta .actions {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .final-cta .btn-accent { background: var(--brand-accent); }
+  .final-cta .btn-accent:hover { background: var(--brand-accent-2); }
+
+  /* ---------- Newsletter strip (lavender, matches alt sections) ---------- */
+  .newsletter-strip {
+    background: var(--surface);
+    padding: var(--sp-6) 0;
+    border-top: 1px solid var(--line);
+  }
+  .newsletter-grid {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: var(--sp-5);
+    align-items: center;
+    max-width: 1080px; margin: 0 auto;
+  }
+  @media (max-width: 760px) {
+    .newsletter-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
+  }
+  .newsletter-text h3 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .newsletter-text p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+  .newsletter-form {
+    display: flex; align-items: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 4px 4px 4px 6px;
+    min-width: 360px;
+    transition: border-color var(--dur-micro) var(--ease-out);
+  }
+  @media (max-width: 760px) { .newsletter-form { min-width: 0; width: 100%; } }
+  .newsletter-form:focus-within { border-color: var(--brand-deep); }
+  .newsletter-form input {
+    flex: 1; min-width: 0;
+    background: transparent; border: 0; outline: 0;
+    color: var(--ink); font: inherit; font-size: 15px;
+    padding: 10px 14px;
+  }
+  .newsletter-form input::placeholder { color: var(--ink-soft); }
+  .newsletter-form button {
+    flex-shrink: 0;
+    padding: 10px 22px;
+    border: 0; border-radius: var(--radius-pill);
+    background: var(--brand-deep);
+    color: #fff;
+    cursor: pointer;
+    font: inherit; font-size: 14px; font-weight: 500;
+    transition: background var(--dur-micro) var(--ease-out);
+  }
+  .newsletter-form button:hover { background: var(--brand-deep-2); }
+
+  /* ---------- Footer (dark) ---------- */
+  footer.site {
+    background: #151828cc;
+    padding: var(--sp-7) 0 var(--sp-4);
+    color: rgba(255,255,255,0.7); font-size: var(--fs-sm);
+    border-top: 0;
+    margin-top: var(--sp-6);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 1fr 1fr 1.4fr;
+    column-gap: var(--sp-4);
+    row-gap: var(--sp-5);
+    align-items: start;
+  }
+  /* Tablet: brand spans full width, 4 link columns sit in a row beneath */
+  @media (max-width: 980px) {
+    .foot-grid { grid-template-columns: repeat(4, 1fr); }
+    .foot-brand {
+      grid-column: 1 / -1;
+      padding-bottom: var(--sp-4);
+      margin-bottom: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+  /* Small tablet: 2×2 grid for link columns */
+  @media (max-width: 720px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-brand { grid-column: 1 / -1; }
+  }
+  /* Phone: everything stacks */
+  @media (max-width: 480px) {
+    .foot-grid { grid-template-columns: 1fr; row-gap: var(--sp-4); }
+  }
+  footer.site h4 {
+    font-size: 13px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.95);
+    margin-bottom: var(--sp-3);
+    font-weight: 600;
+  }
+  footer.site ul li { margin-bottom: 10px; }
+  footer.site a {
+    color: rgba(255,255,255,0.85);
+    transition: color var(--dur-micro) var(--ease-out);
+  }
+  footer.site a:hover { color: var(--brand-accent); }
+
+  /* Brand column */
+  .foot-brand img {
+    height: 50px; width: auto;
+    margin-bottom: var(--sp-2);
+    filter: brightness(0) invert(1);
+  }
+  .foot-brand p {
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6; max-width: 38ch; margin: 0 0 var(--sp-3);
+  }
+
+  /* Social links */
+  .foot-social-label {
+    display: block;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: var(--sp-2);
+  }
+  .foot-social-links { display: flex; gap: 10px; }
+  .foot-social-links a {
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85) !important;
+    transition: background var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out),
+                color var(--dur-micro) var(--ease-out);
+  }
+  .foot-social-links a:hover {
+    background: var(--brand-accent);
+    border-color: var(--brand-accent);
+    color: var(--ink) !important;
+  }
+  .foot-social-links svg { width: 16px; height: 16px; }
+
+  /* Newsletter / Get in touch input */
+  .foot-email {
+    display: flex; align-items: stretch;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-pill);
+    padding: 4px;
+    transition: border-color var(--dur-micro) var(--ease-out);
+  }
+  .foot-email:focus-within { border-color: var(--brand-accent); }
+  .foot-email input {
+    flex: 1; min-width: 0;
+    background: transparent; border: 0; outline: 0;
+    color: #fff; font: inherit; font-size: 14px;
+    padding: 8px 14px;
+  }
+  .foot-email input::placeholder { color: rgba(255,255,255,0.4); }
+  .foot-email button {
+    flex-shrink: 0;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%;
+    background: var(--brand-accent);
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 16px; font-weight: 600;
+    transition: background var(--dur-micro) var(--ease-out);
+  }
+  .foot-email button:hover { background: var(--brand-accent-2); }
+
+  .legal {
+    margin-top: var(--sp-5); padding-top: var(--sp-3);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ---------- A11y skip link ---------- */
+  .skip-link {
+    position: absolute; top: -40px; left: 8px;
+    background: var(--brand-deep); color: #fff;
+    padding: 8px 12px; border-radius: 8px; z-index: 100;
+  }
+  .skip-link:focus { top: 8px; }
+
+  /* ---------- Scroll-in animation (subtle, once) ---------- */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site" id="siteHeader">
+  <div class="container nav">
+    <a class="brand-link" href="index.html" aria-label="Futurera Institute home">
+      <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+    </a>
+
+    <nav class="primary" id="primaryNav" aria-label="Primary">
+      <div class="item"><a class="link" href="index.html">Home</a></div>
+      <div class="item">
+        <button class="link" aria-haspopup="true" aria-expanded="false">AI Lab <span class="caret">▾</span></button>
+        <div class="dropdown" role="menu">
+          <a href="ai-lab.html" role="menuitem">About AI Lab</a>
+          <a href="build-with-ai.html" role="menuitem">Build with AI · course</a>
+          <a href="bootcamp-summer-2026.html" role="menuitem">↳ Summer 2026 Bootcamp</a>
+        </div>
+      </div>
+      <div class="item">
+        <button class="link" aria-haspopup="true" aria-expanded="false">About <span class="caret">▾</span></button>
+        <div class="dropdown" role="menu">
+          <a href="#about" role="menuitem">About us</a>
+          <a href="#team" role="menuitem">Team</a>
+          <a href="#why" role="menuitem">Why it matters</a>
+        </div>
+      </div>
+      <div class="item"><a class="link" href="#faq">FAQ</a></div>
+      <div class="item"><a class="link" href="#contact">Contact</a></div>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn btn-chip" href="bootcamp-summer-2026.html"><span class="cta-full">Join AI Bootcamp →</span><span class="cta-short">Apply →</span></a>
+      <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid reveal">
+      <span class="eyebrow">Toronto · Grades 9–12</span>
+      <h1>AI education for high schoolers.<span class="h1-sub">Taught for <em>university</em>, built for <em>work</em>.</span></h1>
+      <p class="lede">Futurera Institute prepares Grade 9–12 students through structured, mentored, project-based learning. Real outcomes: a portfolio, a research artifact, work experience. Not another certificate.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">Book a 20-minute session</a>
+        <a class="text-arrow" href="#programs">
+          <span>See our programs</span>
+          <span class="arrow-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER / TRUST -->
+  <section class="ticker" aria-label="Trust strip">
+    <div class="container">
+      <div class="ticker-row">
+        <span class="ticker-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <strong>Ontario curriculum</strong>, aligned
+        </span>
+        <span class="ticker-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+          <strong>UofT &amp; TMU</strong>, affiliated faculty
+        </span>
+        <span class="ticker-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+          <strong>Real projects</strong>, shipped end-to-end
+        </span>
+        <span class="ticker-item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <strong>Small cohorts</strong>, weekly mentorship
+        </span>
+      </div>
+    </div>
+  </section>
+  <div class="hero-edge" aria-hidden="true"></div>
+
+  <!-- WHY IT MATTERS -->
+  <section class="section section--alt" id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow gold">Why it matters</span>
+        <h2>The future careers students are heading into are already being rewritten by AI.</h2>
+        <p>AI isn't something students will deal with later — it's already reshaping how universities admit, how employers hire, and how students are being asked to learn. Four numbers, drawn from Statistics Canada, KPMG, and LinkedIn, show why now matters.</p>
+      </div>
+
+      <div class="stats-row reveal">
+        <article class="stat">
+          <div class="num">86%</div>
+          <div class="label">of university-educated Canadian workers are in jobs being transformed by AI</div>
+          <div class="source">Statistics Canada, 2024</div>
+        </article>
+        <article class="stat">
+          <div class="num">2×</div>
+          <div class="label">Canadian business AI adoption doubled in one year (6.1% → 12.2%)</div>
+          <div class="source">Statistics Canada, 2024–25</div>
+        </article>
+        <article class="stat">
+          <div class="num">+78%</div>
+          <div class="label">AI job postings grew 3× faster than qualified talent (+24%)</div>
+          <div class="source">LinkedIn / Gloat, 2026</div>
+        </article>
+        <article class="stat">
+          <div class="num">59%</div>
+          <div class="label">of students use AI without guidance, learning <em>less</em>.</div>
+          <div class="source">KPMG Canada, 2024</div>
+        </article>
+      </div>
+
+      <p class="stats-conclusion reveal">
+        AI fluency isn't an advantage anymore — it's <strong>the baseline universities and employers will assume</strong>.<br>Best learned in high school, with guidance.
+      </p>
+
+      <p class="stats-link reveal">
+        <a class="text-arrow" href="why-it-matters.html">
+          <span>Read more</span>
+          <span class="arrow-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="mv-layout reveal">
+        <div class="mv-intro">
+          <span class="eyebrow gold">Why we exist</span>
+          <h2>Built for the gap<br>between the curriculum<br>and the future.</h2>
+          <p>AI tools will keep changing. Judgment won't. Futurera teaches both, with the rigor of a university program and instructors drawn from working AI teams. Students leave knowing how AI works and how to think with it, not just how to use it.</p>
+        </div>
+
+        <div class="mv-cards">
+          <article class="mv-card">
+            <div class="label">Our mission</div>
+            <h3>Equip high school students with the AI skills, judgment, and portfolio that universities and employers actually expect.</h3>
+            <p>We complement the school curriculum, not replace it. Every program is built around real projects students can show to admissions committees, to interviewers, and to themselves, aligned with leading curriculum standards including the Ontario Ministry of Education.</p>
+          </article>
+
+          <article class="mv-card vision">
+            <div class="label">Our vision</div>
+            <h3>A generation of Canadian students who graduate high school AI-fluent: confident builders, careful thinkers, and ethical participants.</h3>
+            <p>AI isn't a tool — it's how work gets done now. Every field today's students will enter, from medicine to law to design, has already restructured around it. High school is the right time to learn the judgment to use it well.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED COHORT (Open now) -->
+  <section class="section section--alt" id="programs">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="live-badge">
+          <span class="live-dot" aria-hidden="true"></span>
+          Live · Applications open
+        </span>
+        <h2>Build with AI · Summer 2026 Bootcamp</h2>
+        <p>Our first course, currently open for enrollment. A 2-week intensive where students aged 14–18 build and ship two real AI products, without writing a line of code.</p>
+      </div>
+
+      <div class="featured reveal">
+        <div class="featured-grid">
+          <div>
+            <span class="badge-open">● Applications open</span>
+            <h3>What students build</h3>
+            <ul class="builds-list">
+              <li><strong>A custom AI character</strong>: a chatbot students design and ship to a public URL</li>
+              <li><strong>A personalized Study Buddy</strong>: an AI tutor built on their own school notes (RAG)</li>
+              <li><strong>A 60-second pitch + a one-page explainer</strong> they wrote themselves</li>
+            </ul>
+            <a class="text-arrow featured-link" href="build-with-ai.html">
+              <span>Course description</span>
+              <span class="arrow-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
+          </div>
+          <div class="featured-side">
+            <div class="featured-specs">
+              <div class="spec"><span class="spec-label">Dates</span><span class="spec-value">July 13–24, 2026</span></div>
+              <div class="spec"><span class="spec-label">Schedule</span><span class="spec-value">Mon–Fri, 9 AM–12 PM</span></div>
+              <div class="spec"><span class="spec-label">Where</span><span class="spec-value">In-person, Toronto</span></div>
+              <div class="spec"><span class="spec-label">Ages</span><span class="spec-value">14–18 · no coding</span></div>
+            </div>
+            <div class="featured-actions">
+              <a class="btn btn-accent" href="bootcamp-summer-2026.html">Apply now →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSYSTEM (where this leads) -->
+  <section class="section section--alt" id="ecosystem">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow gold">Where this leads</span>
+        <h2>An ecosystem we're building, one course at a time.</h2>
+        <p>Students start at AI Lab, specialize through University Track or Industry Track, and the strongest are invited into AI Studio. We're rolling each stage out as cohorts mature.</p>
+      </div>
+
+      <div class="eco-journey reveal">
+
+        <!-- Step 01 · Foundation -->
+        <div class="eco-stage">
+          <div class="eco-stage-marker">
+            <span class="eco-stage-num">01</span>
+            <span class="eco-stage-label">Foundation</span>
+          </div>
+          <div class="eco-stage-cards">
+            <article class="eco-card current">
+              <span class="status-pill open">● Open now</span>
+              <h4>AI Lab</h4>
+              <p>Where every student starts. Our growing catalog of project-based courses, designed and led by faculty from the University of Toronto and Toronto Metropolitan University. Each course is mentored, mapped to Ontario Ministry expectations, and ends with a real portfolio piece students can show.</p>
+              <p class="eco-current-note"><strong>Currently in catalog:</strong> Build with AI · open for Summer 2026.</p>
+              <a class="eco-link" href="ai-lab.html">About AI Lab →</a>
+            </article>
+          </div>
+        </div>
+
+        <!-- Step 02 · Specialize (branches into two) -->
+        <div class="eco-stage">
+          <div class="eco-stage-marker">
+            <span class="eco-stage-num">02</span>
+            <span class="eco-stage-label">Specialize</span>
+          </div>
+          <div class="eco-stage-cards eco-stage-cards--split">
+            <article class="eco-card future">
+              <span class="status-pill future">Coming soon</span>
+              <h4>University Track</h4>
+              <p>For students aiming at competitive university programs. Research-based projects and an admissions-ready portfolio.</p>
+            </article>
+            <article class="eco-card future">
+              <span class="status-pill future">Coming soon</span>
+              <h4>Industry Track</h4>
+              <p>Internship readiness: interview practice, technical fundamentals, and mentor matching.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Step 03 · Master -->
+        <div class="eco-stage">
+          <div class="eco-stage-marker">
+            <span class="eco-stage-num">03</span>
+            <span class="eco-stage-label">Master</span>
+          </div>
+          <div class="eco-stage-cards">
+            <article class="eco-card future">
+              <span class="status-pill future">Future · paid · ages 16+</span>
+              <h4>AI Studio</h4>
+              <p>Top performers work on real client projects under senior mentorship, and earn a stipend for the work.</p>
+            </article>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="eco-note">
+        Progression is assessment-based. Students continue when they're ready and as the next stage opens. <a href="#contact">Talk to us</a> about the right entry point.
+      </p>
+    </div>
+  </section>
+
+  <!-- MESSAGE FOR PARENTS -->
+  <section class="section" id="parents">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow gold">A note for parents</span>
+        <h2>The questions you're already asking, answered honestly.</h2>
+      </div>
+
+      <div class="parents-note reveal">
+        <div class="salutation">If you're weighing whether AI belongs on your child's plate at all —</div>
+
+        <p>You are right to be careful. The internet is loud, the technology is moving quickly, and most "AI for kids" courses you'll find online are thin. Many promise transformation; few can show what a student actually leaves with.</p>
+
+        <p>Here's what we'll commit to. Your child will leave Futurera with <strong>a real portfolio</strong>: projects you can hand to a university admissions officer or a co-op interviewer and have a substantive conversation about. Their instructor will be a <strong>qualified educator paired with a working practitioner</strong>, not a generic tutor following a script. The curriculum is aligned with Ontario Ministry expectations, so it complements school rather than competing with it.</p>
+
+        <p>Cohort sizes are set per program, small enough that students get weekly 1:1 feedback from their mentor. And if your child isn't a "tech kid," that's fine. AI Lab is built around using AI well in any subject.</p>
+
+        <p>If after reading this you're still unsure, that is a good reason to book a 20-minute conversation. We will tell you honestly whether your child is ready for our program now, in six months, or whether something else is the right fit.</p>
+
+        <div class="signoff">
+          <strong>TBD</strong>
+          Program Lead · Futurera Institute<br>
+          Toronto, Ontario
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section section--alt" id="team">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow gold">About our team</span>
+        <h2>Faculty. Practitioners. Mentors.</h2>
+        <p>Senior faculty, with appointments at the University of Toronto and Toronto Metropolitan University, design the curriculum. AI practitioners from working teams keep the program grounded in what the field actually does. Graduate students from our faculty's labs add depth in every cohort.</p>
+      </div>
+
+      <div class="team-grid reveal">
+        <article class="team-card" data-member="1">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="assets/team/member-1.jpg" alt="Team member" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Name TBA</h3>
+                <p class="title">Title TBA</p>
+              </div>
+              <a class="linkedin-link" href="#" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="2">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="assets/team/member-2.jpg" alt="Team member" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Name TBA</h3>
+                <p class="title">Title TBA</p>
+              </div>
+              <a class="linkedin-link" href="#" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="3">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="assets/team/member-3.jpg" alt="Team member" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Name TBA</h3>
+                <p class="title">Title TBA</p>
+              </div>
+              <a class="linkedin-link" href="#" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="4">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="assets/team/member-4.jpg" alt="Team member" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Name TBA</h3>
+                <p class="title">Title TBA</p>
+              </div>
+              <a class="linkedin-link" href="#" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="5">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="assets/team/member-5.jpg" alt="Team member" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Name TBA</h3>
+                <p class="title">Title TBA</p>
+              </div>
+              <a class="linkedin-link" href="#" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="6">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="assets/team/member-6.jpg" alt="Team member" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Name TBA</h3>
+                <p class="title">Title TBA</p>
+              </div>
+              <a class="linkedin-link" href="#" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow gold">Common questions</span>
+        <h2>The questions families and students ask first.</h2>
+      </div>
+
+      <div class="faq reveal">
+        <details class="faq-item">
+          <summary>Is AI even a good thing for my child to learn right now?</summary>
+          <div class="answer">
+            <p>It is the right question to ask. AI is already part of the academic and working life today's students are heading into. They'll either learn to use it well, or use it badly without guidance. Two thirds of Canadian students already use AI tools and report that they are learning <em>less</em> as a result, because nobody taught them how. That is the gap we close.</p>
+            <p>We don't teach AI as a magic productivity hack. We teach it as a skill set with judgment, ethics, and limits, the same way good schools used to teach research before the internet.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What credentials do your instructors have?</summary>
+          <div class="answer">
+            <p>Our curriculum is <strong>designed and managed by senior faculty on our core team</strong>: university professors with appointments at the University of Toronto and Toronto Metropolitan University. Courses are <strong>led and taught by those same faculty members</strong>, supported by <strong>qualified graduate students</strong> from their labs and by <strong>AI practitioners from industry</strong> who have shipped real products.</p>
+            <p>All instructors are <strong>police-checked</strong>. We are happy to introduce you to the likely instructor on your info call.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How is this different from a YouTube course or a generic AI bootcamp?</summary>
+          <div class="answer">
+            <p>Three things. First, students <strong>do, they don't watch</strong>. Every cohort is built around projects students actually finish, taught in real time by senior faculty. Second, the curriculum is mapped to Ontario Ministry expectations and built around portfolio pieces students can show on a university application. Third, top students continue into mentored, paid work on real client problems through our AI Studio.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is it safe? What about screen time, privacy, and AI ethics?</summary>
+          <div class="answer">
+            <p>Safety is a starting point, not an add-on. We use age-appropriate tools, follow data-handling practices appropriate for under-18 students, and teach the judgment to use AI ethically as part of every module. Parents have visibility into what their child is working on and with whom.</p>
+            <p>On screen time: our programs are <em>doing</em>-focused, not video-watching. Students spend time building, discussing, and presenting.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does it cost, and are scholarships available?</summary>
+          <div class="answer">
+            <p>Pricing depends on the stream and format. AI Lab short modules start at the workshop level; the University Track is a semester-long program. Industry Track placements are by invitation and may include paid stipends.</p>
+            <p>We are pursuing IRAP and OCI innovation funding to subsidize spots for partner schools and need-based students. Sibling discounts and need-based scholarships are available; please ask on your info call.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What if my child isn't a "tech kid"?</summary>
+          <div class="answer">
+            <p>That is most of our students. AI Lab is built around using AI well in <em>any</em> subject: writing essays, doing research, organizing schoolwork, exploring complex topics. No coding background required.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I enroll?</summary>
+          <div class="answer">
+            <p>Start with a 20-minute info session. Book through the link below or email us directly. We will discuss the student's goals, walk you through the program that fits, and send a clear next-step plan. There is no high-pressure sales pitch and no auto-enroll.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Anchor for #contact links elsewhere on the page · scrolls to footer's get-in-touch column -->
+  <span id="contact" aria-hidden="true"></span>
+
+</main>
+
+<!-- NEWSLETTER STRIP -->
+<section class="newsletter-strip" aria-labelledby="newsletter-title">
+  <div class="container">
+    <div class="newsletter-grid">
+      <div class="newsletter-text">
+        <h3 id="newsletter-title">Stay updated.</h3>
+        <p>Be first to hear about new cohorts and program announcements.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="event.preventDefault();">
+        <input type="email" placeholder="your@email.com" aria-label="Email address" required>
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+        <p>AI education for Grade 9–12 students. Proudly started in Toronto. Core team includes faculty affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+        <div class="foot-social">
+          <span class="foot-social-label">Follow us</span>
+          <div class="foot-social-links">
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="X (formerly Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>AI Lab</h4>
+        <ul>
+          <li><a href="ai-lab.html">About AI Lab</a></li>
+          <li><a href="build-with-ai.html">Build with AI · course</a></li>
+          <li><a href="bootcamp-summer-2026.html" style="opacity:.7">↳ Summer 2026 Bootcamp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For</h4>
+        <ul>
+          <li><a href="#parents">Parents</a></li>
+          <li><a href="for-students.html">Students</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#team">Our team</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a></li>
+          <li><a href="#contact">Book an info session →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Futurera Institute. All rights reserved.</span>
+      <span>Aligned with Ontario Ministry of Education expectations.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  (function () {
+    var btn = document.getElementById('navToggle');
+    var menu = document.getElementById('primaryNav');
+    if (btn && menu) {
+      btn.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  })();
+
+  // Sticky header border on scroll
+  (function () {
+    var hdr = document.getElementById('siteHeader');
+    if (!hdr) return;
+    function onScroll() {
+      if (window.scrollY > 8) hdr.classList.add('scrolled');
+      else hdr.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Reveal on scroll (once)
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Industry Track — Internship readiness for high school AI students | Futurera Institute</title>
+<meta name="description" content="Internship readiness program for Grade 9–12 students (ages 14–18). Interview practice, technical fundamentals, and mentor-supervised project simulation. The on-ramp to AI Studio paid engagements. Futurera Institute." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  /* Compatibility shim — maps page-local var names to Futurera tokens */
+  :root{
+    --ink: var(--color-ink);
+    --ink-2: var(--color-ink-2);
+    --muted: var(--color-text-muted);
+    --line: var(--color-line);
+    --bg: var(--color-bg-alt);
+    --card: var(--color-card);
+    --brand: var(--color-navy-700);
+    --brand-700: var(--color-navy-900);
+    --accent: var(--color-gold-700);
+    --good: var(--color-success);
+    --gold: var(--color-gold-700);
+    --max: var(--container-max);
+    --radius: var(--radius-md);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin:0 0 .5em}
+  h1{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.08;letter-spacing:-.02em}
+  h2{font-size:clamp(1.6rem,2.8vw,2.15rem);line-height:1.2}
+  h3{font-size:1.2rem;line-height:1.3;font-weight:600}
+  h4{font-size:1.02rem;font-weight:600;line-height:1.3}
+  p{margin:0 0 1em;color:var(--ink-2)}
+  .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .eyebrow{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:14px}
+  .eyebrow.gold{color:var(--gold)}
+
+  /* nav */
+  header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .brand{display:flex;align-items:center;text-decoration:none}
+  .brand img{height:48px;width:auto;display:block}
+  @media (max-width:760px){ .nav{height:72px} .brand img{height:38px} }
+  .nav nav{display:flex;gap:28px}
+  .nav nav a{color:var(--ink-2);font-weight:500;font-size:.95rem}
+  .nav nav a:hover{color:var(--brand);text-decoration:none}
+  .nav .cta{display:flex;gap:10px;align-items:center}
+  @media (max-width:760px){ .nav nav{display:none} }
+
+  /* breadcrumb */
+  .crumb{padding:18px 0 0;color:var(--muted);font-size:.88rem}
+  .crumb a{color:var(--muted)}
+  .crumb a:hover{color:var(--brand)}
+  .crumb .sep{margin:0 8px;opacity:.5}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;transition:all .15s}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-700);text-decoration:none;box-shadow:var(--shadow)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);text-decoration:none}
+
+  /* hero */
+  .hero{padding:48px 0 56px}
+  .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;gap:32px} }
+  .hero p.lede{font-size:1.15rem;color:var(--ink-2);max-width:54ch}
+  .hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+
+  .glance{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .glance h4{font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:600}
+  .glance dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px}
+  .glance dt{color:var(--muted);font-size:.9rem}
+  .glance dd{margin:0;color:var(--ink);font-weight:500;font-size:.93rem}
+  .glance .cta-row{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+
+  /* sections */
+  section{padding:64px 0}
+  section.tight{padding:48px 0}
+  .section-head{max-width:760px;margin:0 auto 40px}
+  .section-head.center{text-align:center;margin-left:auto;margin-right:auto}
+  .section-head p{color:var(--muted);font-size:1.02rem}
+
+  /* fit cards (for / not for) */
+  .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width:760px){ .fit-grid{grid-template-columns:1fr} }
+  .fit{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .fit h3{margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .fit-yes h3 .ico{background:#dcfce7;color:var(--good)}
+  .fit-no h3 .ico{background:#fee2e2;color:#b91c1c}
+  .fit h3 .ico{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.95rem}
+  .fit ul{list-style:none;padding:0;margin:0}
+  .fit li{padding:8px 0;color:var(--ink-2);font-size:.97rem;border-bottom:1px solid var(--line)}
+  .fit li:last-child{border-bottom:0}
+
+  /* pathways */
+  .pathways{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .path-list{display:grid;gap:16px;margin-top:8px}
+  .path{
+    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start;
+  }
+  @media (max-width:600px){ .path{grid-template-columns:1fr;gap:8px;padding:22px} }
+  .path .num{
+    font-family:'Fraunces',serif;font-size:2rem;color:var(--brand);font-weight:600;
+    line-height:1;background:#eef2ff;border-radius:12px;width:60px;height:60px;
+    display:grid;place-items:center;
+  }
+  .path h3{margin-bottom:6px}
+  .path .meta{color:var(--muted);font-size:.86rem;margin-bottom:8px;font-weight:500}
+  .path p{margin:0 0 8px;color:var(--ink-2);font-size:.97rem}
+  .path .practice{font-size:.9rem;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;margin-top:8px}
+  .path .practice strong{color:var(--ink)}
+  .path.primary{background:#eef2ff;border-color:#c7d2fe}
+  .path.primary .num{background:var(--brand);color:#fff}
+
+  /* sample projects */
+  .samples{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:900px){ .samples{grid-template-columns:1fr} }
+  .sample{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .sample .label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:block}
+  .sample h3{font-size:1.05rem;margin-bottom:10px;font-family:'Inter',sans-serif;font-weight:600}
+  .sample p{font-size:.93rem;color:var(--ink-2);margin:0 0 12px}
+  .sample .specs{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .sample .specs strong{color:var(--ink)}
+
+  /* outcomes */
+  .outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media (max-width:900px){ .outcomes-grid{grid-template-columns:1fr 1fr} }
+  @media (max-width:520px){ .outcomes-grid{grid-template-columns:1fr} }
+  .outcome{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .outcome .ico{width:34px;height:34px;border-radius:8px;background:#eef2ff;color:var(--brand);display:grid;place-items:center;margin-bottom:12px}
+  .outcome h3{font-size:1rem;font-family:'Inter',sans-serif;font-weight:600;margin-bottom:6px}
+  .outcome p{font-size:.9rem;color:var(--muted);margin:0}
+
+  /* won't promise callout */
+  .promise{
+    background:linear-gradient(180deg,#fbfaf7 0%, #f3f1ec 100%);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  }
+  @media (max-width:760px){ .promise{grid-template-columns:1fr;padding:28px} }
+  .promise h3{font-size:1.15rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .promise .yes h3 .ico{background:#dcfce7;color:var(--good)}
+  .promise .no h3 .ico{background:#fef2f2;color:#b91c1c}
+  .promise h3 .ico{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+  .promise ul{list-style:none;padding:0;margin:0}
+  .promise li{padding:6px 0;color:var(--ink-2);font-size:.95rem}
+
+  /* oversight */
+  .oversight{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px}
+  .oversight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
+  @media (max-width:760px){ .oversight-row{grid-template-columns:1fr} }
+  .oversight-item h4{margin-bottom:6px}
+  .oversight-item p{font-size:.92rem;color:var(--muted);margin:0}
+
+  /* faq */
+  .faq{display:grid;gap:10px;max-width:780px;margin:0 auto}
+  details.q{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:0;overflow:hidden;
+  }
+  details.q[open]{border-color:#c7d2fe}
+  details.q summary{
+    padding:18px 22px;cursor:pointer;list-style:none;
+    font-weight:600;color:var(--ink);font-size:1rem;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary::after{content:"+";color:var(--brand);font-size:1.4rem;font-weight:300;line-height:1;transition:transform .15s}
+  details.q[open] summary::after{content:"−"}
+  details.q .answer{padding:0 22px 18px;color:var(--ink-2);font-size:.96rem}
+  details.q .answer p{margin:0 0 .6em}
+  details.q .answer p:last-child{margin-bottom:0}
+
+  /* CTA */
+  .cta-band{
+    background:var(--ink);color:#fff;border-radius:var(--radius);
+    padding:40px;display:grid;grid-template-columns:1.4fr .6fr;gap:24px;align-items:center;
+  }
+  @media (max-width:760px){ .cta-band{grid-template-columns:1fr;padding:28px} }
+  .cta-band h2{color:#fff;margin:0 0 8px}
+  .cta-band p{color:#cdd5e0;margin:0}
+  .cta-band .btn-primary{background:#fff;color:var(--ink)}
+  .cta-band .btn-primary:hover{background:#eef2ff}
+  .cta-band .btn-ghost{color:#fff;border-color:#3a4a5e}
+  .cta-band .btn-ghost:hover{border-color:#fff}
+  .cta-actions{display:flex;flex-direction:column;gap:10px}
+
+  /* footer */
+  footer{padding:48px 0 32px;border-top:1px solid var(--line);margin-top:48px;color:var(--muted);font-size:.92rem}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:24px}
+  @media (max-width:980px){ .foot-grid{grid-template-columns:1fr 1fr 1fr} }
+  @media (max-width:600px){ .foot-grid{grid-template-columns:1fr 1fr} }
+  footer h4{font-family:'Inter',sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0 0 14px;font-weight:600}
+  footer ul{list-style:none;padding:0;margin:0}
+  footer ul li{margin-bottom:8px}
+  footer a{color:var(--ink-2)}
+  .legal{margin-top:32px;border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  .badge-gold{
+    display:inline-block;background:#fef3c7;color:var(--gold);
+    border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:600;
+    letter-spacing:.04em;text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="Futurera Institute home">
+      <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+    </a>
+    <nav>
+      <a href="index.html#mission">Why us</a>
+      <a href="index.html#programs">Programs</a>
+      <a href="index.html#parents">For parents</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <div class="cta">
+      <a class="btn btn-ghost" href="index.html#contact">Contact</a>
+      <a class="btn btn-primary" href="index.html#book">Book a session</a>
+    </div>
+  </div>
+</header>
+
+<div class="container crumb">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <a href="index.html#programs">Programs</a>
+  <span class="sep">›</span>
+  <span>Industry Track</span>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge-gold">Industry path</span>
+        <h1 style="margin-top:14px">Internship readiness — built before the internship starts.</h1>
+        <p class="lede">Industry Track is the prep program that turns motivated students into hireable interns. Interview practice, technical fundamentals, professional communication, and mentor-supervised project simulation. Top performers may be invited into <strong>AI Studio</strong> — Futurera's paid program where students earn while they ship real client work.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html#contact">Book a Industry Track fit conversation →</a>
+          <a class="btn btn-ghost" href="#pathways">See how it works</a>
+        </div>
+      </div>
+
+      <aside class="glance">
+        <h4>At a glance</h4>
+        <dl>
+          <dt>Eligibility</dt><dd>By invitation, after AI Lab</dd>
+          <dt>Age</dt><dd>Grade 9–12</dd>
+          <dt>Format</dt><dd>In-person + remote</dd>
+          <dt>Hours</dt><dd>4–8 / week, around school</dd>
+          <dt>Compensation</dt><dd>Unpaid readiness program</dd>
+          <dt>Paid path</dt><dd>Top performers → <a href="index.html#programs">AI Studio</a> (16+, stipend)</dd>
+          <dt>Co-op credit</dt><dd>Eligible (Ontario Co-op &amp; SHSM, where applicable)</dd>
+        </dl>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="index.html#book">Book a fit call</a>
+          <a class="btn btn-ghost" href="mailto:znoorian@torontomu.ca">Email us</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FIT -->
+  <section class="tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow gold">Is this the right fit?</span>
+        <h2>We say no more often than we say yes — and that's the point.</h2>
+        <p>Industry Track isn't an upgrade you buy. It's a checkpoint. Students earn entry through their work in Stream 01 or 02, and we're honest with families when the timing isn't right.</p>
+      </div>
+
+      <div class="fit-grid">
+        <div class="fit fit-yes">
+          <h3><span class="ico">✓</span> A good fit if your student…</h3>
+          <ul>
+            <li>Has finished University Track or AI Lab with standout work</li>
+            <li>Wants real-world experience before applying to university</li>
+            <li>Is targeting competitive co-op programs (Waterloo, UofT, TMU, etc.)</li>
+            <li>Can commit consistent weekly hours — even a few — through the term</li>
+            <li>Is curious, accountable, and OK getting feedback in public</li>
+          </ul>
+        </div>
+        <div class="fit fit-no">
+          <h3><span class="ico">✕</span> Probably not yet if your student…</h3>
+          <ul>
+            <li>Is looking for a quick credential or résumé line</li>
+            <li>Hasn't done foundational project work yet (start with Stream 01 or 02)</li>
+            <li>Can't carve out a few hours weekly around school commitments</li>
+            <li>Wants a guarantee of an external job offer — that's not what we do</li>
+            <li>Is being pushed in by a parent without their own buy-in</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW INDUSTRY TRACK PREPARES STUDENTS -->
+  <section class="pathways" id="pathways">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Six concrete ways Industry Track prepares students for their first real role.</h2>
+        <p>Industry Track is a readiness program, not the job itself. We close the gap between "I built a project in class" and "I can hold my own in a real interview, on a real team, doing real work."</p>
+      </div>
+
+      <div class="path-list">
+
+        <div class="path primary">
+          <div class="num">1</div>
+          <div>
+            <h3>Technical interview practice — done weekly, not crammed</h3>
+            <div class="meta">The skill that decides most internships.</div>
+            <p>Mock interviews with mentors who've been on the hiring side at Canadian and global AI companies. Coding, system reasoning, and "explain it to a non-technical person" practice. Students learn to think out loud — the part most courses skip.</p>
+            <div class="practice"><strong>What it looks like:</strong> Weekly 30–45 minute mock interview with a working AI engineer. Honest feedback on what worked, what didn't, and one specific thing to improve before next week.</div>
+          </div>
+        </div>
+
+        <div class="path">
+          <div class="num">2</div>
+          <div>
+            <h3>Real-world project simulation under mentor supervision</h3>
+            <div class="meta">A safe place to make mistakes that matter.</div>
+            <p>Students take on a scoped problem that mirrors a real client engagement — requirements, milestones, a stakeholder check-in — but in a safe training environment with a mentor close by. The point is rehearsing professional behaviour, not pretending it's real work.</p>
+            <div class="practice"><strong>What it looks like:</strong> A 4-week simulated brief: build a small classifier, present milestones to a mock stakeholder, handle scope changes, deliver a final demo. Reviewed by a senior mentor.</div>
+          </div>
+        </div>
+
+        <div class="path">
+          <div class="num">3</div>
+          <div>
+            <h3>Professional communication coaching</h3>
+            <div class="meta">The most undertaught skill in any technical field.</div>
+            <p>How to write a clear standup update. How to ask a senior engineer a good question. How to disagree with a manager respectfully. How to give a five-minute demo. These are taught explicitly, not inferred from osmosis.</p>
+            <div class="practice"><strong>What it looks like:</strong> Weekly written and verbal exercises, with feedback. Students leave able to communicate like a junior professional, not like a kid showing schoolwork.</div>
+          </div>
+        </div>
+
+        <div class="path">
+          <div class="num">4</div>
+          <div>
+            <h3>Mentor matching with industry practitioners</h3>
+            <div class="meta">A real practitioner. A real conversation. Every week.</div>
+            <p>Each student is matched with an industry mentor — a working AI practitioner, often a hiring manager — who meets with them regularly. The relationship lasts beyond Industry Track and is one of the strongest things students leave with.</p>
+            <div class="practice"><strong>What it looks like:</strong> A 30-min mentor 1:1 each week. Career-relevant conversation, project review, and direct introductions when the time is right.</div>
+          </div>
+        </div>
+
+        <div class="path">
+          <div class="num">5</div>
+          <div>
+            <h3>Demo Day showcase</h3>
+            <div class="meta">Quarterly. Curated audience.</div>
+            <p>Each term we host a Demo Day where Industry Track students present their work to a curated room of startup founders, alumni, and faculty from UofT and TMU. It's the highest-leverage hour your student spends in the program — preparation collides with opportunity.</p>
+            <div class="practice"><strong>What it looks like:</strong> Your student gives a 5-minute demo to 30–40 people who all know what they're looking at. Conversations follow. Some lead to AI Studio invitations, internship offers, or research opportunities.</div>
+          </div>
+        </div>
+
+        <div class="path">
+          <div class="num">6</div>
+          <div>
+            <h3>Fast-track to AI Studio (the paid program)</h3>
+            <div class="meta">The on-ramp to real, paid work — for top performers.</div>
+            <p>Industry Track is the on-ramp. <strong>AI Studio</strong> is the paid destination. Top performers from Industry Track are invited into AI Studio engagements, where Futurera is the legal employer, the work is real client engagements, and students earn a stipend on qualifying engagements at age 16+.</p>
+            <div class="practice"><strong>What it looks like:</strong> A standout Industry Track student is offered a Studio engagement: 6–8 hours per week, paired with a senior practitioner, on a real client project. WSIB-covered, parental consent, age-appropriate scope. Paid.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE READINESS EXERCISES -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What students actually do</span>
+        <h2>Sample readiness exercises.</h2>
+        <p>The kind of work students do <em>inside</em> Industry Track — building the skills before they need them on a real engagement.</p>
+      </div>
+
+      <div class="samples">
+        <div class="sample">
+          <span class="label">Mock Engagement · SaaS Startup Brief</span>
+          <h3>Build an email-classification tool against a real-feeling brief and stakeholder.</h3>
+          <p>Students get a written brief, a "client" stakeholder (a mentor playing the role), and four weeks to ship. Milestones, scope changes, and a final demo — but in a training environment with safe-to-fail mistakes.</p>
+          <div class="specs"><strong>4 weeks · 2 students · 1 mentor · readiness exercise</strong></div>
+        </div>
+
+        <div class="sample">
+          <span class="label">Mock Interview · Senior Practitioner</span>
+          <h3>Weekly mock technical interviews graded honestly, with one improvement focus per week.</h3>
+          <p>An AI engineer who's been on the hiring side runs a 30–45-minute mock interview. Coding, system reasoning, and "explain it to a non-technical person." Students leave with one specific thing to improve before next week.</p>
+          <div class="specs"><strong>30–45 min · weekly · 1:1 with industry mentor</strong></div>
+        </div>
+
+        <div class="sample">
+          <span class="label">Demo Day · Curated Audience</span>
+          <h3>Five-minute demo to a room of founders, faculty, and alumni who know what they're seeing.</h3>
+          <p>Students prepare for weeks: a working artifact, a tight talk track, anticipated Q&amp;A. Many demos lead to follow-up coffees, AI Studio invitations, or external internship conversations.</p>
+          <div class="specs"><strong>Quarterly · 5-min demo · 30–40 attendees</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="tight" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Outcomes</span>
+        <h2>What every Industry Track student leaves with.</h2>
+      </div>
+
+      <div class="outcomes-grid">
+        <div class="outcome">
+          <div class="ico">📂</div>
+          <h3>A polished portfolio</h3>
+          <p>Curated projects and write-ups, ready to hand to a co-op interviewer or admissions officer.</p>
+        </div>
+        <div class="outcome">
+          <div class="ico">📝</div>
+          <h3>A mentor reference letter</h3>
+          <p>Concrete and specific, signed by a working AI practitioner who can vouch for what the student actually did.</p>
+        </div>
+        <div class="outcome">
+          <div class="ico">🎯</div>
+          <h3>Interview-ready confidence</h3>
+          <p>Students who can hold their own in a technical interview, a stakeholder check-in, or a 5-minute demo.</p>
+        </div>
+        <div class="outcome">
+          <div class="ico">🚀</div>
+          <h3>The on-ramp to AI Studio</h3>
+          <p>Top performers are invited into AI Studio — Futurera's paid program where students earn while shipping real client work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE PROMISE / DON'T -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Honest framing</span>
+        <h2>What we promise — and what we won't.</h2>
+        <p>Most education programs over-promise. We'd rather lose a sale than mislead a parent.</p>
+      </div>
+
+      <div class="promise">
+        <div class="yes">
+          <h3><span class="ico">✓</span> What we will guarantee</h3>
+          <ul>
+            <li>Mentored, supervised work on real problems</li>
+            <li>A senior practitioner accountable for delivery on every project</li>
+            <li>Parental visibility — you can see what your student is doing and with whom</li>
+            <li>WSIB coverage on paid engagements; safe and legal at every step</li>
+            <li>Pathways into Ontario Co-op &amp; SHSM where eligible</li>
+            <li>Honest feedback to your student about what's working and what isn't</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h3><span class="ico">✕</span> What we won't claim</h3>
+          <ul>
+            <li>That Industry Track itself pays your child — it's a readiness program (paid work happens in <a href="index.html#programs">AI Studio</a>, by invitation)</li>
+            <li>That every Industry Track student is invited into AI Studio</li>
+            <li>That we'll get your 16-year-old hired at Shopify</li>
+            <li>That university admissions are guaranteed by anything we do</li>
+            <li>That every readiness exercise is "real client work" — most are simulations</li>
+            <li>That we'll keep a student in the program if they're not engaging</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERSIGHT -->
+  <section class="tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Mentors &amp; oversight</span>
+        <h2>How we keep students safe and the work serious.</h2>
+      </div>
+
+      <div class="oversight">
+        <p style="margin:0">Every Industry Track engagement runs on three commitments. These aren't aspirational — they're enforced before any student is staffed.</p>
+
+        <div class="oversight-row">
+          <div class="oversight-item">
+            <h4>1. Senior accountable on every project</h4>
+            <p>A practitioner with shipping experience owns the deliverable. The student contributes; the senior signs off. Clients know this.</p>
+          </div>
+          <div class="oversight-item">
+            <h4>2. Weekly 1:1 review</h4>
+            <p>Every student has a 30-min check-in with their mentor each week. We review work, blockers, and wellbeing — not just deliverables.</p>
+          </div>
+          <div class="oversight-item">
+            <h4>3. No unsupervised client contact</h4>
+            <p>Students never speak to a client without their mentor present. Not in meetings, not in email threads. Full stop.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">FAQ</span>
+        <h2>The questions parents ask first.</h2>
+      </div>
+
+      <div class="faq">
+
+        <details class="q">
+          <summary>Will my child actually be paid in Industry Track?</summary>
+          <div class="answer">
+            <p>No — Industry Track itself is a readiness program, not the paid work. Think of it as the training ground that prepares students for a real role.</p>
+            <p>The paid work happens in <strong>AI Studio</strong>, Futurera's apex program. Top performers from Industry Track (and from University Track, where the work is research-leaning) are invited into AI Studio engagements. AI Studio students earn a stipend on qualifying engagements at age 16+, with Futurera as the legal employer of record. We document everything via T4 / T4A so it's clean for tax time.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>Is my child legally protected if something goes wrong?</summary>
+          <div class="answer">
+            <p>Yes. We require parent/guardian consent on enrollment. Mentors are present on every external client interaction (and most internal ones). We carry program liability insurance. AI Studio paid placements are WSIB-covered. And we run police-checked instructors — not optional.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>How many hours per week is realistic?</summary>
+          <div class="answer">
+            <p>4–8 hours per week is typical, scheduled around school. Some students do more during breaks; some do less during exam weeks. We design engagements to flex around academics, not the other way around.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>Can this count as my child's high school co-op credit?</summary>
+          <div class="answer">
+            <p>Yes — we are set up as an Ontario co-op employer and work directly with school co-op coordinators. If your child's school requires a co-op placement, we can structure their Industry Track engagement to satisfy that requirement.</p>
+            <p>We also support Specialist High Skills Major (SHSM) in ICT, where applicable.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>What if my child applies to Industry Track and isn't ready?</summary>
+          <div class="answer">
+            <p>They stay in AI Lab or University Track until their work is ready. There's no pressure, no extra fee, no penalty. We've turned away students with cheque-in-hand parents because the timing wasn't right — that's the standard.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>Is this a guarantee my child gets a job?</summary>
+          <div class="answer">
+            <p>No, and we'll never claim that. Industry Track creates interview readiness and credible connections. What that turns into — an AI Studio invitation, an external internship, a co-op offer, a research opportunity — depends on your student, the market, and timing.</p>
+            <p>What we do guarantee: a polished portfolio, a mentor reference letter, interview-ready confidence, and a measurably stronger position when the real interviews come.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>Can my child work on a project of their own choosing?</summary>
+          <div class="answer">
+            <p>For self-driven projects (their own startup idea, a personal research question), <strong>University Track</strong> is usually the right home — students get mentor time and structure to build their own thing. <strong>Industry Track</strong> is specifically about preparing for someone else's brief, under supervision, with feedback. Both are valuable; they teach different muscles.</p>
+          </div>
+        </details>
+
+        <details class="q">
+          <summary>What does it cost?</summary>
+          <div class="answer">
+            <p>Industry Track does not have a separate enrollment fee for students who've completed AI Lab. Pricing for AI Lab and University Track is discussed on the info call. AI Studio engagements pay students (not the other way around) — qualifying engagements include a stipend at age 16+.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="tight">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h2>Talk to us before you decide.</h2>
+          <p>A 20-minute conversation with our program lead. We'll tell you honestly whether your student is ready for Industry Track now, in 6 months, or whether a different stream is the right starting point.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="index.html#book">Book a fit call →</a>
+          <a class="btn btn-ghost" href="mailto:znoorian@torontomu.ca">Email us instead</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="Futurera Institute home">
+          <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" style="height:44px;width:auto;display:block" />
+        </a>
+        <p style="margin-top:14px;max-width:34ch">AI education for Grade 9–12 students. Headquartered in Toronto. Our core team includes faculty members affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+      </div>
+      <div>
+        <h4>AI Lab</h4>
+        <ul>
+          <li><a href="ai-lab.html">About AI Lab</a></li>
+          <li><a href="build-with-ai.html">Build with AI <span style="opacity:.6">· course</span></a></li>
+          <li><a href="bootcamp-summer-2026.html" style="padding-left:10px;font-size:.92em;opacity:.85">↳ Summer 2026 Bootcamp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For</h4>
+        <ul>
+          <li><a href="index.html#parents">Parents</a></li>
+          <li><a href="for-students.html">Students</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#team">Our team</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a></li>
+          <li>Toronto, Ontario</li>
+          <li><a href="index.html#contact">Book an info session</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Futurera Institute. All rights reserved.</span>
+      <span>Aligned with Ontario Ministry of Education expectations.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

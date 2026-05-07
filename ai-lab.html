@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Lab — practical AI fluency for Grade 9–12 students (ages 14–18) | Futurera Institute</title>
+<meta name="description" content="The foundation stream at Futurera Institute. Practical AI fluency for high school students — tools, ethics, judgment, and real projects students design, build, and ship end-to-end. Multiple format options including the Summer 2026 Bootcamp." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    font-family: var(--font-sans); color: var(--color-text); background: var(--color-bg);
+    line-height: var(--lh-base); font-size: var(--fs-base);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--color-navy-700); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 3px;
+    text-decoration-color: rgba(30, 39, 97, 0.25);
+    transition: text-decoration-color var(--duration-base) var(--easing);
+  }
+  a:hover { text-decoration-color: var(--color-navy-700); }
+  a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif); font-weight: 600;
+    color: var(--color-ink); letter-spacing: var(--tracking-snug);
+    margin: 0 0 var(--space-3);
+  }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); }
+  h2 { font-size: var(--fs-2xl); line-height: 1.2; }
+  h3 { font-size: var(--fs-lg); line-height: var(--lh-snug); }
+  h4 { font-size: var(--fs-base); margin-bottom: var(--space-2); }
+  p { margin: 0 0 var(--space-4); color: var(--color-text); }
+
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad); }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 var(--container-pad); }
+  .eyebrow {
+    display: inline-block; font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-gold-700); margin-bottom: var(--space-3);
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: 12px 18px; border-radius: var(--radius);
+    font: inherit; font-weight: 600; font-size: var(--fs-sm);
+    border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    transition: all var(--duration-base) var(--easing);
+  }
+  .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .btn-primary { background: var(--color-navy-700); color: #fff; }
+  .btn-primary:hover { background: var(--color-navy-900); text-decoration: none; }
+  .btn-gold { background: var(--color-gold-500); color: var(--color-ink); }
+  .btn-gold:hover { background: var(--color-gold-600); text-decoration: none; }
+  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-line); }
+  .btn-ghost:hover { border-color: var(--color-ink); text-decoration: none; }
+
+  .topstrip {
+    background: var(--color-navy-900); color: #fff;
+    font-size: var(--fs-xs); text-align: center;
+    padding: 8px var(--container-pad); letter-spacing: var(--tracking-wide);
+  }
+  .topstrip strong { color: var(--color-gold-300); font-weight: 600; }
+  header.site {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); height: 84px; }
+  .brand-link { display: flex; align-items: center; text-decoration: none; }
+  .brand-link img { height: 48px; width: auto; display: block; }
+  @media (max-width: 760px) { .nav { height: 72px; } .brand-link img { height: 38px; } }
+  .nav-cta { display: flex; gap: var(--space-2); align-items: center; }
+  .nav-back { color: var(--color-text-muted); font-size: var(--fs-sm); font-weight: 500; text-decoration: none; }
+  .nav-back:hover { color: var(--color-navy-700); }
+
+  .crumb { padding: var(--space-5) 0 0; color: var(--color-text-muted); font-size: var(--fs-sm); }
+  .crumb a { color: var(--color-text-muted); text-decoration: none; }
+  .crumb a:hover { color: var(--color-navy-700); text-decoration: underline; }
+  .crumb .sep { margin: 0 var(--space-2); opacity: 0.5; }
+
+  /* Hero */
+  .hero { padding: var(--space-12) 0 var(--space-12); }
+  .hero-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+  .hero h1 em {
+    color: var(--color-gold-700); font-style: italic; font-weight: 600;
+  }
+  .hero .lede {
+    font-size: var(--fs-md); color: var(--color-text); line-height: 1.55;
+    max-width: 60ch; margin: 0 auto;
+  }
+  .hero .actions {
+    display: flex; gap: var(--space-3); flex-wrap: wrap;
+    margin-top: var(--space-6); justify-content: center;
+  }
+
+  /* Sections */
+  section { padding: var(--space-16) 0; }
+  section.tight { padding: var(--space-12) 0; }
+  .section-head { max-width: 760px; margin: 0 auto var(--space-10); }
+  .section-head.center { text-align: center; }
+  .section-head p { color: var(--color-text-muted); font-size: var(--fs-md); }
+
+  /* What students learn — themes grid */
+  .themes-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4);
+  }
+  @media (max-width: 880px) { .themes-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .themes-grid { grid-template-columns: 1fr; } }
+  .theme-card {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius); padding: var(--space-5);
+    border-top: 3px solid var(--color-gold-500);
+  }
+  .theme-card h4 {
+    font-family: var(--font-serif); font-size: var(--fs-base);
+    margin: 0 0 var(--space-2); line-height: var(--lh-snug);
+  }
+  .theme-card p { font-size: var(--fs-sm); color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+
+  /* Course catalog */
+  .courses-section {
+    background: var(--color-card);
+    border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);
+  }
+  .course-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5);
+    max-width: 980px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .course-grid { grid-template-columns: 1fr; } }
+  .course-card {
+    background: var(--color-bg-alt); border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-gold-500);
+    border-radius: var(--radius-md); padding: var(--space-6);
+    display: flex; flex-direction: column; gap: var(--space-3);
+    transition: border-color var(--duration-base) var(--easing);
+  }
+  .course-card:hover { border-color: var(--color-navy-500); border-left-color: var(--color-gold-500); }
+  .course-card.tba { background: transparent; border-style: dashed; opacity: 0.92; }
+  .course-card .course-tags {
+    display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: 0;
+  }
+  .course-card .tag-pill {
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    padding: 3px 9px; border-radius: var(--radius-sm);
+    background: var(--color-navy-50); color: var(--color-navy-700);
+  }
+  .course-card .tag-pill.open { background: var(--color-success-bg); color: var(--color-success); }
+  .course-card .tag-pill.tba   { background: var(--color-line-soft); color: var(--color-text-soft); }
+  .course-card h3 {
+    font-family: var(--font-serif); font-size: var(--fs-lg);
+    margin: 0; line-height: var(--lh-snug);
+  }
+  .course-card p {
+    font-size: var(--fs-sm); color: var(--color-text-muted);
+    margin: 0; line-height: 1.55;
+  }
+  .course-card .meta {
+    margin-top: auto; padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-line);
+    font-size: var(--fs-xs); color: var(--color-text-soft);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .course-card .meta strong { color: var(--color-ink-2); font-weight: 600; }
+  .course-card .formats-list { display: flex; gap: 6px; flex-wrap: wrap; }
+  .course-card .format-chip {
+    font-size: var(--fs-xs); background: var(--color-card);
+    border: 1px solid var(--color-line); border-radius: 4px;
+    padding: 1px 7px; color: var(--color-text-muted);
+  }
+  .courses-note {
+    text-align: center; margin-top: var(--space-8); margin-bottom: 0;
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+
+  /* Format options */
+  .formats { background: var(--color-bg-alt); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+  .format-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4);
+    max-width: 980px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .format-grid { grid-template-columns: 1fr; } }
+  .format-card {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius-md); padding: var(--space-6);
+    display: flex; flex-direction: column;
+  }
+  .format-card .label {
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-navy-700); margin-bottom: var(--space-3);
+  }
+  .format-card.tbd .label { color: var(--color-text-soft); }
+  .format-card h3 { font-family: var(--font-serif); margin: 0 0 var(--space-3); }
+  .format-card p { font-size: var(--fs-sm); color: var(--color-text-muted); margin: 0 0 var(--space-4); line-height: 1.55; }
+  .format-card .meta {
+    margin-top: auto; padding-top: var(--space-4);
+    border-top: 1px dashed var(--color-line);
+    font-size: var(--fs-xs); color: var(--color-text-soft);
+  }
+  .format-card.tbd { background: var(--color-bg-alt); border-style: dashed; }
+
+  /* Currently scheduled — featured cohort */
+  .cohort-feature {
+    background: linear-gradient(160deg, var(--color-navy-700) 0%, var(--color-navy-900) 100%);
+    color: #fff; border-radius: var(--radius-md);
+    padding: var(--space-10);
+    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: var(--space-8); align-items: center;
+    position: relative; overflow: hidden;
+    max-width: 980px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .cohort-feature { grid-template-columns: 1fr; padding: var(--space-8); } }
+  .cohort-feature::before {
+    content: ""; position: absolute; right: -60px; top: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244, 181, 35, 0.20), transparent 70%);
+    pointer-events: none;
+  }
+  .cohort-feature .body { position: relative; z-index: 1; }
+  .cohort-feature .badge {
+    display: inline-block; background: var(--color-gold-500); color: var(--color-ink);
+    font-size: var(--fs-xs); font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    padding: 5px 12px; border-radius: var(--radius-sm);
+    margin-bottom: var(--space-4);
+  }
+  .cohort-feature h3 {
+    color: #fff; font-size: var(--fs-2xl);
+    margin-bottom: var(--space-3); font-family: var(--font-serif);
+  }
+  .cohort-feature p { color: var(--color-navy-100); margin: 0 0 var(--space-3); font-size: var(--fs-base); line-height: 1.55; }
+  .cohort-feature .specs {
+    display: flex; gap: var(--space-5); flex-wrap: wrap;
+    margin: var(--space-5) 0 var(--space-6);
+    font-size: var(--fs-sm); color: #fff;
+  }
+  .cohort-feature .specs span { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .cohort-feature .specs strong { color: var(--color-gold-300); }
+  .cohort-feature .actions { display: flex; flex-direction: column; gap: var(--space-2); position: relative; z-index: 1; }
+  .cohort-feature .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
+  .cohort-feature .btn-primary:hover { background: var(--color-gold-600); }
+  .cohort-feature .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.06); }
+  .cohort-feature .btn-ghost:hover { border-color: #fff; background: rgba(255, 255, 255, 0.12); }
+  .future-cohorts {
+    margin-top: var(--space-6); text-align: center;
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+
+  /* Pathway forward */
+  .pathway {
+    display: flex; align-items: center; justify-content: center; gap: var(--space-3);
+    flex-wrap: wrap; margin-top: var(--space-8);
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+  .pathway .step {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill); padding: 8px 16px;
+    color: var(--color-ink-2); font-weight: 600;
+  }
+  .pathway .step.current { background: var(--color-gold-500); color: var(--color-ink); border-color: var(--color-gold-500); }
+  .pathway .arrow { color: var(--color-navy-700); font-weight: 700; opacity: 0.7; }
+  .pathway .branch { display: flex; flex-direction: column; gap: var(--space-2); align-items: flex-start; }
+
+  /* FAQ */
+  .faq { max-width: 800px; margin: 0 auto; display: grid; gap: var(--space-2); }
+  details.faq-item {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius); overflow: hidden;
+    transition: border-color var(--duration-base) var(--easing);
+  }
+  details.faq-item[open] { border-color: var(--color-navy-500); }
+  details.faq-item summary {
+    list-style: none; cursor: pointer;
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--fs-base); font-weight: 600; color: var(--color-ink);
+    display: flex; justify-content: space-between; align-items: center; gap: var(--space-3);
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: "+"; color: var(--color-navy-700);
+    font-size: 1.4rem; font-weight: 300; line-height: 1;
+    transition: transform var(--duration-base) var(--easing);
+  }
+  details.faq-item[open] summary::after { content: "−"; }
+  details.faq-item .answer { padding: 0 var(--space-6) var(--space-5); font-size: var(--fs-base); color: var(--color-text); }
+  details.faq-item .answer p { margin: 0 0 var(--space-3); }
+  details.faq-item .answer p:last-child { margin-bottom: 0; }
+
+  /* CTA */
+  .cta-band {
+    background: var(--color-navy-900); color: #fff;
+    border-radius: var(--radius-md); padding: var(--space-12);
+    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: var(--space-6); align-items: center;
+  }
+  @media (max-width: 760px) { .cta-band { grid-template-columns: 1fr; padding: var(--space-8); } }
+  .cta-band h2 { color: #fff; margin: 0 0 var(--space-3); }
+  .cta-band p { color: var(--color-navy-100); margin: 0; }
+  .cta-band .actions { display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-band .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
+  .cta-band .btn-primary:hover { background: var(--color-gold-600); }
+  .cta-band .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.25); }
+  .cta-band .btn-ghost:hover { border-color: #fff; }
+
+  /* Footer */
+  footer.site {
+    padding: var(--space-12) 0 var(--space-8);
+    border-top: 1px solid var(--color-line);
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 980px) { .foot-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  footer.site h4 {
+    font-family: var(--font-sans); font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-4);
+  }
+  footer.site ul { list-style: none; padding: 0; margin: 0; }
+  footer.site ul li { margin-bottom: var(--space-2); }
+  footer.site a { color: var(--color-ink-2); }
+  .foot-brand img { height: 44px; width: auto; margin-bottom: var(--space-4); }
+  .legal {
+    margin-top: var(--space-8); padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
+    font-size: var(--fs-xs);
+  }
+  .skip-link {
+    position: absolute; top: -40px; left: 8px; background: var(--color-navy-900); color: #fff;
+    padding: 8px 12px; border-radius: var(--radius-sm); z-index: 100; text-decoration: none;
+  }
+  .skip-link:focus { top: 8px; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site">
+  <div class="container nav">
+    <a class="brand-link" href="index.html" aria-label="Futurera Institute home">
+      <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+    </a>
+    <div class="nav-cta">
+      <a class="nav-back" href="index.html#programs">← All programs</a>
+      <a class="btn btn-gold" href="bootcamp-summer-2026.html">Apply for Summer 2026 →</a>
+    </div>
+  </div>
+</header>
+
+<div class="container crumb">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <a href="index.html#programs">Programs</a>
+  <span class="sep">›</span>
+  <span>AI Lab</span>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">Stream 01 · Foundation</span>
+      <h1>AI Lab — practical fluency, <em>for any high schooler</em>.</h1>
+      <p class="lede">The foundation stream every Futurera student starts with. Hands-on, ethics-first, and built around real projects students design, build, and ship end-to-end — regardless of academic track or coding background.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#current">See current cohort</a>
+        <a class="btn btn-ghost" href="#what">What students learn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <section class="tight" style="background: var(--color-bg-alt); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);" id="what">
+    <div class="container-narrow">
+      <h2 style="text-align: center;">Where every student starts.</h2>
+      <p>Most "AI for high schoolers" courses teach how to type prompts at a chatbot. AI Lab goes further — students learn how the tools actually work, where they fail, how to use them well, and how to design, build, and ship real projects with them. The goal is fluency, not familiarity.</p>
+      <p>It's the foundation everything else in the Futurera ecosystem builds on. Students who continue into <a href="index.html#programs">University Track</a> use it as the base for research-grade projects. Students who continue into <a href="industry-track.html">Industry Track</a> use it as the base for internship-readiness work. AI Lab stands on its own too — a complete, valuable program even if a student never enrolls in another stream.</p>
+    </div>
+  </section>
+
+  <!-- COURSE CATALOG -->
+  <section class="courses-section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Course catalog</span>
+        <h2>One course open today. More coming.</h2>
+        <p>AI Lab is built as a growing catalog of courses. <strong>AI Foundations</strong> — the on-ramp every student takes first — is open for Summer 2026. Additional courses are in development and will be announced as they're ready.</p>
+      </div>
+
+      <div class="course-grid">
+
+        <article class="course-card">
+          <div class="course-tags">
+            <span class="tag-pill">Foundation</span>
+            <span class="tag-pill open">Open · Summer 2026</span>
+          </div>
+          <h3><a href="build-with-ai.html" style="color: inherit; text-decoration: none;">Build with AI — From Prompt to Product</a></h3>
+          <p>Two weeks, two real AI products shipped to live URLs. Students aged 14–18 learn to write system prompts, build with retrieval-augmented generation, catch hallucinations, and deploy — the same four ideas working AI engineers use every day.</p>
+          <div class="meta">
+            <div><strong>For:</strong> Students aged 14–18 · no coding required</div>
+            <div class="formats-list">
+              <span class="format-chip">Bootcamp</span>
+            </div>
+            <div style="margin-top: 8px;"><a href="build-with-ai.html" style="font-weight: 600;">Read full course →</a></div>
+          </div>
+        </article>
+
+        <article class="course-card tba">
+          <div class="course-tags">
+            <span class="tag-pill tba">In development</span>
+          </div>
+          <h3>More courses coming</h3>
+          <p>We're shaping the next set of AI Lab courses based on what students actually need — building with AI, AI for academic work, ethics deep-dives, and more. Topics, formats, and timing will be announced as each course is ready.</p>
+          <div class="meta">
+            <div><strong>Want input?</strong> Tell us what you'd want your child to learn.</div>
+            <div><a href="mailto:znoorian@torontomu.ca?subject=AI%20Lab%20course%20suggestions">Send us a course suggestion →</a></div>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="courses-note">
+        <a href="mailto:znoorian@torontomu.ca?subject=Notify%20me%20when%20Futurera%20opens%20new%20AI%20Lab%20courses">Email us to be notified</a> as new courses open.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORMAT OPTIONS -->
+  <section class="formats">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Delivery formats</span>
+        <h2>Different formats for different schedules.</h2>
+        <p>Each course in the AI Lab catalog can be delivered in multiple formats. Same content quality, different pacing — depending on a student's schedule and a school's calendar.</p>
+      </div>
+
+      <div class="format-grid">
+        <article class="format-card">
+          <span class="label">Open · Summer 2026</span>
+          <h3>2-week intensive bootcamp</h3>
+          <p>30 hours over 10 days. 3 hours per weekday morning. Best for students who want to go from "I've heard of AI" to "I've shipped a small AI project" in a single concentrated burst.</p>
+          <div class="meta">10 days · 3 hrs/day · in-person Toronto</div>
+        </article>
+
+        <article class="format-card tbd">
+          <span class="label">Coming soon</span>
+          <h3>4–8 week evening / weekend cohort</h3>
+          <p>The same themes spread across the school year. Two evenings a week or a weekend morning. Better for students balancing AI Lab alongside a full school course load.</p>
+          <div class="meta">4–8 weeks · 2–4 hrs/week · format tbd</div>
+        </article>
+
+        <article class="format-card tbd">
+          <span class="label">Coming soon</span>
+          <h3>In-class enrichment for schools</h3>
+          <p>Co-delivered with a teacher inside ICT, Computer Studies, or Career Education periods. School-friendly pacing. Ontario Ministry-aligned. <a href="for-partners.html">For school partners</a>.</p>
+          <div class="meta">School-paced · co-delivered with your teacher</div>
+        </article>
+
+        <article class="format-card tbd">
+          <span class="label">Coming soon</span>
+          <h3>Weekend workshop / single-session</h3>
+          <p>A 5-hour Saturday introduction. The cheapest, lowest-commitment way to find out if AI Lab is the right fit before committing to a longer cohort.</p>
+          <div class="meta">1 day · 5 hrs · in-person or hybrid</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENTLY SCHEDULED -->
+  <section id="current">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Currently scheduled</span>
+        <h2>One cohort open. Apply now.</h2>
+      </div>
+
+      <div class="cohort-feature">
+        <div class="body">
+          <span class="badge">Applications open</span>
+          <h3>AI Bootcamp · Summer 2026</h3>
+          <p>A 2-week, 30-hour intensive that takes 12 students from foundations to a finished, demoable AI project. In-person in Toronto, taught by senior faculty on our core team.</p>
+          <div class="specs">
+            <span><strong>Dates:</strong>&nbsp;July 13–24, 2026</span>
+            <span><strong>Schedule:</strong>&nbsp;Mon–Fri, 9 AM–12 PM</span>
+            <span><strong>Cohort:</strong>&nbsp;12 students</span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="bootcamp-summer-2026.html">See full details →</a>
+          <a class="btn btn-ghost" href="bootcamp-summer-2026.html#apply">Apply by email</a>
+        </div>
+      </div>
+
+      <p class="future-cohorts">More cohorts coming. <a href="mailto:znoorian@torontomu.ca?subject=Notify%20me%20when%20Futurera%20opens%20new%20AI%20Lab%20cohorts">Email us to be notified</a> when fall and winter cohorts are scheduled.</p>
+    </div>
+  </section>
+
+  <!-- PATHWAY FORWARD -->
+  <section class="tight" style="background: var(--color-bg-alt); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">After AI Lab</span>
+        <h2>What comes next.</h2>
+        <p>AI Lab is complete on its own — but for students who want more, two paths open up after the foundation is built. <strong>Progression to the next stream is assessment-based</strong> — students continue when they're ready, not when they enroll.</p>
+      </div>
+
+      <div class="pathway" aria-hidden="true">
+        <span class="step current">AI Lab</span>
+        <span class="arrow">→</span>
+        <div class="branch">
+          <span class="step">University Track <small style="display:block;font-weight:500;color:var(--color-text-muted);font-size:.78rem;">academic / R&amp;D</small></span>
+          <span class="step">Industry Track <small style="display:block;font-weight:500;color:var(--color-text-muted);font-size:.78rem;">industry / readiness</small></span>
+        </div>
+        <span class="arrow">→</span>
+        <span class="step">AI Studio <small style="display:block;font-weight:500;font-size:.78rem;">paid · apex</small></span>
+      </div>
+
+      <p style="text-align:center;margin-top:var(--space-6);color:var(--color-text-muted);font-size:var(--fs-sm);max-width:640px;margin-left:auto;margin-right:auto;">
+        Each transition — into University Track, Industry Track, or AI Studio — is gated by a competency assessment. We discuss readiness with the family directly; we'd rather have an honest conversation than a transactional one.
+      </p>
+
+      <p style="text-align:center;margin-top:var(--space-5);color:var(--color-text-muted);font-size:var(--fs-sm);">
+        Read about <a href="index.html#programs">all four streams on the homepage</a>, or jump to the <a href="industry-track.html">Industry Track detail page</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">AI Lab FAQ</span>
+        <h2>Common questions about the stream.</h2>
+        <p>For questions about a specific cohort (dates, schedule, application), see the <a href="bootcamp-summer-2026.html">Summer 2026 Bootcamp page</a>.</p>
+      </div>
+
+      <div class="faq">
+
+        <details class="faq-item">
+          <summary>Does my child need a coding background?</summary>
+          <div class="answer">
+            <p>No. AI Lab is built around using AI well in any subject — not just for students aiming at computer science. We assume zero coding experience and use no-code tools throughout, with a mentor next to you the whole way.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What grade is it for?</summary>
+          <div class="answer">
+            <p>Grade 9–12 (ages 14–18). Younger students (Grade 9–10) often benefit most from the bootcamp format — concentrated time with full mentor support. Older students (Grade 11–12) often pair it with University Track or Industry Track right after.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Online or in-person?</summary>
+          <div class="answer">
+            <p>The Summer 2026 Bootcamp is in-person in Toronto. Future cohorts may include online or hybrid formats. We believe in-person delivery is materially better for the foundation stage — but we'll offer remote options where it broadens access.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Will my child receive a certificate?</summary>
+          <div class="answer">
+            <p>Yes — a certificate of completion signed by the lead instructor (a faculty member affiliated with UofT or TMU). But the more valuable outcome is the <strong>portfolio piece</strong> students build during the program. The certificate is the smallest part.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How is this different from a YouTube AI course?</summary>
+          <div class="answer">
+            <p>Three things, specific to AI Lab. First, students <strong>do, they don't watch</strong> — every cohort is built around real projects students design, build, and ship end-to-end, with feedback from senior faculty. Second, the curriculum is taught <strong>in real time</strong> by the same faculty who designed it, not a TA reading from a script. Third, AI Lab is a <strong>stepping stone into a full ecosystem</strong> — University Track, Industry Track, or AI Studio — so the foundation has somewhere to go.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does it cost?</summary>
+          <div class="answer">
+            <p>Pricing varies by format and is discussed on the info call. Need-based scholarships are available — please ask. We are pursuing IRAP and OCI funding to subsidize spots for partner schools and need-based students.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="tight">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h2>Start with the Summer 2026 Bootcamp.</h2>
+          <p>Twelve seats. In-person Toronto. Two weeks of foundations, ethics, and a real project to show. Or book a 20-minute call to find out which AI Lab format fits your student best.</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="bootcamp-summer-2026.html">Bootcamp details →</a>
+          <a class="btn btn-ghost" href="index.html#contact">Book a call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+        <p>AI education for Grade 9–12 students. Headquartered in Toronto. Our core team includes faculty members affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+      </div>
+      <div>
+        <h4>AI Lab</h4>
+        <ul>
+          <li><a href="ai-lab.html">About AI Lab</a></li>
+          <li><a href="build-with-ai.html">Build with AI <span style="opacity:.6">· course</span></a></li>
+          <li><a href="bootcamp-summer-2026.html" style="padding-left:10px;font-size:.92em;opacity:.85">↳ Summer 2026 Bootcamp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For</h4>
+        <ul>
+          <li><a href="index.html#parents">Parents</a></li>
+          <li><a href="for-students.html">Students</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#team">Our team</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a></li>
+          <li>Toronto, Ontario</li>
+          <li><a href="index.html#contact">Book an info session</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Futurera Institute. All rights reserved.</span>
+      <span>Aligned with Ontario Ministry of Education expectations.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

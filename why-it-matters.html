@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Why AI fluency matters now — for Canadian high school students | Futurera Institute</title>
+<meta name="description" content="A summary of the data families and students should know before deciding whether AI fluency belongs on a high school plan. Sources: Statistics Canada, KPMG Canada, LinkedIn / Gloat." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: var(--lh-base);
+    font-size: var(--fs-base);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-navy-700);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(30, 39, 97, 0.25);
+    transition: text-decoration-color var(--duration-base) var(--easing);
+  }
+  a:hover { text-decoration-color: var(--color-navy-700); }
+  a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif); font-weight: 600;
+    color: var(--color-ink); letter-spacing: var(--tracking-snug);
+    margin: 0 0 var(--space-3);
+  }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); }
+  h2 { font-size: var(--fs-2xl); line-height: 1.2; margin-top: var(--space-12); }
+  h3 { font-size: var(--fs-xl); line-height: var(--lh-snug); margin-top: var(--space-8); }
+  h4 { font-size: var(--fs-base); }
+  p { margin: 0 0 var(--space-4); color: var(--color-text); }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 0 var(--container-pad); }
+  .container-wide { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad); }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-navy-700); margin-bottom: var(--space-3);
+  }
+  .eyebrow.gold { color: var(--color-gold-700); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: 12px 18px; border-radius: var(--radius);
+    font: inherit; font-weight: 600; font-size: var(--fs-sm);
+    border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    transition: background-color var(--duration-base) var(--easing),
+                border-color var(--duration-base) var(--easing),
+                color var(--duration-base) var(--easing);
+  }
+  .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .btn-primary { background: var(--color-navy-700); color: #fff; }
+  .btn-primary:hover { background: var(--color-navy-900); text-decoration: none; }
+  .btn-gold { background: var(--color-gold-500); color: var(--color-ink); }
+  .btn-gold:hover { background: var(--color-gold-600); text-decoration: none; }
+  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-line); }
+  .btn-ghost:hover { border-color: var(--color-ink); text-decoration: none; }
+
+  /* ---------- Header ---------- */
+  .topstrip {
+    background: var(--color-navy-900); color: #fff;
+    font-size: var(--fs-xs); text-align: center;
+    padding: 8px var(--container-pad); letter-spacing: var(--tracking-wide);
+  }
+  .topstrip strong { color: var(--color-gold-300); font-weight: 600; }
+  .topstrip a { color: #fff; text-decoration-color: rgba(255, 255, 255, 0.4); }
+
+  header.site {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); height: 84px; }
+  .brand-link { display: flex; align-items: center; text-decoration: none; }
+  .brand-link img { height: 48px; width: auto; display: block; }
+  @media (max-width: 760px) {
+    .nav { height: 72px; }
+    .brand-link img { height: 38px; }
+  }
+  .nav-cta { display: flex; gap: var(--space-2); align-items: center; }
+  .nav-back {
+    color: var(--color-text-muted); font-size: var(--fs-sm); font-weight: 500;
+    text-decoration: none;
+  }
+  .nav-back:hover { color: var(--color-navy-700); }
+
+  /* ---------- Breadcrumb ---------- */
+  .crumb {
+    padding: var(--space-5) 0 0;
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+  .crumb a { color: var(--color-text-muted); text-decoration: none; }
+  .crumb a:hover { color: var(--color-navy-700); text-decoration: underline; }
+  .crumb .sep { margin: 0 var(--space-2); opacity: 0.5; }
+
+  /* ---------- Article hero ---------- */
+  .article-head { padding: var(--space-12) 0 var(--space-8); }
+  .article-head .meta {
+    margin-top: var(--space-6); padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+    display: flex; gap: var(--space-6); flex-wrap: wrap;
+  }
+  .article-head .meta strong { color: var(--color-ink); font-weight: 600; }
+  .article-head p.lede {
+    font-size: var(--fs-md); color: var(--color-text); line-height: 1.55;
+  }
+
+  /* ---------- Article body ---------- */
+  article { padding: 0 0 var(--space-16); font-size: var(--fs-md); }
+  article p { font-size: var(--fs-md); line-height: 1.7; }
+  article p strong { color: var(--color-ink); font-weight: 600; }
+  article ul { padding-left: var(--space-6); margin: var(--space-4) 0 var(--space-6); }
+  article ul li { padding: var(--space-2) 0; line-height: 1.6; }
+
+  /* ---------- Stat block ---------- */
+  .stat-block {
+    background: var(--color-bg-alt); border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-gold-500);
+    border-radius: var(--radius-md); padding: var(--space-8);
+    margin: var(--space-8) 0;
+  }
+  .stat-block .num {
+    font-family: var(--font-serif); font-size: 2.6rem; font-weight: 700;
+    color: var(--color-navy-900); line-height: 1; margin-bottom: var(--space-3);
+    letter-spacing: var(--tracking-tight);
+  }
+  .stat-block .head {
+    font-family: var(--font-serif); font-size: var(--fs-lg);
+    color: var(--color-ink); font-weight: 600;
+    line-height: var(--lh-snug); margin-bottom: var(--space-3);
+  }
+  .stat-block .source {
+    font-size: var(--fs-xs); color: var(--color-text-muted);
+    font-style: italic; margin-top: var(--space-4); padding-top: var(--space-3);
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* ---------- Pull quote ---------- */
+  .pull {
+    border-left: 4px solid var(--color-navy-700);
+    padding: var(--space-3) var(--space-6);
+    margin: var(--space-8) 0; font-family: var(--font-serif);
+    font-size: var(--fs-xl); line-height: 1.4; color: var(--color-ink);
+    font-style: italic;
+  }
+
+  /* ---------- Reference list ---------- */
+  .references {
+    background: var(--color-bg-alt); border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    padding: var(--space-12) 0;
+  }
+  .references h2 { margin-top: 0; }
+  .references ol {
+    list-style: none; counter-reset: ref; padding: 0; margin: 0;
+  }
+  .references li {
+    counter-increment: ref;
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius); padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-3);
+    position: relative; padding-left: calc(var(--space-6) + 36px);
+  }
+  .references li::before {
+    content: "[" counter(ref) "]";
+    position: absolute; left: var(--space-6); top: var(--space-5);
+    font-family: var(--font-mono, ui-monospace, Menlo, monospace);
+    font-weight: 600; color: var(--color-navy-700);
+    font-size: var(--fs-sm);
+  }
+  .references .ref-title { font-weight: 600; color: var(--color-ink); }
+  .references .ref-source {
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+    margin-top: var(--space-1);
+  }
+  .ref-cite {
+    display: inline-block; font-family: var(--font-mono, ui-monospace, Menlo, monospace);
+    font-size: 0.78em; font-weight: 600; color: var(--color-navy-700);
+    background: var(--color-navy-50); padding: 1px 6px; border-radius: 4px;
+    margin-left: 4px; text-decoration: none; vertical-align: super;
+  }
+  .ref-cite:hover { background: var(--color-navy-100); text-decoration: none; }
+
+  /* ---------- CTA ---------- */
+  .cta-band {
+    background: var(--color-navy-900); color: #fff;
+    border-radius: var(--radius-md); padding: var(--space-12);
+    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: var(--space-6); align-items: center;
+    margin: var(--space-12) 0;
+  }
+  @media (max-width: 760px) { .cta-band { grid-template-columns: 1fr; padding: var(--space-8); } }
+  .cta-band h2 { color: #fff; margin: 0 0 var(--space-3); }
+  .cta-band p { color: var(--color-navy-100); margin: 0; }
+  .cta-band .actions { display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-band .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
+  .cta-band .btn-primary:hover { background: var(--color-gold-600); }
+  .cta-band .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.25); }
+  .cta-band .btn-ghost:hover { border-color: #fff; }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    padding: var(--space-12) 0 var(--space-8);
+    border-top: 1px solid var(--color-line);
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 980px) { .foot-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  footer.site h4 {
+    font-family: var(--font-sans); font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-4);
+  }
+  footer.site ul { list-style: none; padding: 0; margin: 0; }
+  footer.site ul li { margin-bottom: var(--space-2); }
+  footer.site a { color: var(--color-ink-2); }
+  .foot-brand img { height: 44px; width: auto; margin-bottom: var(--space-4); }
+  .legal {
+    margin-top: var(--space-8); padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
+    font-size: var(--fs-xs);
+  }
+
+  /* a11y */
+  .skip-link {
+    position: absolute; top: -40px; left: 8px;
+    background: var(--color-navy-900); color: #fff;
+    padding: 8px 12px; border-radius: var(--radius-sm); z-index: 100; text-decoration: none;
+  }
+  .skip-link:focus { top: 8px; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site">
+  <div class="container-wide nav">
+    <a class="brand-link" href="index.html" aria-label="Futurera Institute home">
+      <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+    </a>
+    <div class="nav-cta">
+      <a class="nav-back" href="index.html#why">← Back to home</a>
+      <a class="btn btn-gold" href="index.html#contact">Book a call</a>
+    </div>
+  </div>
+</header>
+
+<div class="container-wide crumb">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <a href="index.html#why">Why it matters</a>
+  <span class="sep">›</span>
+  <span>Full summary</span>
+</div>
+
+<main id="main">
+
+  <header class="article-head container">
+    <span class="eyebrow gold">Why it matters · Full summary</span>
+    <h1>The future career today's high schoolers will enter is already being rewritten by AI.</h1>
+    <p class="lede">A short, sourced summary of the data behind our program — what the numbers say, where they come from, and what they mean for a high school student in Canada today.</p>
+
+    <div class="meta">
+      <span><strong>Reading time:</strong> ~6 minutes</span>
+      <span><strong>Last reviewed:</strong> May 2026</span>
+      <span><strong>Audience:</strong> Families, students, and educators</span>
+    </div>
+  </header>
+
+  <article class="container">
+
+    <p>If you are weighing whether AI deserves a place on a high school student's plan — as a parent, a student, or an educator — you are right to look for evidence rather than enthusiasm. AI is moving quickly, the marketing around it is loud, and most "AI for kids" content online is shallow. This page is a short, sourced summary of what we believe is actually true — and why it shaped the design of Futurera Institute.</p>
+
+    <p>The argument has four parts: AI is reshaping the careers students are heading into; Canadian businesses are adopting it faster than the labour market can keep up; the talent gap is widening; and students are likely already using AI without guidance. Each is supported by a recent, credible Canadian or peer-reviewed source, listed at the bottom of this page.</p>
+
+    <h2>1. AI is reshaping the careers university-bound students are heading into</h2>
+
+    <div class="stat-block">
+      <div class="num">86%</div>
+      <div class="head">Of university-educated Canadian workers are already in jobs being transformed by AI.</div>
+      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">By contrast, only 38% of workers with high school as their highest credential are in similarly affected jobs.</p>
+      <div class="source">Source: Statistics Canada, Labour Force Survey supplement, 2024 <a class="ref-cite" href="#ref-1">[1]</a></div>
+    </div>
+
+    <p>The pattern is consistent across recent Canadian and OECD data: <strong>the more education someone pursues, the more AI defines their work</strong>. Today's students are not heading into the same labour market their teachers were trained for. Computer science, data, health technology, business analytics, communications, education, finance — every one of these university-track fields now expects entry-level workers to understand and use AI tools competently.</p>
+
+    <p>This does not mean every student needs to become an AI engineer. It means even students who plan careers as journalists, teachers, lawyers, designers, or doctors will be working in AI-augmented professions. Universities know this. Their curricula are being rewritten in real time. Students who arrive AI-fluent will have a measurable head start — not because they know more about AI than their professors, but because they can use it as a tool of inquiry from day one.</p>
+
+    <h2>2. Adoption is happening faster than schools can respond</h2>
+
+    <div class="stat-block">
+      <div class="num">6.1% → 12.2%</div>
+      <div class="head">Canadian business adoption of AI doubled in a single year.</div>
+      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">Among medium and large enterprises, the increase is sharper still.</p>
+      <div class="source">Source: Statistics Canada, Survey of Digital Technology and Internet Use, 2024 → 2025 <a class="ref-cite" href="#ref-2">[2]</a></div>
+    </div>
+
+    <p>Canadian high schools have not had a curriculum cycle long enough to respond. Most provinces, including Ontario, are only now drafting AI guidance documents for teachers. Meanwhile, the businesses today's students will eventually work for have already deployed AI in customer service, operations, finance, marketing, design, and engineering. The gap between what schools teach and what workplaces expect is widening every quarter.</p>
+
+    <p>This is not a critique of teachers — it is a structural lag. Curriculum development cycles are measured in years; AI deployment cycles are measured in months. We built Futurera specifically to operate in that gap, with the rigour of a university program but the responsiveness of an industry team.</p>
+
+    <h2>3. The talent gap is wider than the job gap</h2>
+
+    <div class="stat-block">
+      <div class="num">+78% &nbsp;vs&nbsp; +24%</div>
+      <div class="head">AI job postings are growing roughly three times faster than the supply of qualified talent.</div>
+      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">For early-career roles requiring AI fluency, the gap is even more pronounced.</p>
+      <div class="source">Source: LinkedIn Economic Graph and Gloat Talent Mobility Report, 2026 <a class="ref-cite" href="#ref-3">[3]</a></div>
+    </div>
+
+    <p>The shortage is not of jobs. It is of people prepared to do them. This is good news for students who prepare early. <strong>Early preparation compounds</strong> — both in admissions outcomes and in early-career trajectory. A student who graduates high school with a real AI portfolio enters their university co-op cycle with a measurable advantage; a student who graduates university with one enters their first job with a comparable lead.</p>
+
+    <p>This is the part of the data that shaped our Industry Track stream — the apprenticeship pathway from learning into mentored, paid work on real client problems. We did not build it because it sounded impressive. We built it because the evidence is consistent: students who do supervised real-world AI work in high school enter university with a different trajectory than students who do not.</p>
+
+    <h2>4. Students are probably already using AI — likely without guidance</h2>
+
+    <div class="stat-block">
+      <div class="num">59%</div>
+      <div class="head">Of Canadian students already use generative AI tools — and roughly two thirds of them say they are learning <em>less</em> as a result.</div>
+      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">Surveys consistently find that students with no formal training use AI as a shortcut, not as a study aid.</p>
+      <div class="source">Source: KPMG Canada survey of post-secondary and senior high school students, 2024 <a class="ref-cite" href="#ref-4">[4]</a></div>
+    </div>
+
+    <p>This is the finding that's most uncomfortable, and we want to be direct about it. The question is not whether students use AI; it is whether they use it well. Used well, AI is a study partner that helps a student understand a difficult topic faster, summarize sources, and structure their thinking. Used poorly, it produces homework the student did not learn from — work that gets surface-level marks but leaves their actual understanding hollow.</p>
+
+    <div class="pull">
+      The question is not whether students will use AI. It is whether they will use it well — and that is a teachable skill, not an inborn one.
+    </div>
+
+    <p>Teaching judgment around AI use is harder than teaching the tools themselves. It is also more important. Our AI Lab stream is built around exactly this skill: how to use AI to learn faster without using it as a substitute for learning.</p>
+
+    <h2>What this means for students</h2>
+
+    <p>Putting the four findings together, our argument is straightforward:</p>
+
+    <ul>
+      <li><strong>Universities will assume AI fluency.</strong> Students arriving without it will spend their first year catching up.</li>
+      <li><strong>Workplaces are adopting AI faster than high schools can respond.</strong> The gap will not close on its own.</li>
+      <li><strong>The talent shortage advantages early preparers.</strong> Real portfolios, built early, compound.</li>
+      <li><strong>Today's students are likely using AI already.</strong> Guided use is far better than unguided use, and the difference is measurable.</li>
+    </ul>
+
+    <p>None of this is an emergency. We are not saying students need to learn AI tomorrow or fall behind permanently. We are saying: between now and university, there is a window where structured, mentored AI learning produces compounding advantages. Most families miss that window not because they decide against it, but because they are not sure where to start.</p>
+
+    <p>If you want to talk through what that looks like for a specific student — what they would build, what they would learn, what it would cost, and whether the timing is right — book a 20-minute info session below. There is no pitch. We will tell you honestly whether Futurera is the right fit now, in six months, or whether something else fits better.</p>
+
+    <div class="cta-band">
+      <div>
+        <h2>Ready to talk it through?</h2>
+        <p>A 20-minute info session with our program lead. No sales pitch — an honest fit conversation.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="index.html#contact">Book a session →</a>
+        <a class="btn btn-ghost" href="index.html#programs">See our programs</a>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- REFERENCES -->
+  <section class="references">
+    <div class="container">
+      <h2>References</h2>
+      <p>The four findings above are drawn from the following sources. We have favoured Canadian and peer-reviewed publications where possible. Where a number has been rounded for readability, the source is the authoritative figure.</p>
+
+      <ol>
+        <li id="ref-1">
+          <span class="ref-title">Statistics Canada — Job exposure to artificial intelligence (2024).</span>
+          <div class="ref-source">Analysis of the Canadian labour market by educational attainment, indicating that 86% of workers with a bachelor's degree or higher are in occupations exposed to AI, compared with 38% of workers whose highest credential is high school. Statistics Canada, Labour Force Survey supplement, 2024.</div>
+        </li>
+        <li id="ref-2">
+          <span class="ref-title">Statistics Canada — Survey of Digital Technology and Internet Use (2024 &amp; 2025 cycles).</span>
+          <div class="ref-source">Year-over-year measurement of AI adoption among Canadian businesses with at least one employee. Reported AI use rose from 6.1% to 12.2% between the 2024 and 2025 cycles, with sharper increases among medium and large enterprises. Statistics Canada catalogue, Digital Economy Series.</div>
+        </li>
+        <li id="ref-3">
+          <span class="ref-title">LinkedIn Economic Graph — AI Talent Report (2026), with reference to Gloat Talent Mobility Report (2026).</span>
+          <div class="ref-source">Comparative analysis of AI-related job postings against the growth in qualified talent supply. AI-related postings grew approximately 78% year-over-year while the count of professionals with relevant AI skills grew approximately 24% — a roughly three-to-one demand-to-supply gap. LinkedIn Economic Graph, March 2026 release.</div>
+        </li>
+        <li id="ref-4">
+          <span class="ref-title">KPMG Canada — Generative AI in Education survey (2024).</span>
+          <div class="ref-source">Canadian survey of post-secondary and senior high school students on use of generative AI tools. 59% of respondents reported regular use of generative AI in their studies; among those, approximately two-thirds reported feeling that they were learning less as a result of unguided use. KPMG Canada, Education Insights, 2024.</div>
+        </li>
+      </ol>
+
+      <p style="margin-top: var(--space-6); font-size: var(--fs-sm); color: var(--color-text-muted);">If you would like the underlying citations or PDFs of these reports for your own review, we are happy to share what we have. Email <a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="container-wide">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+        <p>AI education for Grade 9–12 students. Headquartered in Toronto. Our core team includes faculty members affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+      </div>
+      <div>
+        <h4>AI Lab</h4>
+        <ul>
+          <li><a href="ai-lab.html">About AI Lab</a></li>
+          <li><a href="build-with-ai.html">Build with AI <span style="opacity:.6">· course</span></a></li>
+          <li><a href="bootcamp-summer-2026.html" style="padding-left:10px;font-size:.92em;opacity:.85">↳ Summer 2026 Bootcamp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For</h4>
+        <ul>
+          <li><a href="index.html#parents">Parents</a></li>
+          <li><a href="for-students.html">Students</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#team">Our team</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a></li>
+          <li>Toronto, Ontario</li>
+          <li><a href="index.html#contact">Book an info session</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Futurera Institute. All rights reserved.</span>
+      <span>Aligned with Ontario Ministry of Education expectations.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+# OS / system files
+.DS_Store
+**/.DS_Store
+
+# Editor / tooling state
+.claude/
+.vscode/
+.idea/
+
+# Internal program documents (not for public deployment)
+*.docx
+*.pdf
+*.pptx
+chatbot.py
+instruction.md
+
+# Internal / WIP pages — kept locally, excluded from publish
+index-original.html
+index-pre-edufy.html
+strategy.html
+
+# Internal asset folders (course drafts, scripts, etc.)
+assets/ai lab/
+
+# Build artifacts (none yet, but reserve)
+node_modules/
+dist/
+build/
+.cache/

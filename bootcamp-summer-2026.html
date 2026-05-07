@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Build with AI · Summer 2026 Bootcamp — Apply now | Futurera Institute</title>
+<meta name="description" content="The Summer 2026 cohort of Build with AI — a 2-week intensive where students aged 14–18 ship two real AI products. July 2026 in Toronto. Apply now. Part of the AI Lab catalog at Futurera Institute." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    font-family: var(--font-sans); color: var(--color-text); background: var(--color-bg);
+    line-height: var(--lh-base); font-size: var(--fs-base);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--color-navy-700); text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 3px;
+    text-decoration-color: rgba(30, 39, 97, 0.25);
+    transition: text-decoration-color var(--duration-base) var(--easing);
+  }
+  a:hover { text-decoration-color: var(--color-navy-700); }
+  a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif); font-weight: 600;
+    color: var(--color-ink); letter-spacing: var(--tracking-snug);
+    margin: 0 0 var(--space-3);
+  }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); }
+  h2 { font-size: var(--fs-2xl); line-height: 1.2; }
+  h3 { font-size: var(--fs-lg); line-height: var(--lh-snug); }
+  h4 { font-size: var(--fs-base); margin-bottom: var(--space-2); }
+  p { margin: 0 0 var(--space-4); color: var(--color-text); }
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad); }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 var(--container-pad); }
+  .eyebrow {
+    display: inline-block; font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-gold-700); margin-bottom: var(--space-3);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: 12px 18px; border-radius: var(--radius);
+    font: inherit; font-weight: 600; font-size: var(--fs-sm);
+    border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    transition: all var(--duration-base) var(--easing);
+  }
+  .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .btn-primary { background: var(--color-navy-700); color: #fff; }
+  .btn-primary:hover { background: var(--color-navy-900); text-decoration: none; }
+  .btn-gold { background: var(--color-gold-500); color: var(--color-ink); }
+  .btn-gold:hover { background: var(--color-gold-600); text-decoration: none; }
+  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-line); }
+  .btn-ghost:hover { border-color: var(--color-ink); text-decoration: none; }
+
+  /* Header */
+  .topstrip {
+    background: var(--color-navy-900); color: #fff;
+    font-size: var(--fs-xs); text-align: center;
+    padding: 8px var(--container-pad); letter-spacing: var(--tracking-wide);
+  }
+  .topstrip strong { color: var(--color-gold-300); font-weight: 600; }
+  header.site {
+    position: sticky; top: 0; z-index: var(--z-nav);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); height: 84px; }
+  .brand-link { display: flex; align-items: center; text-decoration: none; }
+  .brand-link img { height: 48px; width: auto; display: block; }
+  @media (max-width: 760px) { .nav { height: 72px; } .brand-link img { height: 38px; } }
+  .nav-cta { display: flex; gap: var(--space-2); align-items: center; }
+  .nav-back { color: var(--color-text-muted); font-size: var(--fs-sm); font-weight: 500; text-decoration: none; }
+  .nav-back:hover { color: var(--color-navy-700); }
+
+  .crumb { padding: var(--space-5) 0 0; color: var(--color-text-muted); font-size: var(--fs-sm); }
+  .crumb a { color: var(--color-text-muted); text-decoration: none; }
+  .crumb a:hover { color: var(--color-navy-700); text-decoration: underline; }
+  .crumb .sep { margin: 0 var(--space-2); opacity: 0.5; }
+
+  /* Hero */
+  .hero {
+    padding: var(--space-12) 0 var(--space-12);
+    background: linear-gradient(180deg, #fdfcf8 0%, #ffffff 100%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-12); align-items: start; }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; gap: var(--space-8); } }
+  .hero h1 em {
+    color: var(--color-gold-700); font-style: italic; font-weight: 600;
+  }
+  .hero .lede { font-size: var(--fs-md); color: var(--color-text); line-height: 1.55; max-width: 56ch; }
+  .hero .actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-6); }
+  .seats-note {
+    margin-top: var(--space-3);
+    font-size: var(--fs-sm); color: var(--color-text-muted);
+  }
+
+  /* At-a-glance card */
+  .glance {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius-md); padding: var(--space-6);
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--color-gold-500);
+  }
+  .glance h4 {
+    font-family: var(--font-sans); font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-text-soft); margin: 0 0 var(--space-4); font-weight: 600;
+  }
+  .glance dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-3) var(--space-5); }
+  .glance dt { color: var(--color-text-muted); font-size: var(--fs-sm); }
+  .glance dd { margin: 0; color: var(--color-ink); font-weight: 500; font-size: var(--fs-sm); }
+  .glance .cta-row {
+    margin-top: var(--space-6); padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    display: flex; flex-direction: column; gap: var(--space-2);
+  }
+
+  /* Sections */
+  section { padding: var(--space-16) 0; }
+  section.tight { padding: var(--space-12) 0; }
+  .section-head { max-width: 720px; margin: 0 auto var(--space-10); }
+  .section-head.center { text-align: center; }
+  .section-head p { color: var(--color-text-muted); font-size: var(--fs-md); }
+
+  /* Curriculum timeline */
+  .week-block { margin-bottom: var(--space-12); }
+  .week-block:last-child { margin-bottom: 0; }
+  .week-label {
+    display: flex; align-items: center; gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+  .week-label .num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--color-navy-700); color: #fff;
+    display: grid; place-items: center;
+    font-family: var(--font-serif); font-weight: 600; font-size: var(--fs-lg);
+  }
+  .week-label .title h3 { margin: 0; font-size: var(--fs-xl); }
+  .week-label .title .sub { font-size: var(--fs-sm); color: var(--color-text-muted); margin-top: 2px; }
+
+  .day-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-3);
+  }
+  @media (max-width: 980px) { .day-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .day-grid { grid-template-columns: 1fr; } }
+  .day-card {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius); padding: var(--space-5);
+    display: flex; flex-direction: column;
+  }
+  .day-card .day-num {
+    font-size: var(--fs-xs); font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-navy-700); margin-bottom: var(--space-2);
+  }
+  .day-card h4 {
+    font-family: var(--font-serif); font-size: var(--fs-base);
+    margin: 0 0 var(--space-2); line-height: var(--lh-snug);
+  }
+  .day-card p {
+    font-size: var(--fs-xs); color: var(--color-text-muted);
+    margin: 0; line-height: 1.5;
+  }
+  .week-block.build .week-label .num { background: var(--color-gold-500); color: var(--color-ink); }
+
+  /* Audience perspective sections (For Students / For Parents) */
+  .perspective {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-gold-500);
+    border-radius: var(--radius-md); padding: var(--space-10) var(--space-12);
+    max-width: 800px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .perspective { padding: var(--space-8) var(--space-6); } }
+  .perspective.parents { border-left-color: var(--color-navy-700); }
+  .perspective .salutation {
+    font-family: var(--font-serif); font-size: var(--fs-lg);
+    color: var(--color-gold-700); font-style: italic;
+    margin-bottom: var(--space-5);
+  }
+  .perspective.parents .salutation { color: var(--color-navy-700); }
+  .perspective h3 {
+    font-family: var(--font-serif); font-size: var(--fs-xl);
+    margin: var(--space-8) 0 var(--space-3);
+    color: var(--color-ink);
+  }
+  .perspective h3:first-of-type { margin-top: 0; }
+  .perspective p {
+    font-size: var(--fs-md); color: var(--color-text);
+    line-height: 1.7; margin-bottom: var(--space-3);
+  }
+  .perspective p strong { color: var(--color-ink); font-weight: 600; }
+
+  /* Honest framing / promise box */
+  .promise-box {
+    background: var(--color-bg-alt); border: 1px solid var(--color-line);
+    border-radius: var(--radius-md); padding: var(--space-8) var(--space-10);
+    max-width: 800px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .promise-box { padding: var(--space-6); } }
+  .promise-box h3 { font-family: var(--font-serif); font-size: var(--fs-lg); margin: 0 0 var(--space-4); }
+  .promise-box ul { list-style: none; padding: 0; margin: 0; }
+  .promise-box li {
+    padding: var(--space-2) 0 var(--space-2) var(--space-6);
+    position: relative;
+    font-size: var(--fs-base); color: var(--color-text); line-height: 1.55;
+  }
+  .promise-box li::before {
+    content: "✕"; position: absolute; left: 0; top: var(--space-2);
+    color: var(--color-danger); font-weight: 700;
+  }
+  .promise-box li.do::before { content: "✓"; color: var(--color-success); }
+
+  /* Outcomes */
+  .outcomes-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4);
+    max-width: 880px; margin: 0 auto;
+  }
+  .outcomes-grid.outcomes-three { grid-template-columns: repeat(3, 1fr); max-width: 980px; }
+  @media (max-width: 880px) { .outcomes-grid.outcomes-three { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .outcomes-grid { grid-template-columns: 1fr; } }
+  .outcome-card {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius); padding: var(--space-5);
+    display: grid; grid-template-columns: 36px 1fr; gap: var(--space-4); align-items: start;
+  }
+  .outcome-card .ico {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--color-gold-50); color: var(--color-gold-700);
+    display: grid; place-items: center;
+    font-family: var(--font-serif); font-weight: 700; font-size: var(--fs-base);
+  }
+  .outcome-card h4 { margin: 0 0 var(--space-2); font-family: var(--font-sans); font-size: var(--fs-base); }
+  .outcome-card p { font-size: var(--fs-sm); color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+
+  /* Day-in-life */
+  .day-schedule {
+    background: var(--color-bg-alt); border: 1px solid var(--color-line);
+    border-radius: var(--radius-md); padding: var(--space-8);
+    max-width: 640px; margin: 0 auto;
+  }
+  .day-schedule h3 { text-align: center; margin-bottom: var(--space-6); }
+  .schedule-row {
+    display: grid; grid-template-columns: 110px 1fr; gap: var(--space-5);
+    padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line-soft);
+    font-size: var(--fs-sm);
+  }
+  .schedule-row:last-child { border-bottom: 0; }
+  .schedule-row .time { color: var(--color-navy-700); font-weight: 600; font-family: var(--font-mono); }
+  .schedule-row .activity { color: var(--color-text); }
+
+  /* FAQ */
+  .faq { max-width: 800px; margin: 0 auto; display: grid; gap: var(--space-2); }
+  details.faq-item {
+    background: var(--color-card); border: 1px solid var(--color-line);
+    border-radius: var(--radius); overflow: hidden;
+    transition: border-color var(--duration-base) var(--easing);
+  }
+  details.faq-item[open] { border-color: var(--color-navy-500); }
+  details.faq-item summary {
+    list-style: none; cursor: pointer;
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--fs-base); font-weight: 600; color: var(--color-ink);
+    display: flex; justify-content: space-between; align-items: center; gap: var(--space-3);
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: "+"; color: var(--color-navy-700);
+    font-size: 1.4rem; font-weight: 300; line-height: 1;
+    transition: transform var(--duration-base) var(--easing);
+  }
+  details.faq-item[open] summary::after { content: "−"; }
+  details.faq-item .answer { padding: 0 var(--space-6) var(--space-5); font-size: var(--fs-base); color: var(--color-text); }
+  details.faq-item .answer p { margin: 0 0 var(--space-3); }
+  details.faq-item .answer p:last-child { margin-bottom: 0; }
+
+  /* CTA */
+  .cta-band {
+    background: var(--color-navy-900); color: #fff;
+    border-radius: var(--radius-md); padding: var(--space-12);
+    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: var(--space-6); align-items: center;
+  }
+  @media (max-width: 760px) { .cta-band { grid-template-columns: 1fr; padding: var(--space-8); } }
+  .cta-band h2 { color: #fff; margin: 0 0 var(--space-3); }
+  .cta-band p { color: var(--color-navy-100); margin: 0; }
+  .cta-band .actions { display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-band .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
+  .cta-band .btn-primary:hover { background: var(--color-gold-600); }
+  .cta-band .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.25); }
+  .cta-band .btn-ghost:hover { border-color: #fff; }
+
+  /* Footer */
+  footer.site {
+    padding: var(--space-12) 0 var(--space-8);
+    border-top: 1px solid var(--color-line);
+    color: var(--color-text-muted); font-size: var(--fs-sm);
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 980px) { .foot-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  footer.site h4 {
+    font-family: var(--font-sans); font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
+    color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-4);
+  }
+  footer.site ul { list-style: none; padding: 0; margin: 0; }
+  footer.site ul li { margin-bottom: var(--space-2); }
+  footer.site a { color: var(--color-ink-2); }
+  .foot-brand img { height: 44px; width: auto; margin-bottom: var(--space-4); }
+  .legal {
+    margin-top: var(--space-8); padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
+    font-size: var(--fs-xs);
+  }
+  .skip-link {
+    position: absolute; top: -40px; left: 8px; background: var(--color-navy-900); color: #fff;
+    padding: 8px 12px; border-radius: var(--radius-sm); z-index: 100; text-decoration: none;
+  }
+  .skip-link:focus { top: 8px; }
+
+  /* Editorial callout for placeholders */
+  .placeholder-note {
+    display: inline-block; background: var(--color-warn-bg); color: var(--color-warn);
+    padding: 1px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site">
+  <div class="container nav">
+    <a class="brand-link" href="index.html" aria-label="Futurera Institute home">
+      <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+    </a>
+    <div class="nav-cta">
+      <a class="nav-back" href="ai-lab.html">← AI Lab</a>
+      <a class="btn btn-gold" href="#apply">Apply now</a>
+    </div>
+  </div>
+</header>
+
+<div class="container crumb">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <a href="index.html#programs">Programs</a>
+  <span class="sep">›</span>
+  <a href="ai-lab.html">AI Lab</a>
+  <span class="sep">›</span>
+  <span>Summer 2026 Bootcamp</span>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">AI Lab · Build with AI · Summer 2026</span>
+        <h1><em>Build with AI</em> — Summer 2026 Bootcamp.</h1>
+        <p class="lede">The Summer 2026 cohort of <a href="build-with-ai.html">Build with AI</a>, a 2-week intensive where students aged 14–18 ship two real AI products — a custom chatbot and a personalized Study Buddy — without writing a line of code. Live URLs, real audience, real applause on Day 10.</p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#apply">Apply now →</a>
+          <a class="btn btn-ghost" href="build-with-ai.html">Read full course details</a>
+        </div>
+        <p class="seats-note">Small group. Applications reviewed on a rolling basis until full.</p>
+      </div>
+
+      <aside class="glance">
+        <h4>At a glance</h4>
+        <dl>
+          <dt>Course</dt><dd><a href="build-with-ai.html">Build with AI</a> (AI Lab catalog)</dd>
+          <dt>Format</dt><dd>2-week bootcamp</dd>
+          <dt>Dates</dt><dd>July 13–24, 2026 <span class="placeholder-note">draft</span></dd>
+          <dt>Schedule</dt><dd>Mon–Fri, 9:00 AM – 12:00 PM</dd>
+          <dt>Total</dt><dd>30 hours over 10 days</dd>
+          <dt>Where</dt><dd>In-person, Toronto</dd>
+          <dt>Ages</dt><dd>14–18 · no coding required</dd>
+          <dt>Bring</dt><dd>A laptop (any model)</dd>
+          <dt>Tools cost</dt><dd>$0 (free no-code tools)</dd>
+          <dt>Tuition</dt><dd>Discussed on info call <span class="placeholder-note">tbd</span></dd>
+          <dt>Application</dt><dd>Rolling, until full</dd>
+        </dl>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#apply">Apply now</a>
+          <a class="btn btn-ghost" href="mailto:znoorian@torontomu.ca?subject=AI%20Bootcamp%20Summer%202026%20question">Ask a question</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <section class="tight" style="background: var(--color-bg-alt); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);">
+    <div class="container-narrow">
+      <div class="section-head center">
+        <span class="eyebrow">What makes this cohort different</span>
+        <h2>A small, in-person cohort — not a self-paced video.</h2>
+        <p>Different from the YouTube AI courses parents have seen advertised. Taught in real time by senior faculty on our core team, with a stress-test day where students break each other's work and a Showcase Day where parents test the result on their own child's homework.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR STUDENTS -->
+  <section class="tight" id="for-students">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">For students</span>
+        <h2>If you're a high schooler reading this — read this.</h2>
+      </div>
+
+      <div class="perspective">
+        <div class="salutation">A note for you, in your own voice —</div>
+
+        <h3>Why you should take this course</h3>
+        <p>You already know how to ask ChatGPT a question. Everyone in your school does. That's not a skill anymore — it's a baseline, like knowing how to Google.</p>
+        <p>What <strong>is</strong> a skill is being able to <strong>build</strong> with AI. That means writing the kind of instructions that get AI to do what you want on the first try, knowing what's happening under the chat window, knowing when an AI is lying to you, and putting a working AI tool at a public URL your friends can open on their phones.</p>
+        <p>Almost nobody in your grade can do any of this yet. Most teachers can't either. Two weeks in this course puts you in a category of person that companies, colleges, and the rest of the internet are going to keep paying attention to for the rest of your life.</p>
+
+        <h3>Why this matters right now</h3>
+        <p>The four ideas you learn here are the same four ideas the engineers at OpenAI, Anthropic, and Google work with every single day. The only difference between you and them at the end of two weeks is that they wrote code and you used no-code tools. The concepts are identical.</p>
+        <p>In five years, "I use AI" will mean nothing. Everyone will use it. The people who actually go somewhere will be the people who can <strong>explain how it works and build their own version of it</strong>. That second category starts here, at age 14 to 18.</p>
+        <p>When you apply to college in two or three years, you'll be competing against people who claim they "used AI for an essay." You'll be the one with two live URLs to attach to your application.</p>
+
+        <h3>What you'll actually do</h3>
+        <p>You design the personality of your chatbot. You pick the subject your Study Buddy is built around. You decide what it sounds like, what it refuses to answer, what its name is, what its first message says. The work is yours.</p>
+        <p>There's a stress-test day where you spend the whole session trying to break your friends' chatbots on purpose, and they spend it trying to break yours. You document where the cracks are. This is competitive, funny, and the actual lesson at the same time.</p>
+        <p>On the final day, your parents come in and test your Study Buddy on your real homework in front of you. The room is loud. There are stakes.</p>
+
+        <h3>Why you'll actually enjoy this</h3>
+        <p>Most school projects end up in the trash on the last day of class. This one ends up at a URL that lives on the public internet for as long as you want it to. Your friends can open it on their phones. Your siblings can use it. You can keep using it after camp ends.</p>
+        <p>The two weeks are spent playing with the best AI tools that exist right now, in a structured way, with someone in the room who knows how to use them. You're not figuring this out alone in your bedroom at midnight.</p>
+        <p>You design what you build. You break your friends' work on a Friday. You walk out with two live URLs that work. <strong>That's a different kind of summer.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR PARENTS -->
+  <section style="background: var(--color-bg-alt); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);" id="for-parents">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">For parents</span>
+        <h2>The case for parents — five concrete questions, answered.</h2>
+      </div>
+
+      <div class="perspective parents">
+        <div class="salutation">If you're a parent considering this course —</div>
+
+        <h3>Why your child needs to take this course</h3>
+        <p>Your child already uses ChatGPT. So does every other student in their grade. The fact that a teenager can ask a chatbot a question and copy the answer is not a skill anymore — it's a baseline, like knowing how to Google.</p>
+        <p>What <strong>is</strong> becoming an actual skill is the ability to build with AI: knowing what's happening underneath ChatGPT, writing instructions that get the right answer on the first try, knowing when an AI is making something up and how to stop it, and putting a working AI tool on the public internet that another person can use.</p>
+        <p>Almost no high school teaches any of this. Most schools have either banned AI outright or reduced it to "do not use it on essays." Two weeks in this course closes a gap the school system isn't closing. By the end, your child will have <strong>built two working AI products and will be able to explain how they work in plain language</strong>. That's a credential almost no other applicant in their college pool will have.</p>
+
+        <h3>Why these skills matter right now</h3>
+        <p>The four concepts your child learns are not tied to any one company or any one tool. <strong>System prompts, retrieval-augmented generation, hallucination detection, and deployment</strong> are the architecture of every modern AI product on the market. They're how Microsoft Copilot is built. They're how every legal research AI, medical summarization tool, and customer support copilot is built.</p>
+        <p>A teenager who can explain how a system prompt shapes AI behaviour is in a tiny minority of AI-literate teenagers in the country. A teenager who can explain what an embedding is, in plain English, has cleared a conceptual bar that most working adults haven't.</p>
+        <p>When your child applies to college in two or three years, almost every applicant will claim to use AI in some capacity. Almost none will be able to attach two working URLs to their application and explain how they built them. <strong>That's the difference between participating in the AI conversation and contributing to it.</strong></p>
+
+        <h3>Why this is both educational and entertaining</h3>
+        <p>Students aren't assigned a project. They invent the character their chatbot becomes. They pick the school subject their Study Buddy is built around. They decide the tone, the name, and the first message. The student is the one making the creative choices — which is the difference between work and play for almost every teenager.</p>
+        <p><strong>The stress-test day is the social day.</strong> Classmates try to break each other's chatbots on purpose and document the failures. Competitive, funny, educational at the same time. The stress-test results are the lesson, but they come wrapped in a real game played among real friends.</p>
+        <p>Showcase day has stakes. Parents arrive, students give a 60-second pitch, and parents try the Study Buddy on their child's actual homework in real time. The day is not quiet.</p>
+
+        <h3>Why students will actually enjoy it</h3>
+        <p>Almost every "educational" summer activity for teenagers is built around a project the student secretly knows is a toy. This program is built around <strong>two products with public URLs that the student's friends can open on their phones the moment they ship</strong>. That difference changes the entire motivation curve.</p>
+        <p>The mixed-skill room is part of the design. Beginners and code-curious students work side by side and learn from each other. No student is bored, and no student is lost.</p>
+        <p>The output is real, the deadlines are real, and the audience on the last day is real. <strong>For most teenagers, this is the first time school feels like building something rather than completing something.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM -->
+  <section id="curriculum">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Day-by-day</span>
+        <h2>Week 1: Build the chatbot · Week 2: Build the Study Buddy.</h2>
+        <p>Two real products, ten days, three hours each. Every student leaves with two live URLs, a 60-second pitch, and a one-page explainer they wrote themselves.</p>
+      </div>
+
+      <div class="week-block">
+        <div class="week-label">
+          <div class="num">1</div>
+          <div class="title">
+            <h3>Week 1 — Custom AI character</h3>
+            <div class="sub">Design and ship a chatbot with its own personality. Then break each other's bots on Friday.</div>
+          </div>
+        </div>
+        <div class="day-grid">
+          <article class="day-card">
+            <span class="day-num">Day 1 · Mon</span>
+            <h4>System prompts vs. user prompts</h4>
+            <p>The hidden layer that turns a generic chatbot into anything. Hands-on: the same task, phrased five ways, gets five answers.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 2 · Tue</span>
+            <h4>Design your AI character</h4>
+            <p>Pick a personality — a Bestie, a Sensei, a coach, an AP Chem tutor. Write the system prompt. Decide tone, name, first message.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 3 · Wed</span>
+            <h4>Ship to a public URL</h4>
+            <p>Deploy your chatbot to a real, shareable URL. Friends can open it on their phones the moment it's live.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 4 · Thu</span>
+            <h4>Break each other's bots</h4>
+            <p>The social day. Try to break your classmates' chatbots on purpose. Document the cracks. Patch your own.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 5 · Fri</span>
+            <h4>Polish + reflect</h4>
+            <p>Lock in v1 of the chatbot. Reflect on what worked. Set up Week 2 — the personalized Study Buddy.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="week-block build">
+        <div class="week-label">
+          <div class="num">2</div>
+          <div class="title">
+            <h3>Week 2 — Personalized Study Buddy</h3>
+            <div class="sub">Build an AI tutor that knows your own school notes. Showcase it on Day 10.</div>
+          </div>
+        </div>
+        <div class="day-grid">
+          <article class="day-card">
+            <span class="day-num">Day 6 · Mon</span>
+            <h4>Retrieval-augmented generation</h4>
+            <p>What an embedding is, in plain English. Why ChatGPT can't answer questions about your homework — and how RAG fixes that.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 7 · Tue</span>
+            <h4>Build the Study Buddy</h4>
+            <p>Upload your own notes (PDFs, slides, docs). Build an AI tutor that answers from your material and quizzes you on it.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 8 · Wed</span>
+            <h4>Hunt hallucinations</h4>
+            <p>The same techniques production engineers use to catch AI lies. Stress-test your Study Buddy. Patch the gaps.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 9 · Thu</span>
+            <h4>Write the explainer</h4>
+            <p>One page, in your own words. Name the system prompt, the retrieval step, the model. This is what goes on a college application.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-num">Day 10 · Fri</span>
+            <h4>Showcase Day</h4>
+            <p>60-second pitch + live demo. Parents arrive and test the Study Buddy on your real homework in front of the room.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section style="background: var(--color-bg-alt); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">What students leave with</span>
+        <h2>Real outputs — not just a certificate.</h2>
+      </div>
+
+      <div class="outcomes-grid outcomes-three">
+        <div class="outcome-card">
+          <div class="ico">1</div>
+          <div>
+            <h4>Two live URLs</h4>
+            <p>A custom AI character chatbot and a personalized Study Buddy — both deployed to the public internet, both shareable.</p>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <div class="ico">2</div>
+          <div>
+            <h4>A 60-second pitch</h4>
+            <p>Practiced and delivered on Day 10. The skill of explaining your work in front of a room — useful for college interviews and beyond.</p>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <div class="ico">3</div>
+          <div>
+            <h4>A one-page explainer</h4>
+            <p>Written by the student, in their own words. Names the system prompt, the retrieval step, and the model. This goes on a college application.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPICAL DAY -->
+  <section class="tight">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">A typical day</span>
+        <h2>Three hours, structured but not rigid.</h2>
+      </div>
+
+      <div class="day-schedule">
+        <h3>9:00 AM – 12:00 PM</h3>
+        <div class="schedule-row">
+          <div class="time">9:00 – 9:15</div>
+          <div class="activity">Welcome + recap of yesterday's takeaways</div>
+        </div>
+        <div class="schedule-row">
+          <div class="time">9:15 – 10:15</div>
+          <div class="activity">Concept — short lecture + open discussion</div>
+        </div>
+        <div class="schedule-row">
+          <div class="time">10:15 – 10:30</div>
+          <div class="activity">Break</div>
+        </div>
+        <div class="schedule-row">
+          <div class="time">10:30 – 11:45</div>
+          <div class="activity">Hands-on lab — work with mentor support</div>
+        </div>
+        <div class="schedule-row">
+          <div class="time">11:45 – 12:00</div>
+          <div class="activity">Wrap — share progress, set tomorrow's goal</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONEST FRAMING -->
+  <section class="tight">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Honest framing</span>
+        <h2>What we don't promise.</h2>
+        <p>Every course on the internet over-promises. Here's what we won't claim.</p>
+      </div>
+
+      <div class="promise-box">
+        <h3>What we won't claim</h3>
+        <ul>
+          <li>That your child will become an AI engineer in two weeks</li>
+          <li>That they'll launch a startup</li>
+          <li>That the specific tools they use today will be the same in a year — AI is moving fast and the software will keep changing</li>
+        </ul>
+
+        <h3 style="margin-top: var(--space-8);">What we do promise</h3>
+        <ul>
+          <li class="do">Your child will learn the underlying skill — how to think about AI, design with it, test it, ship something real</li>
+          <li class="do">That skill outlives any specific tool</li>
+          <li class="do">That skill is what employers, colleges, and the world will keep paying for</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background: var(--color-bg-alt); border-top: 1px solid var(--color-line);">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Bootcamp FAQ</span>
+        <h2>Specific questions for this cohort.</h2>
+        <p>For the full course philosophy, see the <a href="build-with-ai.html">Build with AI course page</a>. For broader questions about AI Lab, see the <a href="ai-lab.html">AI Lab page</a> or the <a href="index.html#faq">general FAQ</a>.</p>
+      </div>
+
+      <div class="faq">
+
+        <details class="faq-item">
+          <summary>Does my child need a coding background?</summary>
+          <div class="answer">
+            <p>No. The bootcamp uses no-code tools throughout — students don't write a line of code. The skills they learn (system prompts, retrieval-augmented generation, deployment) are conceptually identical to what working AI engineers do, just with a different interface. There's also an optional code track for code-curious students; both run side-by-side in the same room.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does my child need to bring?</summary>
+          <div class="answer">
+            <p>A laptop. Any modern model works — Chromebook, Mac, Windows. That's it. All software is free and runs in the browser. If a laptop is a barrier for your family, mention it on the info call; we can usually arrange a loaner for the bootcamp duration.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What tools will my child use?</summary>
+          <div class="answer">
+            <p>All free, all publicly available: <strong>Lovable, Google NotebookLM, Claude, Bolt.new, Vercel.</strong> The deliberate choice is that your child can keep using these tools at home after camp ends — the skills travel.</p>
+            <p>If your child opts into the optional code track, there's a small $10–15 tools fee that covers API credits.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Where in Toronto does it run?</summary>
+          <div class="answer">
+            <p>The exact venue will be confirmed with applicants in May 2026 — typically central Toronto, transit-accessible, with a real classroom space (not a hotel ballroom). <span class="placeholder-note">tbd</span></p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What if my child misses a day?</summary>
+          <div class="answer">
+            <p>We provide a recap and a 1:1 catch-up session with a mentor. The bootcamp is intensive — we strongly encourage full attendance, but life happens, and we don't penalize for one missed day. Missing more than two days is usually a sign the timing isn't right; we'd rather defer enrollment than rush.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is parent attendance required or invited?</summary>
+          <div class="answer">
+            <p>Not required. Parents are warmly invited to <strong>Showcase Day</strong> on Day 10 — your child gives a 60-second pitch and then you test their Study Buddy on their actual chemistry or history homework, in front of the room. The day is loud. There are stakes. It's the moment that makes the whole two weeks make sense.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What's the application process?</summary>
+          <div class="answer">
+            <p>A short written application (a few sentences about why your child wants to take it and what they'd hope to build), then a 15-minute conversation with our program lead. Decisions within five business days. Rolling intake until the cohort fills.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does it cost?</summary>
+          <div class="answer">
+            <p>Tuition is discussed on the info call. Need-based scholarships are available; mention this when you reach out — we mean it, it's not a token program. <span class="placeholder-note">price tbd</span></p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Refund policy?</summary>
+          <div class="answer">
+            <p>Full refund up to two weeks before the bootcamp starts. 50% refund up to one week before. After that, no refund except for documented medical reasons. Details on the application form.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you issue a certificate of completion?</summary>
+          <div class="answer">
+            <p>We don't. Most short-form AI courses do, and most of those certificates aren't worth much. What your child leaves with — <strong>two live URLs, a 60-second pitch they've delivered, and a one-page explainer they wrote</strong> — is harder to fake and more useful in any college application, interview, or real-world setting.</p>
+            <p>If a verification record is needed for a school program or scholarship, we'll provide one on request, signed by the lead instructor.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens after the bootcamp?</summary>
+          <div class="answer">
+            <p>The chatbot and Study Buddy your child builds keep running on their public URLs after the bootcamp ends — friends can use them, siblings can use them, your child can keep iterating. Many students continue using their Study Buddy through the school year for the subject they built it around.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY CTA -->
+  <section class="tight" id="apply">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h2>Apply for Build with AI · Summer 2026.</h2>
+          <p>Small cohort. Rolling intake. Most applications are reviewed and answered within five business days. There's no high-pressure sales pitch — we want students who actively choose this.</p>
+        </div>
+        <div class="actions">
+          <!-- TODO: Replace href with your Tally form URL once set up. See SETUP.md -->
+          <a class="btn btn-primary" href="https://tally.so/r/REPLACE-WITH-TALLY-FORM-ID">Apply now →</a>
+          <a class="btn btn-ghost" href="build-with-ai.html">Read full course details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
+        <p>AI education for Grade 9–12 students. Headquartered in Toronto. Our core team includes faculty members affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+      </div>
+      <div>
+        <h4>AI Lab</h4>
+        <ul>
+          <li><a href="ai-lab.html">About AI Lab</a></li>
+          <li><a href="build-with-ai.html">Build with AI <span style="opacity:.6">· course</span></a></li>
+          <li><a href="bootcamp-summer-2026.html" style="padding-left:10px;font-size:.92em;opacity:.85">↳ Summer 2026 Bootcamp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For</h4>
+        <ul>
+          <li><a href="index.html#parents">Parents</a></li>
+          <li><a href="for-students.html">Students</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#team">Our team</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a></li>
+          <li>Toronto, Ontario</li>
+          <li><a href="index.html#contact">Book an info session</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Futurera Institute. All rights reserved.</span>
+      <span>Aligned with Ontario Ministry of Education expectations.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
