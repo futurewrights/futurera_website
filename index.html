@@ -177,6 +177,21 @@
   .section--dark .section-head h2 { color: #fff; }
   .section--dark .section-head p { color: rgba(255,255,255,0.7); }
 
+  /* Course-name placeholder — sits under "Summer 2026 Bootcamp" until the
+     real course title is announced. Reads as a deliberate sub-line. */
+  .section-head .course-name-placeholder {
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.3;
+    color: var(--ink-muted);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    margin: 0 0 var(--sp-3);
+  }
+  .section-head .course-name-placeholder em {
+    font-style: italic;
+  }
+
   /* ---------- Buttons ---------- */
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -1097,31 +1112,31 @@
     position: absolute; left: 12px; right: 12px; bottom: 12px;
     z-index: 2;
     display: flex; align-items: center; gap: var(--sp-2);
-    padding: 10px 12px 10px 14px;
+    padding: 16px 14px 16px 18px;
     background: rgba(255,255,255,0.94);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 12px;
+    border-radius: 14px;
     box-shadow: 0 6px 18px rgba(14,14,15,0.08);
   }
   .info-text { flex: 1; min-width: 0; }
   .info-overlay h3 {
-    font-size: 15px; font-weight: 600;
-    letter-spacing: -0.3px; line-height: 1.2;
+    font-size: 18px; font-weight: 600;
+    letter-spacing: -0.4px; line-height: 1.2;
     color: var(--ink);
-    margin: 0 0 1px;
+    margin: 0 0 4px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .info-overlay .title {
-    font-size: 12px; font-weight: 500;
+    font-size: 14px; font-weight: 500;
     color: var(--ink-muted);
-    line-height: 1.3;
+    line-height: 1.35;
     margin: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .linkedin-link {
     flex-shrink: 0;
-    width: 32px; height: 32px;
+    width: 38px; height: 38px;
     display: grid; place-items: center;
     border-radius: 50%;
     background: var(--surface);
@@ -1134,7 +1149,7 @@
     background: var(--brand-deep);
     color: #fff;
   }
-  .linkedin-link svg { width: 16px; height: 16px; }
+  .linkedin-link svg { width: 18px; height: 18px; }
 
   /* ---------- FAQ ---------- */
   .faq { max-width: 840px; margin: 0 auto; display: grid; gap: 10px; }
@@ -1545,16 +1560,16 @@
         </div>
 
         <div class="mv-cards">
-          <article class="mv-card">
-            <div class="label">Our mission</div>
-            <h3>Equip high school students with the AI skills, judgment, and portfolio that universities and employers actually expect.</h3>
-            <p>We complement the school curriculum, not replace it. Every program is built around real projects students can show to admissions committees, to interviewers, and to themselves, aligned with leading curriculum standards including the Ontario Ministry of Education.</p>
-          </article>
-
           <article class="mv-card vision">
             <div class="label">Our vision</div>
-            <h3>A generation of Canadian students who graduate high school AI-fluent: confident builders, careful thinkers, and ethical participants.</h3>
+            <h3>A generation of Canadian students who leave high school AI-fluent: confident builders, critical thinkers, and ethical practitioners.</h3>
             <p>AI isn't a tool — it's how work gets done now. Every field today's students will enter, from medicine to law to design, has already restructured around it. High school is the right time to learn the judgment to use it well.</p>
+          </article>
+
+          <article class="mv-card">
+            <div class="label">Our mission</div>
+            <h3>Equip high school students with the AI skills, judgment, and portfolio that universities and employers now expect.</h3>
+            <p>We complement the school curriculum, not replace it. Every program is built around real projects students can show to admissions committees, to interviewers, and to themselves.</p>
           </article>
         </div>
       </div>
@@ -1569,7 +1584,8 @@
           <span class="live-dot" aria-hidden="true"></span>
           Live · Applications open
         </span>
-        <h2>Build with AI · Summer 2026 Bootcamp</h2>
+        <h2>Summer 2026 Bootcamp</h2>
+        <p class="course-name-placeholder"><em>Course title to be announced</em></p>
         <p>Our first course, currently open for enrollment. A 2-week intensive where students aged 14–18 build and ship two real AI products, without writing a line of code.</p>
       </div>
 
@@ -1592,10 +1608,10 @@
           </div>
           <div class="featured-side">
             <div class="featured-specs">
-              <div class="spec"><span class="spec-label">Dates</span><span class="spec-value">July 13–24, 2026</span></div>
+              <div class="spec"><span class="spec-label">Dates</span><span class="spec-value">TBD · 2026</span></div>
               <div class="spec"><span class="spec-label">Schedule</span><span class="spec-value">Mon–Fri, 9 AM–12 PM</span></div>
               <div class="spec"><span class="spec-label">Where</span><span class="spec-value">In-person, Toronto</span></div>
-              <div class="spec"><span class="spec-label">Ages</span><span class="spec-value">14–18 · no coding</span></div>
+              <div class="spec"><span class="spec-label">Ages</span><span class="spec-value">14–18</span></div>
             </div>
             <div class="featured-actions">
               <a class="btn btn-accent" href="bootcamp-summer-2026.html">Apply now →</a>
