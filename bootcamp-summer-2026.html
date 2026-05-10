@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Summer 2026 Bootcamp — Apply now | Futurera Institute</title>
-<meta name="description" content="The Summer 2026 cohort of our Build with AI course — a 2-week intensive where students aged 14–18 ship two real AI products. Toronto, in-person. Apply now." />
+<meta name="description" content="The Summer 2026 cohort of Build with AI — From Prompt to Product. A 2-week intensive where students aged 14–18 ship two real AI products. Toronto, in-person. Apply now." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +94,8 @@
     margin-left: 4px;
   }
   .glance .cta-row {
-    display: flex; flex-direction: column; gap: 8px;
+    display: flex; flex-direction: column; gap: 10px;
+    align-items: center;
     margin-top: var(--sp-3);
     padding-top: var(--sp-3);
     border-top: 1px solid var(--line);
@@ -203,6 +204,19 @@
   }
   .perspective p strong { color: var(--ink); font-weight: 600; }
 
+  /* Yellow highlighter for key phrases (week names) */
+  .hl-gold {
+    background-image: linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 55%,
+      rgba(244, 180, 0, 0.55) 55%,
+      rgba(244, 180, 0, 0.55) 94%,
+      transparent 94%
+    );
+    padding: 0 0.12em;
+  }
+
   /* Curriculum — week blocks */
   .week-block {
     max-width: 1080px; margin: 0 auto var(--sp-5);
@@ -243,8 +257,8 @@
   @media (max-width: 880px) { .day-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 520px) { .day-grid { grid-template-columns: 1fr; } }
   .day-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
+    background: rgba(244, 180, 0, 0.07);
+    border: 1px solid rgba(244, 180, 0, 0.22);
     border-radius: var(--radius-sm);
     padding: var(--sp-3);
   }
@@ -332,11 +346,21 @@
 
   /* Instructor section */
   .instructor-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: var(--sp-4);
-    max-width: 880px; margin: 0 auto var(--sp-4);
+    display: grid;
+    gap: var(--sp-3);
+    max-width: 980px; margin: 0 auto var(--sp-3);
   }
-  @media (max-width: 760px) { .instructor-grid { grid-template-columns: 1fr; } }
+  .instructor-grid--lead {
+    grid-template-columns: 1fr;
+    margin-bottom: var(--sp-3);
+  }
+  .instructor-grid--3up {
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: var(--sp-4);
+  }
+  @media (max-width: 760px) {
+    .instructor-grid--3up { grid-template-columns: 1fr; }
+  }
   .instructor-card {
     background: #fff;
     border: 1px solid var(--line);
@@ -344,6 +368,12 @@
     padding: var(--sp-4);
     display: flex; gap: var(--sp-3);
     align-items: flex-start;
+  }
+  .instructor-card.lead {
+    border-left: 4px solid var(--brand-accent);
+  }
+  .instructor-card.lead .instructor-photo-frame {
+    width: 96px; height: 96px;
   }
   .instructor-photo-frame {
     width: 80px; height: 80px;
@@ -380,16 +410,16 @@
     color: var(--ink-muted);
     margin: 0;
   }
-  .instructor-note {
+  .instructor-cta-row {
     text-align: center;
-    font-size: 14px;
-    color: var(--ink-muted);
     max-width: 640px;
     margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
   }
-  .instructor-note a {
-    color: var(--brand-deep);
-    font-weight: 600;
+  .instructor-cta-row p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin: 0;
   }
 
   /* Honest framing */
@@ -426,6 +456,51 @@
     content: "✓";
     color: var(--brand-accent-2);
   }
+
+  /* Apply CTA — bootcamp-specific, navy box */
+  .apply-cta-section {
+    background: #fff;
+    border-top: 1px solid var(--line);
+    padding: var(--sp-7) 0;
+  }
+  .apply-cta-card {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--brand-deep);
+    border-radius: var(--radius-md);
+    padding: var(--sp-6) var(--sp-5);
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .apply-cta-card .eyebrow {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--brand-accent);
+    margin: 0 0 var(--sp-2);
+    display: block;
+  }
+  .apply-cta-card h2 {
+    font-size: clamp(28px, 3.2vw, 36px);
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0 0 var(--sp-4);
+    text-wrap: balance;
+  }
+  .apply-cta-card .actions {
+    display: flex; gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .apply-cta-card .btn-accent {
+    background: var(--brand-accent);
+    color: var(--ink);
+    padding: 14px 26px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .apply-cta-card .btn-accent:hover { background: var(--brand-accent-2); }
 
   /* FAQ */
   .faq { max-width: 800px; margin: 0 auto; display: grid; gap: 10px; }
@@ -509,36 +584,45 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow gold">AI Lab · Summer 2026</span>
-          <h1><em>Summer 2026 Bootcamp</em> — apply now.</h1>
-          <p class="lede">The Summer 2026 cohort of <a href="build-with-ai.html">our Build with AI course</a>, a 2-week intensive where students aged 14–18 ship two real AI products: a custom chatbot and a personalized Study Buddy, with little to no code. Live URLs, real audience, real applause on Day 10.</p>
+          <span class="eyebrow gold">AI Lab · Bootcamp</span>
+          <h1><em>Summer 2026 Bootcamp</em>.</h1>
+          <p class="lede">A 2-week intensive cohort of <a href="build-with-ai.html">Build with AI — From Prompt to Product</a>, where students aged 14–18 ship two real AI products: a custom chatbot and a personalized Study Buddy, with little to no code. Live URLs, real audience, real applause on the final day.</p>
 
-          <div class="actions">
-            <a class="btn btn-primary" href="#apply">Apply now →</a>
-            <a class="btn btn-ghost" href="build-with-ai.html">Read full course details</a>
+          <div class="actions" style="flex-direction: column; align-items: flex-start;">
+            <a class="btn btn-primary" href="apply.html">Apply now →</a>
+            <a class="text-arrow" href="build-with-ai.html">
+              <span>Read full course details</span>
+              <span class="arrow-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
           </div>
-          <p class="seats-note">Small group. Applications reviewed on a rolling basis until full.</p>
         </div>
 
         <aside class="glance">
           <h4>At a glance</h4>
           <dl>
-            <dt>Course</dt><dd><a href="build-with-ai.html">Build with AI</a></dd>
+            <dt>Course</dt><dd><a href="build-with-ai.html">Build with AI — From Prompt to Product</a></dd>
             <dt>Format</dt><dd>2-week bootcamp</dd>
-            <dt>Dates</dt><dd>July 2026 <span class="placeholder-note">tentative</span></dd>
+            <dt>Dates</dt><dd>July 26 – August 8, 2026 <span class="placeholder-note">tentative</span></dd>
             <dt>Schedule</dt><dd>Mon–Fri, 9:00 AM – 12:00 PM</dd>
             <dt>Total</dt><dd>30 hours over 10 days</dd>
             <dt>Where</dt><dd>In-person, Toronto</dd>
-            <dt>Cohort size</dt><dd>Small group · ~12 students <span class="placeholder-note">target</span></dd>
+            <dt>Cohort size</dt><dd>Small group · ~15 students <span class="placeholder-note">target</span></dd>
             <dt>Ages</dt><dd>14–18 · no prior coding required</dd>
             <dt>Bring</dt><dd>A laptop (any model)</dd>
-            <dt>Tools cost</dt><dd>$0 (free no-code &amp; low-code tools)</dd>
-            <dt>Tuition</dt><dd>Range available on info call <span class="placeholder-note">tbd</span></dd>
+            <dt>Tools cost</dt><dd>$0–$20 (free or low-cost tools)</dd>
+            <dt>Tuition</dt><dd>TBD <span class="placeholder-note">tbd</span></dd>
             <dt>Application</dt><dd>Rolling, until full</dd>
           </dl>
           <div class="cta-row">
-            <a class="btn btn-primary" href="#apply">Apply now</a>
-            <a class="btn btn-ghost" href="mailto:znoorian@torontomu.ca?subject=Summer%202026%20Bootcamp%20question">Ask a question</a>
+            <a class="btn btn-primary" href="apply.html" style="min-width: 160px; justify-content: center;">Apply</a>
+            <a class="text-arrow" href="mailto:znoorian@torontomu.ca?subject=Summer%202026%20Bootcamp%20question">
+              <span>Ask a question</span>
+              <span class="arrow-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
           </div>
         </aside>
       </div>
@@ -557,20 +641,20 @@
       <div class="diff-grid">
         <article class="diff-card">
           <span class="label">Small group</span>
-          <h3>Real room, real people, individual attention</h3>
-          <p>Capped at a small cohort — not 5,000 names on a Zoom call. The instructor knows every student by name on Day 2. No back-row, no falling behind unnoticed.</p>
+          <h3>Real room, individual attention</h3>
+          <p>Capped at about 15 students per cohort — not 5,000 names on a Zoom call. The instructor knows every student by name on Day 2. No back-row, no falling behind unnoticed.</p>
         </article>
 
         <article class="diff-card">
-          <span class="label">Faculty-led</span>
-          <h3>Designed and taught by senior faculty, not a packaged curriculum</h3>
-          <p>Curriculum designed and led by university faculty on our core team — appointments at the University of Toronto and Toronto Metropolitan University. Graduate students from their labs assist. AI practitioners from industry round it out.</p>
+          <span class="label">Practitioners + faculty</span>
+          <h3>Built by people who ship AI and teach at the university level</h3>
+          <p>Curriculum designed by senior faculty on our core team — with appointments at the University of Toronto and Toronto Metropolitan University. AI practitioners from industry round it out. Graduate students from their labs assist in the room.</p>
         </article>
 
         <article class="diff-card">
-          <span class="label">Stress-test + Showcase</span>
-          <h3>Two rituals that make the work real</h3>
-          <p>Stress-test day: classmates try to break each other's chatbots on purpose and document the failures. Showcase Day: parents arrive, students pitch in 60 seconds, parents test the Study Buddy on real homework in front of the room.</p>
+          <span class="label">Real shipped work</span>
+          <h3>Two live products, a real audience, real stakes</h3>
+          <p>Students don't make slides about AI — they ship two real AI products to the public internet that friends can open on their phones. On the final day, parents arrive and test the Study Buddy on real homework in front of the room. Most "AI summer camps" don't ship anything.</p>
         </article>
       </div>
     </div>
@@ -585,11 +669,11 @@
         <p>Two real products, ten days, three hours each. Every student leaves with two live URLs, a 60-second pitch, and a one-page explainer they wrote themselves.</p>
       </div>
 
-      <div class="week-block">
+      <div class="week-block build">
         <div class="week-label">
           <div class="num">1</div>
           <div class="title">
-            <h3>Week 1 — Custom AI character</h3>
+            <h3>Week 1 — <span class="hl-gold">Custom AI character</span></h3>
             <div class="sub">Design and ship a chatbot with its own personality. Then break each other's bots on Friday.</div>
           </div>
         </div>
@@ -606,7 +690,7 @@
         <div class="week-label">
           <div class="num">2</div>
           <div class="title">
-            <h3>Week 2 — Personalized Study Buddy</h3>
+            <h3>Week 2 — <span class="hl-gold">Personalized Study Buddy</span></h3>
             <div class="sub">Build an AI tutor that knows your own school notes. Showcase it on Day 10.</div>
           </div>
         </div>
@@ -625,30 +709,31 @@
   <section class="lab-section">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">What students leave with</span>
-        <h2>Real outputs, not just a certificate.</h2>
+        <span class="eyebrow gold">What sticks</span>
+        <h2>What stays with students long after the cohort ends.</h2>
+        <p>The two live URLs are real, but the lasting value is what changes in the student — skills and habits that outlast any specific tool.</p>
       </div>
 
       <div class="outcomes-grid">
         <div class="outcome-card">
           <div class="ico">1</div>
           <div>
-            <h4>Two live URLs</h4>
-            <p>A custom AI character chatbot and a personalized Study Buddy, both deployed to the public internet, both shareable.</p>
+            <h4>Confidence to ship something real</h4>
+            <p>Most teens have never put a working tool on the public internet. After this, they have. The next thing they want to build is no longer abstract or scary — it's just one more iteration.</p>
           </div>
         </div>
         <div class="outcome-card">
           <div class="ico">2</div>
           <div>
-            <h4>A 60-second pitch</h4>
-            <p>Practiced through the cohort and delivered live to a real audience. The skill of explaining your work in front of a room — useful for college interviews and beyond.</p>
+            <h4>Vocabulary to explain AI without hand-waving</h4>
+            <p>Embeddings, system prompts, hallucinations — in plain English. They become the student in the room who can answer "how does that actually work?" without bluffing.</p>
           </div>
         </div>
         <div class="outcome-card">
           <div class="ico">3</div>
           <div>
-            <h4>A one-page explainer</h4>
-            <p>Written by the student, in their own words. Names the system prompt, the retrieval step, and the model. This goes on a college application.</p>
+            <h4>A habit of stress-testing AI before trusting it</h4>
+            <p>They've spent a day trying to break their classmates' bots on purpose. They'll never trust an AI's first answer again — a small judgment shift that protects them in school, on essays, and at work.</p>
           </div>
         </div>
       </div>
@@ -664,12 +749,12 @@
       </div>
 
       <div class="day-schedule">
-        <h3>9:00 AM – 12:00 PM</h3>
-        <div class="schedule-row"><div class="time">9:00 – 9:15</div><div class="activity">Welcome + recap of yesterday's takeaways</div></div>
-        <div class="schedule-row"><div class="time">9:15 – 10:15</div><div class="activity">Concept — short lecture + open discussion</div></div>
-        <div class="schedule-row"><div class="time">10:15 – 10:30</div><div class="activity">Break</div></div>
-        <div class="schedule-row"><div class="time">10:30 – 11:45</div><div class="activity">Hands-on lab — work with mentor support</div></div>
-        <div class="schedule-row"><div class="time">11:45 – 12:00</div><div class="activity">Wrap — share progress, set tomorrow's goal</div></div>
+        <h3>Each session · 9 AM – 12 PM</h3>
+        <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Welcome + recap of yesterday's takeaways</div></div>
+        <div class="schedule-row"><div class="time">~1 hour</div><div class="activity">Concept — short lecture + open discussion</div></div>
+        <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Break</div></div>
+        <div class="schedule-row"><div class="time">~1 hr 15</div><div class="activity">Hands-on lab — work with mentor support</div></div>
+        <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Wrap — share progress, set tomorrow's goal</div></div>
       </div>
     </div>
   </section>
@@ -678,13 +763,13 @@
   <section class="lab-section">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">Who's teaching it</span>
-        <h2>The people in your child's room.</h2>
-        <p>Senior faculty on our core team design and lead the bootcamp; graduate students from the same labs assist. All instructors are police-checked. We're happy to introduce you to the likely instructor on your info call before you apply.</p>
+        <span class="eyebrow gold">Your team</span>
+        <h2>Faculty in the lead, researchers in the room.</h2>
+        <p>Senior faculty designs and leads the cohort. Graduate students from their labs assist students 1:1. All police-checked.</p>
       </div>
 
-      <div class="instructor-grid">
-        <article class="instructor-card">
+      <div class="instructor-grid instructor-grid--lead">
+        <article class="instructor-card lead">
           <div class="instructor-photo-frame">
             <div class="instructor-photo-placeholder" aria-hidden="true"></div>
           </div>
@@ -693,6 +778,20 @@
             <h3>Name TBA</h3>
             <div class="instructor-affiliation">University faculty · Affiliation TBA</div>
             <p>Designs the curriculum, leads each session, and is in the room with students every day. Background: AI research and applied product work.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="instructor-grid instructor-grid--3up">
+        <article class="instructor-card">
+          <div class="instructor-photo-frame">
+            <div class="instructor-photo-placeholder" aria-hidden="true"></div>
+          </div>
+          <div class="instructor-info">
+            <div class="instructor-role">Lab assistant</div>
+            <h3>Name TBA</h3>
+            <div class="instructor-affiliation">Graduate student · Affiliation TBA</div>
+            <p>Pairs 1:1 with students during the hands-on lab block. Help is current, not theoretical.</p>
           </div>
         </article>
 
@@ -704,12 +803,32 @@
             <div class="instructor-role">Lab assistant</div>
             <h3>Name TBA</h3>
             <div class="instructor-affiliation">Graduate student · Affiliation TBA</div>
-            <p>Pairs 1:1 with students during the hands-on lab block. Recently shipped real AI products, so the help is current — not theoretical.</p>
+            <p>Helps students debug retrieval and Study Buddy hallucinations. Background: applied ML research.</p>
+          </div>
+        </article>
+
+        <article class="instructor-card">
+          <div class="instructor-photo-frame">
+            <div class="instructor-photo-placeholder" aria-hidden="true"></div>
+          </div>
+          <div class="instructor-info">
+            <div class="instructor-role">Lab assistant</div>
+            <h3>Name TBA</h3>
+            <div class="instructor-affiliation">Graduate student · Affiliation TBA</div>
+            <p>Helps students design system prompts and ship to a public URL. Background: human–AI interaction.</p>
           </div>
         </article>
       </div>
 
-      <p class="instructor-note">Want to meet the instructor before applying? <a href="mailto:znoorian@torontomu.ca?subject=Meet%20the%20instructor%20%E2%80%94%20Summer%202026%20Bootcamp">Set up a 15-minute call →</a></p>
+      <div class="instructor-cta-row">
+        <p>Want to meet the instructor before applying?</p>
+        <a class="text-arrow" href="mailto:znoorian@torontomu.ca?subject=Meet%20the%20instructor%20%E2%80%94%20Summer%202026%20Bootcamp">
+          <span>Set up a 20-minute call</span>
+          <span class="arrow-circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -725,14 +844,14 @@
       <div class="promise-box">
         <h3>What we won't claim</h3>
         <ul>
-          <li>That your child will become an AI engineer in two weeks</li>
-          <li>That they'll launch a startup</li>
-          <li>That the specific tools they use today will be the same in a year — AI is moving fast and the software will keep changing</li>
+          <li>That students will become AI engineers in two weeks</li>
+          <li>That anyone will launch a startup off this</li>
+          <li>That the specific tools used today will be the same in a year — AI is moving fast and the software will keep changing</li>
         </ul>
 
         <h3 style="margin-top: var(--sp-4);">What we do promise</h3>
         <ul>
-          <li class="do">Your child will learn the underlying skill — how to think about AI, design with it, test it, ship something real</li>
+          <li class="do">Students will learn the underlying skill — how to think about AI, design with it, test it, ship something real</li>
           <li class="do">That skill outlives any specific tool</li>
           <li class="do">That skill is what employers, colleges, and the world will keep paying for</li>
         </ul>
@@ -745,37 +864,36 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow gold">Bootcamp FAQ</span>
-        <h2>Specific questions for this cohort.</h2>
-        <p>For the full course philosophy, see the <a href="build-with-ai.html">Build with AI course page</a>. For broader questions about AI Lab, see the <a href="ai-lab.html">AI Lab page</a> or the <a href="index.html#faq">general FAQ</a>.</p>
       </div>
 
       <div class="faq">
-        <details class="faq-item"><summary>Does my child need a coding background?</summary><div class="answer"><p>No prior coding required. The bootcamp relies on no-code and low-code tools throughout — students write little to no code. The skills they learn (system prompts, retrieval-augmented generation, deployment) are conceptually identical to what working AI engineers do, just with a different interface. There's also an optional code track for code-curious students; both run side-by-side in the same room.</p></div></details>
-        <details class="faq-item"><summary>What does my child need to bring?</summary><div class="answer"><p>A laptop. Any modern model works — Chromebook, Mac, Windows. That's it. All software is free and runs in the browser. If a laptop is a barrier for your family, mention it when you get in touch; we can usually arrange a loaner for the bootcamp duration.</p></div></details>
-        <details class="faq-item"><summary>What tools will my child use?</summary><div class="answer"><p>All free, all publicly available: <strong>Lovable, Google NotebookLM, Claude, Bolt.new, Vercel.</strong> The deliberate choice is that your child can keep using these tools at home after camp ends — the skills travel.</p><p>If your child opts into the optional code track, there's a small $10–15 tools fee that covers API credits.</p></div></details>
+        <details class="faq-item"><summary>Is a coding background required?</summary><div class="answer"><p>No prior coding required. The bootcamp relies on no-code and low-code tools throughout — students write little to no code. The skills they learn (system prompts, retrieval-augmented generation, deployment) are conceptually identical to what working AI engineers do, just with a different interface. There's also an optional code track for code-curious students; both run side-by-side in the same room.</p></div></details>
+        <details class="faq-item"><summary>What do students need to bring?</summary><div class="answer"><p>A laptop. Any modern model works — Chromebook, Mac, Windows. That's it. All software is free and runs in the browser. If a laptop is a barrier, mention it when you get in touch; we can usually arrange a loaner for the bootcamp duration.</p></div></details>
+        <details class="faq-item"><summary>What tools are used?</summary><div class="answer"><p>All free, all publicly available: <strong>Lovable, Google NotebookLM, Claude, Bolt.new, Vercel.</strong> The deliberate choice is that students can keep using these tools at home after camp ends — the skills travel.</p><p>Students who opt into the optional code track pay a small $10–15 tools fee that covers API credits.</p></div></details>
         <details class="faq-item"><summary>Where in Toronto does it run?</summary><div class="answer"><p>The exact venue will be confirmed with applicants in May 2026 — typically central Toronto, transit-accessible, with a real classroom space (not a hotel ballroom). <span class="placeholder-note">tbd</span></p></div></details>
-        <details class="faq-item"><summary>What if my child misses a day?</summary><div class="answer"><p>We provide a recap and a 1:1 catch-up session with a mentor. The bootcamp is intensive — we strongly encourage full attendance, but life happens, and we don't penalize for one missed day. Missing more than two days is usually a sign the timing isn't right; we'd rather defer enrollment than rush.</p></div></details>
-        <details class="faq-item"><summary>Is parent attendance required or invited?</summary><div class="answer"><p>Not required. Parents are warmly invited to <strong>Showcase Day</strong> on Day 10 — your child gives a 60-second pitch and then you test their Study Buddy on their actual chemistry or history homework, in front of the room. The day is loud. There are stakes. It's the moment that makes the whole two weeks make sense.</p></div></details>
-        <details class="faq-item"><summary>What's the application process?</summary><div class="answer"><p>A short written application (a few sentences about why your child wants to take it and what they'd hope to build), then a short conversation with our program lead. Decisions within five business days. Rolling intake until the cohort fills.</p></div></details>
+        <details class="faq-item"><summary>What if a student misses a day?</summary><div class="answer"><p>We provide a recap and a 1:1 catch-up session with a mentor. The bootcamp is intensive — we strongly encourage full attendance, but life happens, and we don't penalize for one missed day. Missing more than two days is usually a sign the timing isn't right; we'd rather defer enrollment than rush.</p></div></details>
+        <details class="faq-item"><summary>Is parent attendance required or invited?</summary><div class="answer"><p>Not required. Parents are warmly invited to <strong>Showcase Day</strong> on the final day — students give a 60-second pitch and parents test the Study Buddy on real chemistry or history homework in front of the room. The day is loud. There are stakes. It's the moment that makes the whole two weeks make sense.</p></div></details>
+        <details class="faq-item"><summary>What's the application process?</summary><div class="answer"><p>A short written application (a few sentences about why the applicant wants to take it and what they'd hope to build), then a short conversation with our program lead. Decisions within five business days. Rolling intake until the cohort fills.</p></div></details>
         <details class="faq-item"><summary>What does it cost?</summary><div class="answer"><p>Tuition for this cohort is being finalized — we'll share a range on your info call, well before any commitment. Need-based scholarships are available; mention this when you reach out. We mean it — it's not a token program. <span class="placeholder-note">price tbd</span></p></div></details>
         <details class="faq-item"><summary>Refund policy?</summary><div class="answer"><p>Full refund up to two weeks before the bootcamp starts. 50% refund up to one week before. After that, no refund except for documented medical reasons. Details on the application form.</p></div></details>
-        <details class="faq-item"><summary>Do you issue a certificate of completion?</summary><div class="answer"><p>We don't. Most short-form AI courses do, and most of those certificates aren't worth much. What your child leaves with — <strong>two live URLs, a 60-second pitch they've delivered, and a one-page explainer they wrote</strong> — is harder to fake and more useful in any college application, interview, or real-world setting.</p><p>If a verification record is needed for a school program or scholarship, we'll provide one on request, signed by the lead instructor.</p></div></details>
-        <details class="faq-item"><summary>What happens after the bootcamp?</summary><div class="answer"><p>The chatbot and Study Buddy your child builds keep running on their public URLs after the bootcamp ends — friends can use them, siblings can use them, your child can keep iterating. Many students continue using their Study Buddy through the school year for the subject they built it around.</p></div></details>
+        <details class="faq-item"><summary>Do you issue a certificate of completion?</summary><div class="answer"><p>We don't. Most short-form AI courses do, and most of those certificates aren't worth much. What students leave with — <strong>two live URLs, a 60-second pitch they've delivered, and a one-page explainer they wrote</strong> — is harder to fake and more useful in any college application, interview, or real-world setting.</p><p>If a verification record is needed for a school program or scholarship, we'll provide one on request, signed by the lead instructor.</p></div></details>
+        <details class="faq-item"><summary>What happens after the bootcamp?</summary><div class="answer"><p>The chatbot and Study Buddy each student builds keep running on their public URLs after the bootcamp ends — friends can use them, siblings can use them, students can keep iterating. Many continue using their Study Buddy through the school year for the subject they built it around.</p></div></details>
       </div>
     </div>
   </section>
 
   <!-- APPLY CTA -->
-  <div class="article-cta-wrap" id="apply">
-    <div class="article-cta">
-      <span class="article-cta-eyebrow">Apply now</span>
-      <h2>Apply for Summer 2026.</h2>
-      <p>Small cohort. Rolling intake. Most applications are reviewed and answered within five business days. There's no high-pressure sales pitch — we want students who actively choose this.</p>
-      <div class="actions">
-        <a class="btn btn-accent" href="mailto:znoorian@torontomu.ca?subject=Summer%202026%20Bootcamp%20application">Apply by email</a>
+  <section class="apply-cta-section" id="apply">
+    <div class="container">
+      <div class="apply-cta-card">
+        <span class="eyebrow">Apply</span>
+        <h2>Take your spot in Summer 2026.</h2>
+        <div class="actions">
+          <a class="btn btn-accent" href="apply.html">Apply now →</a>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
 </main>
 
