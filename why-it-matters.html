@@ -8,281 +8,283 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/tokens.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles/site.css">
 
 <style>
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  /* ----------- Article-specific styles (why-it-matters page) ----------- */
 
-  body {
-    font-family: var(--font-sans);
-    color: var(--color-text);
-    background: var(--color-bg);
-    line-height: var(--lh-base);
-    font-size: var(--fs-base);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  a {
-    color: var(--color-navy-700);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(30, 39, 97, 0.25);
-    transition: text-decoration-color var(--duration-base) var(--easing);
-  }
-  a:hover { text-decoration-color: var(--color-navy-700); }
-  a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
-
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif); font-weight: 600;
-    color: var(--color-ink); letter-spacing: var(--tracking-snug);
-    margin: 0 0 var(--space-3);
-  }
-  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); }
-  h2 { font-size: var(--fs-2xl); line-height: 1.2; margin-top: var(--space-12); }
-  h3 { font-size: var(--fs-xl); line-height: var(--lh-snug); margin-top: var(--space-8); }
-  h4 { font-size: var(--fs-base); }
-  p { margin: 0 0 var(--space-4); color: var(--color-text); }
-
-  .container { max-width: 760px; margin: 0 auto; padding: 0 var(--container-pad); }
-  .container-wide { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad); }
-
-  .eyebrow {
-    display: inline-block;
-    font-size: var(--fs-xs); font-weight: 600;
-    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
-    color: var(--color-navy-700); margin-bottom: var(--space-3);
-  }
-  .eyebrow.gold { color: var(--color-gold-700); }
-
-  /* ---------- Buttons ---------- */
-  .btn {
-    display: inline-flex; align-items: center; gap: var(--space-2);
-    padding: 12px 18px; border-radius: var(--radius);
-    font: inherit; font-weight: 600; font-size: var(--fs-sm);
-    border: 1px solid transparent; cursor: pointer; text-decoration: none;
-    transition: background-color var(--duration-base) var(--easing),
-                border-color var(--duration-base) var(--easing),
-                color var(--duration-base) var(--easing);
-  }
-  .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-  .btn-primary { background: var(--color-navy-700); color: #fff; }
-  .btn-primary:hover { background: var(--color-navy-900); text-decoration: none; }
-  .btn-gold { background: var(--color-gold-500); color: var(--color-ink); }
-  .btn-gold:hover { background: var(--color-gold-600); text-decoration: none; }
-  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-line); }
-  .btn-ghost:hover { border-color: var(--color-ink); text-decoration: none; }
-
-  /* ---------- Header ---------- */
-  .topstrip {
-    background: var(--color-navy-900); color: #fff;
-    font-size: var(--fs-xs); text-align: center;
-    padding: 8px var(--container-pad); letter-spacing: var(--tracking-wide);
-  }
-  .topstrip strong { color: var(--color-gold-300); font-weight: 600; }
-  .topstrip a { color: #fff; text-decoration-color: rgba(255, 255, 255, 0.4); }
-
-  header.site {
-    position: sticky; top: 0; z-index: var(--z-nav);
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: saturate(140%) blur(8px);
-    border-bottom: 1px solid var(--color-line);
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); height: 84px; }
-  .brand-link { display: flex; align-items: center; text-decoration: none; }
-  .brand-link img { height: 48px; width: auto; display: block; }
-  @media (max-width: 760px) {
-    .nav { height: 72px; }
-    .brand-link img { height: 38px; }
-  }
-  .nav-cta { display: flex; gap: var(--space-2); align-items: center; }
-  .nav-back {
-    color: var(--color-text-muted); font-size: var(--fs-sm); font-weight: 500;
-    text-decoration: none;
-  }
-  .nav-back:hover { color: var(--color-navy-700); }
-
-  /* ---------- Breadcrumb ---------- */
+  /* Breadcrumb */
   .crumb {
-    padding: var(--space-5) 0 0;
-    color: var(--color-text-muted); font-size: var(--fs-sm);
+    padding: var(--sp-3) 0 0;
+    color: var(--ink-muted); font-size: var(--fs-sm);
   }
-  .crumb a { color: var(--color-text-muted); text-decoration: none; }
-  .crumb a:hover { color: var(--color-navy-700); text-decoration: underline; }
-  .crumb .sep { margin: 0 var(--space-2); opacity: 0.5; }
+  .crumb a { color: var(--ink-muted); text-decoration: none; transition: color var(--dur-micro) var(--ease-out); }
+  .crumb a:hover { color: var(--brand-deep); }
+  .crumb .sep { margin: 0 var(--sp-1); opacity: 0.5; }
 
-  /* ---------- Article hero ---------- */
-  .article-head { padding: var(--space-12) 0 var(--space-8); }
+  /* Article hero */
+  .article-head {
+    max-width: 760px; margin: 0 auto;
+    padding: var(--sp-6) var(--gutter) var(--sp-5);
+  }
+  .article-head h1 {
+    font-size: clamp(32px, 4.6vw, 56px);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    color: var(--ink);
+    margin: var(--sp-2) 0 var(--sp-3);
+    text-wrap: balance;
+  }
+  .article-head .lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0;
+  }
   .article-head .meta {
-    margin-top: var(--space-6); padding-top: var(--space-5);
-    border-top: 1px solid var(--color-line);
-    color: var(--color-text-muted); font-size: var(--fs-sm);
-    display: flex; gap: var(--space-6); flex-wrap: wrap;
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--line);
+    color: var(--ink-muted);
+    font-size: var(--fs-sm);
+    display: flex; gap: var(--sp-4); flex-wrap: wrap;
   }
-  .article-head .meta strong { color: var(--color-ink); font-weight: 600; }
-  .article-head p.lede {
-    font-size: var(--fs-md); color: var(--color-text); line-height: 1.55;
+  .article-head .meta strong { color: var(--ink); font-weight: 600; }
+
+  /* Article body — scoped to DIRECT children only so styles don't leak into .article-cta */
+  article.article-body {
+    max-width: 760px; margin: 0 auto;
+    padding: 0 var(--gutter) var(--sp-7);
+  }
+  article.article-body > p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);
+  }
+  article.article-body > p strong { color: var(--ink); font-weight: 600; }
+  article.article-body > h2 {
+    font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: var(--sp-6) 0 var(--sp-3);
+  }
+  article.article-body > ul {
+    padding-left: var(--sp-4);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+  article.article-body > ul > li {
+    padding: 6px 0;
+    line-height: 1.6;
+    font-size: 17px;
+    color: var(--ink);
   }
 
-  /* ---------- Article body ---------- */
-  article { padding: 0 0 var(--space-16); font-size: var(--fs-md); }
-  article p { font-size: var(--fs-md); line-height: 1.7; }
-  article p strong { color: var(--color-ink); font-weight: 600; }
-  article ul { padding-left: var(--space-6); margin: var(--space-4) 0 var(--space-6); }
-  article ul li { padding: var(--space-2) 0; line-height: 1.6; }
-
-  /* ---------- Stat block ---------- */
+  /* Stat block */
   .stat-block {
-    background: var(--color-bg-alt); border: 1px solid var(--color-line);
-    border-left: 4px solid var(--color-gold-500);
-    border-radius: var(--radius-md); padding: var(--space-8);
-    margin: var(--space-8) 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand-accent);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-4);
+    margin: var(--sp-5) 0;
   }
   .stat-block .num {
-    font-family: var(--font-serif); font-size: 2.6rem; font-weight: 700;
-    color: var(--color-navy-900); line-height: 1; margin-bottom: var(--space-3);
-    letter-spacing: var(--tracking-tight);
+    font-size: clamp(34px, 3.8vw, 48px);
+    font-weight: 600;
+    letter-spacing: -2px;
+    color: var(--brand-deep);
+    line-height: 1;
+    margin-bottom: var(--sp-2);
+    font-variant-numeric: tabular-nums;
   }
   .stat-block .head {
-    font-family: var(--font-serif); font-size: var(--fs-lg);
-    color: var(--color-ink); font-weight: 600;
-    line-height: var(--lh-snug); margin-bottom: var(--space-3);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0 0 var(--sp-2);
+    letter-spacing: -0.3px;
+  }
+  .stat-block .note {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
   }
   .stat-block .source {
-    font-size: var(--fs-xs); color: var(--color-text-muted);
-    font-style: italic; margin-top: var(--space-4); padding-top: var(--space-3);
-    border-top: 1px solid var(--color-line);
-  }
-
-  /* ---------- Pull quote ---------- */
-  .pull {
-    border-left: 4px solid var(--color-navy-700);
-    padding: var(--space-3) var(--space-6);
-    margin: var(--space-8) 0; font-family: var(--font-serif);
-    font-size: var(--fs-xl); line-height: 1.4; color: var(--color-ink);
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-2);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-xs);
+    color: var(--ink-muted);
     font-style: italic;
   }
 
-  /* ---------- Reference list ---------- */
-  .references {
-    background: var(--color-bg-alt); border-top: 1px solid var(--color-line);
-    border-bottom: 1px solid var(--color-line);
-    padding: var(--space-12) 0;
+  /* Pull quote */
+  .pull {
+    border-left: 3px solid var(--brand-accent);
+    padding: var(--sp-2) var(--sp-4);
+    margin: var(--sp-5) 0;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 500;
   }
-  .references h2 { margin-top: 0; }
+
+  /* References */
+  .references {
+    background: #fff;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--sp-7) 0;
+  }
+  .references .container { max-width: 760px; }
+  .references h2 {
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);
+  }
+  .references > .container > p:first-of-type {
+    color: var(--ink-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0 0 var(--sp-4);
+  }
   .references ol {
-    list-style: none; counter-reset: ref; padding: 0; margin: 0;
+    list-style: none;
+    counter-reset: ref;
+    padding: 0;
+    margin: 0;
   }
   .references li {
     counter-increment: ref;
-    background: var(--color-card); border: 1px solid var(--color-line);
-    border-radius: var(--radius); padding: var(--space-5) var(--space-6);
-    margin-bottom: var(--space-3);
-    position: relative; padding-left: calc(var(--space-6) + 36px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-3) var(--sp-4);
+    margin-bottom: var(--sp-2);
+    position: relative;
+    padding-left: calc(var(--sp-4) + 36px);
   }
   .references li::before {
     content: "[" counter(ref) "]";
-    position: absolute; left: var(--space-6); top: var(--space-5);
-    font-family: var(--font-mono, ui-monospace, Menlo, monospace);
-    font-weight: 600; color: var(--color-navy-700);
+    position: absolute;
+    left: var(--sp-4);
+    top: var(--sp-3);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 600;
+    color: var(--brand-deep);
     font-size: var(--fs-sm);
   }
-  .references .ref-title { font-weight: 600; color: var(--color-ink); }
+  .references .ref-title {
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
   .references .ref-source {
-    color: var(--color-text-muted); font-size: var(--fs-sm);
-    margin-top: var(--space-1);
+    color: var(--ink-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    margin-top: 6px;
   }
+  .references .ref-footer {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-sm);
+    color: var(--ink-muted);
+  }
+  .references .ref-footer a { color: var(--brand-deep); font-weight: 500; }
+
   .ref-cite {
-    display: inline-block; font-family: var(--font-mono, ui-monospace, Menlo, monospace);
-    font-size: 0.78em; font-weight: 600; color: var(--color-navy-700);
-    background: var(--color-navy-50); padding: 1px 6px; border-radius: 4px;
-    margin-left: 4px; text-decoration: none; vertical-align: super;
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.78em;
+    font-weight: 600;
+    color: var(--brand-deep);
+    background: rgba(244,180,0,0.15);
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    text-decoration: none;
+    vertical-align: super;
+    transition: background var(--dur-micro) var(--ease-out);
   }
-  .ref-cite:hover { background: var(--color-navy-100); text-decoration: none; }
+  .ref-cite:hover { background: rgba(244,180,0,0.3); }
 
-  /* ---------- CTA ---------- */
-  .cta-band {
-    background: var(--color-navy-900); color: #fff;
-    border-radius: var(--radius-md); padding: var(--space-12);
-    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: var(--space-6); align-items: center;
-    margin: var(--space-12) 0;
-  }
-  @media (max-width: 760px) { .cta-band { grid-template-columns: 1fr; padding: var(--space-8); } }
-  .cta-band h2 { color: #fff; margin: 0 0 var(--space-3); }
-  .cta-band p { color: var(--color-navy-100); margin: 0; }
-  .cta-band .actions { display: flex; flex-direction: column; gap: var(--space-2); }
-  .cta-band .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
-  .cta-band .btn-primary:hover { background: var(--color-gold-600); }
-  .cta-band .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.25); }
-  .cta-band .btn-ghost:hover { border-color: #fff; }
-
-  /* ---------- Footer ---------- */
-  footer.site {
-    padding: var(--space-12) 0 var(--space-8);
-    border-top: 1px solid var(--color-line);
-    color: var(--color-text-muted); font-size: var(--fs-sm);
-  }
-  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--space-6); }
-  @media (max-width: 980px) { .foot-grid { grid-template-columns: 1fr 1fr 1fr; } }
-  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
-  footer.site h4 {
-    font-family: var(--font-sans); font-size: var(--fs-xs);
-    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
-    color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-4);
-  }
-  footer.site ul { list-style: none; padding: 0; margin: 0; }
-  footer.site ul li { margin-bottom: var(--space-2); }
-  footer.site a { color: var(--color-ink-2); }
-  .foot-brand img { height: 44px; width: auto; margin-bottom: var(--space-4); }
-  .legal {
-    margin-top: var(--space-8); padding-top: var(--space-5);
-    border-top: 1px solid var(--color-line);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
-    font-size: var(--fs-xs);
-  }
-
-  /* a11y */
-  .skip-link {
-    position: absolute; top: -40px; left: 8px;
-    background: var(--color-navy-900); color: #fff;
-    padding: 8px 12px; border-radius: var(--radius-sm); z-index: 100; text-decoration: none;
-  }
-  .skip-link:focus { top: 8px; }
+  /* (Article CTA styles now live in styles/site.css — reusable across pages) */
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="site">
-  <div class="container-wide nav">
+<header class="site scrolled" id="siteHeader">
+  <div class="container nav">
     <a class="brand-link" href="index.html" aria-label="Futurera Institute home">
       <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
     </a>
+
+    <nav class="primary" id="primaryNav" aria-label="Primary">
+      <div class="item"><a class="link" href="index.html">Home</a></div>
+      <div class="item">
+        <button class="link" aria-haspopup="true" aria-expanded="false">Programs <span class="caret">▾</span></button>
+        <div class="dropdown" role="menu">
+          <a href="ai-lab.html" role="menuitem">AI Lab</a>
+          <a href="index.html#ecosystem" role="menuitem">University Track</a>
+          <a href="index.html#ecosystem" role="menuitem">Industry Track</a>
+          <a href="index.html#ecosystem" role="menuitem">AI Studio</a>
+        </div>
+      </div>
+      <div class="item">
+        <button class="link" aria-haspopup="true" aria-expanded="false">About <span class="caret">▾</span></button>
+        <div class="dropdown" role="menu">
+          <a href="index.html#about" role="menuitem">About us</a>
+          <a href="index.html#team" role="menuitem">Team</a>
+          <a href="index.html#faq" role="menuitem">FAQ</a>
+        </div>
+      </div>
+      <div class="item">
+        <button class="link" aria-haspopup="true" aria-expanded="false">Resources <span class="caret">▾</span></button>
+        <div class="dropdown" role="menu">
+          <a href="blog.html" role="menuitem">Blog</a>
+          <a href="#demo" role="menuitem">Demos</a>
+        </div>
+      </div>
+      <div class="item"><a class="link" href="index.html#contact">Contact</a></div>
+    </nav>
+
     <div class="nav-cta">
-      <a class="nav-back" href="index.html#why">← Back to home</a>
-      <a class="btn btn-gold" href="index.html#contact">Book a call</a>
+      <a class="btn btn-chip" href="bootcamp-summer-2026.html"><span class="cta-full">Join Summer 2026 Bootcamp →</span><span class="cta-short">Apply →</span></a>
+      <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
     </div>
   </div>
 </header>
 
-<div class="container-wide crumb">
-  <a href="index.html">Home</a>
-  <span class="sep">›</span>
-  <a href="index.html#why">Why it matters</a>
-  <span class="sep">›</span>
-  <span>Full summary</span>
-</div>
-
 <main id="main">
 
-  <header class="article-head container">
-    <span class="eyebrow gold">Why it matters · Full summary</span>
-    <h1>The future career today's high schoolers will enter is already being rewritten by AI.</h1>
+  <div class="container crumb">
+    <a href="index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="blog.html">Blog</a>
+    <span class="sep">›</span>
+    <span>By the numbers</span>
+  </div>
+
+  <header class="article-head">
+    <span class="eyebrow gold">By the numbers</span>
+    <h1>The future careers students are heading into are already being rewritten by AI.</h1>
     <p class="lede">A short, sourced summary of the data behind our program — what the numbers say, where they come from, and what they mean for a high school student in Canada today.</p>
 
     <div class="meta">
@@ -292,9 +294,9 @@
     </div>
   </header>
 
-  <article class="container">
+  <article class="article-body">
 
-    <p>If you are weighing whether AI deserves a place on a high school student's plan — as a parent, a student, or an educator — you are right to look for evidence rather than enthusiasm. AI is moving quickly, the marketing around it is loud, and most "AI for kids" content online is shallow. This page is a short, sourced summary of what we believe is actually true — and why it shaped the design of Futurera Institute.</p>
+    <p>If you are weighing whether AI deserves a place on a high school student's plan — as a parent, a student, or an educator — you are right to look for evidence rather than enthusiasm. AI is moving quickly, the marketing around it is loud, and most "AI for kids" content online is shallow. This page is a short, sourced summary of what we believe is actually true, and why it shaped the design of Futurera Institute.</p>
 
     <p>The argument has four parts: AI is reshaping the careers students are heading into; Canadian businesses are adopting it faster than the labour market can keep up; the talent gap is widening; and students are likely already using AI without guidance. Each is supported by a recent, credible Canadian or peer-reviewed source, listed at the bottom of this page.</p>
 
@@ -303,20 +305,20 @@
     <div class="stat-block">
       <div class="num">86%</div>
       <div class="head">Of university-educated Canadian workers are already in jobs being transformed by AI.</div>
-      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">By contrast, only 38% of workers with high school as their highest credential are in similarly affected jobs.</p>
+      <p class="note">By contrast, only 38% of workers with high school as their highest credential are in similarly affected jobs.</p>
       <div class="source">Source: Statistics Canada, Labour Force Survey supplement, 2024 <a class="ref-cite" href="#ref-1">[1]</a></div>
     </div>
 
     <p>The pattern is consistent across recent Canadian and OECD data: <strong>the more education someone pursues, the more AI defines their work</strong>. Today's students are not heading into the same labour market their teachers were trained for. Computer science, data, health technology, business analytics, communications, education, finance — every one of these university-track fields now expects entry-level workers to understand and use AI tools competently.</p>
 
-    <p>This does not mean every student needs to become an AI engineer. It means even students who plan careers as journalists, teachers, lawyers, designers, or doctors will be working in AI-augmented professions. Universities know this. Their curricula are being rewritten in real time. Students who arrive AI-fluent will have a measurable head start — not because they know more about AI than their professors, but because they can use it as a tool of inquiry from day one.</p>
+    <p>This does not mean every student needs to become an AI engineer. It means even students who plan careers as journalists, teachers, lawyers, designers, or doctors will be working in AI-augmented professions. Universities know this. Their curricula are being rewritten in real time. Students who arrive AI-fluent will have a measurable head start, not because they know more about AI than their professors, but because they can use it as a tool of inquiry from day one.</p>
 
     <h2>2. Adoption is happening faster than schools can respond</h2>
 
     <div class="stat-block">
       <div class="num">6.1% → 12.2%</div>
       <div class="head">Canadian business adoption of AI doubled in a single year.</div>
-      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">Among medium and large enterprises, the increase is sharper still.</p>
+      <p class="note">Among medium and large enterprises, the increase is sharper still.</p>
       <div class="source">Source: Statistics Canada, Survey of Digital Technology and Internet Use, 2024 → 2025 <a class="ref-cite" href="#ref-2">[2]</a></div>
     </div>
 
@@ -329,20 +331,20 @@
     <div class="stat-block">
       <div class="num">+78% &nbsp;vs&nbsp; +24%</div>
       <div class="head">AI job postings are growing roughly three times faster than the supply of qualified talent.</div>
-      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">For early-career roles requiring AI fluency, the gap is even more pronounced.</p>
+      <p class="note">For early-career roles requiring AI fluency, the gap is even more pronounced.</p>
       <div class="source">Source: LinkedIn Economic Graph and Gloat Talent Mobility Report, 2026 <a class="ref-cite" href="#ref-3">[3]</a></div>
     </div>
 
-    <p>The shortage is not of jobs. It is of people prepared to do them. This is good news for students who prepare early. <strong>Early preparation compounds</strong> — both in admissions outcomes and in early-career trajectory. A student who graduates high school with a real AI portfolio enters their university co-op cycle with a measurable advantage; a student who graduates university with one enters their first job with a comparable lead.</p>
+    <p>The shortage is not of jobs. It is of people prepared to do them. This is good news for students who prepare early. <strong>Early preparation compounds</strong>, both in admissions outcomes and in early-career trajectory. A student who graduates high school with a real AI portfolio enters their university co-op cycle with a measurable advantage; a student who graduates university with one enters their first job with a comparable lead.</p>
 
     <p>This is the part of the data that shaped our Industry Track stream — the apprenticeship pathway from learning into mentored, paid work on real client problems. We did not build it because it sounded impressive. We built it because the evidence is consistent: students who do supervised real-world AI work in high school enter university with a different trajectory than students who do not.</p>
 
-    <h2>4. Students are probably already using AI — likely without guidance</h2>
+    <h2>4. Students are probably already using AI, likely without guidance</h2>
 
     <div class="stat-block">
       <div class="num">59%</div>
-      <div class="head">Of Canadian students already use generative AI tools — and roughly two thirds of them say they are learning <em>less</em> as a result.</div>
-      <p style="margin: 0; color: var(--color-text-muted); font-size: var(--fs-sm);">Surveys consistently find that students with no formal training use AI as a shortcut, not as a study aid.</p>
+      <div class="head">Of Canadian students already use generative AI tools, and roughly two thirds of them say they are learning <em>less</em> as a result.</div>
+      <p class="note">Surveys consistently find that students with no formal training use AI as a shortcut, not as a study aid.</p>
       <div class="source">Source: KPMG Canada survey of post-secondary and senior high school students, 2024 <a class="ref-cite" href="#ref-4">[4]</a></div>
     </div>
 
@@ -367,18 +369,7 @@
 
     <p>None of this is an emergency. We are not saying students need to learn AI tomorrow or fall behind permanently. We are saying: between now and university, there is a window where structured, mentored AI learning produces compounding advantages. Most families miss that window not because they decide against it, but because they are not sure where to start.</p>
 
-    <p>If you want to talk through what that looks like for a specific student — what they would build, what they would learn, what it would cost, and whether the timing is right — book a 20-minute info session below. There is no pitch. We will tell you honestly whether Futurera is the right fit now, in six months, or whether something else fits better.</p>
-
-    <div class="cta-band">
-      <div>
-        <h2>Ready to talk it through?</h2>
-        <p>A 20-minute info session with our program lead. No sales pitch — an honest fit conversation.</p>
-      </div>
-      <div class="actions">
-        <a class="btn btn-primary" href="index.html#contact">Book a session →</a>
-        <a class="btn btn-ghost" href="index.html#programs">See our programs</a>
-      </div>
-    </div>
+    <p>If you want to talk through what that looks like for a specific student — what they would build, what they would learn, what it would cost, and whether the timing is right — get in touch below. There is no pitch. We will tell you honestly whether Futurera is the right fit now, in six months, or whether something else fits better.</p>
 
   </article>
 
@@ -407,31 +398,76 @@
         </li>
       </ol>
 
-      <p style="margin-top: var(--space-6); font-size: var(--fs-sm); color: var(--color-text-muted);">If you would like the underlying citations or PDFs of these reports for your own review, we are happy to share what we have. Email <a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a>.</p>
+      <p class="ref-footer">If you would like the underlying citations or PDFs of these reports for your own review, we are happy to share what we have. Email <a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a>.</p>
+    </div>
+  </section>
+
+  <!-- CTA · final ask, after references, before footer -->
+  <section class="article-cta-section">
+    <div class="article-cta-wrap">
+      <div class="article-cta">
+        <span class="article-cta-eyebrow">Get in touch</span>
+        <h2>Ready to talk it through?</h2>
+        <p>A 20-minute conversation with our program lead. No sales pitch — an honest fit conversation.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="index.html#contact">Book a meeting with us</a>
+        </div>
+      </div>
     </div>
   </section>
 
 </main>
 
+<!-- NEWSLETTER STRIP -->
+<section class="newsletter-strip" aria-labelledby="newsletter-title">
+  <div class="container">
+    <div class="newsletter-grid">
+      <div class="newsletter-text">
+        <h3 id="newsletter-title">Stay updated.</h3>
+        <p>Be first to hear about new cohorts and program announcements.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="event.preventDefault();">
+        <input type="email" placeholder="your@email.com" aria-label="Email address" required>
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <footer class="site">
-  <div class="container-wide">
+  <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="assets/Futurera Institute Logo-cropped.png" alt="Futurera Institute" />
-        <p>AI education for Grade 9–12 students. Headquartered in Toronto. Our core team includes faculty members affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+        <p>AI education for Grade 9–12 students. Proudly started in Toronto. Core team includes faculty affiliated with University of Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.</p>
+        <div class="foot-social">
+          <span class="foot-social-label">Follow us</span>
+          <div class="foot-social-links">
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="X (formerly Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
       <div>
-        <h4>AI Lab</h4>
+        <h4>Programs</h4>
         <ul>
-          <li><a href="ai-lab.html">About AI Lab</a></li>
-          <li><a href="build-with-ai.html">Build with AI <span style="opacity:.6">· course</span></a></li>
-          <li><a href="bootcamp-summer-2026.html" style="padding-left:10px;font-size:.92em;opacity:.85">↳ Summer 2026 Bootcamp</a></li>
+          <li><a href="ai-lab.html">AI Lab</a></li>
+          <li><a href="index.html#ecosystem">University Track</a></li>
+          <li><a href="index.html#ecosystem">Industry Track</a></li>
+          <li><a href="index.html#ecosystem">AI Studio</a></li>
         </ul>
       </div>
       <div>
         <h4>For</h4>
         <ul>
-          <li><a href="index.html#parents">Parents</a></li>
+          <li><a href="for-parents.html">Parents</a></li>
           <li><a href="for-students.html">Students</a></li>
         </ul>
       </div>
@@ -447,8 +483,7 @@
         <h4>Get in touch</h4>
         <ul>
           <li><a href="mailto:znoorian@torontomu.ca">znoorian@torontomu.ca</a></li>
-          <li>Toronto, Ontario</li>
-          <li><a href="index.html#contact">Book an info session</a></li>
+          <li><a href="index.html#contact">Book an info session →</a></li>
         </ul>
       </div>
     </div>
@@ -458,6 +493,22 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Mobile menu toggle
+  (function () {
+    var btn = document.getElementById('navToggle');
+    var menu = document.getElementById('primaryNav');
+    if (btn && menu) {
+      btn.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  })();
+
+  // Article page: header is always in scrolled state (no dark hero), so no scroll listener needed.
+</script>
 
 </body>
 </html>
