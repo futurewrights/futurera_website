@@ -1,222 +1,242 @@
-# Futurera Site — Operations Setup
+# Futurera Institute — Operations Setup
 
-The site is static HTML. To accept applications, bookings, and payments, you'll wire it to three external services. **Total setup time: ~45 minutes.**
+The site is static HTML. The application + payment flow is **email-driven**:
+no booking widget, no payment processor, no auto-pipelines. Just a contact
+form, your email, and Interac e-Transfer.
+
+**Total setup time: ~30 minutes. Cost: $0.**
 
 ---
 
-## 1 · Calendly (info session bookings)
+## The flow
 
-**Used for**: the "Book a 20-minute session" CTA on the homepage.
-
-### Setup
-
-1. Sign up at [calendly.com](https://calendly.com) — free plan is enough for one event type
-2. Create an event called **"Futurera info session"** (20 min, 1:1)
-3. Set your availability windows
-4. Copy the booking URL (looks like `https://calendly.com/your-handle/info-call`)
-
-### Where to swap in the code
-
-`index.html`, around the bottom CTA section. Search for the comment:
-
-```html
-<!-- TODO: Replace href with your Calendly URL once set up. See SETUP.md -->
-<a class="btn btn-primary" href="https://calendly.com/futurera/info-call">Book a 20-minute session →</a>
+```
+PARENT FINDS SITE
+       │
+       ▼
+   Get in touch
+   ├─ Contact form (Tally) → email to your inbox
+   └─ Direct mailto link → email to your inbox
+       │
+       ▼
+   YOU email back to start the conversation
+       │
+       ▼
+   IF a call helps:
+      YOU send a manual calendar invite
+      (Google Calendar / Outlook · 30 seconds)
+       │
+       ▼
+   YOU email Acceptance + e-transfer instructions
+       │
+       ▼
+   PARENT sends e-transfer (auto-deposits to your bank)
+       │
+       ▼
+   YOU email Confirmation + welcome packet
+       │
+       ▼
+   PROGRAM STARTS
 ```
 
-Replace `https://calendly.com/futurera/info-call` with your real Calendly URL.
+---
 
-### What Calendly handles automatically
+## 1 · Bank — set up Interac e-Transfer Auto-Deposit *(5 min)*
 
-- Confirmation email to the booker (with calendar invite)
-- Reminder email 24 hrs before
-- Reschedule + cancel links
-- Calendar sync to Google / Outlook
-- Time zone handling
+In your bank's mobile app or website → **Interac e-Transfer settings** → **Register for Auto-Deposit**:
+
+- Email address: `znoorian@torontomu.ca` *(or a dedicated `payments@futurera.ca` later)*
+- Linked account: your business or operating account
+
+**Why this matters**: with Auto-Deposit, the parent doesn't need to set a security question. Their transfer lands in your account automatically and you get a notification email. Frictionless.
 
 ---
 
-## 2 · Tally (Build with AI Bootcamp application form)
-
-**Used for**: the "Apply now" CTA on the Summer 2026 Bootcamp page.
-
-### Setup
+## 2 · Tally — contact form *(10 min)*
 
 1. Sign up at [tally.so](https://tally.so) — free plan: 100 submissions/month
-2. Create a new form titled **"Build with AI · Summer 2026 Bootcamp Application"**
-3. Add the questions below
-4. In **Form settings → Email notifications**:
-   - Enable notifications to your inbox (so you see new applications)
-   - Enable autoresponder to the applicant — see the suggested copy below
-5. Copy the share URL (looks like `https://tally.so/r/abc123`)
-
-### Suggested form questions
+2. **Create form** → name it **"Contact Futurera"**
+3. Add 4 fields:
 
 | # | Field | Type | Required |
 |---|---|---|---|
-| 1 | Student's first name | Short text | ✓ |
-| 2 | Student's last name | Short text | ✓ |
-| 3 | Student's email | Email | ✓ |
-| 4 | Student's grade | Dropdown (Grade 9 / 10 / 11 / 12) | ✓ |
-| 5 | Student's age (at start of program) | Number (14–18) | ✓ |
-| 6 | Parent / guardian name | Short text | ✓ |
-| 7 | Parent / guardian email | Email | ✓ |
-| 8 | Parent / guardian phone | Short text | optional |
-| 9 | Why does the student want to take Build with AI? | Long text (200–500 char) | ✓ |
-| 10 | Has the student used AI tools before (e.g., ChatGPT, Claude)? | Multiple choice (Never / Sometimes / Daily) | ✓ |
-| 11 | What would they hope to build during the program? | Long text | optional |
-| 12 | Anything else we should know? | Long text | optional |
-| 13 | Consent to be contacted about this application | Checkbox (single, required) | ✓ |
-| 14 | (Optional) Consent to receive Futurera updates and future cohort announcements | Checkbox | optional |
+| 1 | Your name | Short text | ✓ |
+| 2 | Your email | Email | ✓ |
+| 3 | Who is this for? | Dropdown: *My child / Myself (student) / I represent a school or partner* | ✓ |
+| 4 | Your message | Long text | ✓ |
 
-> Note on #14: Marketing-style emails to Canadians require explicit consent under CASL. The transactional emails (application receipt, payment receipt, program updates to enrolled families) are exempt — but a newsletter or "future cohort" blast needs this opt-in.
+4. **Form settings → Email notifications**: enable submissions → route to `znoorian@torontomu.ca`
+5. Copy the share URL — it'll look like `https://tally.so/r/abc123`
+6. Send me the URL — I'll wire it into the site
 
-### Suggested autoresponder email (Tally → applicant)
-
-```
-Subject: We received your Build with AI application
-
-Hi {first_name_of_parent},
-
-Thanks for applying to Build with AI · Summer 2026.
-
-Here's what happens next:
-
-1. We'll review the application within 5 business days.
-2. We'll email you to schedule a 15-minute conversation with our program lead. This is part of how we decide fit — for both directions.
-3. If both sides are aligned, we'll send a payment link to confirm the seat.
-
-If you have any questions in the meantime, reply to this email.
-
-— The Futurera team
-```
-
-### Where to swap in the code
-
-`bootcamp-summer-2026.html`, around the apply CTA section. Search for the comment:
-
-```html
-<!-- TODO: Replace href with your Tally form URL once set up. See SETUP.md -->
-<a class="btn btn-primary" href="https://tally.so/r/REPLACE-WITH-TALLY-FORM-ID">Apply now →</a>
-```
-
-Replace `https://tally.so/r/REPLACE-WITH-TALLY-FORM-ID` with your real Tally URL.
+**Optional second Tally form (later)**: a "Stay updated" newsletter form with just an email field. Sits in the newsletter strip on the homepage. Use this when you actually want to start sending cohort announcements.
 
 ---
 
-## 3 · Stripe (payment, sent manually after acceptance)
+## 3 · Email templates *(15 min · save in Gmail or Outlook as drafts)*
 
-**Used for**: tuition payment. Sent by email to families after you've accepted them — *not* as a public link on the website.
+Four templates you'll reuse for every applicant. Save them in your email client's **"Templates"** feature and customize the placeholders before sending.
 
-### Setup
-
-1. Sign up at [stripe.com](https://stripe.com) — Canadian business setup
-2. Verify your business (business name, banking, tax info) — usually 1–3 business days
-3. In Stripe Dashboard, go to **Products → Add product**:
-   - Name: `Build with AI · Summer 2026 Bootcamp · Tuition`
-   - Description: `2-week intensive bootcamp · July 13–24, 2026 · Toronto`
-   - Price: `$X,XXX CAD` (one-time)
-4. From the product page, click **Create payment link**
-5. Configure:
-   - ✓ Collect billing address
-   - ✓ Allow promotional codes (optional, useful for sibling discounts)
-   - ✓ Send Stripe receipt automatically (default)
-6. Copy the payment link (looks like `https://buy.stripe.com/abc123`)
-
-### How to use it
-
-When a family is accepted after the info call:
-
-1. Email them: *"We'd love to have you in the Summer 2026 cohort. Here's the secure payment link: \[link\]. Once payment clears, we'll send the welcome packet."*
-2. Stripe automatically sends them a payment receipt.
-3. You see the payment in Stripe Dashboard → Payments.
-4. Send a manual welcome email confirming the seat.
-
-### Stripe fees
-
-- **2.9% + $0.30 CAD** per successful card payment
-- Example: on $1,200 tuition, Stripe takes ~$35; you net ~$1,165
-- No monthly fee, no setup fee
-
-### Refund handling
-
-Per the FAQ on the bootcamp page: full refund > 2 weeks before; 50% > 1 week before; none after (except documented medical). Stripe handles refunds via Dashboard in 1 click — they reverse via the original card automatically.
-
----
-
-## 4 · Email — what each tool handles automatically
-
-You don't need Mailchimp or ConvertKit yet. The three tools above cover all transactional email:
-
-| Email | Sent by | When |
-|---|---|---|
-| Application received | Tally autoresponder | Immediately when form is submitted |
-| Application reviewed | You (manual) | Within 5 business days |
-| Info session confirmed | Calendly | When the family books |
-| Info session reminder | Calendly | 24 hours before |
-| Payment receipt | Stripe | When payment clears |
-| Welcome / what's next | You (manual) | After payment |
-| Cohort updates | You (manual or via MailerLite later) | As needed |
-
-### When you'd want a real email tool (not yet)
-
-- You want a "Notify me when fall cohort opens" waitlist that auto-emails when the next cohort is open
-- You publish a newsletter
-- You want welcome sequences (Day 1, Day 3, etc. emails after enrollment)
-
-When that day comes, **MailerLite** (free up to 1,000 contacts) or **Beehiiv** (free up to 2,500) is the right tool. Both have built-in CASL-compliant double opt-in.
-
----
-
-## 5 · End-to-end flow, summarized
+### Template A — First reply (after contact form)
 
 ```
-┌────────────────────────────────────────────────────────────────┐
-│  Parent or student finds the site                              │
-│        ↓                                                        │
-│  Reads homepage / Build with AI / Bootcamp pages               │
-│        ↓                                                        │
-│  Clicks "Apply now" on the bootcamp page                       │
-│        ↓                                                        │
-│  Tally form opens (in new tab)                                 │
-│        ↓                                                        │
-│  Submits → Tally auto-emails them: "We received your app"      │
-│        ↓                                                        │
-│  You see the application in Tally + your inbox                 │
-│        ↓                                                        │
-│  You email them: "Let's chat. Book here: [Calendly]"           │
-│        ↓                                                        │
-│  Family books a slot → Calendly auto-emails confirmation       │
-│        ↓                                                        │
-│  Info session happens                                          │
-│        ↓                                                        │
-│  You email them: "Welcome — here's the payment link [Stripe]"  │
-│        ↓                                                        │
-│  Family pays → Stripe auto-emails receipt                      │
-│        ↓                                                        │
-│  You email them: "Confirmed — see you July 13"                 │
-└────────────────────────────────────────────────────────────────┘
+Subject: Re: Your Futurera inquiry
+
+Hi [first name],
+
+Thanks for reaching out. Happy to answer any questions about the program.
+
+Could you share a bit more so I can give you a useful response:
+  - Student's grade and approximate age
+  - What you're hoping the program would help them with
+  - Any specific concerns or questions
+
+If at any point a phone or video call would be more useful, just say so —
+I'll send you a calendar invite for a time that works.
+
+— [Your name]
+Program Lead · Futurera Institute
+```
+
+### Template B — Acceptance + payment instructions
+
+```
+Subject: Welcome to Summer 2026 — next steps inside
+
+Hi [parent first name],
+
+Thank you for the conversation this past week. We'd love to have
+[student first name] in the Summer 2026 cohort.
+
+Tuition is $X,XXX CAD. To secure the seat, please send an Interac e-Transfer:
+
+  Send to:    znoorian@torontomu.ca
+  Amount:     $X,XXX CAD
+  Reference:  [Student name] · Summer 2026
+
+Auto-deposit is enabled on our end, so no security question needed.
+
+Once the transfer arrives, I'll send a confirmation email with the full
+welcome packet (location, day-one schedule, what to bring).
+
+We'll hold the seat for 7 days from today.
+
+— [Your name]
+```
+
+### Template C — Payment confirmed + welcome
+
+```
+Subject: Confirmed — see you July 13
+
+Hi [parent first name],
+
+The e-transfer arrived. [Student first name]'s seat is confirmed.
+
+  Dates:           July 13–24, 2026 (Mon–Fri)
+  Schedule:        9:00 AM – 12:00 PM
+  Location:        [address]
+  What to bring:   [laptop / notebook]
+  Day-one contact: [your name + phone]
+
+I'll send a more detailed welcome email two weeks before the cohort starts
+with parking info and a short pre-reading.
+
+Looking forward to it.
+
+— [Your name]
+```
+
+### Template D — Decline (gentle, leaves door open)
+
+```
+Subject: A note on Summer 2026
+
+Hi [parent first name],
+
+Thank you for the conversation. After thinking it through, I don't think
+the Summer 2026 cohort is the right fit for [student first name] right now.
+
+[1–2 honest, specific sentences. e.g.: "the format assumes more
+self-direction than feels right at this stage" / "the program's pace is
+geared toward students already comfortable with X".]
+
+I'd suggest revisiting this for the Fall 2026 cohort, or take a look at
+[alternative if you have one].
+
+If your thinking changes, write back any time.
+
+— [Your name]
 ```
 
 ---
 
-## 6 · Quick reference — placeholders to swap
+## 4 · Tracking spreadsheet *(2 min · Google Sheet)*
 
-After you set up Tally and Calendly, search the code for these strings and replace:
+A single sheet with these columns:
 
-| Placeholder | Replace with |
+| Student Name | Parent Name | Parent Email | Inquiry Date | Decision | Payment Date | Amount | Status |
+|---|---|---|---|---|---|---|---|
+
+Status values:
+`Inquiry · In conversation · Accepted (awaiting payment) · Paid · Confirmed · Declined · Waitlist`
+
+This is your operational dashboard. Update after every conversation.
+
+---
+
+## 5 · What I'll change on the site
+
+Once you send the Tally contact form URL, I'll update everything in one push:
+
+| Currently | Will become |
 |---|---|
-| `https://calendly.com/futurera/info-call` | Your real Calendly URL |
-| `https://tally.so/r/REPLACE-WITH-TALLY-FORM-ID` | Your real Tally form URL |
+| "Book a 20-minute session" buttons | **"Get in touch"** → opens contact form |
+| Dead `#contact` anchor at end of `<main>` | Real **Contact section** with the form embedded + your email shown as fallback |
+| Hero secondary CTA | Stays as "See our programs" |
+| `bootcamp-summer-2026.html` "Apply now" | **"Get in touch to apply"** → opens contact form |
+| Newsletter Subscribe form | Either stays (if you create a 2nd Tally form for emails) or replaced with "Email us to be notified" mailto link |
+| Stripe payment language anywhere | Removed — payment is by e-transfer, sent via email |
 
-The Stripe payment link is sent manually by email — no code change needed.
+### Site copy I'll standardize
+
+| Old phrase | New phrase |
+|---|---|
+| "Book a 20-minute session" | "Get in touch" or "Talk to us" |
+| "Book an info session" | "Get in touch" |
+| "info session" / "info call" | "conversation" |
+| "Apply now" CTAs that imply form | "Get in touch to apply" |
 
 ---
 
-## 7 · Things to watch for
+## 6 · Setup checklist *(do these in order)*
 
-- **Tally form testing**: submit a test application from a personal email before launching, to verify autoresponder works
-- **Calendly availability**: set realistic availability windows; nothing kills momentum like a busy calendar
-- **Stripe verification**: takes 1–3 business days for first-time accounts; start this early
-- **CASL consent**: keep the marketing checkbox optional (#14 above), keep the transactional checkbox required (#13)
-- **Cohort capacity**: when applications fill the cohort, manually disable the Tally form (or add a "Cohort full — join the waitlist for Fall 2026" overlay)
+- [ ] **Step 1** — Bank: register Interac e-Transfer Auto-Deposit *(5 min)*
+- [ ] **Step 2** — Sign up for Tally and build the contact form *(10 min)*
+- [ ] **Step 3** — Save 4 email templates as drafts in your email client *(15 min)*
+- [ ] **Step 4** — Create the tracking Google Sheet *(2 min)*
+- [ ] **Step 5** — Send me the Tally form URL → I wire the site *(then push to GitHub)*
+
+---
+
+## 7 · What's *not* in the stack *(and why)*
+
+These were considered but skipped — kept here for the record:
+
+- **Calendly** — skipped. You'll send manual calendar invites only when a call is actually useful. Keeps the conversation in email, where it's already happening.
+- **Stripe** — skipped. E-transfer is free (no 2.9% + $0.30 fees), trusted by Canadian parents, and works with your existing bank. Add Stripe later only if you start enrolling international families.
+- **Newsletter platform (MailerLite / Beehiiv)** — deferred. Add when you have content to send and have decided what kind of newsletter. Until then, capturing emails into Tally is enough.
+- **CRM / pipeline tools (HubSpot, Pipedrive)** — overkill for current scale. Google Sheets handles tracking until you're enrolling 50+ students per cohort.
+
+---
+
+## 8 · When to revisit this stack
+
+You'll outgrow this setup when:
+
+- **Volume**: You're getting more than ~20 inquiries per cohort and the manual email back-and-forth is taking more than ~5 hours per week → time to add Calendly so people self-serve booking.
+- **Geography**: You start enrolling international students → time for Stripe (e-transfer is Canada-only).
+- **Marketing**: You want to send newsletters or cohort-launch announcements → time for MailerLite (free up to 1,000) or Beehiiv (free up to 2,500).
+- **Team grows**: More than one person handling inquiries → time for a shared inbox tool (Front, Help Scout) and a real CRM.
+
+Until then, this stack is intentionally minimal — and it's enough.
