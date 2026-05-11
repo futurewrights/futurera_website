@@ -499,25 +499,30 @@
   .text-arrow:focus-visible { outline: none; }
   .text-arrow:focus-visible .arrow-circle { box-shadow: var(--focus-ring); }
 
-  /* Dark-bg variant (hero, featured cohort, final CTA) — white text + circle */
+  /* Dark-bg variant (hero, featured cohort, final CTA, article CTA) — white text + circle */
   .hero .text-arrow,
   .featured .text-arrow,
-  .final-cta .text-arrow { color: #fff; }
+  .final-cta .text-arrow,
+  .article-cta .text-arrow { color: #fff; }
   .hero .text-arrow > span:first-child,
   .featured .text-arrow > span:first-child,
-  .final-cta .text-arrow > span:first-child { text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+  .final-cta .text-arrow > span:first-child,
+  .article-cta .text-arrow > span:first-child { text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
   .hero .arrow-circle,
   .featured .arrow-circle,
-  .final-cta .arrow-circle {
+  .final-cta .arrow-circle,
+  .article-cta .arrow-circle {
     border-color: rgba(255,255,255,0.4);
     background: rgba(255,255,255,0.06);
   }
   .hero .arrow-circle svg,
   .featured .arrow-circle svg,
-  .final-cta .arrow-circle svg { color: #fff; }
+  .final-cta .arrow-circle svg,
+  .article-cta .arrow-circle svg { color: #fff; }
   .hero .text-arrow:hover .arrow-circle,
   .featured .text-arrow:hover .arrow-circle,
-  .final-cta .text-arrow:hover .arrow-circle {
+  .final-cta .text-arrow:hover .arrow-circle,
+  .article-cta .text-arrow:hover .arrow-circle {
     background: rgba(255,255,255,0.18);
     border-color: #fff;
   }
