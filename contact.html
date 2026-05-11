@@ -49,35 +49,21 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     overflow: hidden;
+    transition: min-height 0.4s ease;
+  }
+  .contact-form-embed.submitted {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
   }
   .contact-form-embed iframe {
     display: block;
     width: 100%;
     border: 0;
+    transition: height 0.4s ease;
   }
 
-  /* Bottom contact strip */
-  .contact-strip {
-    margin-top: var(--sp-4);
-    padding-top: var(--sp-3);
-    border-top: 1px solid var(--line);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2) var(--sp-4);
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    color: var(--ink-muted);
-  }
-  .contact-strip a {
-    color: var(--brand-deep);
-    font-weight: 600;
-  }
-  .contact-strip .direct {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
-  }
 </style>
 </head>
 <body>
@@ -155,20 +141,12 @@
         -->
         <div class="contact-form-embed">
           <iframe
+            id="contactFormIframe"
             src="https://docs.google.com/forms/d/e/1FAIpQLSfoAXCsy0tAbzpJdnTnur-83WvEq3YKk012kWVEXr2jXiisMg/viewform?embedded=true"
-            height="900"
+            height="1400"
             title="Contact form">
             Loading…
           </iframe>
-        </div>
-
-        <div class="contact-strip">
-          <span class="direct">
-            <a href="mailto:hello@futurera.org">hello@futurera.org</a>
-            <span aria-hidden="true">·</span>
-            <span>Toronto, ON</span>
-          </span>
-          <span>Looking to apply? <a href="apply.html">Use the application page →</a></span>
         </div>
 
       </div>
@@ -230,6 +208,26 @@
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     }
+  })();
+
+  // Center the "Thanks" message vertically after form submission.
+  // Google Forms navigates the iframe to a new URL on submit, which
+  // fires a second `load` event. On that second load we shrink the
+  // iframe to fit the confirmation content and switch the container
+  // into a centered flex layout so the message sits in the middle
+  // of the card.
+  (function () {
+    var iframe = document.getElementById('contactFormIframe');
+    if (!iframe) return;
+    var container = iframe.parentElement;
+    var loads = 0;
+    iframe.addEventListener('load', function () {
+      loads++;
+      if (loads === 2) {
+        iframe.style.height = '280px';
+        if (container) container.classList.add('submitted');
+      }
+    });
   })();
 </script>
 
