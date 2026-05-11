@@ -45,7 +45,7 @@ PARENT FINDS SITE
 
 In your bank's mobile app or website → **Interac e-Transfer settings** → **Register for Auto-Deposit**:
 
-- Email address: `znoorian@torontomu.ca` *(or a dedicated `payments@futurera.ca` later)*
+- Email address: `hello@futurera.org` *(or a dedicated `payments@futurera.ca` later)*
 - Linked account: your business or operating account
 
 **Why this matters**: with Auto-Deposit, the parent doesn't need to set a security question. Their transfer lands in your account automatically and you get a notification email. Frictionless.
@@ -65,7 +65,7 @@ In your bank's mobile app or website → **Interac e-Transfer settings** → **R
 | 3 | Who is this for? | Dropdown: *My child / Myself (student) / I represent a school or partner* | ✓ |
 | 4 | Your message | Long text | ✓ |
 
-4. **Form settings → Email notifications**: enable submissions → route to `znoorian@torontomu.ca`
+4. **Form settings → Email notifications**: enable submissions → route to `hello@futurera.org`
 5. Copy the share URL — it'll look like `https://tally.so/r/abc123`
 6. Send me the URL — I'll wire it into the site
 
@@ -110,7 +110,7 @@ Thank you for the conversation this past week. We'd love to have
 
 Tuition is $X,XXX CAD. To secure the seat, please send an Interac e-Transfer:
 
-  Send to:    znoorian@torontomu.ca
+  Send to:    hello@futurera.org
   Amount:     $X,XXX CAD
   Reference:  [Student name] · Summer 2026
 
