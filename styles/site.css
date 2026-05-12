@@ -1,5 +1,5 @@
   /* ============================================================
-     Futurera Institute · Edufy-inspired layout
+     Futurera Academy · Edufy-inspired layout
      · One typeface (Inter)
      · Negative tracking on display sizes
      · Pill buttons, calm motion
@@ -257,7 +257,7 @@
   }
   .brand-link { display: flex; align-items: center; justify-self: start; }
   .brand-link img {
-    height: 50px; width: auto; display: block;
+    height: 40px; width: auto; display: block;
     transition: filter var(--dur-micro) var(--ease-out);
   }
   /* Over the dark hero: render the logo all-white */
@@ -1311,7 +1311,7 @@
 
   /* Brand column */
   .foot-brand img {
-    height: 50px; width: auto;
+    height: 40px; width: auto;
     margin-bottom: var(--sp-2);
     filter: brightness(0) invert(1);
   }

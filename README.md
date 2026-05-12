@@ -1,6 +1,6 @@
-# Futurera Institute — Website
+# Futurera Academy — Website
 
-Static HTML site for **Futurera Institute** — AI education for Grade 9–12 students.
+Static HTML site for **Futurera Academy** — AI education for Grade 9–12 students.
 Headquartered in Toronto. Core team includes faculty affiliated with the University of
 Toronto and Toronto Metropolitan University, alongside AI practitioners from industry.
 

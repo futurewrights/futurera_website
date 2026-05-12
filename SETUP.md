@@ -1,4 +1,4 @@
-# Futurera Institute — Operations Setup
+# Futurera Academy — Operations Setup
 
 The site is static HTML. The application + payment flow is **email-driven**:
 no booking widget, no payment processor, no auto-pipelines. Just a contact
@@ -95,7 +95,7 @@ If at any point a phone or video call would be more useful, just say so —
 I'll send you a calendar invite for a time that works.
 
 — [Your name]
-Program Lead · Futurera Institute
+Program Lead · Futurera Academy
 ```
 
 ### Template B — Acceptance + payment instructions
