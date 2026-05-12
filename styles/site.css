@@ -1207,7 +1207,7 @@
   /* ---------- Newsletter strip (lavender, matches alt sections) ---------- */
   .newsletter-strip {
     background: var(--surface);
-    padding: var(--sp-6) 0;
+    padding: var(--sp-4) 0;
     border-top: 1px solid var(--line);
   }
   .newsletter-grid {
@@ -1267,7 +1267,7 @@
     padding: var(--sp-7) 0 var(--sp-4);
     color: rgba(255,255,255,0.7); font-size: var(--fs-sm);
     border-top: 0;
-    margin-top: var(--sp-6);
+    margin-top: 0;
   }
   .foot-grid {
     display: grid;
