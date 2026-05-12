@@ -103,13 +103,6 @@
   /* Embedded form (Google Forms iframe wrapper) */
   .apply-form-embed {
     margin-bottom: var(--sp-4);
-    transition: min-height 0.4s ease;
-  }
-  .apply-form-embed.submitted {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
   }
   .apply-form-embed iframe {
     display: block;
@@ -302,13 +295,11 @@
   (function () {
     var iframe = document.getElementById('applyFormIframe');
     if (!iframe) return;
-    var container = iframe.parentElement;
     var loads = 0;
     iframe.addEventListener('load', function () {
       loads++;
       if (loads === 2) {
         iframe.style.height = '320px';
-        if (container) container.classList.add('submitted');
       }
     });
   })();
