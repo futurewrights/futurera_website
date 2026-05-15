@@ -295,19 +295,27 @@
     margin: 0;
   }
 
-  /* Tools */
+  /* Tools — clickable text chip pills */
   .tools-list {
     display: flex; gap: 10px; flex-wrap: wrap;
     justify-content: center;
     max-width: 760px; margin: 0 auto;
   }
   .tool-chip {
+    display: inline-block;
     font-size: 14px; font-weight: 500;
     color: var(--ink);
     background: #fff;
     border: 1px solid var(--line);
     padding: 8px 16px;
     border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  }
+  .tool-chip:hover {
+    border-color: var(--brand-accent);
+    color: var(--brand-deep);
+    transform: translateY(-1px);
   }
 
   /* Outcomes */
@@ -669,11 +677,12 @@
       </div>
 
       <div class="tools-list">
-        <span class="tool-chip">Lovable</span>
-        <span class="tool-chip">Google NotebookLM</span>
-        <span class="tool-chip">Claude</span>
-        <span class="tool-chip">Bolt.new</span>
-        <span class="tool-chip">Vercel</span>
+        <a class="tool-chip" href="https://lovable.dev" target="_blank" rel="noopener">Lovable</a>
+        <a class="tool-chip" href="https://notebooklm.google.com" target="_blank" rel="noopener">Google NotebookLM</a>
+        <a class="tool-chip" href="https://claude.ai" target="_blank" rel="noopener">Claude</a>
+        <a class="tool-chip" href="https://bolt.new" target="_blank" rel="noopener">Bolt.new</a>
+        <a class="tool-chip" href="https://cursor.com" target="_blank" rel="noopener">Cursor</a>
+        <a class="tool-chip" href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>
       </div>
     </div>
   </section>
