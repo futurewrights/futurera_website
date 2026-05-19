@@ -1045,6 +1045,19 @@
   }
   .parents-note .signoff strong { color: var(--ink); display: block; }
 
+  /* Gold highlighter for key phrases */
+  .hl-gold {
+    background-image: linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 55%,
+      rgba(244, 180, 0, 0.55) 55%,
+      rgba(244, 180, 0, 0.55) 94%,
+      transparent 94%
+    );
+    padding: 0 0.12em;
+  }
+
   /* ---------- Team · framed photo with floating info-overlay ---------- */
   .team-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
