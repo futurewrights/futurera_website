@@ -1,5 +1,5 @@
   /* ============================================================
-     Futurera Academy · Edufy-inspired layout
+     Future Wrights Academy · Edufy-inspired layout
      · One typeface (Inter)
      · Negative tracking on display sizes
      · Pill buttons, calm motion
@@ -24,7 +24,7 @@
     --ls-heading: -1.5px;
     --ls-eyebrow: 0.16em;
 
-    /* Color — Futurera brand palette */
+    /* Color — Future Wrights brand palette */
     --ink: #0E0E0F;              /* text-dark */
     --ink-muted: #535353;        /* paragraph-gray */
     --ink-soft: #616163;         /* light-grey */
@@ -35,7 +35,7 @@
     --line: #D4D7E3;             /* cool gray line, derived from surface */
     --brand-deep: #353447;       /* primary-dark · slate */
     --brand-deep-2: #28283A;     /* derived: darker slate */
-    --brand-accent: #F4B400;     /* primary · Futurera logo gold */
+    --brand-accent: #F4B400;     /* primary · Future Wrights logo gold */
     --brand-accent-2: #D19A00;   /* derived: darker gold for hover */
     --grey-30: #6161634D;        /* grey-opacity-30 */
     --success: #15803D;

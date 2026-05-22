@@ -1,4 +1,4 @@
-# Futurera Academy — Operations Setup
+# Future Wrights Academy — Operations Setup
 
 The site is static HTML. The application + payment flow is **email-driven**:
 no booking widget, no payment processor, no auto-pipelines. Just a contact
@@ -45,7 +45,7 @@ PARENT FINDS SITE
 
 In your bank's mobile app or website → **Interac e-Transfer settings** → **Register for Auto-Deposit**:
 
-- Email address: `hello@futurera.org` *(or a dedicated `payments@futurera.ca` later)*
+- Email address: `hello@futurewrights.ai` *(or a dedicated `payments@futurera.ca` later)*
 - Linked account: your business or operating account
 
 **Why this matters**: with Auto-Deposit, the parent doesn't need to set a security question. Their transfer lands in your account automatically and you get a notification email. Frictionless.
@@ -55,7 +55,7 @@ In your bank's mobile app or website → **Interac e-Transfer settings** → **R
 ## 2 · Tally — contact form *(10 min)*
 
 1. Sign up at [tally.so](https://tally.so) — free plan: 100 submissions/month
-2. **Create form** → name it **"Contact Futurera"**
+2. **Create form** → name it **"Contact Future Wrights"**
 3. Add 4 fields:
 
 | # | Field | Type | Required |
@@ -65,7 +65,7 @@ In your bank's mobile app or website → **Interac e-Transfer settings** → **R
 | 3 | Who is this for? | Dropdown: *My child / Myself (student) / I represent a school or partner* | ✓ |
 | 4 | Your message | Long text | ✓ |
 
-4. **Form settings → Email notifications**: enable submissions → route to `hello@futurera.org`
+4. **Form settings → Email notifications**: enable submissions → route to `hello@futurewrights.ai`
 5. Copy the share URL — it'll look like `https://tally.so/r/abc123`
 6. Send me the URL — I'll wire it into the site
 
@@ -80,7 +80,7 @@ Four templates you'll reuse for every applicant. Save them in your email client'
 ### Template A — First reply (after contact form)
 
 ```
-Subject: Re: Your Futurera inquiry
+Subject: Re: Your Future Wrights inquiry
 
 Hi [first name],
 
@@ -95,7 +95,7 @@ If at any point a phone or video call would be more useful, just say so —
 I'll send you a calendar invite for a time that works.
 
 — [Your name]
-Program Lead · Futurera Academy
+Program Lead · Future Wrights Academy
 ```
 
 ### Template B — Acceptance + payment instructions
@@ -110,7 +110,7 @@ Thank you for the conversation this past week. We'd love to have
 
 Tuition is $X,XXX CAD. To secure the seat, please send an Interac e-Transfer:
 
-  Send to:    hello@futurera.org
+  Send to:    hello@futurewrights.ai
   Amount:     $X,XXX CAD
   Reference:  [Student name] · Summer 2026
 
