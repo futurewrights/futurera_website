@@ -257,7 +257,7 @@
   }
   .brand-link { display: flex; align-items: center; justify-self: start; }
   .brand-link img {
-    height: 40px; width: auto; display: block;
+    height: 62px; width: auto; display: block;
     transition: filter var(--dur-micro) var(--ease-out);
   }
   /* Over the dark hero: render the logo all-white */
@@ -1324,7 +1324,7 @@
 
   /* Brand column */
   .foot-brand img {
-    height: 40px; width: auto;
+    height: 76px; width: auto;
     margin-bottom: var(--sp-2);
     filter: brightness(0) invert(1);
   }
