@@ -168,6 +168,15 @@ records the decision).
     with a cyan-glow hover). The old `.fw-btn*` classes were **retired**.
   - **Out of scope:** `for-partners.html` / `industry-track.html` keep their own parked
     button styles (separate `tokens.css` system).
+- **Headline keyword emphasis — LOCKED (2026-05):** ONE device — a **solid gold word**
+  (never a highlighter on headlines). Reusable `.gold-word` class: deep gold `--gold-ink`
+  `#b8860a` on light sections, bright `--brand-accent` `#F4B400` on dark (`.section--dark`).
+  Applied: hero "AI era", Why Future Wrights "gap" + "future.", Why it matters "careers",
+  Ecosystem "Creation". The gold **highlighter-marker** (`.hl-gold`) is reserved for
+  emphasis inside **body/paragraph** text only (e.g. the stats conclusion). (Hero `.grad`
+  and `.vm-grad` predate `.gold-word` but render identically; migrate later for tidiness.)
+- **Shared tokens added (`site.css`):** `--navy: #0A1B3D` (brand navy for headings/numbers
+  on light) · `--gold-ink: #b8860a` (gold text/icons on light, AA) · `--radius-btn: 14px`.
 
 ### Visual system as built
 - **Palette:** navy `#0A1B3D`, gold `#F4B400` (logo gold), cyan `#00E5FF`, off-white text
@@ -368,3 +377,16 @@ records the decision).
   gold primary with navy text, lift −2px + shadow-deepen hover. Unified the hero `.fw-btn`
   into the shared `.btn` (`.fw-hero .btn` scope for size + dark ghost), flipped
   `.btn-primary` slate→gold, retired darken-on-hover overrides, nav CTA shape → 14px.
+- **2026-05** — Mission graphic swapped to the client's `assets/puzzle.png` (3-piece teal),
+  then trimmed/squared (749×698 → centered 620×620). Both V&M card graphics sized to a
+  matching **80px**. Added a **staggered entrance** to Why Future Wrights (intro → Vision →
+  Mission, ~120ms steps, reduced-motion safe).
+- **2026-05** — **Aligned "Why it matters" with the 3-color system:** stat numbers slate
+  `#353447` → brand **navy** `#0A1B3D`; gold eyebrow `#D19A00` → AA-safe **`#b8860a`**
+  (site-wide for `.eyebrow.gold` on light); label `<em>` → navy; removed a dead
+  `.stats-conclusion strong` rule. Added `--navy` / `--gold-ink` tokens.
+- **2026-05** — "Read more" kept as a text-arrow link (correct tertiary hierarchy, not a
+  CTA); polished its hover to a **navy** arrow-circle with a white arrow (light-bg variant).
+- **2026-05** — **Locked headline keyword emphasis to a solid gold word** (`.gold-word`,
+  see LOCKED note). Highlighted: Why it matters "careers"; Ecosystem "Creation" (Real-World
+  stays black); Why Future Wrights "gap" + "future.".

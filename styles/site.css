@@ -37,6 +37,8 @@
     --brand-deep-2: #28283A;     /* derived: darker slate */
     --brand-accent: #F4B400;     /* primary · Future Wrights logo gold */
     --brand-accent-2: #D19A00;   /* derived: darker gold for hover */
+    --navy: #0A1B3D;             /* brand navy · headings/numbers on light */
+    --gold-ink: #b8860a;         /* deep gold · gold TEXT/icons on light (WCAG AA) */
     --cyan: #00E5FF;             /* secondary accent (use sparingly on light bg) */
     --grey-30: #6161634D;        /* grey-opacity-30 */
     --success: #15803D;
@@ -136,8 +138,13 @@
     margin: 0 0 var(--sp-3);
   }
   .section--dark .eyebrow { color: rgba(255,255,255,0.85); }
-  .eyebrow.gold { color: var(--brand-accent-2); }
+  .eyebrow.gold { color: var(--gold-ink); }
   .section--dark .eyebrow.gold { color: var(--brand-accent); }
+
+  /* Headline keyword emphasis — ONE device: solid gold word.
+     Deep gold on light sections, bright logo gold on dark. */
+  .gold-word { color: var(--gold-ink); }
+  .section--dark .gold-word { color: var(--brand-accent); }
 
   /* ============================================================
      Section header pattern — single source of truth for every
@@ -525,11 +532,12 @@
     transition: transform var(--dur-micro) var(--ease-out);
   }
   .text-arrow:hover .arrow-circle {
-    background: rgba(14,14,15,0.08);
-    border-color: var(--ink);
+    background: var(--navy);
+    border-color: var(--navy);
   }
   .text-arrow:hover .arrow-circle svg {
     transform: translateX(3px);
+    color: #fff;
   }
   .text-arrow:focus-visible { outline: none; }
   .text-arrow:focus-visible .arrow-circle { box-shadow: var(--focus-ring); }
@@ -691,7 +699,7 @@
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1;
-    color: var(--brand-deep);
+    color: var(--navy);
     margin-bottom: var(--sp-2);
     font-variant-numeric: tabular-nums;
   }
@@ -701,7 +709,7 @@
     color: var(--ink);
     margin: 0 0 var(--sp-3);
   }
-  .stat .label em { font-style: italic; color: var(--brand-deep-2); }
+  .stat .label em { font-style: italic; color: var(--navy); }
   .stat .source {
     border: 0; padding: 0;
     margin-top: auto;
@@ -721,11 +729,6 @@
     color: var(--ink);
     letter-spacing: -0.3px;
     font-weight: 500;
-  }
-  .stats-conclusion strong {
-    color: var(--brand-deep); font-weight: 600;
-    background: linear-gradient(180deg, transparent 70%, rgba(244,180,0,0.4) 70%);
-    padding: 0 4px;
   }
   .stats-link {
     text-align: center; margin: var(--sp-4) 0 0;
