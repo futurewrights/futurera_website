@@ -69,13 +69,12 @@
   line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:40ch; }
 
 .fw-hero__cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:38px; }
-.fw-btn { display:inline-flex; align-items:center; gap:9px; font-family:"Inter",sans-serif;
-  font-weight:600; font-size:16px; padding:15px 30px; border-radius:14px; border:1px solid transparent; cursor:pointer;
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease; }
-.fw-btn--primary { background:var(--gold); color:#1b1404; box-shadow:0 10px 34px rgba(244,180,0,.28); }
-.fw-btn--primary:hover { transform:translateY(-2px); box-shadow:0 14px 42px rgba(244,180,0,.42); }
-.fw-btn--ghost { color:var(--ink-0); border-color:rgba(255,255,255,.24); background:rgba(255,255,255,.04); }
-.fw-btn--ghost:hover { border-color:var(--cyan); box-shadow:0 0 0 1px rgba(0,229,255,.45),0 0 26px rgba(0,229,255,.18); }
+/* Hero CTAs use the locked .btn system — sized up for the showpiece + dark-bg ghost (cyan glow) */
+.fw-hero .btn { font-size:16px; padding:15px 30px; gap:9px; }
+.fw-hero .btn-primary { box-shadow:0 10px 34px rgba(244,180,0,.30); }
+.fw-hero .btn-primary:hover { box-shadow:0 16px 44px rgba(244,180,0,.45); }
+.fw-hero .btn-ghost { color:var(--ink-0); border-color:rgba(255,255,255,.24); background:rgba(255,255,255,.04); }
+.fw-hero .btn-ghost:hover { border-color:var(--cyan); background:rgba(255,255,255,.04); transform:translateY(-2px); box-shadow:0 0 0 1px rgba(0,229,255,.45),0 0 26px rgba(0,229,255,.18); }
 
 /* motion */
 @keyframes fwUp { from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:translateY(0)} }
@@ -203,16 +202,16 @@ header.site:not(.scrolled) {
 }
 
 /* ============================================================
-   Vision & Mission — gold vision card + violet mission card
+   Why Future Wrights — intro (left) + stacked Vision/Mission (right)
    ============================================================ */
-#about .section-head { max-width: 840px; }
+#about .vm-wrap { display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start; max-width:1180px; margin:0 auto; }
+#about .vm-intro { max-width:none; margin:0; text-align:left; position:sticky; top:104px; }
+#about .vm-intro h2 { text-align:left; }
 #about .vm-grad { color: #b8860a; }
-#about .vm-sub { font-size: clamp(15px,1.6vw,18px); line-height:1.6; color: var(--ink-muted); max-width: 58ch; margin: var(--sp-3) auto 0; }
+#about .vm-sub { font-size: clamp(15px,1.6vw,18px); line-height:1.6; color: var(--ink-muted); max-width: 42ch; margin: var(--sp-3) 0 0; text-align:left; }
 #about .vm-sub .g { color:#b8860a; font-weight:600; }
-#about .vm-sub .b { color:#1192ad; font-weight:600; }
-#about .vm-sub .v { color:#b8860a; font-weight:600; }
 
-.vm-cards { display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1180px; margin: var(--sp-6) auto 0; }
+.vm-cards { display:flex; flex-direction:column; gap:20px; margin:0; }
 .vm-card {
   position:relative; overflow:hidden;
   border:1px solid var(--line); border-radius: var(--radius-md);
@@ -226,23 +225,33 @@ header.site:not(.scrolled) {
 .vm-badge::before { content:""; width:7px; height:7px; border-radius:50%; background: currentColor; }
 .vm-badge--gold   { background: rgba(244,180,0,0.14); color:#b8860a; }
 .vm-badge--cyan { background: rgba(0,229,255,0.12); color:#0e8fa8; }
-.vm-card__ico svg { width:48px; height:48px; }
+.vm-card__ico svg { width:76px; height:76px; }
+.vm-card__ico--art img { width:auto; height:92px; display:block; }   /* puzzle.png illustration */
 .vm-card--vision  .vm-card__ico { color:#b8860a; }
 .vm-card--mission .vm-card__ico { color:#12a5c4; }
 .vm-card h3 { font-family:"General Sans","Inter",sans-serif; font-size:clamp(21px,2.3vw,27px); font-weight:600; letter-spacing:-.02em; line-height:1.22; color: var(--ink); margin:0 0 var(--sp-3); }
-.vm-card--vision  h3 .em { color:#b8860a; }
-.vm-card--mission h3 .em { color:#1192ad; }
-.vm-card--mission h3 .em2 { color:#0e8fa8; }
-.vm-card p { font-size:15px; line-height:1.65; color: var(--ink-muted); margin:0 0 var(--sp-4); }
-.vm-feats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin: var(--sp-4) 0 0; padding: var(--sp-4) 0 0; border-top:1px solid var(--line); list-style:none; }
-.vm-feat { display:flex; align-items:center; gap:9px; padding:11px 10px; border-radius:12px; font-size:12px; font-weight:500; line-height:1.25; color: var(--ink); }
-.vm-card--vision  .vm-feat { background: rgba(244,180,0,0.08); }
-.vm-card--mission .vm-feat { background: rgba(0,229,255,0.07); }
-.vm-feat svg { width:18px; height:18px; flex:none; }
-.vm-card--vision  .vm-feat svg { color:#b8860a; }
-.vm-card--mission .vm-feat svg { color:#12a5c4; }
-@media (max-width:880px){ .vm-cards { grid-template-columns:1fr; } }
-@media (max-width:520px){ .vm-feats { grid-template-columns:1fr 1fr; } }
+.vm-card p { font-size:15px; line-height:1.65; color: var(--ink-muted); margin:0; }
+
+/* Staggered entrance: intro fades up first, then Vision, then Mission.
+   The .reveal observer adds .in to .vm-wrap when the section enters; the wrapper
+   itself stays visible and acts only as the trigger for the children below. */
+#about .vm-wrap.reveal { opacity:1; transform:none; }
+#about .vm-intro,
+#about .vm-cards .vm-card {
+  opacity:0; transform:translateY(18px);
+  transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
+}
+#about .vm-wrap.in .vm-intro { opacity:1; transform:none; }
+#about .vm-wrap.in .vm-cards .vm-card:nth-child(1) { opacity:1; transform:none; transition-delay:.12s; }
+#about .vm-wrap.in .vm-cards .vm-card:nth-child(2) { opacity:1; transform:none; transition-delay:.24s; }
+@media (prefers-reduced-motion: reduce){
+  #about .vm-intro, #about .vm-cards .vm-card { opacity:1; transform:none; transition:none; }
+}
+
+@media (max-width:900px){
+  #about .vm-wrap { grid-template-columns:1fr; gap:36px; }
+  #about .vm-intro { position:static; }
+}
 </style>
 </head>
 <body>
@@ -289,8 +298,8 @@ header.site:not(.scrolled) {
         <h1 class="fw-hero__title">Prepare for the<br><span class="grad">AI era</span> before your<br>future career begins.</h1>
         <p class="fw-hero__lede">Most teens are AI consumers. Future Wrights helps high schoolers understand AI deeply, build real projects, and develop the creativity and confidence to lead the AI era — prepared, not surprised.</p>
         <div class="fw-hero__cta">
-          <a class="fw-btn fw-btn--primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
-          <a class="fw-btn fw-btn--ghost" href="#ecosystem">See our programs</a>
+          <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
+          <a class="btn btn-ghost" href="#ecosystem">See our programs</a>
         </div>
       </div>
     </div>
@@ -388,42 +397,32 @@ header.site:not(.scrolled) {
   <!-- MISSION & VISION -->
   <section class="section" id="about">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow gold">Why Future Wrights</span>
-        <h2>Filling the gap between<br>school and the <span class="vm-grad">future.</span></h2>
-        <p class="vm-sub">We prepare high school students not just to keep up with AI, but to lead with it—<span class="g">ethically</span>, <span class="b">creatively</span>, and <span class="v">confidently</span>.</p>
-      </div>
+      <div class="vm-wrap reveal">
+        <div class="vm-intro section-head">
+          <span class="eyebrow gold">Why Future Wrights</span>
+          <h2>Filling the gap between school and the <span class="vm-grad">future.</span></h2>
+          <p class="vm-sub">We prepare high school students not just to keep up with AI, but to lead with it—<span class="g">ethically</span>, <span class="g">creatively</span>, and <span class="g">confidently</span>.</p>
+        </div>
 
-      <div class="vm-cards reveal">
-        <article class="vm-card vm-card--vision">
-          <div class="vm-card__top">
-            <span class="vm-badge vm-badge--gold">Our vision</span>
-            <span class="vm-card__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44"/><path d="m13.56 11.747 4.332-.924"/><path d="m16 21-3.105-6.21"/><path d="M16.485 5.94a2 2 0 0 1 1.455-2.425l1.09-.272a1 1 0 0 1 1.212.727l1.515 6.06a1 1 0 0 1-.727 1.213l-1.09.272a2 2 0 0 1-2.425-1.455z"/><path d="m6.158 8.633 1.114 4.456"/><path d="m8 21 3.105-6.21"/><circle cx="12" cy="21" r="1"/></svg></span>
-          </div>
-          <h3>A generation of students who shape <span class="em">the future</span> with AI.</h3>
-          <p>We envision a future where every Canadian student graduates AI-fluent—confident, curious, and ethical creators ready to solve meaningful problems in any field they choose.</p>
-          <ul class="vm-feats">
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>Curious Minds</li>
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>Critical Thinkers</li>
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Ethical Creators</li>
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Future Leaders</li>
-          </ul>
-        </article>
+        <div class="vm-cards">
+          <article class="vm-card vm-card--vision">
+            <div class="vm-card__top">
+              <span class="vm-badge vm-badge--gold">Our vision</span>
+              <span class="vm-card__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44"/><path d="m13.56 11.747 4.332-.924"/><path d="m16 21-3.105-6.21"/><path d="M16.485 5.94a2 2 0 0 1 1.455-2.425l1.09-.272a1 1 0 0 1 1.212.727l1.515 6.06a1 1 0 0 1-.727 1.213l-1.09.272a2 2 0 0 1-2.425-1.455z"/><path d="m6.158 8.633 1.114 4.456"/><path d="m8 21 3.105-6.21"/><circle cx="12" cy="21" r="1"/></svg></span>
+            </div>
+            <h3>A generation of students who shape the future with AI.</h3>
+            <p>We envision a future where every Canadian student graduates AI-fluent—confident, curious, and ethical creators ready to solve meaningful problems in any field they choose.</p>
+          </article>
 
-        <article class="vm-card vm-card--mission">
-          <div class="vm-card__top">
-            <span class="vm-badge vm-badge--cyan">Our mission</span>
-            <span class="vm-card__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/></svg></span>
-          </div>
-          <h3>Bridge the gap with <span class="em">real skills</span>, <span class="em">real projects</span>, and <span class="em2">real mentorship</span>.</h3>
-          <p>We equip high school students with the AI skills, judgment, and portfolio experience universities and employers now expect. We complement school—bringing learning to life through hands-on projects, mentorship, and feedback that matters.</p>
-          <ul class="vm-feats">
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Real-World AI Skills</li>
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Portfolio That Stands Out</li>
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>Mentorship That Guides</li>
-            <li class="vm-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Outcomes That Open Doors</li>
-          </ul>
-        </article>
+          <article class="vm-card vm-card--mission">
+            <div class="vm-card__top">
+              <span class="vm-badge vm-badge--cyan">Our mission</span>
+              <span class="vm-card__ico vm-card__ico--art" aria-hidden="true"><img src="assets/puzzle.png" alt="" /></span>
+            </div>
+            <h3>Bridge the gap with real skills, real projects, and real mentorship.</h3>
+            <p>We equip high school students with the AI skills, judgment, and portfolio experience universities and employers now expect. We complement school—bringing learning to life through hands-on projects, mentorship, and feedback that matters.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>

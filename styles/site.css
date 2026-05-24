@@ -58,6 +58,7 @@
     --gutter: 30px;
     --radius-sm: 10px;
     --radius-md: 20px;
+    --radius-btn: 14px;          /* LOCKED button corner radius */
     --radius-pill: 60px;
     --radius-chip: 100px;
 
@@ -180,30 +181,47 @@
     font-style: italic;
   }
 
-  /* ---------- Buttons ---------- */
+  /* ---------- Buttons · LOCKED system ----------
+     Shape:   rounded-rect 14px (--radius-btn)
+     Primary: solid brand gold + navy text (matches hero CTA)
+     Ghost:   outline (white on dark, ink on light)
+     Hover:   lift -2px + shadow deepen (NO color change on primary)
+     See DESIGN-CONTEXT.md "Buttons — LOCKED". */
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 28px;
-    font-family: inherit; font-size: var(--fs-sm); font-weight: 500;
-    border-radius: var(--radius-pill);
+    font-family: inherit; font-size: var(--fs-sm); font-weight: 600;
+    border-radius: var(--radius-btn);
     border: 1px solid transparent;
     cursor: pointer; text-decoration: none;
     transition: background-color var(--dur-micro) var(--ease-out),
                 color var(--dur-micro) var(--ease-out),
                 border-color var(--dur-micro) var(--ease-out),
+                box-shadow var(--dur-micro) var(--ease-out),
                 transform var(--dur-micro) var(--ease-out);
   }
   .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-  .btn-primary { background: var(--brand-deep); color: #fff; }
-  .btn-primary:hover { background: var(--brand-deep-2); }
-  .btn-accent { background: var(--brand-accent); color: var(--ink); }
-  .btn-accent:hover { background: var(--brand-accent-2); color: var(--ink); }
-  .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(13,23,20,0.15); }
-  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* Primary = brand gold, navy text (btn-accent kept as an alias) */
+  .btn-primary, .btn-accent {
+    background: var(--brand-accent); color: var(--ink);
+    box-shadow: 0 8px 24px rgba(244,180,0,0.26);
+  }
+  .btn-primary:hover, .btn-accent:hover {
+    background: var(--brand-accent); color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 34px rgba(244,180,0,0.40);
+  }
+
+  /* Secondary = outline ghost */
+  .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(13,23,20,0.16); }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,23,66,0.10); }
   .section--dark .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.3); }
-  .section--dark .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
-  .btn-chip { padding: 8px 18px; font-size: var(--fs-sm); border-radius: var(--radius-chip); background: var(--surface); color: var(--ink); }
-  .btn-chip:hover { background: var(--surface-2); }
+  .section--dark .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.06); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
+
+  /* Nav CTA — same 14px shape; gold when header is solid, ghost over hero (header rules below) */
+  .btn-chip { padding: 10px 20px; font-size: var(--fs-sm); border-radius: var(--radius-btn); background: var(--brand-accent); color: var(--ink); }
+  .btn-chip:hover { transform: translateY(-2px); }
 
   /* ---------- Header (Edufy-style, transparent over dark hero) ---------- */
   header.site {
@@ -248,7 +266,8 @@
     color: var(--ink);
   }
   header.site.scrolled .nav-cta .btn-chip:hover {
-    background: var(--brand-accent-2);
+    background: var(--brand-accent);
+    box-shadow: 0 10px 26px rgba(244,180,0,0.34);
   }
   .nav {
     display: grid;
@@ -976,7 +995,6 @@
     display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
   }
   .final-cta .btn-accent { background: var(--brand-accent); }
-  .final-cta .btn-accent:hover { background: var(--brand-accent-2); }
 
   /* ---------- Newsletter strip (lavender, matches alt sections) ---------- */
   .newsletter-strip {
@@ -1208,7 +1226,6 @@
     flex-wrap: wrap;
   }
   .article-cta .btn-accent { background: var(--brand-accent); color: var(--ink); }
-  .article-cta .btn-accent:hover { background: var(--brand-accent-2); }
 
   /* ---------- A11y skip link · only visible when keyboard-focused ---------- */
   .skip-link {

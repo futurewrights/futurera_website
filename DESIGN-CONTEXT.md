@@ -152,6 +152,22 @@ records the decision).
 - **Rollout note:** when applying later — (1) load General Sans on all pages and set
   headings to it; (2) standardize gold/cyan accent usage; (3) retire the conflicting
   `tokens.css` (navy/Fraunces) vs `site.css` (slate/Inter) palettes in favor of this one.
+- **Buttons — LOCKED (2026-05):** one button system across the site.
+  - **Shape:** rounded-rect, **14px** radius (`--radius-btn`). No pills.
+  - **Primary** (`.btn-primary`; `.btn-accent` is a gold alias): solid brand gold `#F4B400`
+    + near-black/navy text (`--ink`), soft gold drop-shadow. (`.btn-primary` was flipped
+    from slate `#353447` to gold.)
+  - **Secondary** (`.btn-ghost`): transparent + 1px outline — ink on light, white on dark
+    (`.section--dark`, hero).
+  - **Hover (all):** lift `translateY(-2px)` + shadow **deepens**; **no color change** on the
+    primary (gold stays gold — not the old darken-to-`#D19A00`). Removed the
+    `.final-cta`/`.article-cta` darken-on-hover overrides.
+  - **Nav CTA** (`.btn-chip`): same 14px shape; translucent-white over the dark hero,
+    flips to gold primary when the header turns solid on scroll.
+  - **Hero CTAs** reuse `.btn` via a `.fw-hero .btn` scope (larger 16px/15×30, dark-bg ghost
+    with a cyan-glow hover). The old `.fw-btn*` classes were **retired**.
+  - **Out of scope:** `for-partners.html` / `industry-track.html` keep their own parked
+    button styles (separate `tokens.css` system).
 
 ### Visual system as built
 - **Palette:** navy `#0A1B3D`, gold `#F4B400` (logo gold), cyan `#00E5FF`, off-white text
@@ -335,3 +351,20 @@ records the decision).
   solid gold to follow this.
 - **2026-05** — Added a second break so "future career begins." sits on line 3 (final
   3-line layout: "Prepare for the" / "AI era before your" / "future career begins.").
+- **2026-05** — Cleaned the accumulated dead CSS/JS (floating AI cards, `.fw-why*`/`.fw-pillar*`,
+  `.mv-*`, `.eco-journey/.eco-stage` blocks, hero-media parallax leftovers) and committed the
+  redesign checkpoint to `redesign`.
+- **2026-05** — **Vision & Mission polish:** both card headlines set **fully black** (removed
+  the gold/teal emphasis spans); enlarged the card icons 48→**60px**; swapped the Mission
+  icon from a single puzzle piece to a **4-piece jigsaw**; removed the feature-chip icons,
+  then the chips entirely (client: icons "not clean").
+- **2026-05** — **Reworked the "Why Future Wrights" (#about) section into a split layout:**
+  intro on the **left** (eyebrow + headline + description, left-aligned, lightly sticky) with
+  **Vision over Mission stacked on the right**; chips removed. Text kept simple/black with a
+  **single gold highlight** — headline "future." + the three adverbs unified to deep gold
+  `#b8860a` (dropped the gold/teal/gold mix). Confirmed gold-on-light stays `#b8860a` (the
+  hero's `#F4B400` is the same gold, just the dark-bg tone; logo gold sampled = `#F4B400`).
+- **2026-05** — **Locked the button system** (see "Buttons — LOCKED"): rounded-rect 14px,
+  gold primary with navy text, lift −2px + shadow-deepen hover. Unified the hero `.fw-btn`
+  into the shared `.btn` (`.fw-hero .btn` scope for size + dark ghost), flipped
+  `.btn-primary` slate→gold, retired darken-on-hover overrides, nav CTA shape → 14px.
