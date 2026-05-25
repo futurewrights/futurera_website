@@ -17,77 +17,75 @@
 
 <style>
   /* Page-specific styles for the bootcamp page */
+  /* ===== HERO (dark, full-bleed photo + glance card) ===== */
   .page-hero {
-    background: var(--surface);
-    padding: var(--sp-7) 0 var(--sp-6);
-    border-bottom: 1px solid var(--line);
+    position: relative; overflow: hidden; isolation: isolate;
+    padding: var(--sp-7) 0;
+    background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
   }
+  .page-hero__bg { position: absolute; inset: -40px; z-index: 0; pointer-events: none; }
+  .page-hero__bg .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .42; }
+  .page-hero__bg .orb--gold { width: 540px; height: 540px; left: -120px; top: -100px; background: radial-gradient(circle, rgba(244,180,0,.55), transparent 68%); }
+  .page-hero__bg .orb--cyan { width: 600px; height: 600px; right: -150px; bottom: -180px; background: radial-gradient(circle, rgba(0,229,255,.42), transparent 68%); }
+  .page-hero__grid { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 62px 62px;
+    -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
+            mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%); }
+  .page-hero .container { position: relative; z-index: 1; }
   .hero-grid {
-    display: grid; grid-template-columns: 1.4fr 1fr;
-    gap: var(--sp-5); align-items: start;
+    display: grid; grid-template-columns: 1.12fr 0.88fr;
+    gap: var(--sp-6); align-items: center;
     max-width: 1180px; margin: 0 auto;
   }
-  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: var(--sp-5); } }
+  .hero-copy { color: #fff; }
+  .page-hero .eyebrow.gold { color: var(--brand-accent); }
   .page-hero h1 {
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 600;
-    letter-spacing: -1.8px;
-    line-height: 1.1;
-    color: var(--ink);
-    margin: var(--sp-2) 0 var(--sp-3);
-    text-align: left;
+    font-size: clamp(30px, 4.4vw, 44px);
+    font-weight: 600; letter-spacing: -1.8px; line-height: 1.12;
+    color: #fff; margin: var(--sp-2) 0 var(--sp-3); text-align: left;
+    white-space: nowrap;
   }
-  .page-hero h1 em {
-    font-style: normal;
-    color: var(--brand-accent-2);
-  }
+  @media (max-width: 520px) { .page-hero h1 { white-space: normal; font-size: clamp(28px, 8vw, 40px); } }
+  .page-hero h1 em { font-style: normal; color: #fff; }
   .page-hero .lede {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink-muted);
-    margin: 0 0 var(--sp-3);
-    text-align: left;
+    font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.80);
+    margin: 0 0 var(--sp-3); text-align: left; max-width: 540px;
   }
-  .page-hero .lede a { color: var(--brand-deep); font-weight: 600; }
-  .page-hero .actions {
-    display: flex; gap: 12px; flex-wrap: wrap;
-    margin-bottom: var(--sp-2);
-  }
-  .page-hero .btn-primary { background: var(--brand-deep); color: #fff; }
-  .page-hero .btn-primary:hover { background: var(--brand-deep-2); }
-  .page-hero .btn-ghost {
-    background: transparent;
-    color: var(--ink);
-    border-color: rgba(14,14,15,0.2);
-  }
-  .page-hero .btn-ghost:hover { border-color: var(--ink); }
+  .page-hero .lede strong { color: #fff; font-weight: 600; }
+  .page-hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: var(--sp-4); }
+  .page-hero .btn-primary { background: var(--brand-accent); color: var(--navy); }
+  .page-hero .btn-primary:hover { background: var(--brand-accent-2); transform: translateY(-2px); }
+  .page-hero .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.32); }
+  .page-hero .btn-ghost:hover { border-color: var(--cyan); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); }
   .seats-note { font-size: 13px; color: var(--ink-muted); font-style: italic; }
 
-  /* At-a-glance sidebar */
+  /* At-a-glance card */
   .glance {
-    background: #fff;
-    border: 1px solid var(--line);
+    background: #fff; border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    padding: var(--sp-4);
+    padding: var(--sp-4) var(--sp-5);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.34);
+    text-align: left;
   }
   .glance h4 {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink-muted);
-    margin: 0 0 var(--sp-3);
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--navy); margin: 0 0 var(--sp-2);
+    padding-bottom: var(--sp-2); border-bottom: 1px solid var(--line);
+    text-align: left;
   }
-  .glance dl {
-    margin: 0; display: grid; grid-template-columns: auto 1fr;
-    gap: 8px 14px;
-    font-size: 13px;
+  .glance__row {
+    display: grid; grid-template-columns: 18px 96px 1fr;
+    gap: 12px; align-items: start; justify-items: start; text-align: left;
+    padding: 7px 0; font-size: 13px; line-height: 1.4;
   }
-  .glance dt {
-    color: var(--ink-muted); font-weight: 500;
-  }
-  .glance dd {
-    margin: 0; color: var(--ink); font-weight: 500;
-  }
-  .glance dd a { color: var(--brand-deep); font-weight: 600; }
+  .glance__row + .glance__row { border-top: 1px solid #eef0f5; }
+  .glance__row > svg { width: 16px; height: 16px; color: var(--brand-accent-2); margin-top: 1px; flex: none; }
+  .glance__k { color: var(--ink-muted); font-weight: 500; }
+  .glance__v { color: var(--ink); font-weight: 500; }
   .placeholder-note {
     display: inline-block;
     font-size: 10px; font-weight: 700;
@@ -97,23 +95,6 @@
     padding: 1px 5px; border-radius: 3px;
     margin-left: 4px;
   }
-  .glance .cta-row {
-    display: flex; flex-direction: row; gap: 14px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: var(--sp-3);
-    padding-top: var(--sp-3);
-    border-top: 1px solid var(--line);
-  }
-  .glance .btn-primary { background: var(--brand-accent); color: var(--ink); }
-  .glance .btn-primary:hover { background: var(--brand-accent-2); }
-  .glance .btn-ghost {
-    background: transparent;
-    color: var(--ink);
-    border-color: rgba(14,14,15,0.2);
-  }
-  .glance .btn-ghost:hover { border-color: var(--ink); }
 
   /* Section base */
   .lab-section { padding: var(--sp-7) 0; }
@@ -140,6 +121,12 @@
     margin: 0;
   }
   .section-head p a { color: var(--brand-deep); font-weight: 600; }
+  .section-head--wide { max-width: 1120px; }
+  .section-head--wide h2 { white-space: nowrap; font-size: clamp(24px, 3.4vw, 40px); }
+  .section-head--wide p { white-space: nowrap; }
+  @media (max-width: 1000px) {
+    .section-head--wide h2, .section-head--wide p { white-space: normal; }
+  }
 
   /* "What makes this cohort different" — 3-up cards */
   .diff-grid {
@@ -149,27 +136,31 @@
   }
   @media (max-width: 880px) { .diff-grid { grid-template-columns: 1fr; } }
   .diff-card {
-    background: #fff;
-    border: 1px solid var(--line);
+    background: #f7f9fd;
+    border: 1px solid #e7ecf6;
     border-radius: var(--radius-md);
-    padding: var(--sp-4);
+    padding: var(--sp-4) var(--sp-4) var(--sp-5);
   }
+  .diff-card__head { display: flex; gap: 16px; align-items: center; margin-bottom: var(--sp-3); }
+  .diff-card__ico {
+    flex: none; width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(17,146,173,0.12);
+    display: grid; place-items: center;
+  }
+  .diff-card__ico svg { width: 30px; height: 30px; color: var(--teal); }
   .diff-card .label {
-    display: inline-block;
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--brand-accent-2);
-    background: rgba(244,180,0,0.15);
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-    margin-bottom: var(--sp-3);
+    display: block;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal);
+    margin: 0 0 5px;
   }
   .diff-card h3 {
-    font-size: 18px; font-weight: 600;
+    font-size: 17px; font-weight: 600;
     letter-spacing: -0.3px;
     line-height: 1.3;
-    color: var(--ink);
-    margin: 0 0 var(--sp-2);
+    color: var(--navy);
+    margin: 0;
   }
   .diff-card p {
     font-size: 14px; line-height: 1.55;
@@ -466,43 +457,38 @@
 
   <!-- HERO -->
   <section class="page-hero">
+    <div class="page-hero__bg" aria-hidden="true">
+      <span class="orb orb--gold"></span>
+      <span class="orb orb--cyan"></span>
+    </div>
+    <div class="page-hero__grid" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-grid">
-        <div>
-          <span class="eyebrow gold">AI Labs · Bootcamp</span>
-          <h1><em>Summer 2026<br>Bootcamp</em></h1>
-          <p class="lede">A 2-week intensive cohort of Build with AI — From Idea to Launched app, where students aged 13–16 build a real, working app every single day using AI — no prior coding experience required. The course builds to a capstone project students design, build, and launch live on the internet. Real URL, real audience, real applause on the final day.</p>
-
-          <div class="actions" style="align-items: center;">
-            <a class="btn btn-primary" href="apply.html">Apply now →</a>
+        <div class="hero-copy">
+          <span class="eyebrow gold">AI Labs · Summer Bootcamp</span>
+          <h1><em>Build with AI</em> &mdash;<br>From Idea to Launched App</h1>
+          <p class="lede">A 2-week in-person bootcamp for students <strong>ages 13–16</strong> to build real apps with AI — no prior <strong>coding experience required</strong>.</p>
+          <p class="lede">Every student builds something new each day and launches a final <strong>capstone app live</strong> on the internet.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
           </div>
         </div>
 
         <aside class="glance">
           <h4>At a glance</h4>
-          <dl>
-            <dt>Course</dt><dd>Build with AI — From Idea to Launched app</dd>
-            <dt>Format</dt><dd>2-week bootcamp</dd>
-            <dt>Dates</dt><dd>Jul 20–31 / Aug 3–14 / Aug 17–28, 2026 · 3 cohorts</dd>
-            <dt>Schedule</dt><dd>Mon–Fri, 9:00 AM – 12:00 PM</dd>
-            <dt>Total</dt><dd>30 hours over 10 days</dd>
-            <dt>Where</dt><dd>In-person, Toronto Uptown</dd>
-            <dt>Cohort size</dt><dd>Small group · up to 15 students</dd>
-            <dt>Ages</dt><dd>13–16 · no prior coding required</dd>
-            <dt>Bring</dt><dd>A laptop (any model)</dd>
-            <dt>Tools cost</dt><dd>Free tier works; optional Cursor Pro ~$20/mo</dd>
-            <dt>Tuition</dt><dd>$1,699 CAD</dd>
-            <dt>Application</dt><dd>Rolling, until full</dd>
-          </dl>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="apply.html">Apply</a>
-            <a class="text-arrow" href="mailto:hello@futurewrights.ai?subject=Summer%202026%20Bootcamp%20question">
-              <span>Ask a question</span>
-              <span class="arrow-circle" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </span>
-            </a>
-          </div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><div class="glance__k">Course</div><div class="glance__v">Build with AI — From Idea to Launched App</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><div class="glance__k">Format</div><div class="glance__v">2-week in-person bootcamp</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div class="glance__k">Dates</div><div class="glance__v">Jul 20–31 / Aug 3–14 / Aug 17–28, 2026 · 3 cohorts</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg><div class="glance__k">Schedule</div><div class="glance__v">Mon–Fri, 9:00 AM – 12:00 PM</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" y1="2" x2="14" y2="2"/><circle cx="12" cy="14" r="8"/><line x1="12" y1="14" x2="15" y2="11"/></svg><div class="glance__k">Total</div><div class="glance__v">30 hours over 10 days</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="glance__k">Where</div><div class="glance__v">In-person, Toronto · GTA-wide welcome</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><div class="glance__k">Cohort size</div><div class="glance__v">Small group · up to 15 students</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="glance__k">Ages</div><div class="glance__v">13–16 · no coding required</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><div class="glance__k">Bring</div><div class="glance__v">A laptop (any model)</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg><div class="glance__k">Tools cost</div><div class="glance__v">Free tier works; optional Cursor Pro ~$20/mo</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><div class="glance__k">Tuition</div><div class="glance__v">$1,699 CAD</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg><div class="glance__k">Application</div><div class="glance__v">Rolling, until full</div></div>
         </aside>
       </div>
     </div>
@@ -511,29 +497,44 @@
   <!-- WHAT MAKES IT DIFFERENT -->
   <section class="lab-section">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head section-head--wide">
         <span class="eyebrow gold">What makes this cohort different</span>
         <h2>A small, in-person cohort, not a self-paced video.</h2>
-        <p>Three things distinguish this bootcamp from the YouTube AI courses parents have seen advertised.</p>
+        <p>Three things distinguish Future Wrights from the AI courses parents see advertised online.</p>
       </div>
 
       <div class="diff-grid">
         <article class="diff-card">
-          <span class="label">Small group</span>
-          <h3>Real room, individual attention</h3>
-          <p>Capped at about 15 students per cohort — not 5,000 names on a Zoom call. The instructor knows every student by name on Day 2. No back-row, no falling behind unnoticed.</p>
+          <div class="diff-card__head">
+            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div>
+              <span class="label">Small Cohorts</span>
+              <h3>Real mentorship. Real attention.</h3>
+            </div>
+          </div>
+          <p>Small in-person groups capped at around 15 students, so every learner is seen, supported, and guided throughout the program.</p>
         </article>
 
         <article class="diff-card">
-          <span class="label">Practitioners + faculty</span>
-          <h3>Built by people who ship AI and teach at the university level</h3>
-          <p>Curriculum designed by senior faculty on our core team — with appointments at the University of Toronto and Toronto Metropolitan University. Engineers and founders from industry bring current problems into the classroom. Graduate students from their labs assist in the room.</p>
+          <div class="diff-card__head">
+            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+            <div>
+              <span class="label">Faculty + Practitioners</span>
+              <h3>Taught by educators and builders.</h3>
+            </div>
+          </div>
+          <p>University-affiliated faculty shape the curriculum, while industry practitioners and graduate mentors bring real AI workflows into the room.</p>
         </article>
 
         <article class="diff-card">
-          <span class="label">Real shipped work</span>
-          <h3>A launched app, a real audience, real stakes</h3>
-          <p>Students don't make slides about AI — they build a working project every day and launch a real capstone app to the public internet that friends can open on their phones. On Demo Day, parents arrive and try it live in front of the room. Most "AI summer camps" don't ship anything.</p>
+          <div class="diff-card__head">
+            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+            <div>
+              <span class="label">Real Shipped Work</span>
+              <h3>Build daily. Launch publicly.</h3>
+            </div>
+          </div>
+          <p>Students create working projects throughout the bootcamp and launch a final capstone app with a real URL on Demo Day.</p>
         </article>
       </div>
     </div>
@@ -584,7 +585,7 @@
 
 
   <!-- TYPICAL DAY -->
-  <section class="lab-section lab-section--alt">
+  <section class="lab-section">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow gold">A typical day</span>
@@ -640,6 +641,7 @@
           <p class="cta-banner__lede">Give your child the confidence, skills, and mindset to build, think, and lead in the AI era.</p>
           <div class="cta-banner__actions">
             <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
           </div>
           <div class="cta-banner__meta">
             <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
