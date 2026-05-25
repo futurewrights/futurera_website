@@ -105,100 +105,143 @@ header.site:not(.scrolled) {
 
 /* Design-system rollout: General Sans for all homepage section headings */
 .section-head h2 { font-family: "General Sans", "Inter", sans-serif; }
-#ecosystem .section-head { max-width: 880px; }
+#ecosystem .section-head { max-width: 880px; margin-bottom: var(--sp-3); }
 #ecosystem .section-head p + p { margin-top: var(--sp-3); }
 
 /* ============================================================
    Ecosystem journey — callout + timeline rail + step cards (light)
    ============================================================ */
 .eco-callout {
-  display: flex; align-items: center; gap: 16px;
-  max-width: 880px; margin: 0 auto var(--sp-6);
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md);
-  padding: 16px 22px; box-shadow: 0 1px 2px rgba(15,23,66,.04), 0 8px 22px rgba(15,23,66,.05);
+  display: flex; align-items: center; gap: 18px;
+  max-width: 880px; margin: 0 auto var(--sp-4);
+  background: transparent; border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 16px 22px; box-shadow: none;
 }
-.eco-callout__ico { flex: none; width: 40px; height: 40px; display:inline-flex; align-items:center; justify-content:center; color: var(--cyan); }
-.eco-callout__ico svg { width: 26px; height: 26px; }
+.eco-callout__ico { flex: none; width: 56px; height: 56px; display:inline-flex; align-items:center; justify-content:center; color: var(--teal); }
+.eco-callout__ico svg { width: 44px; height: 44px; }
 .eco-callout p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-muted); }
-.eco-callout strong { color: var(--brand-deep); font-weight: 600; }
+.eco-callout strong { color: var(--navy); font-weight: 600; }
 
-.eco-steps { max-width: 1080px; margin: 0 auto; }
-.eco-step { display: grid; grid-template-columns: 132px 1fr; gap: 28px; padding-bottom: var(--sp-5); }
-.eco-step__rail { position: relative; padding-top: 4px; }
-.eco-step__rail::before {
-  content: ""; position: absolute; left: 12px; top: 58px; bottom: -20px; width: 2px;
-  background: linear-gradient(var(--line), rgba(212,215,227,0));
+.eco-steps { max-width: 1172px; margin: 0 auto; }
+.eco-step { display: grid; grid-template-columns: 132px 1fr; gap: 28px; padding-bottom: 16px; --node: var(--teal); }
+.eco-step:first-child { --node: var(--gold-ink); }   /* 01 gold · 02-04 teal */
+.eco-step__rail { position: relative; padding-top: 4px; text-align: center; }
+.eco-step__down { display:block; width:18px; height:132px; margin:16px auto 0; position:relative; }
+.eco-step__down::before {   /* gradient vertical line */
+  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:2px; height:120px; background:linear-gradient(to bottom, transparent, var(--node));
+}
+.eco-step__down::after {    /* down arrowhead */
+  content:""; position:absolute; left:50%; top:113px; transform:translateX(-50%) rotate(45deg);
+  width:10px; height:10px; border-right:2.5px solid var(--node); border-bottom:2.5px solid var(--node);
+}
+.eco-step__rail::before {   /* dotted connector — runs node→next-node so it reads continuous (nodes hide the joins) */
+  content: ""; position: absolute; left: 131px; top: 34px; bottom: -54px; width: 3px;
+  background-image: radial-gradient(circle, #bcc4d4 1.4px, transparent 1.6px);
+  background-size: 3px 9px; background-repeat: repeat-y;
 }
 .eco-step:last-child .eco-step__rail::before { display: none; }
-.eco-step__num { display:block; font-family:"General Sans","Inter",sans-serif; font-size:40px; font-weight:700; line-height:1; letter-spacing:-.03em; color: var(--brand-accent); }
-.eco-step__num--cyan { color: #1192ad; }
-.eco-step__label { display:block; margin-top:8px; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color: var(--ink); }
+.eco-step__rail::after {    /* stage node (ring + dot) beside the card */
+  content: ""; position: absolute; left: 123px; top: 18px; box-sizing: border-box;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--node); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--node);
+}
+.eco-step__body { position: relative; }
+.eco-step__body::before {   /* short connector: node -> card */
+  content: ""; position: absolute; left: -19px; top: 26px; width: 19px; height: 2px;
+  background: #bcc4d4;
+}
+.eco-step__num { display:block; font-family:"General Sans","Inter",sans-serif; font-size:54px; font-weight:700; line-height:1; letter-spacing:-.03em; color: var(--gold-ink); }
+.eco-step__num--cyan { color: var(--teal); }
+.eco-step__label { display:inline-block; margin-top:10px; font-size:15px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color: var(--ink); border-bottom:2px solid var(--node); padding-bottom:7px; }
 .eco-step__sub { display:block; margin-top:10px; font-size:13px; color: var(--ink-muted); }
 
 .eco-prog { background:#fff; border:1px solid var(--line); border-radius: var(--radius-md); padding: var(--sp-5); display:flex; gap:24px; align-items:flex-start;
   box-shadow: 0 1px 2px rgba(15,23,66,.04), 0 12px 28px rgba(15,23,66,.05); }
-.eco-prog--gold { border-color: rgba(244,180,0,0.40); }
-.eco-prog--cyan { border-color: rgba(0,229,255,0.30); }
+.eco-prog--gold { background: linear-gradient(165deg, #fffdf4, #ffffff 60%); border-color: rgba(244,180,0,0.40); }
+.eco-prog--cyan { background: linear-gradient(165deg, #f3fdff, #ffffff 60%); border-color: rgba(17,146,173,0.28); }
 .eco-prog__main { flex:1; min-width:0; }
-.eco-prog h3 { font-family:"General Sans","Inter",sans-serif; font-size:22px; font-weight:600; letter-spacing:-.02em; color: var(--ink); margin: 10px 0 8px; }
-.eco-prog p { font-size:14px; line-height:1.55; color: var(--ink-muted); margin: 0 0 16px; }
+.eco-prog h3 { font-family:"General Sans","Inter",sans-serif; font-size:29px; font-weight:600; letter-spacing:-.02em; color: var(--ink); margin: 10px 0 8px; }
+.eco-prog p { font-size:18px; line-height:1.6; color: var(--ink-muted); margin: 0 0 16px; }
 .eco-prog__art { flex:none; width:38%; max-width:280px; }
-.eco-prog__cardico { float:right; color: var(--cyan); }
+.eco-prog__art img { width:100%; height:auto; display:block; border-radius:12px; }
+.eco-prog--community .eco-prog__art img { box-shadow:none; }
+.eco-prog__cardico { float:right; color: var(--teal); }
+
+/* Feature cards (AI Labs / AI Studio) - text left, graphic right, feature row underneath */
+.eco-prog--feat { display:block; }
+.eco-prog--feat .eco-prog__head { display:flex; gap:24px; align-items:flex-start; }
+.eco-prog--feat .eco-prog__art { width:38%; max-width:330px; }
+.eco-prog--feat .eco-prog__art img { opacity:0.7; }
+.eco-prog--feat .eco-feats { margin-top:0; }
+.eco-prog--feat .eco-feats li { flex-direction:row; align-items:center; text-align:left; }
+.eco-prog--gold .eco-feats li { align-items:center; }
+.eco-prog--gold .eco-feats svg { color: var(--brand-accent); width:24px; height:24px; }
+/* AI Labs (gold) — larger card content */
+.eco-prog--gold h3 { font-size:29px; }
+.eco-prog--gold p { font-size:18px; line-height:1.6; }
+.eco-prog--gold .eco-feats { gap:18px; margin-top:0; }
+.eco-prog--gold .eco-feats li { font-size:13px; gap:10px; flex-direction:row; align-items:center; text-align:left; }
+.eco-prog--gold .eco-badge { font-size:12.5px; padding:6px 14px; }
+.eco-prog--gold .eco-prog__art { width:32%; max-width:270px; }
+.eco-prog--gold .eco-prog__art img { opacity:0.7; }
 .eco-prog__cardico svg { width:32px; height:32px; }
+.eco-prog__cardico img { width:96px; height:96px; object-fit:contain; display:block; }
 
-.eco-step__body--split { display:grid; grid-template-columns: 1fr auto 1fr; gap:18px; align-items:center; }
-.eco-step__body--split .eco-prog { display:block; }
-.eco-or { font-size:12px; font-weight:700; color: var(--ink-faint); letter-spacing:.1em; }
+.eco-step__body--split { position:relative; display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:12px; align-items:start; }
+.eco-step__body--split .eco-prog { display:block; position:relative; padding: var(--sp-5); }
+.eco-step__body--split .eco-prog__cardico { position:absolute; top:40px; right:26px; float:none; }
+.eco-step__body--split .eco-feats { margin-top:0; width:100%; align-self:stretch; }
+.eco-or { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; width:56px; height:56px; flex:none; display:grid; place-items:center; border-radius:50%; background:#fff; border:1px solid var(--line); box-shadow:0 4px 16px rgba(15,23,66,.14); font-size:12px; font-weight:700; color: var(--ink-muted); letter-spacing:.06em; }
 
-.eco-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:5px 11px; border-radius:999px; }
-.eco-badge--open { background: rgba(244,180,0,0.16); color: var(--brand-accent-2); }
-.eco-badge--soon { background: rgba(0,229,255,0.12); color: #1192ad; }
+.eco-badge { display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; border-radius:999px; }
+.eco-badge--open { background: rgba(244,180,0,0.16); color: var(--gold-ink); }
+.eco-badge--soon { background: rgba(0,229,255,0.12); color: var(--teal); }
 
 .eco-feats { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin:0; padding:0; list-style:none; }
-.eco-feats--2 { grid-template-columns: 1fr 1fr; }
-.eco-feats li { display:flex; align-items:flex-start; gap:8px; font-size:12.5px; line-height:1.3; color: var(--ink); }
-.eco-feats svg { width:18px; height:18px; flex:none; color: var(--cyan); margin-top:1px; }
+.eco-feats--2 { grid-template-columns: repeat(4, 1fr); gap:10px; }
+.eco-feats--2 li { align-items:center; }
+.eco-feats--2 svg { width:16px; height:16px; }
+.eco-feats li { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; font-size:13px; line-height:1.3; color: var(--ink); }
+.eco-feats svg { width:18px; height:18px; flex:none; color: var(--teal); margin-top:1px; }
+.eco-feats .eco-feat-ico { width:52px; height:52px; flex:none; object-fit:contain; }
 
-/* abstract UI mockup */
-.eco-win { width:100%; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fbfdff; }
-.eco-win__bar { display:flex; gap:5px; padding:9px 11px; border-bottom:1px solid var(--line); }
-.eco-win__bar i { width:8px; height:8px; border-radius:50%; background:#d7dbe7; }
-.eco-win__body { padding:16px; }
-.eco-win__row { height:10px; border-radius:5px; margin-bottom:9px; background:linear-gradient(90deg, rgba(0,229,255,0.28), rgba(244,180,0,0.18)); }
-.eco-win__row:nth-child(2){ width:72%; } .eco-win__row:nth-child(3){ width:88%; } .eco-win__row:nth-child(4){ width:56%; }
-
-/* community card (step 04, dark) */
-.eco-prog--community { background:linear-gradient(135deg,#0e2950,#0A1B3D); border-color: rgba(255,255,255,0.10); color:#fff; }
-.eco-prog--community h3 { color:#fff; line-height:1.2; }
-.eco-prog--community h3 .hl-cyan { color: var(--cyan); }
-.eco-prog--community p { color: rgba(255,255,255,0.7); }
-.eco-net { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; width:100%; }
-.eco-net__core { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-  background: rgba(0,229,255,0.08); border:1px solid rgba(0,229,255,0.45); box-shadow:0 0 38px rgba(0,229,255,0.25);
-  color: var(--cyan); font-family:"General Sans",sans-serif; font-weight:700; font-size:24px; }
-.eco-net__nodes { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
-.eco-net__nodes span { font-size:12px; color: rgba(255,255,255,0.82); border:1px solid rgba(255,255,255,0.18); border-radius:999px; padding:5px 11px; }
+/* community card (step 04, light) */
+.eco-prog--community { background: linear-gradient(165deg, #eefbfb, #ffffff 62%); border-color: rgba(17,146,173,0.28); align-items: center; padding-block: 12px; gap: 14px; }
+.eco-join { margin-top: 6px; }
+.eco-join:hover { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); transform: translateY(-2px); }
+.eco-prog--community h3 { color: var(--navy); line-height:1.2; }
+.eco-prog--community h3 .hl-cyan { color: var(--teal); }
+.eco-prog--community p { color: var(--ink-muted); }
+.eco-prog--community .eco-prog__art { width:50%; max-width:500px; }
 
 /* bottom strip */
-.eco-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; max-width:1080px; margin: var(--sp-6) auto 0; padding-top: var(--sp-5); border-top:1px solid var(--line); }
+.eco-strip-wrap { max-width:1172px; margin: var(--sp-4) auto 0; }
+.eco-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-left:160px; padding: 20px 26px; border:1px solid var(--line); border-radius: var(--radius-md); }
 .eco-strip__item { display:flex; align-items:center; gap:12px; }
-.eco-strip__item > span { flex:none; color: var(--cyan); }
+.eco-strip__item > span { flex:none; color: var(--navy); }
 .eco-strip__item svg { width:24px; height:24px; }
+.eco-strip__item .eco-strip-ico { width:54px; height:54px; object-fit:contain; display:block; }
 .eco-strip__item strong { display:block; font-size:14px; color: var(--ink); }
 .eco-strip__item small { font-size:12px; color: var(--ink-muted); }
 
 @media (max-width: 860px) {
   .eco-step { grid-template-columns: 1fr; gap: 14px; }
   .eco-step__rail { display:flex; align-items:baseline; gap:12px; padding-top:0; }
-  .eco-step__rail::before { display:none; }
+  .eco-step__rail::before, .eco-step__rail::after, .eco-step__body::before, .eco-step__down { display:none; }
   .eco-step__num { font-size:30px; }
   .eco-step__label, .eco-step__sub { margin-top:0; }
   .eco-prog { flex-direction:column; }
   .eco-prog__art { width:100%; max-width:none; }
+  .eco-prog--feat .eco-prog__head { flex-direction:column; }
+  .eco-prog--feat .eco-prog__art { width:100%; max-width:280px; }
+  .eco-prog--community { text-align:center; padding: 18px var(--sp-4) 24px; }
+  .eco-prog--community .eco-prog__main { width:100%; }
+  .eco-prog--community .eco-prog__art { width:100%; max-width:440px; }
   .eco-step__body--split { grid-template-columns:1fr; }
   .eco-or { display:none; }
   .eco-feats, .eco-feats--2 { grid-template-columns: 1fr 1fr; }
-  .eco-strip { grid-template-columns: 1fr 1fr; }
+  .eco-strip { grid-template-columns: 1fr 1fr; margin-left:0; }
 }
 
 /* ============================================================
@@ -226,7 +269,7 @@ header.site:not(.scrolled) {
 .vm-badge--gold   { background: rgba(244,180,0,0.14); color:#b8860a; }
 .vm-badge--cyan { background: rgba(0,229,255,0.12); color:#0e8fa8; }
 .vm-card__ico svg { width:80px; height:80px; }
-.vm-card__ico--art img { width:80px; height:80px; display:block; }   /* puzzle.png (squared) — matches telescope */
+.vm-card__ico--art img { width:96px; height:96px; display:block; }   /* puzzle.png (squared) */
 .vm-card--vision  .vm-card__ico { color:#b8860a; }
 .vm-card--mission .vm-card__ico { color:#12a5c4; }
 .vm-card h3 { font-family:"General Sans","Inter",sans-serif; font-size:clamp(21px,2.3vw,27px); font-weight:600; letter-spacing:-.02em; line-height:1.22; color: var(--ink); margin:0 0 var(--sp-3); }
@@ -266,7 +309,7 @@ header.site:not(.scrolled) {
 
     <nav class="primary" id="primaryNav" aria-label="Primary">
       <div class="item"><a class="link" href="index.html">Home</a></div>
-      <div class="item"><a class="link" href="bootcamp-summer-2026.html">AI Labs</a></div>
+      <div class="item"><a class="link" href="#ecosystem">Programs</a></div>
       <div class="item"><a class="link" href="team.html">Team</a></div>
       <div class="item"><a class="link" href="contact.html">Contact</a></div>
     </nav>
@@ -437,141 +480,138 @@ header.site:not(.scrolled) {
       </div>
 
       <div class="eco-callout reveal">
-        <span class="eco-callout__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+        <span class="eco-callout__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="9" r="2.2"/><path d="M1.6 18.5v-1a3 3 0 0 1 3-3h1"/><circle cx="19" cy="9" r="2.2"/><path d="M22.4 18.5v-1a3 3 0 0 0-3-3h-1"/><circle cx="12" cy="7.3" r="3.1"/><path d="M6.5 18.5v-1.2a4.3 4.3 0 0 1 4.3-4.3h2.4a4.3 4.3 0 0 1 4.3 4.3v1.2"/></svg></span>
         <p>Future Wrights is more than a program — it's a <strong>growing ecosystem and community</strong> designed to help students continuously learn, connect, build, and evolve together.</p>
       </div>
 
       <div class="eco-steps reveal">
 
-        <!-- 01 Foundation · AI Labs -->
+        <!-- 01 Foundation -->
         <div class="eco-step">
           <div class="eco-step__rail">
             <span class="eco-step__num">01</span>
             <span class="eco-step__label">Foundation</span>
-            <span class="eco-step__sub">Start your journey</span>
+            <span class="eco-step__sub">Start your<br>journey</span>
+            <span class="eco-step__down" aria-hidden="true"></span>
           </div>
           <div class="eco-step__body">
-            <article class="eco-prog eco-prog--gold">
-              <div class="eco-prog__main">
-                <span class="eco-badge eco-badge--open">Open now</span>
-                <h3>AI Labs</h3>
-                <p>Where curiosity becomes hands-on exploration. Students build AI foundations through project-based courses focused on creativity, problem solving, and modern AI tools.</p>
-                <ul class="eco-feats">
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 21v-8"/></svg>Project-Based Learning</li>
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>Creative Exploration</li>
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>AI Tools &amp; Prompting</li>
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Portfolio Projects</li>
-                </ul>
+            <article class="eco-prog eco-prog--gold eco-prog--feat">
+              <div class="eco-prog__head">
+                <div class="eco-prog__main">
+                  <span class="eco-badge eco-badge--open">Open now</span>
+                  <h3>AI Labs</h3>
+                  <p>Where curiosity becomes hands-on exploration.<br>Students build AI foundations through project-<br>based courses focused on creativity, problem<br>solving, and modern AI tools.</p>
+                </div>
+                <div class="eco-prog__art" aria-hidden="true"><img src="assets/graphioic_for_ai_lab.png" alt="" /></div>
               </div>
-              <div class="eco-prog__art" aria-hidden="true">
-                <div class="eco-win"><div class="eco-win__bar"><i></i><i></i><i></i></div><div class="eco-win__body"><div class="eco-win__row"></div><div class="eco-win__row"></div><div class="eco-win__row"></div><div class="eco-win__row"></div></div></div>
-              </div>
+              <ul class="eco-feats">
+                <li><img class="eco-feat-ico" src="assets/project_based_leaning.png" alt="" /><span>Project-Based<br>Learning</span></li>
+                <li><img class="eco-feat-ico" src="assets/creative_exploration.png" alt="" /><span>Creative<br>Exploration</span></li>
+                <li><img class="eco-feat-ico" src="assets/ai_tools.png" alt="" /><span>AI Tools &amp;<br>Prompting</span></li>
+                <li><img class="eco-feat-ico" src="assets/protfolio_projects.png" alt="" /><span>Portfolio<br>Projects</span></li>
+              </ul>
             </article>
           </div>
         </div>
 
-        <!-- 02 Specialize · University / Industry -->
+        <!-- 02 Specialize -->
         <div class="eco-step">
           <div class="eco-step__rail">
             <span class="eco-step__num eco-step__num--cyan">02</span>
             <span class="eco-step__label">Specialize</span>
-            <span class="eco-step__sub">Choose your path</span>
+            <span class="eco-step__sub">Choose your<br>path</span>
+            <span class="eco-step__down" aria-hidden="true"></span>
           </div>
           <div class="eco-step__body eco-step__body--split">
             <article class="eco-prog eco-prog--cyan">
-              <span class="eco-prog__cardico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span>
+              <span class="eco-prog__cardico"><img src="assets/school_hat.png" alt="" /></span>
               <span class="eco-badge eco-badge--soon">Coming soon</span>
               <h3>University Track</h3>
-              <p>For students aiming to pursue competitive university pathways through advanced mentorship, research exposure, and portfolio-driven projects.</p>
+              <p>For students aiming to pursue competitive<br>university pathways through advanced<br>mentorship, research exposure, and<br>portfolio-driven projects.</p>
               <ul class="eco-feats eco-feats--2">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Research Exposure</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Academic Mentorship</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>Advanced Concepts</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Strong Portfolio</li>
+                <li><img class="eco-feat-ico" src="assets/research_expo.png" alt="" /><span>Research<br>Exposure</span></li>
+                <li><img class="eco-feat-ico" src="assets/creative_explo.png" alt="" /><span>Academic<br>Mentorship</span></li>
+                <li><img class="eco-feat-ico" src="assets/advaned_concept.png" alt="" /><span>Advanced<br>Concepts</span></li>
+                <li><img class="eco-feat-ico" src="assets/strong_academic_portfolio.png" alt="" /><span>Strong<br>Portfolio</span></li>
               </ul>
             </article>
             <span class="eco-or">OR</span>
             <article class="eco-prog eco-prog--cyan">
-              <span class="eco-prog__cardico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+              <span class="eco-prog__cardico"><img src="assets/breafcase.png" alt="" /></span>
               <span class="eco-badge eco-badge--soon">Coming soon</span>
               <h3>Industry Track</h3>
-              <p>For students interested in real-world AI skills, entrepreneurship, collaboration, and industry-inspired project experience.</p>
+              <p>For students interested in real-world<br>AI skills, entrepreneurship, collaboration,<br>and industry-inspired project<br>experience.</p>
               <ul class="eco-feats eco-feats--2">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Real-World Skills</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Industry Mentorship</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>Team Collaboration</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Entrepreneurship Mindset</li>
+                <li><img class="eco-feat-ico" src="assets/read_skills.png" alt="" /><span>Real-World<br>Skills</span></li>
+                <li><img class="eco-feat-ico" src="assets/industry_mentorship.png" alt="" /><span>Industry<br>Mentorship</span></li>
+                <li><img class="eco-feat-ico" src="assets/team_collaboration.png" alt="" /><span>Team<br>Collaboration</span></li>
+                <li><img class="eco-feat-ico" src="assets/entrepreneurship_mindset.png" alt="" /><span>Entrepreneurship<br>Mindset</span></li>
               </ul>
             </article>
           </div>
         </div>
 
-        <!-- 03 Create · AI Studio -->
+        <!-- 03 Create -->
         <div class="eco-step">
           <div class="eco-step__rail">
             <span class="eco-step__num eco-step__num--cyan">03</span>
             <span class="eco-step__label">Create</span>
-            <span class="eco-step__sub">Build real impact</span>
+            <span class="eco-step__sub">Build real<br>impact</span>
+            <span class="eco-step__down" aria-hidden="true"></span>
           </div>
           <div class="eco-step__body">
-            <article class="eco-prog eco-prog--cyan">
-              <div class="eco-prog__main">
-                <span class="eco-badge eco-badge--soon">Future · paid · ages 16+</span>
-                <h3>AI Studio</h3>
-                <p>An advanced collaborative environment where top students build ambitious AI projects, work alongside mentors, and transform ideas into real-world outcomes.</p>
-                <ul class="eco-feats">
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 21v-8"/></svg>Real Projects</li>
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Expert Mentorship</li>
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>Startup-Style Environment</li>
-                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Portfolio Showcase</li>
-                </ul>
+            <article class="eco-prog eco-prog--cyan eco-prog--feat">
+              <div class="eco-prog__head">
+                <div class="eco-prog__main">
+                  <span class="eco-badge eco-badge--soon">Future &middot; paid &middot; ages 16+</span>
+                  <h3>AI Studio</h3>
+                  <p>An advanced collaborative environment where top<br>students build ambitious AI projects, work alongside<br>mentors, and transform ideas into real-world outcomes.</p>
+                </div>
+                <div class="eco-prog__art" aria-hidden="true"><img src="assets/graphic_for_ai_studio.png" alt="" /></div>
               </div>
-              <div class="eco-prog__art" aria-hidden="true">
-                <div class="eco-win"><div class="eco-win__bar"><i></i><i></i><i></i></div><div class="eco-win__body"><div class="eco-win__row"></div><div class="eco-win__row"></div><div class="eco-win__row"></div><div class="eco-win__row"></div></div></div>
-              </div>
+              <ul class="eco-feats">
+                <li><img class="eco-feat-ico" src="assets/real_projects.png" alt="" /><span>Real<br>Projects</span></li>
+                <li><img class="eco-feat-ico" src="assets/expert_mentorship.png" alt="" /><span>Expert<br>Mentorship</span></li>
+                <li><img class="eco-feat-ico" src="assets/startup_env.png" alt="" /><span>Startup-Style<br>Environment</span></li>
+                <li><img class="eco-feat-ico" src="assets/showcase.png" alt="" /><span>Portfolio<br>Showcase</span></li>
+              </ul>
             </article>
           </div>
         </div>
 
-        <!-- 04 Connect · Community -->
+        <!-- 04 Connect -->
         <div class="eco-step">
           <div class="eco-step__rail">
-            <span class="eco-step__num eco-step__num--gold">04</span>
+            <span class="eco-step__num eco-step__num--cyan">04</span>
             <span class="eco-step__label">Connect</span>
-            <span class="eco-step__sub">Grow together forever</span>
+            <span class="eco-step__sub">Grow together<br>forever</span>
           </div>
           <div class="eco-step__body">
             <article class="eco-prog eco-prog--community">
               <div class="eco-prog__main">
-                <h3>Beyond programs.<br><span class="hl-cyan">A growing ecosystem for future creators.</span></h3>
-                <p>New programs. New mentors. New connections. The ecosystem grows — and you grow with it.</p>
-                <a class="btn btn-accent eco-join" href="contact.html">Join the Community →</a>
+                <h3>Beyond programs.<br><span class="hl-cyan">A growing ecosystem<br>for future creators.</span></h3>
+                <p>New programs. New mentors. New connections.<br>The ecosystem grows &mdash; and you grow with it.</p>
+                <a class="btn btn-ghost eco-join" href="contact.html">Join the Community &rarr;</a>
               </div>
-              <div class="eco-prog__art" aria-hidden="true">
-                <div class="eco-net">
-                  <span class="eco-net__core">FW</span>
-                  <div class="eco-net__nodes">
-                    <span>Mentors</span><span>Students</span><span>Alumni</span><span>Partners</span><span>Projects</span><span>Opportunities</span>
-                  </div>
-                </div>
-              </div>
+              <div class="eco-prog__art" aria-hidden="true"><img src="assets/fw_network.png" alt="" /></div>
             </article>
           </div>
         </div>
 
       </div>
 
-      <div class="eco-strip reveal">
-        <div class="eco-strip__item"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><div><strong>Continuous Learning</strong><small>Always evolving</small></div></div>
-        <div class="eco-strip__item"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><div><strong>Global Community</strong><small>Connect worldwide</small></div></div>
-        <div class="eco-strip__item"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span><div><strong>Real-World Impact</strong><small>Build what matters</small></div></div>
-        <div class="eco-strip__item"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span><div><strong>Future Ready</strong><small>Skills for tomorrow</small></div></div>
+      <div class="eco-strip-wrap">
+        <div class="eco-strip reveal">
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/continious_learning.png" alt="" /></span><div><strong>Continuous Learning</strong><small>Always evolving</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/global_community.png" alt="" /></span><div><strong>Global Community</strong><small>Connect worldwide</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/real_impact.png" alt="" /></span><div><strong>Real-World Impact</strong><small>Build what matters</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/future_ready.png" alt="" /></span><div><strong>Future Ready</strong><small>Skills for tomorrow</small></div></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- MESSAGE FOR PARENTS -->
-  <section class="section" id="parents">
+    <section class="section" id="parents">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow gold">A note for parents</span>
@@ -579,66 +619,25 @@ header.site:not(.scrolled) {
       </div>
 
       <div class="parents-note reveal">
-        <div class="salutation">If you're weighing whether AI belongs on your child's plate at all —</div>
+        <div class="salutation">If you're weighing whether AI belongs on your child's plate at all, you're right to be careful. The technology is moving quickly, and many "AI for kids" courses promise transformation without showing what students actually leave with.</div>
 
-        <p>You are right to be careful. The internet is loud, the technology is moving quickly, and most "AI for kids" courses you'll find online are thin. Many promise transformation; few can show what a student actually leaves with.</p>
+        <p>At Future Wrights, students leave with <strong>real portfolio projects</strong> they can discuss with university admissions teams, co-op interviewers, and future mentors.</p>
 
-        <p>Here's what we'll commit to. Your child will leave Future Wrights with <strong>a real portfolio</strong>: projects you can hand to a university admissions officer or a co-op interviewer and have a substantive conversation about. Their instructor will be a <strong>qualified educator paired with a working practitioner</strong>, not a generic tutor following a script. The curriculum is aligned with Ontario Ministry expectations, so it complements school rather than competing with it.</p>
+        <p>Each program is led by <strong>qualified educators and working practitioners</strong>, not generic tutors following a script. Our curriculum complements school and is aligned with Ontario Ministry expectations.</p>
 
-        <p>Cohort sizes are set per program, small enough that students get weekly 1:1 feedback from their mentor. And if your child isn't a "tech kid," that's fine. AI Labs is built around using AI well in any subject.</p>
+        <p>Cohorts are intentionally small, with regular mentor feedback so students are supported as individuals. And your child does not need to be a "tech kid" to begin — AI Labs is built around using AI well across subjects, interests, and future paths.</p>
 
-        <p>If after reading this you're still unsure, that is a good reason to book a 20-minute conversation. We will tell you honestly whether your child is ready for our program now, in six months, or whether something else is the right fit.</p>
+        <p>Still unsure? Book a 20-minute conversation. We'll tell you honestly whether your child is ready now, in six months, or whether another path is the better fit.</p>
 
-        <div class="signoff">
-          <strong>The Future Wrights Academy Team</strong>
-          Toronto, Ontario
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED COHORT (Open now) -->
-  <section class="section section--alt" id="programs">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="live-badge">
-          <span class="live-dot" aria-hidden="true"></span>
-          Live · Applications open
-        </span>
-        <h2>Summer 2026 Bootcamp</h2>
-        <p class="course-name-placeholder"><em><a href="bootcamp-summer-2026.html">Build with AI — From Prompt to Product</a></em></p>
-        <p>Our first course, currently open for enrollment. A 2-week intensive where students aged 13–16 build and ship two real AI products with little to no code.</p>
-      </div>
-
-      <div class="featured reveal">
-        <div class="featured-grid">
-          <div>
-            <span class="badge-open">● Applications open</span>
-            <h3>What students build</h3>
-            <ul class="builds-list">
-              <li><strong>A custom AI character</strong>: a chatbot students design and ship to a public URL</li>
-              <li><strong>A personalized Study Buddy</strong>: an AI tutor built on their own school notes (RAG)</li>
-              <li><strong>A 60-second pitch + a one-page explainer</strong> they wrote themselves</li>
-            </ul>
-          </div>
-          <div class="featured-side">
-            <div class="featured-specs">
-              <div class="spec"><span class="spec-label">Dates</span><span class="spec-value">Jul 20–31 / Aug 3–14 / Aug 17–28, 2026</span></div>
-              <div class="spec"><span class="spec-label">Schedule</span><span class="spec-value">Mon–Fri, 9 AM–12 PM</span></div>
-              <div class="spec"><span class="spec-label">Where</span><span class="spec-value">In-person, Toronto Uptown</span></div>
-              <div class="spec"><span class="spec-label">Ages</span><span class="spec-value">13–16</span></div>
-            </div>
-            <div class="featured-actions">
-              <a class="btn btn-accent" href="bootcamp-summer-2026.html">Apply now →</a>
-            </div>
-          </div>
+        <div class="parents-cta">
+          <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute call</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section" id="faq">
+  <section class="section section--alt" id="faq">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow gold">Common questions</span>
@@ -702,6 +701,29 @@ header.site:not(.scrolled) {
     </div>
   </section>
 
+  <!-- FINAL CTA BANNER -->
+  <section class="cta-banner-section">
+    <div class="cta-banner reveal">
+      <div class="cta-banner__bg" aria-hidden="true">
+        <img src="assets/footer_banner.png" alt="" />
+      </div>
+      <div class="cta-banner__inner">
+        <div class="cta-banner__panel">
+          <h2 class="cta-banner__title">The Future <span class="gold-word">Will Not Wait.</span></h2>
+          <p class="cta-banner__lede">Give your child the confidence, skills, and mindset to build, think, and lead in the AI era.</p>
+          <div class="cta-banner__actions">
+            <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
+            <a class="btn btn-ghost" href="bootcamp-summer-2026.html">Join the Next Cohort &rarr;</a>
+          </div>
+          <div class="cta-banner__meta">
+            <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
+            <span><i class="cta-banner__dot" aria-hidden="true"></i>Apply early for priority consideration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Anchor for #contact links elsewhere on the page · scrolls to footer's get-in-touch column -->
   <span id="contact" aria-hidden="true"></span>
 
@@ -728,7 +750,7 @@ header.site:not(.scrolled) {
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="assets/fw_logo.png" alt="Future Wrights Academy" />
-        <p>AI education for Grade 9–12 students. Proudly started in Toronto. Core team includes faculty affiliated with University of Toronto and Toronto Metropolitan University, alongside engineers, founders, and researchers from industry.</p>
+        <p>AI education for Grade 9–12 students. Proudly built in Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
@@ -751,7 +773,6 @@ header.site:not(.scrolled) {
         <ul>
           <li><a href="for-parents.html">Parents</a></li>
           <li><a href="for-students.html">Students</a></li>
-          <li><a href="for-partners.html">Schools &amp; partners</a></li>
         </ul>
       </div>
       <div>

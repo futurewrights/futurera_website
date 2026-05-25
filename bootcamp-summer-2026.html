@@ -463,51 +463,6 @@
     color: var(--brand-accent-2);
   }
 
-  /* Apply CTA — bootcamp-specific, navy box */
-  .apply-cta-section {
-    background: #fff;
-    border-top: 1px solid var(--line);
-    padding: var(--sp-7) 0;
-  }
-  .apply-cta-card {
-    max-width: 760px;
-    margin: 0 auto;
-    background: var(--brand-deep);
-    border-radius: var(--radius-md);
-    padding: var(--sp-6) var(--sp-5);
-    text-align: center;
-    display: flex; flex-direction: column; align-items: center;
-  }
-  .apply-cta-card .eyebrow {
-    font-size: 12px; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--brand-accent);
-    margin: 0 0 var(--sp-2);
-    display: block;
-  }
-  .apply-cta-card h2 {
-    font-size: clamp(28px, 3.2vw, 36px);
-    font-weight: 600;
-    letter-spacing: -1px;
-    line-height: 1.2;
-    color: #fff;
-    margin: 0 0 var(--sp-4);
-    text-wrap: balance;
-  }
-  .apply-cta-card .actions {
-    display: flex; gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .apply-cta-card .btn-accent {
-    background: var(--brand-accent);
-    color: var(--ink);
-    padding: 14px 26px;
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .apply-cta-card .btn-accent:hover { background: var(--brand-accent-2); }
-
   /* FAQ */
   .faq { max-width: 800px; margin: 0 auto; display: grid; gap: 10px; }
   details.faq-item {
@@ -558,7 +513,7 @@
     </a>
     <nav class="primary" id="primaryNav" aria-label="Primary">
       <div class="item"><a class="link" href="index.html">Home</a></div>
-      <div class="item"><a class="link" href="bootcamp-summer-2026.html">AI Labs</a></div>
+      <div class="item"><a class="link" href="index.html#ecosystem">Programs</a></div>
       <div class="item"><a class="link" href="team.html">Team</a></div>
       <div class="item"><a class="link" href="contact.html">Contact</a></div>
     </nav>
@@ -797,14 +752,24 @@
     </div>
   </section>
 
-  <!-- APPLY CTA -->
-  <section class="apply-cta-section" id="apply">
-    <div class="container">
-      <div class="apply-cta-card">
-        <span class="eyebrow">Apply</span>
-        <h2>Take your spot in Summer 2026.</h2>
-        <div class="actions">
-          <a class="btn btn-accent" href="apply.html">Apply now →</a>
+  <!-- FINAL CTA BANNER -->
+  <section class="cta-banner-section">
+    <div class="cta-banner">
+      <div class="cta-banner__bg" aria-hidden="true">
+        <img src="assets/footer_banner.png" alt="" />
+      </div>
+      <div class="cta-banner__inner">
+        <div class="cta-banner__panel">
+          <h2 class="cta-banner__title">The Future <span class="gold-word">Will Not Wait.</span></h2>
+          <p class="cta-banner__lede">Give your child the confidence, skills, and mindset to build, think, and lead in the AI era.</p>
+          <div class="cta-banner__actions">
+            <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
+            <a class="btn btn-ghost" href="bootcamp-summer-2026.html">Join the Next Cohort &rarr;</a>
+          </div>
+          <div class="cta-banner__meta">
+            <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
+            <span><i class="cta-banner__dot" aria-hidden="true"></i>Apply early for priority consideration</span>
+          </div>
         </div>
       </div>
     </div>
@@ -833,7 +798,7 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="assets/fw_logo.png" alt="Future Wrights Academy" />
-        <p>AI education for Grade 9–12 students. Proudly started in Toronto. Core team includes faculty affiliated with University of Toronto and Toronto Metropolitan University, alongside engineers, founders, and researchers from industry.</p>
+        <p>AI education for Grade 9–12 students. Proudly built in Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
@@ -856,7 +821,6 @@
         <ul>
           <li><a href="for-parents.html">Parents</a></li>
           <li><a href="for-students.html">Students</a></li>
-          <li><a href="for-partners.html">Schools &amp; partners</a></li>
         </ul>
       </div>
       <div>
