@@ -127,6 +127,8 @@
   @media (max-width: 1000px) {
     .section-head--wide h2, .section-head--wide p { white-space: normal; }
   }
+  /* curriculum subtitle — two lines, default font size */
+  #curriculum .section-head { max-width: 860px; }
 
   /* "What makes this cohort different" — 3-up cards */
   .diff-grid {
@@ -214,69 +216,69 @@
     padding: 0 0.12em;
   }
 
-  /* Curriculum — week blocks */
-  .week-block {
-    max-width: 1080px; margin: 0 auto var(--sp-5);
-    padding: var(--sp-4);
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
+  /* Curriculum — two-week timeline */
+  .weeks {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5);
+    max-width: 1180px; margin: 0 auto; position: relative;
   }
-  .week-block.build { border-left: 4px solid var(--brand-accent); }
-  .week-label {
-    display: flex; align-items: center; gap: var(--sp-3);
-    margin-bottom: var(--sp-4);
-    padding-bottom: var(--sp-3);
-    border-bottom: 1px solid var(--line);
+  @media (max-width: 900px) {
+    .weeks { grid-template-columns: 1fr; gap: var(--sp-4); }
   }
-  .week-label .num {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--brand-deep); color: #fff;
-    display: grid; place-items: center;
-    font-size: 18px; font-weight: 600;
-    flex-shrink: 0;
+  .week-col {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-md); overflow: hidden;
   }
-  .week-block.build .week-label .num { background: var(--brand-accent); color: var(--ink); }
-  .week-label .title h3 {
-    font-size: 20px; font-weight: 600;
-    letter-spacing: -0.4px;
-    color: var(--ink);
-    margin: 0 0 4px;
+  .week-head {
+    text-align: center; color: #fff;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px var(--sp-3);
   }
-  .week-label .title .sub {
-    font-size: 14px; color: var(--ink-muted);
+  .week-head--navy { background: var(--navy); }
+  .week-head--teal { background: var(--teal); }
+  .day-row {
+    position: relative;
+    display: grid; grid-template-columns: 100px 1fr 142px;
+    gap: var(--sp-3); align-items: start;
+    padding: var(--sp-3) var(--sp-4);
   }
-  .day-grid {
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: var(--sp-2);
+  .day-row + .day-row { border-top: 1px solid var(--line); }
+  .week-col--2 .day-row { grid-template-columns: 44px 1fr 142px; }
+  /* vertical dotted line connecting the number circles */
+  .day-row::before {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 3px; z-index: 0;
+    background-image: radial-gradient(circle, #c2cad9 1.4px, transparent 1.6px);
+    background-size: 3px 11px;
   }
-  @media (max-width: 880px) { .day-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .day-grid { grid-template-columns: 1fr; } }
-  .day-card {
-    background: rgba(244, 180, 0, 0.07);
-    border: 1px solid rgba(244, 180, 0, 0.22);
-    border-radius: var(--radius-sm);
-    padding: var(--sp-3);
+  .week-col--1 .day-row::before { left: 114px; }
+  .week-col--2 .day-row::before { left: 46px; }
+  .day-row:nth-child(2)::before { top: 40px; }
+  .day-row:last-child::before { bottom: auto; height: 40px; }
+  @media (max-width: 520px) { .day-row::before { display: none; } }
+  .day-row__when { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 9px; }
+  .day-row__day {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--navy); line-height: 1.3; text-align: center;
   }
-  .day-card .day-num {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--brand-deep);
-    margin-bottom: 6px;
-    display: block;
+  .day-row__num {
+    position: relative; z-index: 1;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 15px; font-weight: 700; flex: none;
   }
-  .day-card h4 {
-    font-size: 14px; font-weight: 600;
-    letter-spacing: -0.2px;
-    line-height: 1.3;
-    color: var(--ink);
-    margin: 0 0 6px;
+  .week-col--1 .day-row__num { background: #e7eaf1; color: var(--navy); }
+  .week-col--2 .day-row__num { background: #e0eff3; color: var(--teal); }
+  .day-row__body h4 {
+    font-size: 15px; font-weight: 600; letter-spacing: -0.2px;
+    line-height: 1.25; color: var(--navy); margin: 0 0 5px;
   }
-  .day-card p {
-    font-size: 13px; line-height: 1.5;
-    color: var(--ink-muted);
-    margin: 0;
+  .day-row__body p { font-size: 12.5px; line-height: 1.5; color: var(--ink-muted); margin: 0; }
+  .day-row__build { display: flex; gap: 9px; align-items: flex-start; align-self: stretch; border-left: 1px solid var(--line); padding-left: 16px; }
+  .day-row__build svg { width: 28px; height: 28px; color: var(--teal); flex: none; }
+  .day-row__build span { font-size: 11px; line-height: 1.45; color: var(--ink-muted); }
+  .day-row__build strong { display: block; color: var(--ink); font-weight: 600; }
+  @media (max-width: 520px) {
+    .day-row, .week-col--2 .day-row { grid-template-columns: 1fr; gap: 8px; }
+    .day-row__when { justify-content: flex-start; }
+    .day-row__build { border-left: none; padding-left: 0; }
   }
 
   /* Typical day schedule */
@@ -311,6 +313,7 @@
     max-width: 720px; margin: var(--sp-3) auto 0;
     font-size: 14px; line-height: 1.6; color: var(--ink-muted);
   }
+  .schedule-note strong { color: var(--ink); font-weight: 700; }
 
   /* Instructor section */
   .instructor-grid {
@@ -549,35 +552,73 @@
         <p>Ten sessions, three hours each. A real working project every day — and a capstone you design, build, and launch live by Demo Day. Every student leaves with a portfolio and a live URL.</p>
       </div>
 
-      <div class="week-block build">
-        <div class="week-label">
-          <div class="num">1</div>
-          <div class="title">
-            <h3>Week 1 — <span class="hl-gold">Learn to build with AI</span></h3>
-          </div>
-        </div>
-        <div class="day-grid">
-          <article class="day-card"><span class="day-num">Day 1 · Mon</span><h4>What AI really is</h4><p>Run quick experiments on ChatGPT to see what it gets right, what it gets wrong, and what it gets confidently wrong. Walk out understanding the tool you're about to build with. <strong>Build today:</strong> your own AI "stress test."</p></article>
-          <article class="day-card"><span class="day-num">Day 2 · Tue</span><h4>Your new toolkit</h4><p>Set up Cursor — the AI tool that turns plain-English descriptions into real apps — and build your first working pages. <strong>Build today:</strong> a live Birthday Countdown page.</p></article>
-          <article class="day-card"><span class="day-num">Day 3 · Wed</span><h4>The art of prompting</h4><p>Learn what separates a frustrating AI session from a magical one, then go head-to-head in a live Prompt Battle. <strong>Build today:</strong> a reaction-time game.</p></article>
-          <article class="day-card"><span class="day-num">Day 4 · Thu</span><h4>From idea to instructions</h4><p>Turn a vague idea into a clear, step-by-step plan before you build a single thing. <strong>Build today:</strong> a "How Well Do You Know Me?" quiz.</p></article>
-          <article class="day-card"><span class="day-num">Day 5 · Fri</span><h4>Thinking in components</h4><p>Why does asking for a whole app at once make a mess? Learn to break a project into pieces and build it part by part. <strong>Build today:</strong> a clean, working Snake game.</p></article>
-        </div>
-      </div>
+      <div class="weeks">
+        <div class="week-col week-col--1">
+          <div class="week-head week-head--navy">Week 1 — Learn to Build with AI</div>
 
-      <div class="week-block build">
-        <div class="week-label">
-          <div class="num">2</div>
-          <div class="title">
-            <h3>Week 2 — <span class="hl-gold">Build and launch your own app</span></h3>
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__day">Day 1<br>Mon</span><span class="day-row__num">1</span></div>
+            <div class="day-row__body"><h4>What AI really is</h4><p>Run quick experiments on ChatGPT to see what it gets right, what it gets wrong, and what it gets confidently wrong. Walk out understanding the tool you're about to build with.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v6L3.6 18.4A2 2 0 0 0 5.3 21.5h13.4a2 2 0 0 0 1.7-3.1L15 9V3"/><path d="M9 3h6"/><path d="M8 14h8"/></svg><span><strong>Build today:</strong> your own AI "stress test."</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__day">Day 2<br>Tue</span><span class="day-row__num">2</span></div>
+            <div class="day-row__body"><h4>Your new toolkit</h4><p>Set up Cursor — the AI tool that turns plain-English descriptions into real apps — and build your first working pages.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span><strong>Build today:</strong> a live Birthday Countdown page.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__day">Day 3<br>Wed</span><span class="day-row__num">3</span></div>
+            <div class="day-row__body"><h4>The art of prompting</h4><p>Learn what separates a frustrating AI session from a magical one, then go head-to-head in a live Prompt Battle.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/></svg><span><strong>Build today:</strong> a reaction-time game.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__day">Day 4<br>Thu</span><span class="day-row__num">4</span></div>
+            <div class="day-row__body"><h4>From idea to instructions</h4><p>Turn a vague idea into a clear, step-by-step plan before you build a single thing.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9.5 9a2.5 2.5 0 1 1 3.3 2.4c-.6.2-1.3.7-1.3 1.6"/><line x1="11.5" y1="16" x2="11.51" y2="16"/></svg><span><strong>Build today:</strong> a "How Well Do You Know Me?" quiz.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__day">Day 5<br>Fri</span><span class="day-row__num">5</span></div>
+            <div class="day-row__body"><h4>Thinking in components</h4><p>Why does asking for a whole app at once make a mess? Learn to break a project into pieces and build it part by part.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span><strong>Build today:</strong> a clean, working Snake game.</span></div>
           </div>
         </div>
-        <div class="day-grid">
-          <article class="day-card"><span class="day-num">Day 6 · Mon</span><h4>When the AI does the work</h4><p>Discover that Cursor can search the web, run code, and generate data on its own — then learn the real-world skill that matters most: finding and fixing bugs without panicking. <strong>Build today:</strong> a Trivia game, built and debugged.</p></article>
-          <article class="day-card"><span class="day-num">Day 7 · Tue</span><h4>Teach the AI how you work</h4><p>Stop repeating yourself. Use rules and skills to teach Cursor your style so every project gets faster and better. <strong>Build today:</strong> a "Which ___ Are You?" personality quiz.</p></article>
-          <article class="day-card"><span class="day-num">Day 8 · Wed</span><h4>Capstone kickoff + go live</h4><p>No new concepts — just building. Start your own capstone project. The goal by end of session: a working version, deployed live, with a real URL. <strong>Build today:</strong> the first live version of your capstone.</p></article>
-          <article class="day-card"><span class="day-num">Day 9 · Thu</span><h4>Capstone sprint</h4><p>A full focused build session. Push your capstone further — add features, fix bugs, and polish — with instructors circulating to help you get unstuck. <strong>Build today:</strong> a more complete, polished capstone.</p></article>
-          <article class="day-card"><span class="day-num">Day 10 · Fri</span><h4>Demo Day</h4><p>Present your live app: what you built, why, what was hard, and what you'd do next. Parents arrive. Real demo, real audience, real applause. <strong>Walk away with:</strong> a deployed app, a presentation, and a portfolio piece.</p></article>
+
+        <div class="week-col week-col--2">
+          <div class="week-head week-head--teal">Week 2 — Build &amp; Launch Your Own App</div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__num">6</span></div>
+            <div class="day-row__body"><h4>When the AI does the work</h4><p>Discover that Cursor can search the web, run code, and generate data on its own — then learn the real-world skill that matters most: finding and fixing bugs without panicking.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg><span><strong>Build today:</strong> a Trivia game, built and debugged.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__num">7</span></div>
+            <div class="day-row__body"><h4>Teaching the AI how you work</h4><p>Stop repeating yourself. Use rules and skills to teach Cursor your style so every project gets faster and better.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span><strong>Build today:</strong> a "Which ___ Are You?" personality quiz.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__num">8</span></div>
+            <div class="day-row__body"><h4>Capstone kickoff + go live</h4><p>No new concepts — just building. Start your own capstone project. The goal by end of session: a working version, deployed live, with a real URL.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span><strong>Build today:</strong> the first live version of your capstone.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__num">9</span></div>
+            <div class="day-row__body"><h4>Capstone sprint</h4><p>A full focused build session. Push your capstone further — add features, fix bugs, and polish — with instructors circulating to help you get unstuck.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span><strong>Build today:</strong> a more complete, polished capstone.</span></div>
+          </div>
+
+          <div class="day-row">
+            <div class="day-row__when"><span class="day-row__num">10</span></div>
+            <div class="day-row__body"><h4>Demo Day</h4><p>Present your live app: what you built, why, what was hard, and what you'd do next. Parents arrive. Real demo, real audience, real applause.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/><path d="M5 3v4"/><path d="M3 5h4"/><path d="M19 17v4"/><path d="M17 19h4"/></svg><span><strong>Walk away with:</strong> a deployed app, a presentation, and a portfolio piece.</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -587,7 +628,7 @@
   <!-- TYPICAL DAY -->
   <section class="lab-section">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head section-head--wide">
         <span class="eyebrow gold">A typical day</span>
         <h2>Three hours, and you're building by minute fifteen.</h2>
       </div>
@@ -601,7 +642,7 @@
         <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Wrap — demo what you made and set tomorrow's goal</div></div>
       </div>
 
-      <p class="schedule-note">The final three sessions shift to full build sprints — students spend the time building, debugging, and shipping their capstone, with instructors there to unblock rather than lecture.</p>
+      <p class="schedule-note"><strong>Note:</strong> The final three sessions shift to full build sprints — students spend the time building, debugging, and shipping their capstone, with instructors there to unblock rather than lecture.</p>
     </div>
   </section>
 
@@ -637,7 +678,7 @@
       </div>
       <div class="cta-banner__inner">
         <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">The Future <span class="gold-word">Will Not Wait.</span></h2>
+          <h2 class="cta-banner__title">The future <span class="gold-word">won't wait.</span></h2>
           <p class="cta-banner__lede">Give your child the confidence, skills, and mindset to build, think, and lead in the AI era.</p>
           <div class="cta-banner__actions">
             <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
