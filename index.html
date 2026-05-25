@@ -69,6 +69,12 @@
   line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:40ch; }
 
 .fw-hero__cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:38px; }
+.fw-hero__camp { display:none; }
+@media (max-width:640px){
+  .fw-hero__camp { display:inline-flex; }
+  .fw-hero__cta { flex-direction:column; align-items:stretch; }
+  .fw-hero__cta .btn { justify-content:center; }
+}
 /* Hero CTAs use the locked .btn system — sized up for the showpiece + dark-bg ghost (cyan glow) */
 .fw-hero .btn { font-size:16px; padding:15px 30px; gap:9px; }
 .fw-hero .btn-primary { box-shadow:0 10px 34px rgba(244,180,0,.30); }
@@ -344,6 +350,7 @@ header.site:not(.scrolled) {
         <h1 class="fw-hero__title">Prepare for the<br><span class="grad">AI era</span> before your<br>future career begins.</h1>
         <p class="fw-hero__lede">Most teens are becoming AI consumers. Future Wrights helps high school students understand AI deeply, build real projects, and develop the creativity, confidence, and critical thinking to enter the AI era prepared &mdash; not surprised.</p>
         <div class="fw-hero__cta">
+          <a class="btn btn-primary fw-hero__camp" href="bootcamp-summer-2026.html">Summer 2026 Bootcamp &rarr;</a>
           <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
           <a class="btn btn-ghost" href="#ecosystem">See our programs</a>
         </div>
