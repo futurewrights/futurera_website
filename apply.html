@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Apply — Summer 2026 Bootcamp | Future Wrights Academy</title>
-<meta name="description" content="Apply for the Summer 2026 cohort of Build with AI — From Prompt to Product. Small cohort, rolling intake, decisions within two business days." />
+<meta name="description" content="Apply for the Summer 2026 cohort of Build with AI — From Idea to Launched App. Small cohort, rolling intake, decisions within two business days." />
 
 <link rel="icon" type="image/png" href="assets/fw_favicon.png" />
 <link rel="apple-touch-icon" href="assets/fw_favicon.png" />
@@ -20,74 +20,90 @@
   /* Page hero */
   .page-hero {
     background: var(--surface);
-    padding: var(--sp-7) 0 var(--sp-6);
+    padding: var(--sp-7) 0;
     border-bottom: 1px solid var(--line);
   }
-  .page-hero .container { max-width: 760px; }
+  .page-hero .container { max-width: 1080px; text-align: center; }
   .page-hero h1 {
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 600;
-    letter-spacing: -1.8px;
-    line-height: 1.1;
-    color: var(--ink);
-    margin: var(--sp-2) 0 var(--sp-3);
-    text-wrap: balance;
+    font-size: clamp(30px, 4.6vw, 48px);
+    font-weight: 600; letter-spacing: -1.5px; line-height: 1.12;
+    color: var(--navy); margin: var(--sp-2) 0 var(--sp-3);
   }
+  .page-hero h1 em { font-style: italic; }
   .page-hero .lede {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink-muted);
-    margin: 0;
+    font-size: 17px; line-height: 1.6; color: var(--ink-muted);
+    margin: 0 auto; max-width: 640px;
+  }
+  /* facts bar under the description */
+  .apply-facts {
+    text-align: left;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: 0 18px 50px rgba(15,23,66,0.08);
+    margin-top: var(--sp-5);
+  }
+  .apply-fact { display: flex; gap: 12px; align-items: center; padding: var(--sp-3) var(--sp-4); }
+  .apply-fact + .apply-fact { border-left: 1px solid var(--line); }
+  .apply-fact__ico { flex: none; width: 40px; height: 40px; border-radius: 50%; background: #eef1f7; display: grid; place-items: center; }
+  .apply-fact__ico svg { width: 20px; height: 20px; color: var(--navy); }
+  .apply-fact__txt strong { display: block; font-size: 15px; font-weight: 700; color: var(--navy); letter-spacing: -0.2px; }
+  .apply-fact__txt span { display: block; font-size: 12.5px; color: var(--ink-muted); margin-top: 1px; }
+  @media (max-width: 760px) {
+    .apply-facts { grid-template-columns: 1fr; }
+    .apply-fact + .apply-fact { border-left: none; border-top: 1px solid var(--line); }
   }
 
   /* Application section — single column */
   .apply-section { padding: var(--sp-6) 0 var(--sp-7); }
   .apply-section .container { max-width: 880px; }
 
-  /* "What happens next" — horizontal 3-step strip above the form */
+  /* "How it works" — 3-step cards */
+  .apply-eyebrow {
+    display: block;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold-ink);
+    text-align: center;
+    margin: 0 0 var(--sp-4);
+  }
   .apply-steps {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-2);
+    gap: var(--sp-4);
     padding: 0;
-    margin: 0 0 var(--sp-5);
+    margin: 0 0 var(--sp-6);
   }
   @media (max-width: 720px) {
-    .apply-steps { grid-template-columns: 1fr; }
+    .apply-steps { grid-template-columns: 1fr; gap: var(--sp-3); }
   }
   .apply-step {
-    background: #fff;
-    border: 1px solid var(--line);
+    position: relative;
+    background: #f7f9fd;
+    border: 1px solid #e7ecf6;
     border-radius: var(--radius-md);
-    padding: var(--sp-3);
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+    padding: var(--sp-4);
   }
+  .apply-step:not(:last-child)::after {
+    content: ""; position: absolute; top: 50%; left: 100%;
+    width: var(--sp-4); height: 2px; transform: translateY(-50%);
+    background-image: radial-gradient(circle, var(--brand-accent) 1.5px, transparent 1.7px);
+    background-size: 7px 2px; background-repeat: repeat-x; background-position: center;
+  }
+  @media (max-width: 720px) { .apply-step:not(:last-child)::after { display: none; } }
   .apply-step .num {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--brand-accent);
-    color: var(--ink);
-    display: grid; place-items: center;
-    font-size: 13px; font-weight: 600;
-    flex-shrink: 0;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--brand-accent); color: var(--navy);
+    display: grid; place-items: center; font-size: 15px; font-weight: 700;
+    margin-bottom: var(--sp-3);
   }
-  .apply-step .step-content { flex: 1; min-width: 0; }
   .apply-step strong {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 4px;
-    letter-spacing: -0.1px;
+    display: block; font-size: 17px; font-weight: 700;
+    color: var(--navy); margin-bottom: 8px; letter-spacing: -0.2px; line-height: 1.25;
   }
   .apply-step span {
-    display: block;
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--ink-muted);
+    display: block; font-size: 14px; line-height: 1.55; color: var(--ink-muted);
   }
 
   /* Footnote below the form */
@@ -146,37 +162,39 @@
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow gold">Apply</span>
-      <h1>Apply for <em>Build with AI — From Prompt to Product</em>.</h1>
-      <p class="lede">Small cohort, rolling intake. Most applicants get a decision in two business days.</p>
+      <h1>Apply for Build with AI &mdash;<br><em>From Idea to Launched App.</em></h1>
+      <p class="lede">Small cohorts. Thoughtful admissions.</p>
+      <p class="lede">Most applicants receive a response within two business days.</p>
+      <div class="apply-facts">
+        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="apply-fact__txt"><strong>15 students max</strong><span>Small, in-person cohorts</span></div></div>
+        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span><div class="apply-fact__txt"><strong>30 hours</strong><span>10 sessions over 2 weeks</span></div></div>
+        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div class="apply-fact__txt"><strong>Toronto, Ontario</strong><span>GTA-wide welcome</span></div></div>
+        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="apply-fact__txt"><strong>Ages 13–16</strong><span>No prior coding required</span></div></div>
+      </div>
     </div>
   </section>
 
   <!-- APPLICATION -->
-  <section class="apply-section">
+  <section class="apply-section" id="application">
     <div class="container">
 
-      <!-- What happens next — horizontal 3-step strip -->
+      <!-- How it works — 3-step cards -->
+      <span class="apply-eyebrow">How it works</span>
       <ol class="apply-steps">
         <li class="apply-step">
           <span class="num">1</span>
-          <div class="step-content">
-            <strong>Submit the application</strong>
-            <span>~5 minutes. No essays.</span>
-          </div>
+          <strong>Submit the application</strong>
+          <span>Takes about five minutes. No essays. No technical experience required.</span>
         </li>
         <li class="apply-step">
           <span class="num">2</span>
-          <div class="step-content">
-            <strong>We review &amp; reply</strong>
-            <span>Within 2 business days — Stripe payment link, or a 20-min call first.</span>
-          </div>
+          <strong>We review &amp; reply</strong>
+          <span>Most students receive a response within two business days. If needed, we may invite families to a short conversation first.</span>
         </li>
         <li class="apply-step">
           <span class="num">3</span>
-          <div class="step-content">
-            <strong>Pay to confirm</strong>
-            <span>Once payment lands, your spot is locked in.</span>
-          </div>
+          <strong>Confirm your spot</strong>
+          <span>Once tuition is processed, your place in the cohort is secured.</span>
         </li>
       </ol>
 
