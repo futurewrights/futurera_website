@@ -883,18 +883,16 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .info-overlay .affiliation {
-    font-size: 13px; font-weight: 500;
+    font-size: 13px; font-weight: 600;
     color: var(--ink);
     line-height: 1.3;
-    margin: 0 0 1px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin: 0 0 2px;
   }
   .info-overlay .title {
     font-size: 12px; font-weight: 500;
     color: var(--ink-muted);
-    line-height: 1.3;
+    line-height: 1.35;
     margin: 0;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .linkedin-link {
     flex-shrink: 0;
