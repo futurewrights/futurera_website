@@ -59,6 +59,8 @@
 .fw-eyebrow { display:inline-flex; align-items:center; gap:9px; font-family:"Inter",sans-serif;
   font-size:13px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); }
 .fw-eyebrow::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 14px var(--cyan); }
+.fw-eyebrow__loc { margin-left:-9px; }
+@media (max-width:480px){ .fw-eyebrow__loc { display:none; } }
 
 .fw-hero__title { font-family:"General Sans","Inter",sans-serif; font-weight:600; color:var(--ink-0);
   font-size: clamp(38px, 4.8vw, 60px); line-height:1.08; letter-spacing:-.02em; margin:18px 0 0;
@@ -238,7 +240,8 @@ header.site:not(.scrolled) {
   .eco-step__num { font-size:30px; }
   .eco-step__label, .eco-step__sub { margin-top:0; }
   .eco-step__sub br { display:none; }
-  .eco-prog { flex-direction:column; }
+  .eco-prog { flex-direction:column; padding: var(--sp-4); }
+  .eco-step__body--split .eco-prog { padding: var(--sp-4); }
   .eco-prog__art { width:100%; max-width:none; }
   .eco-prog--feat .eco-prog__head { flex-direction:column; }
   .eco-prog--feat .eco-prog__art { width:100%; max-width:280px; }
@@ -249,8 +252,15 @@ header.site:not(.scrolled) {
   .eco-step__body--split .eco-prog__cardico { position: static; display: block; margin-bottom: 10px; }
   .eco-step__body--split .eco-prog__cardico img { width: 54px; height: 54px; }
   .eco-or { display:none; }
-  .eco-feats, .eco-feats--2 { grid-template-columns: 1fr 1fr; }
+  .eco-feats, .eco-feats--2 { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
   .eco-strip { grid-template-columns: 1fr 1fr; margin-left:0; }
+}
+@media (max-width: 560px) {
+  /* feat-card (AI Labs / AI Studio) chips: stack icon over text so they fit & align */
+  .eco-prog--feat .eco-feats li, .eco-prog--gold .eco-feats li {
+    flex-direction: column; align-items: center; text-align: center; gap: 8px;
+  }
+  .eco-feats .eco-feat-ico { width: 46px; height: 46px; }
 }
 
 /* ============================================================
@@ -304,6 +314,11 @@ header.site:not(.scrolled) {
   #about .vm-wrap { grid-template-columns:1fr; gap:36px; }
   #about .vm-intro { position:static; }
 }
+@media (max-width:560px){
+  .vm-card { padding: var(--sp-4); }
+  .vm-card__ico svg, .vm-card__ico--art img { width:56px; height:56px; }
+  .vm-badge { white-space:nowrap; }
+}
 </style>
 </head>
 <body>
@@ -346,7 +361,7 @@ header.site:not(.scrolled) {
 
     <div class="container fw-hero__inner">
       <div class="fw-hero__copy">
-        <span class="fw-eyebrow">AI education for high schoolers &middot; Toronto</span>
+        <span class="fw-eyebrow">AI education for high schoolers<span class="fw-eyebrow__loc"> &middot; Toronto</span></span>
         <h1 class="fw-hero__title">Prepare for the<br><span class="grad">AI era</span> before your<br>future career begins.</h1>
         <p class="fw-hero__lede">Most teens are becoming AI consumers. Future Wrights helps high school students understand AI deeply, build real projects, and develop the creativity, confidence, and critical thinking to enter the AI era prepared &mdash; not surprised.</p>
         <div class="fw-hero__cta">
