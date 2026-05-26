@@ -86,6 +86,12 @@
   .glance__row > svg { width: 16px; height: 16px; color: var(--brand-accent-2); margin-top: 1px; flex: none; }
   .glance__k { color: var(--ink-muted); font-weight: 500; }
   .glance__v { color: var(--ink); font-weight: 500; }
+  /* Multi-part values (Dates, Where): inline w/ separators on desktop,
+     one segment per line on phones so the narrow value column stays tidy */
+  @media (max-width: 600px) {
+    .glance__v--list span:not(.gsep) { display: block; }
+    .glance__v--list .gsep { display: none; }
+  }
   .placeholder-note {
     display: inline-block;
     font-size: 10px; font-weight: 700;
@@ -314,6 +320,11 @@
     font-size: 14px; line-height: 1.6; color: var(--ink-muted);
   }
   .schedule-note strong { color: var(--ink); font-weight: 700; }
+  /* Phones: drop the fixed 140px time column to a 40/60 split so the
+     activity (right) column gets ~60% width instead of being cramped */
+  @media (max-width: 600px) {
+    .schedule-row { grid-template-columns: 2fr 3fr; }
+  }
 
   /* Instructor section */
   .instructor-grid {
@@ -482,10 +493,10 @@
           <h4>At a glance</h4>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><div class="glance__k">Course</div><div class="glance__v">Build with AI — From Idea to Launched App</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><div class="glance__k">Format</div><div class="glance__v">2-week in-person bootcamp</div></div>
-          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div class="glance__k">Dates</div><div class="glance__v">Jul 20–31 / Aug 3–14 / Aug 17–28, 2026 · 3 cohorts</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div class="glance__k">Dates</div><div class="glance__v glance__v--list"><span>Jul 20–31</span><span class="gsep"> / </span><span>Aug 3–14</span><span class="gsep"> / </span><span>Aug 17–28, 2026</span><span class="gsep"> · </span><span>3 cohorts</span></div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg><div class="glance__k">Schedule</div><div class="glance__v">Mon–Fri, 9:00 AM – 12:00 PM</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" y1="2" x2="14" y2="2"/><circle cx="12" cy="14" r="8"/><line x1="12" y1="14" x2="15" y2="11"/></svg><div class="glance__k">Total</div><div class="glance__v">30 hours over 10 days</div></div>
-          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="glance__k">Where</div><div class="glance__v">In-person · Toronto, North York · GTA-wide welcome</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="glance__k">Where</div><div class="glance__v glance__v--list"><span>In-person</span><span class="gsep"> · </span><span>Toronto, North York</span><span class="gsep"> · </span><span>GTA-wide welcome</span></div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><div class="glance__k">Cohort size</div><div class="glance__v">Small group · up to 15 students</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="glance__k">Ages</div><div class="glance__v">13–16 · no coding required</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><div class="glance__k">Bring</div><div class="glance__v">A laptop (any model)</div></div>
