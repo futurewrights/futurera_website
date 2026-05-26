@@ -87,6 +87,18 @@
 .fw-hero .btn-ghost { color:var(--ink-0); border-color:rgba(255,255,255,.24); background:rgba(255,255,255,.04); }
 .fw-hero .btn-ghost:hover { border-color:var(--cyan); background:rgba(255,255,255,.04); transform:translateY(-2px); box-shadow:0 0 0 1px rgba(0,229,255,.45),0 0 26px rgba(0,229,255,.18); }
 
+/* Mobile hero CTAs: one gold primary (Bootcamp) + slimmer outline buttons.
+   Placed after the base .fw-hero .btn rules so the smaller size wins. */
+@media (max-width:640px){
+  .fw-hero__cta { gap:10px; }
+  .fw-hero .btn { font-size:15px; padding:12px 24px; }
+  /* demote "Book a 20-minute session" (the non-camp primary) to an outline button */
+  .fw-hero__cta .btn-primary:not(.fw-hero__camp){
+    background:rgba(255,255,255,0.04); color:var(--ink-0);
+    border-color:rgba(255,255,255,.24); box-shadow:none;
+  }
+}
+
 /* motion */
 @keyframes fwUp { from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:translateY(0)} }
 .fw-hero__copy > * { animation:fwUp .7s cubic-bezier(.2,.7,.2,1) both; }
@@ -221,7 +233,7 @@ header.site:not(.scrolled) {
 .eco-prog--community { background: linear-gradient(165deg, #eefbfb, #ffffff 62%); border-color: rgba(17,146,173,0.28); align-items: center; padding-block: 12px; gap: 14px; }
 .eco-join { margin-top: 6px; }
 .eco-join:hover { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); transform: translateY(-2px); }
-.eco-prog--community h3 { color: var(--navy); line-height:1.2; }
+.eco-prog--community h3 { color: var(--navy); line-height:1.2; text-wrap: balance; }
 .eco-prog--community h3 .hl-cyan { color: var(--teal); }
 .eco-prog--community p { color: var(--ink-muted); }
 .eco-prog--community .eco-prog__art { width:50%; max-width:500px; }
@@ -246,14 +258,19 @@ header.site:not(.scrolled) {
   .eco-step__label, .eco-step__sub { margin-top:0; }
   .eco-step__sub br { display:none; }
   .eco-prog { flex-direction:column; padding: var(--sp-4); }
+  /* drop forced desktop <br>s in card descriptions (AI Labs, University/
+     Industry Track, AI Studio) so the text wraps & aligns naturally */
+  .eco-prog p br { display:none; }
+  .eco-prog p { text-wrap: pretty; }
   .eco-step__body--split .eco-prog { padding: var(--sp-4); }
   .eco-prog__art { width:100%; max-width:none; }
   .eco-prog--feat .eco-prog__head { flex-direction:column; }
   .eco-prog--feat .eco-prog__art { width:100%; max-width:280px; }
   .eco-prog--community { text-align:center; padding: 18px var(--sp-4) 24px; }
-  /* drop forced desktop line breaks so centered copy wraps & balances cleanly */
-  .eco-prog--community h3 br,
-  .eco-prog--community p br { display:none; }
+  /* heading balances on its own; keep the paragraph's sentence break so
+     "The ecosystem grows…" starts a fresh line instead of orphaning "The" */
+  .eco-prog--community h3 br { display:none; }
+  .eco-prog--community p br { display:inline; }
   .eco-prog--community h3 { text-wrap: balance; }
   .eco-prog--community p { text-wrap: pretty; }
   .eco-prog--community .eco-prog__main { width:100%; }
@@ -624,7 +641,7 @@ header.site:not(.scrolled) {
           <div class="eco-step__body">
             <article class="eco-prog eco-prog--community">
               <div class="eco-prog__main">
-                <h3>Beyond programs.<br><span class="hl-cyan">A growing ecosystem<br>for future creators.</span></h3>
+                <h3>Beyond programs. <span class="hl-cyan">A growing ecosystem for future creators.</span></h3>
                 <p>New programs. New mentors. New connections.<br>The ecosystem grows &mdash; and you grow with it.</p>
                 <a class="btn btn-ghost eco-join" href="contact.html">Join the Community &rarr;</a>
               </div>
