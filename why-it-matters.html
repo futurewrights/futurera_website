@@ -18,40 +18,52 @@
 <style>
   /* ----------- Article-specific styles (why-it-matters page) ----------- */
 
-  /* Article hero — white background, no breadcrumb */
+  /* Article hero — navy gradient with gold/cyan orbs + grid (matches homepage) */
   .article-head {
+    position: relative; overflow: hidden; isolation: isolate;
     padding: var(--sp-7) 0 var(--sp-6);
+    background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
   }
-  .article-head .container { max-width: 760px; }
+  .article-head__bg { position: absolute; inset: -40px; z-index: 0; pointer-events: none; }
+  .article-head__bg .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .42; }
+  .article-head__bg .orb--gold { width: 540px; height: 540px; left: -120px; top: -100px; background: radial-gradient(circle, rgba(244,180,0,.55), transparent 68%); }
+  .article-head__bg .orb--cyan { width: 600px; height: 600px; right: -150px; bottom: -180px; background: radial-gradient(circle, rgba(0,229,255,.42), transparent 68%); }
+  .article-head__grid { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 62px 62px;
+    -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
+            mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%); }
+  .article-head .container { max-width: 760px; position: relative; z-index: 1; }
   .article-head h1 {
     font-size: clamp(32px, 4.6vw, 56px);
     font-weight: 600;
     line-height: 1.12;
     letter-spacing: -1.6px;
-    color: var(--ink);
+    color: #fff;
     margin: var(--sp-2) 0 var(--sp-3);
     text-wrap: balance;
   }
+  .article-head .eyebrow.gold { color: var(--brand-accent); }
   .article-head .lede {
     font-size: 18px;
     line-height: 1.55;
-    color: var(--ink-muted);
+    color: rgba(255,255,255,0.80);
     margin: 0;
   }
   .article-head .meta {
     margin-top: var(--sp-4);
     padding-top: var(--sp-3);
-    border-top: 1px solid var(--line);
-    color: var(--ink-muted);
+    border-top: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.62);
     font-size: var(--fs-sm);
     display: flex; gap: var(--sp-4); flex-wrap: wrap;
   }
-  .article-head .meta strong { color: var(--ink); font-weight: 600; }
+  .article-head .meta strong { color: #fff; font-weight: 600; }
 
   /* Article body — scoped to DIRECT children only so styles don't leak into .article-cta */
   article.article-body {
     max-width: 760px; margin: 0 auto;
-    padding: 0 var(--gutter) var(--sp-7);
+    padding: var(--sp-6) var(--gutter) var(--sp-7);
   }
   article.article-body > p {
     font-size: 17px;
@@ -81,7 +93,7 @@
 
   /* Stat block */
   .stat-block {
-    background: var(--surface);
+    background: #F5F7FC;
     border: 1px solid var(--line);
     border-left: 3px solid var(--brand-accent);
     border-radius: var(--radius-sm);
@@ -163,7 +175,7 @@
   }
   .references li {
     counter-increment: ref;
-    background: var(--surface);
+    background: #F5F7FC;
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     padding: var(--sp-3) var(--sp-4);
@@ -247,6 +259,11 @@
 <main id="main">
 
   <section class="article-head">
+    <div class="article-head__bg" aria-hidden="true">
+      <span class="orb orb--gold"></span>
+      <span class="orb orb--cyan"></span>
+    </div>
+    <div class="article-head__grid" aria-hidden="true"></div>
     <div class="container">
       <span class="eyebrow gold">Why it matters</span>
       <h1>The future careers students are heading into are already being rewritten by AI.</h1>
