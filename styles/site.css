@@ -853,14 +853,6 @@
     width: 100%; height: 100%;
     object-fit: cover; display: block;
   }
-  /* Initials inside the placeholder's head circle (keeps gradient bg) */
-  .ph-initials {
-    position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%);
-    font-family: "General Sans", "Inter", sans-serif;
-    font-weight: 700; letter-spacing: 1px;
-    font-size: clamp(24px, 3vw, 32px);
-    color: var(--navy);
-  }
   /* Subtle inset border for the "framed picture" feel */
   .photo-frame::after {
     content: ""; position: absolute; inset: 0; z-index: 3;
@@ -1144,14 +1136,13 @@
 
   /* Brand column */
   .foot-brand img {
-    height: 76px; width: auto;
-    margin-left: -8px;                /* offset the logo's transparent left padding so it aligns with the text */
-    margin-bottom: var(--sp-2);
+    height: 46px; width: auto;
+    margin-bottom: var(--sp-3);
     filter: brightness(0) invert(1);
   }
   .foot-brand p {
     color: rgba(255,255,255,0.65);
-    line-height: 1.6; max-width: 38ch; margin: 0 0 var(--sp-3);
+    line-height: 1.6; max-width: 46ch; margin: 0 0 var(--sp-3);
   }
 
   /* Social links */
