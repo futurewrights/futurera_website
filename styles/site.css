@@ -1110,6 +1110,10 @@
       margin-bottom: 0;
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
+    /* Size the logo to the description's width so they read as one aligned
+       block (instead of a small logo lost in the full-width row); cap so it
+       never overflows narrow phones. */
+    .foot-brand img { width: min(100%, 340px); height: auto; }
   }
   /* Small tablet: 2×2 grid for link columns */
   @media (max-width: 720px) {
