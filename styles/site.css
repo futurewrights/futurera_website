@@ -1088,6 +1088,11 @@
     transition: background var(--dur-micro) var(--ease-out);
   }
   .newsletter-form button:hover { background: var(--brand-deep-2); }
+  .newsletter-done {
+    flex: 1; margin: 0;
+    text-align: center; padding: 10px 16px;
+    font-size: 14px; font-weight: 600; color: var(--brand-deep);
+  }
 
   /* ---------- Footer (dark) ---------- */
   footer.site {
