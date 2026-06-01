@@ -119,15 +119,37 @@
     font-weight: 600;
   }
 
-  /* Embedded form (Google Forms iframe wrapper) */
-  .apply-form-embed {
-    margin-bottom: var(--sp-4);
+  /* Apply CTA card — replaces the embedded Google Form; the form opens
+     in a new tab where Google can render it natively at any height */
+  .apply-cta {
+    max-width: 560px;
+    margin: var(--sp-5) auto var(--sp-3);
+    padding: var(--sp-5) var(--sp-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    text-align: center;
   }
-  .apply-form-embed iframe {
-    display: block;
-    width: 100%;
-    border: 0;
-    transition: height 0.4s ease;
+  .apply-cta h3 {
+    font-family: "General Sans", "Inter", sans-serif;
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin: 0 0 var(--sp-2);
+  }
+  .apply-cta > p {
+    color: var(--ink-muted);
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0 auto var(--sp-4);
+    max-width: 420px;
+  }
+  .apply-cta__btn { font-size: 17px; padding: 16px 32px; }
+  .apply-cta__note {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin: var(--sp-3) auto 0;
   }
 
 </style>
@@ -199,9 +221,10 @@
       </ol>
 
       <!--
-        Application form below. The iframe is the live Google Form.
-        To swap the form, replace the src URL with a new embed.
-        Auto-shrink-on-submit handled by the script at the bottom of the page.
+        Application form button below. The form opens in a new tab on
+        Google Forms (cleaner than embedding — Google's form layout
+        handles section navigation natively).
+        To swap the form, replace the href URL on the .apply-cta__btn link.
 
         AFTER SUBMISSION (manual workflow):
           1. Review the application in the linked Google Sheet
@@ -216,14 +239,13 @@
           Auto-deposit recommended so no security question is needed.
           Save the full e-Transfer instructions in a Gmail draft template.
       -->
-      <div class="apply-form-embed">
-        <iframe
-          id="applyFormIframe"
-          src="https://docs.google.com/forms/d/e/1FAIpQLSenjfSD4TWFG1h1Fg5-Reg2b91cEzR0RzEraRboNECABu2cfA/viewform?embedded=true"
-          height="3000"
-          title="Application form">
-          Loading…
-        </iframe>
+      <div class="apply-cta">
+        <h3>Ready to apply?</h3>
+        <p>The application takes about 5 minutes. No essays. No technical experience required.</p>
+        <a class="btn btn-primary apply-cta__btn" href="https://docs.google.com/forms/d/e/1FAIpQLSenjfSD4TWFG1h1Fg5-Reg2b91cEzR0RzEraRboNECABu2cfA/viewform" target="_blank" rel="noopener">
+          Open the application form &rarr;
+        </a>
+        <p class="apply-cta__note">Opens in a new tab on Google Forms.</p>
       </div>
 
       <p class="apply-footnote">Questions about your application? Email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p>
@@ -319,22 +341,6 @@
 
     // Close when the page is scrolled
     window.addEventListener('scroll', closeMenu, { passive: true });
-  })();
-
-  // Shrink the application form iframe once submitted so the
-  // "Thanks for applying" confirmation doesn't leave huge empty space.
-  // Google Forms navigates the iframe to a new URL on submit,
-  // which fires a second `load` event we can detect.
-  (function () {
-    var iframe = document.getElementById('applyFormIframe');
-    if (!iframe) return;
-    var loads = 0;
-    iframe.addEventListener('load', function () {
-      loads++;
-      if (loads === 2) {
-        iframe.style.height = '320px';
-      }
-    });
   })();
 </script>
 
