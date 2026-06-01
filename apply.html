@@ -80,8 +80,8 @@
   }
   .apply-step {
     position: relative;
-    background: #f7f9fd;
-    border: 1px solid #e7ecf6;
+    background: linear-gradient(165deg, #fffdf4, #ffffff 60%);
+    border: 1px solid rgba(244,180,0,0.22);
     border-radius: var(--radius-md);
     padding: var(--sp-4);
   }
@@ -125,41 +125,55 @@
     font-weight: 600;
   }
 
-  /* Apply CTA card — replaces the embedded Google Form; the form opens
-     in a new tab where Google can render it natively at any height */
+  /* Apply CTA card — same navy hero background as the camp page:
+     navy radial gradient + gold/cyan orbs + faint masked grid */
   .apply-cta {
-    max-width: 560px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    max-width: 640px;
     margin: var(--sp-5) auto var(--sp-3);
-    padding: var(--sp-5) var(--sp-4);
-    background: var(--surface);
-    border: 1px solid var(--line);
+    padding: var(--sp-4) var(--sp-5);
+    background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
+    border: 1px solid rgba(255,255,255,0.10);
     border-radius: var(--radius-md);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    box-shadow: 0 24px 60px rgba(10,27,61,0.30);
   }
+  .apply-cta__bg { position: absolute; inset: -30px; z-index: 0; pointer-events: none; }
+  .apply-cta__bg .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .42; }
+  .apply-cta__bg .orb--gold { width: 260px; height: 260px; left: -60px; top: -50px; background: radial-gradient(circle, rgba(244,180,0,.55), transparent 68%); }
+  .apply-cta__bg .orb--cyan { width: 280px; height: 280px; right: -80px; bottom: -90px; background: radial-gradient(circle, rgba(0,229,255,.42), transparent 68%); }
+  .apply-cta__grid {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
+            mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
+  }
+  .apply-cta > h3,
+  .apply-cta > p,
+  .apply-cta > a { position: relative; z-index: 1; }
   .apply-cta h3 {
     font-family: "General Sans", "Inter", sans-serif;
-    font-size: clamp(22px, 2.4vw, 28px);
+    font-size: clamp(26px, 3vw, 34px);
     font-weight: 600;
-    letter-spacing: -0.5px;
-    color: var(--ink);
+    letter-spacing: -0.6px;
+    line-height: 1.15;
+    color: #fff;
     margin: 0 0 var(--sp-2);
   }
   .apply-cta > p {
-    color: var(--ink-muted);
-    font-size: 16px;
+    color: rgba(255,255,255,0.78);
+    font-size: 17px;
     line-height: 1.55;
-    margin: 0 auto var(--sp-4);
-    max-width: 420px;
+    margin: 0 auto var(--sp-3);
+    max-width: 460px;
   }
   .apply-cta__btn { font-size: 17px; padding: 16px 32px; }
-  .apply-cta__note {
-    font-size: 13px;
-    color: var(--ink-muted);
-    margin: var(--sp-3) auto 0;
-  }
 
 </style>
 </head>
@@ -249,12 +263,16 @@
           Save the full e-Transfer instructions in a Gmail draft template.
       -->
       <div class="apply-cta">
+        <div class="apply-cta__bg" aria-hidden="true">
+          <span class="orb orb--gold"></span>
+          <span class="orb orb--cyan"></span>
+        </div>
+        <div class="apply-cta__grid" aria-hidden="true"></div>
         <h3>Ready to apply?</h3>
-        <p>The application takes about 5 minutes. No essays. No technical experience required.</p>
+        <p>Apply in five minutes. Build for two weeks. Launch your capstone live.</p>
         <a class="btn btn-primary apply-cta__btn" href="https://docs.google.com/forms/d/e/1FAIpQLSenjfSD4TWFG1h1Fg5-Reg2b91cEzR0RzEraRboNECABu2cfA/viewform" target="_blank" rel="noopener">
           Start application &rarr;
         </a>
-        <p class="apply-cta__note">Opens in a new tab on Google Forms.</p>
       </div>
 
       <p class="apply-footnote">Questions about your application? Email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p>
