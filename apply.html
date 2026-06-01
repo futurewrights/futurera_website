@@ -86,16 +86,22 @@
     padding: var(--sp-4);
   }
   .apply-step:not(:last-child)::after {
-    content: ""; position: absolute; top: 50%; left: 100%;
-    width: var(--sp-4); height: 2px; transform: translateY(-50%);
-    background-image: radial-gradient(circle, var(--brand-accent) 1.5px, transparent 1.7px);
-    background-size: 7px 2px; background-repeat: repeat-x; background-position: center;
+    content: "→";
+    position: absolute; top: 50%;
+    left: calc(100% + var(--sp-4) / 2);
+    transform: translate(-50%, -50%);
+    color: var(--brand-accent);
+    font-size: 26px; font-weight: 700; line-height: 1;
   }
   @media (max-width: 720px) { .apply-step:not(:last-child)::after { display: none; } }
   .apply-step .num {
-    width: 34px; height: 34px; border-radius: 50%;
-    background: var(--brand-accent); color: var(--navy);
-    display: grid; place-items: center; font-size: 15px; font-weight: 700;
+    display: inline-block;
+    background: rgba(244,180,0,0.18);
+    color: var(--gold-ink);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
     margin-bottom: var(--sp-3);
   }
   .apply-step strong {
@@ -207,17 +213,17 @@
       <span class="apply-eyebrow">How it works</span>
       <ol class="apply-steps">
         <li class="apply-step">
-          <span class="num">1</span>
+          <span class="num">Step 1</span>
           <strong>Submit the application</strong>
           <span>Takes about five minutes. No essays. No technical experience required.</span>
         </li>
         <li class="apply-step">
-          <span class="num">2</span>
+          <span class="num">Step 2</span>
           <strong>We review &amp; reply</strong>
           <span>Most students receive a response within two business days. If needed, we may invite families to a short conversation first.</span>
         </li>
         <li class="apply-step">
-          <span class="num">3</span>
+          <span class="num">Step 3</span>
           <strong>Confirm your spot</strong>
           <span>Once tuition is processed, your place in the cohort is secured.</span>
         </li>
