@@ -34,15 +34,15 @@
             mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%); }
   .page-hero .container { position: relative; z-index: 1; }
   .hero-grid {
-    display: grid; grid-template-columns: 1.12fr 0.88fr;
-    gap: var(--sp-6); align-items: center;
-    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: .9fr 1.1fr;
+    gap: var(--sp-5); align-items: center;
+    max-width: 1280px; margin: 0 auto;
   }
   @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: var(--sp-5); } }
   .hero-copy { color: #fff; text-align: left; }
   .page-hero .eyebrow.gold { color: var(--brand-accent); text-align: left; }
   .page-hero h1 {
-    font-size: clamp(30px, 4.4vw, 44px);
+    font-size: clamp(30px, 3.4vw, 40px);
     font-weight: 600; letter-spacing: -1.8px; line-height: 1.12;
     color: #fff; margin: var(--sp-2) 0 var(--sp-3); text-align: left;
     white-space: nowrap;
@@ -73,19 +73,22 @@
     transform: translateY(-2px);
   }
 
-  /* Hero photo placeholder */
+  /* Hero photo */
   .hero-photo {
-    aspect-ratio: 4 / 3;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
-    border: 1px solid rgba(255,255,255,0.16);
+    position: relative; isolation: isolate; aspect-ratio: 5 / 4; min-height: 430px;
+    border-radius: 28px;
+    background: radial-gradient(circle at 70% 24%, rgba(244,180,0,.34), transparent 26%), linear-gradient(135deg, #25477d 0%, #102750 45%, #07152f 100%);
+    border: 1px solid rgba(255,255,255,0.28);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-    color: rgba(255,255,255,0.55);
-    overflow: hidden;
+    color: rgba(255,255,255,0.7); overflow: hidden;
+    box-shadow: -8px 10px 24px rgba(244,180,0,.12), 10px 14px 28px rgba(0,229,255,.10), 0 18px 36px rgba(0,0,0,.22);
   }
-  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-photo svg { width: 34px; height: 34px; }
-  .hero-photo span { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .hero-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5,14,28,.03) 30%, rgba(5,14,28,.62) 100%); }
+  .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.06); }
+  .hero-photo svg, .hero-photo span { position: relative; z-index: 3; }
+  .hero-photo svg { width: 44px; height: 44px; }
+  .hero-photo span { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  @media (max-width: 920px) { .hero-photo { min-height: 0; aspect-ratio: 16 / 10; } }
 
   /* Demo Day feature video + steps + gallery */
   .video-frame.demo-day-video { margin: 0 auto; }
@@ -398,6 +401,7 @@
     display: grid; place-items: center;
     border: 1px solid var(--line);
   }
+  .bootcamp-video-frame { max-width: 980px; }
   .video-frame video, .video-frame iframe {
     position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover;
   }
@@ -413,6 +417,19 @@
   }
   .video-frame__play svg { width: 26px; height: 26px; margin-left: 3px; }
   .video-frame__placeholder span { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .video-frame__play-button {
+    position: absolute; z-index: 2; width: 78px; height: 78px; border: 0; border-radius: 50%;
+    display: grid; place-items: center; background: var(--brand-accent); color: var(--navy); cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0,0,0,.28); transition: opacity .2s var(--ease-out), transform .2s var(--ease-out), background .2s var(--ease-out);
+  }
+  .video-frame__play-button:hover, .video-frame__play-button:focus-visible { background: var(--brand-accent-2); transform: scale(1.08); outline: 2px solid #fff; outline-offset: 4px; }
+  .video-frame__play-button svg { width: 30px; height: 30px; margin-left: 4px; }
+  .video-frame.is-playing .video-frame__play-button { opacity: 0; pointer-events: none; transform: scale(.85); }
+  .bootcamp-video-intro { max-width: 1120px; }
+  .bootcamp-video-intro h2 { white-space: nowrap; }
+  .section-head .bootcamp-video-caption { margin: 10px 0 0; text-align: center; font-size: 18px; font-weight: 500; color: var(--ink-muted); }
+  .bootcamp-video-description { max-width: 720px; margin: var(--sp-4) auto 0; text-align: center; font-size: 15px; line-height: 1.6; color: var(--ink-muted); }
+  @media (max-width: 900px) { .bootcamp-video-intro h2 { white-space: normal; } }
 
   /* Student reflections — single video */
   .reflection-grid {
@@ -572,7 +589,7 @@
   .journey-node {
     position: relative; z-index: 1;
     display: flex; flex-direction: column; align-items: center; gap: 12px;
-    flex: 1;
+    flex: 1; border: 0; padding: 0; background: transparent; font: inherit; cursor: pointer;
   }
   .journey-node__icon {
     width: 68px; height: 68px; border-radius: 50%;
@@ -581,12 +598,26 @@
     flex-shrink: 0;
   }
   .journey-node__icon svg { width: 26px; height: 26px; }
+  .journey-node__icon img { width: 42px; height: 42px; object-fit: contain; }
+  .journey-node:hover .journey-node__icon, .journey-node:focus-visible .journey-node__icon { transform: translateY(-5px) scale(1.07); border-color: var(--brand-accent); box-shadow: 0 8px 18px rgba(10,17,40,.12); }
+  .journey-node:focus-visible { outline: none; }
+  .journey-node:focus-visible .journey-node__icon { outline: 2px solid var(--brand-accent); outline-offset: 3px; }
+  .journey-node__icon { transition: transform .2s var(--ease-out), border-color .2s var(--ease-out), box-shadow .2s var(--ease-out); }
   .journey-node__label {
     font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--navy);
   }
   .journey-node--active .journey-node__icon { border-color: var(--brand-accent); color: var(--brand-accent); }
   .journey-node--active .journey-node__label { color: var(--brand-accent); }
+  .journey-tooltip {
+    position: absolute; bottom: calc(100% + 12px); left: 50%; width: 190px;
+    transform: translateX(-50%) translateY(5px); padding: 10px 12px; border-radius: 12px;
+    background: var(--navy); color: #fff; box-shadow: 0 10px 24px rgba(10,17,40,.22);
+    font-size: 12px; font-weight: 500; line-height: 1.4; text-align: center;
+    opacity: 0; pointer-events: none; transition: opacity .2s var(--ease-out), transform .2s var(--ease-out);
+  }
+  .journey-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -7px; border: 7px solid transparent; border-top-color: var(--navy); }
+  .journey-node--active .journey-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
   @media (max-width: 760px) {
     .journey-rail { flex-wrap: wrap; justify-content: center; gap: var(--sp-3) var(--sp-2); }
     .journey-rail::before { display: none; }
@@ -982,12 +1013,12 @@
       <div class="hero-grid">
         <div class="hero-copy">
           <span class="eyebrow gold">Summer 2026 · Program Showcase</span>
-          <h1 style="white-space:normal;">Students came with ideas.<br>They left with working apps.</h1>
-          <p class="lede">In Summer 2026, our inaugural <strong>Build with AI — From Idea to Launched App</strong> bootcamp brought together 10 students ages 13&ndash;16 for an intensive, hands-on introduction to building with AI.</p>
-          <p class="lede">Over two weeks, students learned to turn ideas into plans, work with AI as a development partner, debug and improve their work, and bring their own projects to life.</p>
-          <p class="hero-stats">10 DAYS &middot; 30 HOURS &middot; 10 STUDENTS &middot; 1 DEMO DAY</p>
+          <h1>Students came with ideas.<br>They left with working apps.</h1>
+          <p class="lede">In Summer 2026, 10 students ages 13&ndash;16 joined our inaugural <strong>Build with AI — From Idea to Launched App</strong> bootcamp for an intensive, hands-on introduction to creating with AI.</p>
+          <p class="lede">Over two weeks, they learned to turn ideas into plans, build with AI, debug and iterate &mdash; and ultimately launch and present their own work.</p>
+          <p class="hero-stats">10 STUDENTS &middot; 30 HOURS &middot; 10 BUILD DAYS &middot; 1 DEMO DAY</p>
           <div class="actions">
-            <a class="btn btn-primary" href="#projects">Explore Their Work &darr;</a>
+            <a class="btn btn-primary" href="#projects">Explore the Showcase &rarr;</a>
             <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
           </div>
         </div>
@@ -1003,18 +1034,20 @@
   <!-- INSIDE THE BOOTCAMP -->
   <section class="lab-section">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow gold">Inside the bootcamp</span>
-        <h2>See what two weeks of building looked like.</h2>
+      <div class="section-head bootcamp-video-intro">
+        <span class="eyebrow gold">Where the journey began</span>
+        <h2>Meet the students before they started building.</h2>
+        <p class="bootcamp-video-caption">Orientation Day &middot; Summer 2026</p>
       </div>
 
-      <div class="video-frame">
-        <!-- PLACEHOLDER: swap for <video src="..."> or an <iframe> embed (YouTube/Vimeo) -->
-        <div class="video-frame__placeholder">
-          <span class="video-frame__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-          <span>Bootcamp video — coming soon</span>
-        </div>
+      <div class="video-frame bootcamp-video-frame">
+        <video controls preload="metadata">
+          <source src="assets/summer-2026/videos/orientation.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <button class="video-frame__play-button" type="button" data-video-play aria-label="Play Orientation Day video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
       </div>
+      <p class="bootcamp-video-description">Hear why they joined, what they hoped to learn, and what they wanted to <span class="hl-gold">create with AI.</span></p>
     </div>
   </section>
 
@@ -1028,34 +1061,34 @@
       </div>
 
       <div class="journey-rail">
-        <div class="journey-node">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 .8 1 1.8h6c0-1 .4-1.3 1-1.8A7 7 0 0 0 12 2z"/></svg></span>
+        <button class="journey-node" type="button" data-journey-stage="Idea" data-journey-description="Start with a problem worth solving and shape it into a clear project idea." aria-pressed="false">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/idea.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Idea</span>
-        </div>
-        <div class="journey-node">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 3.5h6a1 1 0 0 1 1 1V6H8V4.5a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h4"/></svg></span>
+        </button>
+        <button class="journey-node" type="button" data-journey-stage="Plan" data-journey-description="Turn the idea into features, requirements, and a practical sequence of next steps." aria-pressed="false">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/plan.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Plan</span>
-        </div>
-        <div class="journey-node">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 8 5 12 9 16"/><polyline points="15 8 19 12 15 16"/></svg></span>
+        </button>
+        <button class="journey-node" type="button" data-journey-stage="Build" data-journey-description="Use AI as a development partner to bring the plan to life, one piece at a time." aria-pressed="false">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/build.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Build</span>
-        </div>
-        <div class="journey-node">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="8" height="10" rx="4"/><path d="M12 8V5"/><path d="M9 5l1.5 1.5M15 5l-1.5 1.5"/><path d="M5 12H3M21 12h-2M5 16l-2 1M19 16l2 1M5 9l-1.5-1M19 9l1.5-1"/></svg></span>
+        </button>
+        <button class="journey-node" type="button" data-journey-stage="Debug" data-journey-description="Test what happens, identify issues, and make evidence-based fixes." aria-pressed="false">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/debug.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Debug</span>
-        </div>
-        <div class="journey-node">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><polyline points="18 3 18 7 14 7"/><polyline points="6 21 6 17 10 17"/></svg></span>
+        </button>
+        <button class="journey-node" type="button" data-journey-stage="Iterate" data-journey-description="Improve the experience through feedback, experimentation, and revision." aria-pressed="false">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/iterate.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Iterate</span>
-        </div>
-        <div class="journey-node">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c2.5 2 4 5.5 4 9 0 2-1 4-1 4l-3 3-3-3s-1-2-1-4c0-3.5 1.5-7 4-9z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 15l-3 3 1 3 3-1M15 15l3 3-1 3-3-1"/></svg></span>
-          <span class="journey-node__label">Ship</span>
-        </div>
-        <div class="journey-node journey-node--active">
-          <span class="journey-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8"/><circle cx="9" cy="9" r="1.3"/><path d="M13 8h4M13 11h3"/></svg></span>
+        </button>
+        <button class="journey-node" type="button" data-journey-stage="Deploy" data-journey-description="Launch a working app to a real URL so others can try it." aria-pressed="false">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/deploy.png" alt="" loading="lazy"></span>
+          <span class="journey-node__label">Deploy</span>
+        </button>
+        <button class="journey-node journey-node--active" type="button" data-journey-stage="Present" data-journey-description="Share the finished project, explain the choices behind it, and reflect on what comes next." aria-pressed="true">
+          <span class="journey-node__icon"><img src="assets/summer-2026/icons/present.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Present</span>
-        </div>
+        </button>
       </div>
 
       <div class="learning-trio">
@@ -1699,6 +1732,60 @@
   <script src="scripts/newsletter.js" defer></script>
   <script src="scripts/editorial-gallery.js" defer></script>
   <script>
+    /* Branded play button for featured video */
+    (function () {
+      document.querySelectorAll('[data-video-play]').forEach(function (button) {
+        var frame = button.closest('.video-frame');
+        var video = frame && frame.querySelector('video');
+        if (!video) return;
+
+        button.addEventListener('click', function () { video.play(); });
+        video.addEventListener('play', function () { frame.classList.add('is-playing'); });
+        video.addEventListener('pause', function () { frame.classList.remove('is-playing'); });
+        video.addEventListener('ended', function () { frame.classList.remove('is-playing'); });
+      });
+    })();
+
+    /* Interactive learning-journey stages */
+    (function () {
+      var stages = Array.from(document.querySelectorAll('[data-journey-stage]'));
+      if (!stages.length) return;
+
+      var tooltip = document.createElement('span');
+      tooltip.className = 'journey-tooltip';
+      tooltip.setAttribute('aria-hidden', 'true');
+
+      function selectStage(stage) {
+        stages.forEach(function (item) {
+          var selected = item === stage;
+          item.classList.toggle('journey-node--active', selected);
+          item.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        });
+        tooltip.textContent = stage.dataset.journeyDescription;
+        stage.appendChild(tooltip);
+      }
+
+      function clearStage() {
+        stages.forEach(function (stage) {
+          stage.classList.remove('journey-node--active');
+          stage.setAttribute('aria-pressed', 'false');
+        });
+        tooltip.remove();
+      }
+
+      stages.forEach(function (stage) {
+        stage.addEventListener('click', function () { selectStage(stage); });
+      });
+      selectStage(stages.find(function (stage) { return stage.classList.contains('journey-node--active'); }) || stages[0]);
+
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest('[data-journey-stage]')) clearStage();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') clearStage();
+      });
+    })();
+
     /* Student voice selector */
     (function () {
       var steps = Array.from(document.querySelectorAll('[data-voice-step]'));
