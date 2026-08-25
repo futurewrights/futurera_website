@@ -1,60 +1,64 @@
 /* Editorial gallery + lightbox for the "Inside the Classroom" section.
-   To add/remove/reorder photos, edit the GALLERY_IMAGES array below —
-   the grid and lightbox are both generated from it.
-   size: "feature" (2x2), "wide" (2x1), "tall" (1x2), or "normal" (1x1). */
+   GALLERY_IMAGES is a fixed, curated case-study composition — each entry's
+   "area" maps to a named grid-template-area in the CSS (classroom, building,
+   mentor, collab, screens, moment, group). The one entry with
+   "standalone: true" (Demo Day) renders separately, full-width, below the
+   grid as a transition into its own section. Order in the array is also the
+   lightbox prev/next order and reading order on mobile. */
 (function () {
   var GALLERY_IMAGES = [
     {
       src: "assets/summer-2026/gallery/classroom-01.jpg",
       alt: "Wide view of the Future Wrights classroom during a build session",
       caption: "The classroom, mid-build.",
-      size: "feature"
+      area: "classroom"
     },
     {
       src: "assets/summer-2026/gallery/building-01.jpg",
       alt: "Two students working together on their laptops",
       caption: "Building the day's project.",
-      size: "tall"
+      area: "building"
     },
     {
       src: "assets/summer-2026/gallery/mentoring-01.jpg",
       alt: "An instructor helping a student debug their code",
       caption: "Mentors circulating during build time.",
-      size: "normal"
+      area: "mentor"
     },
     {
       src: "assets/summer-2026/gallery/collaboration-01.jpg",
       alt: "Students collaborating around a shared laptop screen",
       caption: "Working through an idea together.",
-      size: "normal"
+      area: "collab"
     },
     {
       src: "assets/summer-2026/gallery/screens-01.jpg",
       alt: "Close-up of a student's project running in the browser",
       caption: "A capstone app, mid-build.",
-      size: "normal"
+      area: "screens"
     },
     {
       src: "assets/summer-2026/gallery/classroom-02.jpg",
       alt: "A quiet moment of focused work in the classroom",
       caption: "Heads down, building.",
-      size: "tall"
-    },
-    {
-      src: "assets/summer-2026/gallery/demo-day-01.jpg",
-      alt: "A student presenting their capstone project on Demo Day",
-      caption: "Demo Day — presenting to the room.",
-      size: "feature"
+      area: "moment"
     },
     {
       src: "assets/summer-2026/gallery/group-01.jpg",
       alt: "The full cohort together on the final day",
       caption: "The cohort, together.",
-      size: "normal"
+      area: "group"
+    },
+    {
+      src: "assets/summer-2026/gallery/demo-day-01.jpg",
+      alt: "A student presenting their capstone project on Demo Day",
+      caption: "Demo Day — presenting to the room.",
+      standalone: true
     }
   ];
 
   var grid = document.querySelector("[data-gallery-grid]");
+  var standalone = document.querySelector("[data-gallery-standalone]");
   var lightbox = document.getElementById("galleryLightbox");
   if (!grid || !lightbox) return;
 
@@ -69,35 +73,51 @@
   var lastFocusedTrigger = null;
   var touchStartX = null;
 
-  function renderGrid() {
-    var frag = document.createDocumentFragment();
-    GALLERY_IMAGES.forEach(function (item, index) {
-      var figure = document.createElement("figure");
-      figure.className = "gallery-tile gallery-tile--" + item.size;
+  function createTile(item, index) {
+    var figure = document.createElement("figure");
+    figure.className = "gallery-tile" + (item.area ? " gallery-tile--" + item.area : "");
 
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "gallery-tile__btn";
-      button.setAttribute("data-index", String(index));
-      button.setAttribute(
-        "aria-label",
-        "View photo " + (index + 1) + " of " + GALLERY_IMAGES.length + ": " + item.caption
-      );
-      button.addEventListener("click", function () {
-        lastFocusedTrigger = button;
-        openLightbox(index);
-      });
-
-      var image = document.createElement("img");
-      image.src = item.src;
-      image.alt = item.alt;
-      image.loading = "lazy";
-
-      button.appendChild(image);
-      figure.appendChild(button);
-      frag.appendChild(figure);
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "gallery-tile__btn";
+    button.setAttribute("data-index", String(index));
+    button.setAttribute(
+      "aria-label",
+      "View photo " + (index + 1) + " of " + GALLERY_IMAGES.length + ": " + item.caption
+    );
+    button.addEventListener("click", function () {
+      lastFocusedTrigger = button;
+      openLightbox(index);
     });
-    grid.appendChild(frag);
+
+    var image = document.createElement("img");
+    image.src = item.src;
+    image.alt = item.alt;
+    image.loading = "lazy";
+    button.appendChild(image);
+
+    if (item.caption) {
+      var caption = document.createElement("span");
+      caption.className = "gallery-tile__hover-caption";
+      caption.textContent = item.caption;
+      button.appendChild(caption);
+    }
+
+    figure.appendChild(button);
+    return figure;
+  }
+
+  function renderGrid() {
+    var gridFrag = document.createDocumentFragment();
+    GALLERY_IMAGES.forEach(function (item, index) {
+      var tile = createTile(item, index);
+      if (item.standalone) {
+        if (standalone) standalone.appendChild(tile);
+      } else {
+        gridFrag.appendChild(tile);
+      }
+    });
+    grid.appendChild(gridFrag);
   }
 
   function updateLightboxContent() {
