@@ -98,42 +98,34 @@
 
   .demo-day-rail {
     position: relative;
-    display: flex; align-items: flex-start;
-    max-width: 1080px; margin: 0 auto var(--sp-6); gap: 8px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    max-width: 1080px; margin: 0 auto var(--sp-6); gap: 4px;
   }
-  /* Line spans from the 1st node's icon center to the 5th column's (arrow) center —
-     with 5 equal flex:1 columns, those centers land exactly at 10% and 90%. */
   .demo-day-rail::before {
-    content: ""; position: absolute; top: 55px; left: 10%; right: 10%; height: 2px;
-    background: var(--brand-accent);
+    content: ""; position: absolute; top: 34px; left: 34px; right: 34px; height: 2px;
+    background: linear-gradient(90deg, var(--navy), var(--teal), var(--brand-accent));
     z-index: 0;
   }
   .demo-day-node {
     position: relative; z-index: 1; flex: 1;
-    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
-  }
-  .demo-day-node__num {
-    display: block; height: 18px; line-height: 18px;
-    font-size: 15px; font-weight: 800; letter-spacing: 0.02em; color: var(--brand-accent);
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
   }
   .demo-day-node__icon {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: #45445a; border: 1px solid rgba(255,255,255,0.14);
-    display: grid; place-items: center; color: #fff; flex-shrink: 0;
+    width: 68px; height: 68px; border-radius: 50%;
+    background: #fff; border: 1px solid var(--line);
+    display: grid; place-items: center; color: var(--navy); flex-shrink: 0;
   }
-  .demo-day-node__icon svg { width: 24px; height: 24px; }
-  .demo-day-node__icon--arrow { background: transparent; border: 0; color: var(--brand-accent); }
-  .demo-day-node__icon--arrow svg { width: 22px; height: 22px; }
+  .demo-day-node__icon svg { width: 26px; height: 26px; }
   .demo-day-node__label {
-    font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #fff;
-    margin-top: 2px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff;
   }
   .demo-day-node__q { font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.6); max-width: 160px; }
+  .demo-day-node--active .demo-day-node__icon { border-color: var(--brand-accent); color: var(--brand-accent); }
+  .demo-day-node--active .demo-day-node__label { color: var(--brand-accent); }
   @media (max-width: 760px) {
-    .demo-day-rail { flex-wrap: wrap; gap: var(--sp-4) var(--sp-2); }
+    .demo-day-rail { flex-wrap: wrap; justify-content: center; gap: var(--sp-4) var(--sp-2); }
     .demo-day-rail::before { display: none; }
     .demo-day-node { flex: 0 1 45%; }
-    .demo-day-node--arrow { display: none; }
   }
 
   .demo-day-gallery {
@@ -1373,32 +1365,24 @@
 
       <div class="demo-day-rail">
         <div class="demo-day-node">
-          <span class="demo-day-node__num">01</span>
           <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 .8 1 1.8h6c0-1 .4-1.3 1-1.8A7 7 0 0 0 12 2z"/></svg></span>
           <span class="demo-day-node__label">The Idea</span>
           <span class="demo-day-node__q">Why did I decide to build this?</span>
         </div>
         <div class="demo-day-node">
-          <span class="demo-day-node__num">02</span>
           <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg></span>
           <span class="demo-day-node__label">The Demo</span>
           <span class="demo-day-node__q">How does my project actually work?</span>
         </div>
         <div class="demo-day-node">
-          <span class="demo-day-node__num">03</span>
           <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19l6-9 4 5 3-4 5 8H3z"/></svg></span>
           <span class="demo-day-node__label">The Challenge</span>
           <span class="demo-day-node__q">What was difficult while I was building it?</span>
         </div>
-        <div class="demo-day-node">
-          <span class="demo-day-node__num">04</span>
+        <div class="demo-day-node demo-day-node--active">
           <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c2.5 2 4 5.5 4 9 0 2-1 4-1 4l-3 3-3-3s-1-2-1-4c0-3.5 1.5-7 4-9z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 15l-3 3 1 3 3-1M15 15l3 3-1 3-3-1"/></svg></span>
           <span class="demo-day-node__label">What's Next</span>
           <span class="demo-day-node__q">What would I improve or build next?</span>
-        </div>
-        <div class="demo-day-node demo-day-node--arrow" aria-hidden="true">
-          <span class="demo-day-node__num" style="visibility:hidden;">00</span>
-          <span class="demo-day-node__icon demo-day-node__icon--arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span>
         </div>
       </div>
 
