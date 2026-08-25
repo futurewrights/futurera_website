@@ -133,14 +133,13 @@
 
   .demo-day-gallery {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    grid-template-rows: 160px 160px 280px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 360px 180px;
     grid-template-areas:
-      "a b b"
-      "a c d"
-      "e e e";
+      "a a a a"
+      "b c d e";
     gap: var(--sp-3);
-    max-width: 1120px; margin: 0 auto;
+    max-width: 1120px; margin: var(--sp-3) auto 0;
   }
   .demo-day-gallery__item--a { grid-area: a; }
   .demo-day-gallery__item--b { grid-area: b; }
@@ -150,14 +149,25 @@
   .demo-day-gallery [class*="demo-day-gallery__item"] {
     border-radius: var(--radius-sm); overflow: hidden;
     background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
-    display: grid; place-items: center; color: rgba(255,255,255,0.35);
+    display: grid; place-items: center; color: rgba(255,255,255,0.35); margin: 0;
   }
   .demo-day-gallery [class*="demo-day-gallery__item"] svg { width: 26px; height: 26px; }
   .demo-day-gallery [class*="demo-day-gallery__item"] img { width: 100%; height: 100%; object-fit: cover; }
+  .demo-day-gallery__btn { position: relative; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: zoom-in; overflow: hidden; }
+  .demo-day-gallery__btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .demo-day-gallery__btn img { transition: transform var(--dur-micro) var(--ease-out); }
+  .demo-day-gallery__btn:hover img { transform: scale(1.02); }
+  .demo-day-gallery__caption { position: absolute; inset: auto 0 0; padding: 28px 16px 12px; text-align: left; background: linear-gradient(180deg, transparent, rgba(10,17,40,.72)); color: #fff; font-size: 12.5px; font-weight: 500; opacity: 0; transition: opacity var(--dur-micro) var(--ease-out); pointer-events: none; }
+  .demo-day-gallery__btn:hover .demo-day-gallery__caption, .demo-day-gallery__btn:focus-visible .demo-day-gallery__caption { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .demo-day-gallery__btn img, .demo-day-gallery__caption { transition: none; } .demo-day-gallery__btn:hover img { transform: none; } }
+  @media (hover: none) { .demo-day-gallery__caption { display: none; } }
+  .demo-day-gallery__head { max-width: 1120px; margin: var(--sp-6) auto 0; text-align: center; }
+  .demo-day-gallery__head h3 { margin: 0; font-size: 26px; color: #fff; }
+  .demo-day-gallery__head p { margin: 6px 0 0; color: rgba(255,255,255,.7); font-size: 14px; }
   @media (max-width: 760px) {
     .demo-day-gallery {
-      grid-template-columns: 1fr 1fr; grid-template-rows: 180px 140px 140px 220px;
-      grid-template-areas: "a a" "b b" "c d" "e e";
+      grid-template-columns: 1fr 1fr; grid-template-rows: 260px 150px 150px;
+      grid-template-areas: "a a" "b c" "d e";
     }
   }
   @media (max-width: 480px) {
@@ -438,7 +448,7 @@
   }
   @media (max-width: 820px) { .reflection-grid { grid-template-columns: 1fr; } }
   .reflection-grid--single {
-    grid-template-columns: 1fr; max-width: 640px;
+    grid-template-columns: 1fr; max-width: 980px;
   }
   .video-frame--sm {
     max-width: none; margin: 0;
@@ -479,101 +489,28 @@
   .project-card__link svg { width: 14px; height: 14px; }
   .project-card__links { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
 
-  /* Quotes — "In their own words" student voice selector */
-  .voice-story {
-    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: var(--sp-5);
-    max-width: 1120px; margin: 0 auto;
-  }
-  .voice-cards { min-width: 0; }
-  .voice-steps { display: flex; flex-direction: column; gap: var(--sp-4); }
-  .voice-step {
-    min-height: 260px; display: flex; flex-direction: column; justify-content: center;
-    padding: var(--sp-4); border-left: 3px solid var(--line); color: var(--ink-muted);
-    transition: border-color .25s var(--ease-out), color .25s var(--ease-out);
-  }
-  .voice-step.is-active { border-color: var(--brand-deep); color: var(--ink); }
-  .voice-step__number { font-size: 13px; font-weight: 800; letter-spacing: .08em; color: var(--brand-deep); }
-  .voice-step h3 { margin: 8px 0 4px; font-size: 24px; color: var(--navy); }
-  .voice-step p { margin: 0; font-size: 14px; line-height: 1.5; }
-  .voice-card {
-    position: relative; display: flex; align-items: center; gap: var(--sp-4); padding: var(--sp-5);
-    border-radius: 28px 140px 140px 28px; color: #fff; margin: 0; min-height: 230px;
-    animation: voiceCardIn .35s var(--ease-out);
-  }
-  .voice-card[hidden] { display: none; }
-  @keyframes voiceCardIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  .voice-card--1 { background: #6D28D9; }
-  .voice-card--2 { background: #FBF3DF; color: var(--ink); }
-  .voice-card--3 { background: #F9C6EC; color: var(--ink); }
-  .voice-card--4 { background: #C8F0D9; color: var(--ink); }
-
-  .voice-card__decor {
-    flex-shrink: 0; width: 64px; min-height: 64px;
-    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-  }
-  .voice-card__mark {
-    font-size: 56px; line-height: 0.7; font-family: Georgia, serif; opacity: 0.5;
-  }
-  .voice-card__icon { width: 44px; height: 44px; }
-  .voice-card__dots {
-    width: 60px; height: 22px;
-    background-image: radial-gradient(currentColor 1.4px, transparent 1.6px);
-    background-size: 8px 8px;
-    opacity: 0.35;
-  }
-  .voice-card__body { flex: 1; min-width: 0; }
-  .voice-card__body p {
-    margin: 0 0 10px; font-size: 17px; line-height: 1.5; font-weight: 500;
-  }
-  .voice-card__body footer {
-    font-size: 14px; font-weight: 600; opacity: 0.85; font-style: normal;
-  }
-  .voice-card__num {
-    flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%;
-    display: grid; place-items: center; font-size: 20px; font-weight: 800;
-    background: rgba(255,255,255,0.22);
-  }
-  .voice-card--2 .voice-card__num,
-  .voice-card--3 .voice-card__num,
-  .voice-card--4 .voice-card__num {
-    background: rgba(10,17,40,0.08);
-  }
-  @media (min-width: 761px) {
-    .voice-cards { position: sticky; top: 104px; align-self: start; }
-  }
-  @media (max-width: 760px) {
-    .voice-story { grid-template-columns: 1fr; gap: var(--sp-4); }
-    .voice-steps { display: none; }
-    .voice-card {
-      flex-wrap: wrap; border-radius: 24px; padding: var(--sp-3); gap: var(--sp-2);
-    }
-    .voice-card__decor { display: none; }
-    .voice-card__num {
-      position: absolute; top: 16px; right: 16px;
-      width: 44px; height: 44px; font-size: 14px;
-    }
-    .voice-card__body { width: 100%; padding-right: 56px; }
-  }
-  @media (prefers-reduced-motion: reduce) { .voice-card { animation: none; } }
-  .more-voices { max-width: 1120px; margin: var(--sp-6) auto 0; }
-  .more-voices__head { display: flex; align-items: end; justify-content: space-between; gap: var(--sp-3); margin-bottom: var(--sp-3); }
-  .more-voices__head h3 { margin: 0; font-size: 26px; color: var(--navy); }
-  .more-voices__head p { margin: 0; font-size: 14px; color: var(--ink-muted); }
-  .more-voices__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); }
-  .more-voice-card { border: 1px solid var(--line); border-radius: 20px; background: #fff; overflow: hidden; }
-  .more-voice-card summary { list-style: none; cursor: pointer; padding: var(--sp-3); }
-  .more-voice-card summary::-webkit-details-marker { display: none; }
-  .more-voice-card summary::after { content: "+"; float: right; font-size: 22px; line-height: .8; color: var(--brand-deep); }
-  .more-voice-card[open] summary::after { content: "−"; }
-  .more-voice-card__label { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-deep); }
-  .more-voice-card h4 { margin: 8px 0 0; font-size: 17px; color: var(--navy); }
-  .more-voice-card__body { padding: 0 var(--sp-3) var(--sp-3); font-size: 14px; line-height: 1.55; color: var(--ink-muted); }
-  .more-voice-card__body p { margin: 0; }
-  @media (max-width: 760px) {
-    .more-voices__head { display: block; }
-    .more-voices__head p { margin-top: 6px; }
-    .more-voices__grid { grid-template-columns: 1fr; }
-  }
+  /* Quotes — "In their own words" expandable quote wall */
+  .voice-wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); max-width: 1120px; margin: 0 auto; }
+  .voice-note { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: #fff; }
+  .voice-note--featured { grid-column: span 2; background: var(--navy); color: #fff; border-color: var(--navy); }
+  .voice-note--cream { background: #FFF7E7; border-color: #F1D79A; }
+  .voice-note--pink { background: #EAF3FA; border-color: #BED6E8; }
+  .voice-note--green { background: #E8F5F1; border-color: #B9DFD4; }
+  .voice-note summary { list-style: none; cursor: pointer; padding: var(--sp-4); }
+  .voice-note summary::-webkit-details-marker { display: none; }
+  .voice-note summary::after { content: "+"; float: right; font-size: 24px; line-height: .8; color: var(--brand-deep); }
+  .voice-note[open] summary::after { content: "−"; }
+  .voice-note--featured summary::after { color: #fff; }
+  .voice-note__meta { display: block; margin-bottom: 14px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-deep); }
+  .voice-note--featured .voice-note__meta { color: rgba(255,255,255,.8); }
+  .voice-note__quote { display: block; font-size: 17px; line-height: 1.48; font-weight: 600; }
+  .voice-note--featured .voice-note__quote { font-size: 23px; }
+  .voice-note__body { padding: 0 var(--sp-4) var(--sp-4); font-size: 14px; line-height: 1.6; color: var(--ink-muted); }
+  .voice-note--featured .voice-note__body { color: rgba(255,255,255,.84); }
+  .voice-note__body p { margin: 0; }
+  .voice-note--sample { background: #fff; border-style: dashed; }
+  .voice-note--sample .voice-note__quote { color: var(--ink-muted); font-size: 15px; font-weight: 500; }
+  @media (max-width: 760px) { .voice-wall { grid-template-columns: 1fr; } .voice-note--featured { grid-column: auto; } }
 
   /* Learning journey rail — icon nodes connected by a gradient line */
   .journey-rail {
@@ -777,6 +714,7 @@
     transition: transform .25s var(--ease-out);
   }
   .skill-card__icon svg { width: 30px; height: 30px; }
+  .skill-card__icon img { width: 42px; height: 42px; object-fit: contain; }
   .skill-card__meta { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .skill-card__toprow { display: flex; align-items: center; gap: 10px; }
   .skill-card__num { font-size: 19px; font-weight: 800; color: var(--skill-accent); }
@@ -1186,106 +1124,16 @@
         <p>Real reflections from our Summer 2026 students.</p>
       </div>
 
-      <div class="voice-story">
-        <div class="voice-cards">
-        <blockquote class="voice-card voice-card--1" id="voice-alex" aria-label="Alex's reflection">
-          <div class="voice-card__decor">
-            <span class="voice-card__mark" aria-hidden="true">&ldquo;</span>
-          </div>
-          <div class="voice-card__body">
-            <p>&ldquo;Above all, Future Wrights gave me a safe space to get interested in something foreign to me. It gave me a chance and I want everyone to have that kind of open, productive, enlightening experience.&rdquo;</p>
-            <footer>— Alex, 15 &middot; Summer 2026</footer>
-          </div>
-          <span class="voice-card__num">01</span>
-        </blockquote>
-
-        <blockquote class="voice-card voice-card--2" id="voice-sam" aria-label="Sam's reflection" hidden>
-          <div class="voice-card__decor">
-            <svg class="voice-card__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#2F6FE4"/><path d="M14 20l4 4-4 4M22 28h4" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M30 20c2 2 2 6 0 8" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
-            <span class="voice-card__dots" aria-hidden="true"></span>
-          </div>
-          <div class="voice-card__body">
-            <p>&ldquo;I could not have asked for a better working environment, and I looked forward to going to camp each day. The Future Wrights community is truly so special and I felt extremely cared for each step of the way.&rdquo;</p>
-            <footer>— Sam, 14 &middot; Summer 2026</footer>
-          </div>
-          <span class="voice-card__num">02</span>
-        </blockquote>
-
-        <blockquote class="voice-card voice-card--3" id="voice-maya" aria-label="Maya's reflection" hidden>
-          <div class="voice-card__decor">
-            <svg class="voice-card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M16 6l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="#F5D90A"/><path d="M10 34a14 14 0 0 1 28 0" stroke="#2F6FE4" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
-            <span class="voice-card__dots" aria-hidden="true"></span>
-          </div>
-          <div class="voice-card__body">
-            <p>&ldquo;Because of Future Wrights, I can walk into a computer science class and connect with topics I&rsquo;ve learned in camp. I also have the confidence to answer the teacher&rsquo;s questions, and I can even teach concepts to others.&rdquo;</p>
-            <footer>— Maya, 15 &middot; Summer 2026</footer>
-          </div>
-          <span class="voice-card__num">03</span>
-        </blockquote>
-
-        <blockquote class="voice-card voice-card--4" id="voice-jayden" aria-label="Jayden's reflection" hidden>
-          <div class="voice-card__decor">
-            <svg class="voice-card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40s-14-8.5-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 10.5-14 19-14 19z" fill="#22B573"/><rect x="26" y="26" width="16" height="11" rx="3" fill="#0B6B3A"/><circle cx="30" cy="31.5" r="1.4" fill="#fff"/><circle cx="34" cy="31.5" r="1.4" fill="#fff"/><circle cx="38" cy="31.5" r="1.4" fill="#fff"/></svg>
-          </div>
-          <div class="voice-card__body">
-            <p>&ldquo;I&rsquo;ve had a such a pleasant and rewarding experience at Future Wrights. This is a workspace and community in which I felt truly appreciated by both the staff and scholars. It&rsquo;s a place I take pride in representing, and being part of community.&rdquo;</p>
-            <footer>— Jayden, 16 &middot; Summer 2026</footer>
-          </div>
-          <span class="voice-card__num">04</span>
-        </blockquote>
-        </div>
-
-        <div class="voice-steps" aria-label="Student reflection journey">
-          <article class="voice-step is-active" data-voice-step="voice-alex">
-            <span class="voice-step__number">01 / 04</span>
-            <h3>Alex</h3>
-            <p>Finding a welcoming space to explore new ideas.</p>
-          </article>
-          <article class="voice-step" data-voice-step="voice-sam">
-            <span class="voice-step__number">02 / 04</span>
-            <h3>Sam</h3>
-            <p>Feeling supported by a caring community.</p>
-          </article>
-          <article class="voice-step" data-voice-step="voice-maya">
-            <span class="voice-step__number">03 / 04</span>
-            <h3>Maya</h3>
-            <p>Building confidence to learn and share knowledge.</p>
-          </article>
-          <article class="voice-step" data-voice-step="voice-jayden">
-            <span class="voice-step__number">04 / 04</span>
-            <h3>Jayden</h3>
-            <p>Taking pride in a community where everyone belongs.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="more-voices">
-        <div class="more-voices__head">
-          <h3>More student voices</h3>
-          <p>Five additional reflections from Summer 2026.</p>
-        </div>
-        <div class="more-voices__grid">
-          <details class="more-voice-card">
-            <summary><span class="more-voice-card__label">Sample reflection 05</span><h4>Student name, age</h4></summary>
-            <div class="more-voice-card__body"><p>Replace this with the student&rsquo;s full reflection on what they learned, created, or discovered.</p></div>
-          </details>
-          <details class="more-voice-card">
-            <summary><span class="more-voice-card__label">Sample reflection 06</span><h4>Student name, age</h4></summary>
-            <div class="more-voice-card__body"><p>Replace this with the student&rsquo;s full reflection on what they learned, created, or discovered.</p></div>
-          </details>
-          <details class="more-voice-card">
-            <summary><span class="more-voice-card__label">Sample reflection 07</span><h4>Student name, age</h4></summary>
-            <div class="more-voice-card__body"><p>Replace this with the student&rsquo;s full reflection on what they learned, created, or discovered.</p></div>
-          </details>
-          <details class="more-voice-card">
-            <summary><span class="more-voice-card__label">Sample reflection 08</span><h4>Student name, age</h4></summary>
-            <div class="more-voice-card__body"><p>Replace this with the student&rsquo;s full reflection on what they learned, created, or discovered.</p></div>
-          </details>
-          <details class="more-voice-card">
-            <summary><span class="more-voice-card__label">Sample reflection 09</span><h4>Student name, age</h4></summary>
-            <div class="more-voice-card__body"><p>Replace this with the student&rsquo;s full reflection on what they learned, created, or discovered.</p></div>
-          </details>
-        </div>
+      <div class="voice-wall">
+        <details class="voice-note voice-note--featured" open><summary><span class="voice-note__meta">Alex, 15 · Open-mindedness</span><span class="voice-note__quote">&ldquo;Future Wrights gave me a safe space to get interested in something foreign to me.&rdquo;</span></summary><div class="voice-note__body"><p>It gave me a chance and I want everyone to have that kind of open, productive, enlightening experience.</p></div></details>
+        <details class="voice-note voice-note--cream"><summary><span class="voice-note__meta">Sam, 14 · Community</span><span class="voice-note__quote">&ldquo;I looked forward to going to camp each day.&rdquo;</span></summary><div class="voice-note__body"><p>The Future Wrights community is truly special and I felt extremely cared for each step of the way.</p></div></details>
+        <details class="voice-note voice-note--pink"><summary><span class="voice-note__meta">Maya, 15 · Confidence</span><span class="voice-note__quote">&ldquo;I can walk into a computer science class and connect with what I learned in camp.&rdquo;</span></summary><div class="voice-note__body"><p>I have the confidence to answer questions and even teach concepts to others.</p></div></details>
+        <details class="voice-note voice-note--green"><summary><span class="voice-note__meta">Jayden, 16 · Belonging</span><span class="voice-note__quote">&ldquo;This is a community in which I felt truly appreciated.&rdquo;</span></summary><div class="voice-note__body"><p>It is a place I take pride in representing and being part of.</p></div></details>
+        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 05</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
+        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 06</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
+        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 07</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
+        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 08</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
+        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 09</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
       </div>
 
     </div>
@@ -1323,7 +1171,7 @@
       <div class="partner-formats skills-cards">
         <article class="skill-card skill-card--1">
           <div class="skill-card__head">
-            <span class="skill-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3z"/><path d="M5 16h5M14 16h5M7.5 16v3M16.5 16v3"/><circle cx="12" cy="18.5" r="1.5"/></svg></span>
+            <span class="skill-card__icon"><img src="assets/summer-2026/icons/ai-lit.png" alt="" loading="lazy"></span>
             <div class="skill-card__meta">
               <div class="skill-card__toprow">
                 <span class="skill-card__num">01</span>
@@ -1337,7 +1185,7 @@
 
         <article class="skill-card skill-card--2">
           <div class="skill-card__head">
-            <span class="skill-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-4 4v-4H4z"/><path d="M8 9h7M8 12h4"/><path d="M17 4v4M15 6h4"/></svg></span>
+            <span class="skill-card__icon"><img src="assets/summer-2026/icons/prompt.png" alt="" loading="lazy"></span>
             <div class="skill-card__meta">
               <div class="skill-card__toprow">
                 <span class="skill-card__num">02</span>
@@ -1351,7 +1199,7 @@
 
         <article class="skill-card skill-card--3">
           <div class="skill-card__head">
-            <span class="skill-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18V6h14v12H5z"/><path d="M8 15l3-3 2 2 3-4"/><circle cx="8" cy="9" r="1" fill="currentColor"/><path d="M8 20h8"/></svg></span>
+            <span class="skill-card__icon"><img src="assets/summer-2026/icons/plan.png" alt="" loading="lazy"></span>
             <div class="skill-card__meta">
               <div class="skill-card__toprow">
                 <span class="skill-card__num">03</span>
@@ -1365,7 +1213,7 @@
 
         <article class="skill-card skill-card--4">
           <div class="skill-card__head">
-            <span class="skill-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/><path d="M10 7h4M7 10v4M17 10v4"/></svg></span>
+            <span class="skill-card__icon"><img src="assets/summer-2026/icons/decomp.png" alt="" loading="lazy"></span>
             <div class="skill-card__meta">
               <div class="skill-card__toprow">
                 <span class="skill-card__num">04</span>
@@ -1379,7 +1227,7 @@
 
         <article class="skill-card skill-card--5">
           <div class="skill-card__head">
-            <span class="skill-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8V6M15 8V6M7 11h10M8 16h8"/><rect x="6" y="8" width="12" height="10" rx="4"/><circle cx="10" cy="13" r="1" fill="currentColor"/><circle cx="14" cy="13" r="1" fill="currentColor"/><path d="M19 5l1 1 2-2"/></svg></span>
+            <span class="skill-card__icon"><img src="assets/summer-2026/icons/iteration-deb.png" alt="" loading="lazy"></span>
             <div class="skill-card__meta">
               <div class="skill-card__toprow">
                 <span class="skill-card__num">05</span>
@@ -1393,7 +1241,7 @@
 
         <article class="skill-card skill-card--6">
           <div class="skill-card__head">
-            <span class="skill-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l14-6v12L4 12z"/><path d="M18 10l2 1v2l-2 1M8 13l1 5h3l1-3"/><path d="M7 10l6 2"/></svg></span>
+            <span class="skill-card__icon"><img src="assets/summer-2026/icons/ownership.png" alt="" loading="lazy"></span>
             <div class="skill-card__meta">
               <div class="skill-card__toprow">
                 <span class="skill-card__num">06</span>
@@ -1457,41 +1305,11 @@
           <span>Demo Day video — coming soon</span>
         </div>
       </div>
-      <p class="demo-day-watch">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        Watch Demo Day
-      </p>
-
-      <div class="demo-day-rail">
-        <div class="demo-day-node">
-          <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 .8 1 1.8h6c0-1 .4-1.3 1-1.8A7 7 0 0 0 12 2z"/></svg></span>
-          <span class="demo-day-node__label">The Idea</span>
-          <span class="demo-day-node__q">Why did I decide to build this?</span>
-        </div>
-        <div class="demo-day-node">
-          <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg></span>
-          <span class="demo-day-node__label">The Demo</span>
-          <span class="demo-day-node__q">How does my project actually work?</span>
-        </div>
-        <div class="demo-day-node">
-          <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19l6-9 4 5 3-4 5 8H3z"/></svg></span>
-          <span class="demo-day-node__label">The Challenge</span>
-          <span class="demo-day-node__q">What was difficult while I was building it?</span>
-        </div>
-        <div class="demo-day-node demo-day-node--active">
-          <span class="demo-day-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c2.5 2 4 5.5 4 9 0 2-1 4-1 4l-3 3-3-3s-1-2-1-4c0-3.5 1.5-7 4-9z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 15l-3 3 1 3 3-1M15 15l3 3-1 3-3-1"/></svg></span>
-          <span class="demo-day-node__label">What's Next</span>
-          <span class="demo-day-node__q">What would I improve or build next?</span>
-        </div>
+      <div class="demo-day-gallery__head">
+        <h3>Demo Day moments</h3>
+        <p>A closer look at students sharing what they built.</p>
       </div>
-
-      <div class="demo-day-gallery">
-        <div class="demo-day-gallery__item demo-day-gallery__item--a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <div class="demo-day-gallery__item demo-day-gallery__item--b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <div class="demo-day-gallery__item demo-day-gallery__item--c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <div class="demo-day-gallery__item demo-day-gallery__item--d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <div class="demo-day-gallery__item demo-day-gallery__item--e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-      </div>
+      <div class="demo-day-gallery" data-demo-gallery></div>
     </div>
   </section>
 
@@ -1572,45 +1390,6 @@
         <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a Conversation &rarr;</a>
       </div>
 
-      <div class="trust-row">
-        <div class="trust-row__item">
-          <span class="trust-row__icon trust-row__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V10l8-5 8 5v11"/><path d="M9 21v-6h6v6"/><path d="M10 3.5V6M14 3.5V6"/></svg></span>
-          <div>
-            <h4>Built for Schools</h4>
-            <p>Aligned with academic goals and school priorities.</p>
-          </div>
-        </div>
-        <div class="trust-row__item">
-          <span class="trust-row__icon trust-row__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="2.4"/><circle cx="16" cy="9" r="2"/><path d="M4 19v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1"/><path d="M14.5 14.2A3.6 3.6 0 0 1 18 13a3.6 3.6 0 0 1 3 5.7"/></svg></span>
-          <div>
-            <h4>Flexible &amp; Scalable</h4>
-            <p>Programs that adapt to your students and schedule.</p>
-          </div>
-        </div>
-        <div class="trust-row__item">
-          <span class="trust-row__icon trust-row__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16"/><path d="M6 16l4-4 3 3 5-6"/><path d="M15 8h3v3"/></svg></span>
-          <div>
-            <h4>Real Impact</h4>
-            <p>Students build skills, confidence, and a portfolio of work.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="lab-section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow gold">Showcase FAQ</span>
-      </div>
-
-      <div class="faq">
-        <details class="faq-item"><summary>Are these projects still live?</summary><div class="answer"><p>Yes — each app was deployed to a real URL during the bootcamp, and most students keep them running (and keep improving them) after camp ends. If a link above doesn't load, the student may have taken it down or moved on to a new project — <a href="contact.html">let us know</a> and we'll update it.</p></div></details>
-        <details class="faq-item"><summary>Did students really build these without coding experience?</summary><div class="answer"><p>Yes. Every project here was built by a student who started the bootcamp with <strong>no prior coding experience</strong>, using GitHub Copilot inside Visual Studio Code to turn plain-English descriptions into working apps.</p></div></details>
-        <details class="faq-item"><summary>How were these projects built?</summary><div class="answer"><p>Over two weeks, students learned to prompt AI tools effectively, plan a build, break it into pieces, and debug it — then spent the second week designing, building, and launching their own capstone app. See the <a href="bootcamp-summer-2026.html#curriculum">day-by-day curriculum</a> for the full breakdown.</p></div></details>
-        <details class="faq-item"><summary>Can my child build something like this?</summary><div class="answer"><p>That's exactly what the bootcamp is for. Check out the <a href="bootcamp-summer-2026.html">next cohort</a> for dates, pricing, and how to apply.</p></div></details>
-      </div>
     </div>
   </section>
 
@@ -1786,36 +1565,6 @@
       });
     })();
 
-    /* Student voice selector */
-    (function () {
-      var steps = Array.from(document.querySelectorAll('[data-voice-step]'));
-      var panels = Array.from(document.querySelectorAll('.voice-card[id]'));
-      if (!steps.length || !panels.length) return;
-      if (window.matchMedia('(max-width: 760px)').matches) {
-        panels.forEach(function (panel) { panel.hidden = false; });
-        return;
-      }
-
-      function selectVoice(voiceId) {
-        panels.forEach(function (panel) {
-          panel.hidden = panel.id !== voiceId;
-        });
-        steps.forEach(function (step) {
-          step.classList.toggle('is-active', step.dataset.voiceStep === voiceId);
-        });
-      }
-
-      if ('IntersectionObserver' in window) {
-        var stepObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            selectVoice(entry.target.dataset.voiceStep);
-          });
-        }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
-
-        steps.forEach(function (step) { stepObserver.observe(step); });
-      }
-    })();
   </script>
 </body>
 </html>

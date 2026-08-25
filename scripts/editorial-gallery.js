@@ -57,8 +57,17 @@
     }
   ];
 
+  var DEMO_DAY_IMAGES = [
+    { src: "assets/summer-2026/gallery/demo-day-01.jpg", alt: "A student presenting their capstone project on Demo Day", caption: "Presenting a finished project." },
+    { src: "assets/summer-2026/gallery/group-01.jpg", alt: "The full cohort together on the final day", caption: "Celebrating the cohort." },
+    { src: "assets/summer-2026/gallery/screens-01.jpg", alt: "A student's project running in the browser", caption: "Projects ready to share." },
+    { src: "assets/summer-2026/gallery/collaboration-01.jpg", alt: "Students collaborating around a shared laptop", caption: "Peers cheering each other on." },
+    { src: "assets/summer-2026/gallery/mentoring-01.jpg", alt: "An instructor helping a student", caption: "Mentors in the room." }
+  ];
+
   var grid = document.querySelector("[data-gallery-grid]");
   var standalone = document.querySelector("[data-gallery-standalone]");
+  var demoGallery = document.querySelector("[data-demo-gallery]");
   var lightbox = document.getElementById("galleryLightbox");
   if (!grid || !lightbox) return;
 
@@ -70,6 +79,7 @@
   var nextBtn = lightbox.querySelector("[data-lightbox-next]");
 
   var currentIndex = 0;
+  var activeImages = GALLERY_IMAGES;
   var lastFocusedTrigger = null;
   var touchStartX = null;
 
@@ -120,15 +130,44 @@
     grid.appendChild(gridFrag);
   }
 
+  function renderDemoGallery() {
+    if (!demoGallery) return;
+    var areas = ["a", "b", "c", "d", "e"];
+    DEMO_DAY_IMAGES.forEach(function (item, index) {
+      var figure = document.createElement("figure");
+      figure.className = "demo-day-gallery__item demo-day-gallery__item--" + areas[index];
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "demo-day-gallery__btn";
+      button.setAttribute("aria-label", "View Demo Day photo " + (index + 1) + " of " + DEMO_DAY_IMAGES.length + ": " + item.caption);
+      button.addEventListener("click", function () {
+        lastFocusedTrigger = button;
+        openLightbox(index, DEMO_DAY_IMAGES);
+      });
+      var image = document.createElement("img");
+      image.src = item.src;
+      image.alt = item.alt;
+      image.loading = "lazy";
+      var caption = document.createElement("span");
+      caption.className = "demo-day-gallery__caption";
+      caption.textContent = item.caption;
+      button.appendChild(image);
+      button.appendChild(caption);
+      figure.appendChild(button);
+      demoGallery.appendChild(figure);
+    });
+  }
+
   function updateLightboxContent() {
-    var item = GALLERY_IMAGES[currentIndex];
+    var item = activeImages[currentIndex];
     img.src = item.src;
     img.alt = item.alt;
     captionEl.textContent = item.caption || "";
-    counterEl.textContent = (currentIndex + 1) + " / " + GALLERY_IMAGES.length;
+    counterEl.textContent = (currentIndex + 1) + " / " + activeImages.length;
   }
 
-  function openLightbox(index) {
+  function openLightbox(index, collection) {
+    activeImages = collection || GALLERY_IMAGES;
     currentIndex = index;
     updateLightboxContent();
     lightbox.hidden = false;
@@ -147,12 +186,12 @@
   }
 
   function showPrev() {
-    currentIndex = (currentIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    currentIndex = (currentIndex - 1 + activeImages.length) % activeImages.length;
     updateLightboxContent();
   }
 
   function showNext() {
-    currentIndex = (currentIndex + 1) % GALLERY_IMAGES.length;
+    currentIndex = (currentIndex + 1) % activeImages.length;
     updateLightboxContent();
   }
 
@@ -183,4 +222,5 @@
   }, { passive: true });
 
   renderGrid();
+  renderDemoGallery();
 })();
