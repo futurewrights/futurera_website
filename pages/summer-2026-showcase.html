@@ -666,6 +666,9 @@
     background: #fff; border: 1px solid var(--line);
     border-radius: var(--radius-md); padding: var(--sp-4);
     text-align: center;
+    transition: transform var(--dur-micro) var(--ease-out),
+                box-shadow var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out);
   }
   .format-card__num {
     position: absolute; top: 14px; left: 14px;
@@ -678,9 +681,11 @@
   .format-card--3 .format-card__num { background: #FBEBD3; color: #B9791A; }
   .format-card--4 .format-card__num { background: #FBE0D3; color: #C6531F; }
   .format-card__icon {
-    display: block; width: 96px; height: 96px; margin: var(--sp-3) auto var(--sp-3);
+    display: flex; align-items: center; justify-content: center;
+    width: 112px; height: 112px; margin: var(--sp-3) auto var(--sp-3);
+    transition: transform var(--dur-micro) var(--ease-out);
   }
-  .format-card__icon svg, .format-card__icon img { width: 100%; height: 100%; object-fit: contain; }
+  .format-card__icon svg, .format-card__icon img { width: auto; height: 88px; max-width: 112px; object-fit: contain; }
   .format-card h3 {
     font-size: 16px; font-weight: 700; letter-spacing: -0.2px;
     color: var(--navy); margin: 0 0 8px;
@@ -694,6 +699,18 @@
   .format-card--4 h3 { border-color: #C6531F; }
   .format-card p {
     font-size: 14px; line-height: 1.55; color: var(--ink-muted); margin: 8px 0 0;
+  }
+  @media (hover: hover) {
+    .format-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(17, 146, 173, 0.4);
+      box-shadow: 0 18px 36px rgba(14, 14, 15, 0.12);
+    }
+    .format-card:hover .format-card__icon { transform: scale(1.06) rotate(-2deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .format-card, .format-card__icon { transition: none; }
+    .format-card:hover, .format-card:hover .format-card__icon { transform: none; }
   }
 
   /* Trust row beneath the CTAs */
