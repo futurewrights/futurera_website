@@ -21,6 +21,8 @@ strategy.html
 
 # Internal asset folders (course drafts, scripts, etc.)
 assets/ai lab/
+assets/summer-2026/videos/Interview.mp4
+assets/summer-2026/videos/orientation.mp4
 
 # Build artifacts (none yet, but reserve)
 node_modules/
