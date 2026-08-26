@@ -8,14 +8,9 @@ Toronto and Toronto Metropolitan University, alongside AI practitioners from ind
 
 | File | What it is |
 |---|---|
-| `index.html` | Homepage |
-| `ai-lab.html` | About AI Lab — the program family |
-| `build-with-ai.html` | Build with AI · course description |
-| `bootcamp-summer-2026.html` | Summer 2026 Bootcamp · application page |
-| `industry-track.html` | Industry Track (in development) |
-| `for-students.html` | Audience page · students |
-| `for-partners.html` | Audience page · schools & partners |
-| `why-it-matters.html` | Long-form article with sources & references |
+| `index.html` | Homepage entry point |
+| `pages/` | All secondary site pages |
+| `docs/` | Project documentation and operational runbooks |
 
 ## Stack
 
@@ -35,7 +30,7 @@ Connect this repo to **Cloudflare Pages** (or Netlify / Vercel / GitHub Pages):
 
 Application form (Tally), info-call booking (Calendly), and tuition payment
 (Stripe Payment Link) are wired through placeholder URLs in the HTML.
-See [`SETUP.md`](SETUP.md) for the full operations runbook.
+See [`SETUP.md`](docs/SETUP.md) for the full operations runbook.
 
 ## Team photos
 
