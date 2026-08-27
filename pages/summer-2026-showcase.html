@@ -48,6 +48,10 @@
     white-space: nowrap;
   }
   @media (max-width: 520px) { .page-hero h1 { white-space: nowrap; font-size: clamp(21px, 6.8vw, 32px); letter-spacing: -1.2px; } }
+  @media (max-width: 520px) {
+    .page-hero .actions { justify-content: center; }
+    .page-hero .actions .btn { min-width: 220px; justify-content: center; padding: 15px 20px; font-size: 15px; }
+  }
   .page-hero h1 em { font-style: normal; color: #fff; }
   .page-hero .lede {
     font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.80);
@@ -85,6 +89,12 @@
   }
   .hero-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5,14,28,.03) 30%, rgba(5,14,28,.62) 100%); }
   .hero-photo img { display: block; width: 100%; height: auto; filter: saturate(1.08) contrast(1.06); }
+  .hero-photo--mobile { display: none; }
+  @media (max-width: 920px) {
+    .hero-photo--desktop { display: none; }
+    .hero-photo--mobile { display: block; aspect-ratio: 4 / 3; margin: var(--sp-4) 0; }
+    .hero-photo--mobile img { height: 100%; object-fit: cover; object-position: center; }
+  }
   .hero-photo svg, .hero-photo span { position: relative; z-index: 3; }
   .hero-photo svg { width: 44px; height: 44px; }
   .hero-photo span { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -521,7 +531,11 @@
   }
   .showcase-cta__link svg { width: 16px; height: 16px; }
   .showcase-cta__link:hover { background: var(--brand-accent); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(244, 180, 0, .26); }
-  @media (max-width: 620px) { .showcase-cta { align-items: flex-start; flex-direction: column; } }
+  @media (max-width: 620px) {
+    .showcase-cta { align-items: flex-start; flex-direction: column; }
+    .showcase-cta__title { white-space: nowrap; font-size: clamp(14px, 4.3vw, 18px); }
+    .project-card__links .project-card__link { display: none; }
+  }
 
   /* Quotes — "In their own words" expandable quote wall */
   .voice-wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); max-width: 1120px; margin: 0 auto; }
@@ -1003,8 +1017,11 @@
         <div class="hero-copy">
           <span class="eyebrow gold">Summer 2026 · Program Showcase</span>
           <h1>Students came with ideas.<br>They left with working apps.</h1>
-          <p class="lede">In Summer 2026, 10 students ages 13&ndash;16 joined our inaugural <strong>Build with AI — From Idea to Launched App</strong> bootcamp for an intensive, hands-on introduction to creating with AI.</p>
-          <p class="lede">Over two weeks, they learned to turn ideas into plans, build with AI, debug and iterate &mdash; and ultimately launch and present their own work.</p>
+          <p class="lede">In Summer 2026, 10 students ages 13&ndash;16 joined our inaugural <strong>Build with AI — From Idea to Launched App</strong> bootcamp.</p>
+          <aside class="hero-photo hero-photo--mobile">
+            <img src="../assets/summer-2026/gallery/hero.JPG" alt="Summer 2026 Future Wrights Academy bootcamp cohort" />
+          </aside>
+          <p class="lede">Over two weeks, students learned to turn ideas into plans, build with AI, debug and iterate &mdash; then launch and present their own work.</p>
           <p class="hero-stats">10 STUDENTS &middot; 30 HOURS &middot; 10 BUILD DAYS &middot; 1 DEMO DAY</p>
           <div class="actions">
             <a class="btn btn-primary" href="#projects">Explore the Showcase &rarr;</a>
@@ -1012,7 +1029,7 @@
           </div>
         </div>
 
-        <aside class="hero-photo">
+        <aside class="hero-photo hero-photo--desktop">
           <img src="../assets/summer-2026/gallery/hero.JPG" alt="Summer 2026 Future Wrights Academy bootcamp cohort" />
         </aside>
       </div>
