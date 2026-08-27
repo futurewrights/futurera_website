@@ -19,27 +19,37 @@
     .builder-stat__icon svg { width:26px; height:26px; }
     .builder-stat strong { display:block; font-size:23px; line-height:1; } .builder-stat span { display:block; margin-top:5px; color:var(--ink-muted); font-size:13px; font-weight:600; }
     .projects-section { padding:var(--sp-5) 0 var(--sp-7); border-top:1px solid var(--line); background:#fbfcfe; }
-    .project-controls { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3); max-width:1280px; margin:0 auto var(--sp-4); }
-    .project-filters { display:flex; gap:4px; padding:5px; border-radius:12px; background:#edf0f6; }
-    .project-filters button, .view-toggle button { border:0; padding:10px 16px; border-radius:9px; background:transparent; color:var(--ink-muted); font:inherit; font-size:14px; font-weight:700; cursor:pointer; }
-    .project-filters button.is-active, .view-toggle button.is-active { background:var(--navy); color:#fff; }
-    .project-search { display:flex; align-items:center; width:min(100%,290px); border:1px solid var(--line); border-radius:10px; background:#fff; padding:0 12px; }
-    .project-search input { width:100%; border:0; outline:0; padding:12px 0; color:var(--ink); font:inherit; } .project-search svg { width:20px; color:var(--ink-muted); }
-    .project-tools { display:flex; align-items:center; gap:var(--sp-3); }
-    .view-toggle { display:flex; gap:4px; padding:4px; border:1px solid var(--line); border-radius:10px; background:#fff; }
-    .view-toggle button { padding:8px 10px; } .view-toggle svg { width:18px; height:18px; }
     .projects-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-4); max-width:1120px; margin:auto; }
     .project-card { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 4px 12px rgba(10,17,40,.05); transition:transform var(--dur-micro) var(--ease-out),box-shadow var(--dur-micro) var(--ease-out); }
     .project-card:hover { transform:translateY(-4px); box-shadow:0 14px 28px rgba(10,17,40,.12); }
+    .project-card[data-project-link] { cursor:pointer; }
+    .project-card[data-project-link]:focus-visible { outline:3px solid var(--brand-accent); outline-offset:3px; }
+    .project-card--flippable { border:0; overflow:visible; background:transparent; box-shadow:none; perspective:1200px; }
+    .project-card--flippable:hover { box-shadow:none; }
+    .project-card__flip { display:grid; width:100%; transform-style:preserve-3d; transition:transform 620ms var(--ease-out); }
+    .project-card--flippable.is-flipped .project-card__flip { transform:rotateY(180deg); }
+    .project-card__face { grid-area:1 / 1; width:100%; min-width:0; box-sizing:border-box; overflow:hidden; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 4px 12px rgba(10,17,40,.05); backface-visibility:hidden; }
+    .project-card__face--back { display:flex; flex-direction:column; justify-content:center; padding:24px; background:linear-gradient(145deg,#0a1b3d,#16356b); color:#fff; transform:rotateY(180deg); pointer-events:none; }
+    .project-card--flippable.is-flipped .project-card__face--front { pointer-events:none; }
+    .project-card--flippable.is-flipped .project-card__face--back { pointer-events:auto; }
+    .project-card__reflection-eyebrow { margin:0 0 12px; color:var(--brand-accent); font-size:11px; font-weight:800; letter-spacing:.11em; }
+    .project-card__reflection-quote { margin:0; font-size:16px; line-height:1.55; font-style:italic; }
+    .project-card__reflection-author { margin:16px 0 0; font-size:13px; font-weight:800; }
+    .project-card--flippable .project-card__body { display:grid; grid-template-columns:56px minmax(0,1fr) auto; column-gap:10px; row-gap:13px; align-items:center; }
+    .project-card--flippable .student-avatar { grid-column:1; grid-row:1; }
+    .project-card--flippable .project-card__meta { grid-column:2; grid-row:1; }
+    .project-card--flippable .project-card__link { grid-column:3; grid-row:2; }
+    .reflection-toggle { grid-column:1 / span 2; grid-row:2; margin:0; padding:0; border:0; background:transparent; color:var(--brand-deep); font:inherit; font-size:12px; font-weight:800; cursor:pointer; text-align:left; transition:color var(--dur-micro) var(--ease-out),text-decoration-color var(--dur-micro) var(--ease-out); }
+    .reflection-toggle:not(.reflection-toggle--back):hover, .reflection-toggle:not(.reflection-toggle--back):focus-visible { color:var(--navy); text-decoration:underline; text-decoration-color:var(--brand-accent); text-decoration-thickness:2px; text-underline-offset:4px; }
+    .reflection-toggle--back { margin:24px 0 0; color:#fff; }
+    @media (prefers-reduced-motion:reduce) { .project-card__flip { transition:none; } }
     .project-preview { position:relative; aspect-ratio:16/10; display:flex; flex-direction:column; justify-content:flex-end; padding:18px; color:#fff; overflow:hidden; }
     .project-preview::before { content:"Future Wrights"; position:absolute; top:10px; left:12px; font-size:8px; font-weight:800; letter-spacing:.06em; opacity:.8; } .project-preview h2 { position:relative; margin:0; font-size:22px; line-height:1.05; letter-spacing:-1px; } .project-preview p { position:relative; margin:5px 0 0; font-size:11px; opacity:.8; }
     .project-preview--image { padding:0; } .project-preview--image::before { display:none; } .project-preview--image img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
     .project-preview--space { background:radial-gradient(circle at 20% 24%,#b280ff 0 4%,transparent 5%),linear-gradient(135deg,#170040,#4a158c); } .project-preview--jungle { background:linear-gradient(135deg,#0a3e36,#3e7c3d); } .project-preview--neon { background:radial-gradient(circle at 75% 75%,#22d3ee 0 5%,transparent 6%),linear-gradient(135deg,#020b23,#12265e); } .project-preview--city { background:linear-gradient(135deg,#261050,#8b2677); } .project-preview--ocean { background:linear-gradient(135deg,#082a6a,#00a8c9); } .project-preview--mint { background:linear-gradient(135deg,#bcf5ea,#45caa6); color:var(--navy); } .project-preview--mountain { background:linear-gradient(135deg,#0e478f,#79b5ee); } .project-preview--game { background:linear-gradient(135deg,#040919,#102a3f); } .project-preview--lilac { background:linear-gradient(135deg,#f6f4ff,#bfb4ff); color:var(--navy); } .project-preview--rocket { background:linear-gradient(135deg,#0b042c,#3b146c); } .project-preview--blue { background:linear-gradient(135deg,#0d3f87,#248ed1); }
-    .project-card__body { display:flex; align-items:center; gap:10px; padding:12px; } .student-avatar { width:56px; height:56px; display:grid; place-items:center; flex:0 0 auto; overflow:hidden; border-radius:50%; background:var(--surface-2); color:var(--navy); font-size:15px; font-weight:800; } .student-avatar img { width:100%; height:100%; object-fit:cover; } .project-card__meta { min-width:0; flex:1; } .project-card__meta strong { display:block; font-size:15px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .project-card__meta span { display:block; margin-top:3px; color:var(--ink-muted); font-size:12px; } .project-card__link { color:var(--brand-deep); font-size:11px; font-weight:800; white-space:nowrap; }
-    .projects-grid.is-list { grid-template-columns:1fr; } .projects-grid.is-list .project-card { display:grid; grid-template-columns:220px 1fr; } .projects-grid.is-list .project-card__body { padding:var(--sp-3); }
-    .empty-state { display:none; max-width:1280px; margin:var(--sp-5) auto; text-align:center; color:var(--ink-muted); }
+    .project-card__body { display:flex; align-items:center; gap:10px; padding:12px; } .student-avatar { width:56px; height:56px; display:grid; place-items:center; flex:0 0 auto; overflow:hidden; border-radius:50%; background:var(--surface-2); color:var(--navy); font-size:15px; font-weight:800; } .student-avatar img { width:100%; height:100%; object-fit:cover; } .student-avatar__image--arwin { object-position:center 23%; } .project-card__meta { min-width:0; flex:1; } .project-card__meta strong { display:block; font-size:15px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .project-card__meta span { display:block; margin-top:3px; color:var(--ink-muted); font-size:12px; } .project-card__link { color:var(--brand-deep); font-size:11px; font-weight:800; white-space:nowrap; text-decoration-color:transparent; text-underline-offset:4px; transition:text-decoration-color var(--dur-micro) var(--ease-out); } .project-card__link:hover, .project-card__link:focus-visible { text-decoration:underline; text-decoration-color:var(--brand-accent); text-decoration-thickness:2px; }
     .showcase-note { max-width:720px; margin:var(--sp-6) auto 0; padding:14px 20px; border-radius:12px; background:#fff7e7; color:var(--navy); text-align:center; font-size:15px; font-weight:600; }
-    @media (max-width:700px) { .builder-stats { flex-wrap:wrap; } .project-controls { align-items:stretch; flex-direction:column; } .project-tools { justify-content:space-between; } .project-search { width:100%; } .projects-grid { grid-template-columns:repeat(2,1fr); } .projects-grid.is-list .project-card { grid-template-columns:1fr; } }
+    @media (max-width:700px) { .builder-stats { flex-wrap:wrap; } .projects-grid { grid-template-columns:repeat(2,1fr); } }
     @media (max-width:430px) { .projects-grid { grid-template-columns:1fr; } .builder-stat { width:100%; } }
   </style>
 </head>
@@ -65,18 +75,17 @@
     </div>
   </section>
   <section class="projects-section" id="projects"><div class="container">
-    <div class="project-controls"><div class="project-filters"><button class="is-active" type="button" data-sort="all">All Students (9)</button><button type="button" data-sort="az">A–Z</button><button type="button" data-sort="za">Z–A</button></div><div class="project-tools"><label class="project-search"><input id="studentSearch" type="search" placeholder="Search student…" aria-label="Search students"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></label><div class="view-toggle"><button class="is-active" type="button" data-view="grid" aria-label="Grid view"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></button><button type="button" data-view="list" aria-label="List view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg></button></div></div></div>
     <div class="projects-grid" id="projectsGrid">
-      <article class="project-card" data-name="Arsha A."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/arsha.png" alt="Arsha A.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/arsha.JPG" alt="Arsha A." loading="lazy"></span><div class="project-card__meta"><strong>Arsha A.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-wine.vercel.app/" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Towheed B."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/towheed-pro.png" alt="Towheed B.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/towheed.jpg" alt="Towheed B." loading="lazy"></span><div class="project-card__meta"><strong>Towheed B.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-henna.vercel.app/" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Nilo Z."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/nilo.png" alt="Nilo Z.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/nilo.jpg" alt="Nilo Z." loading="lazy"></span><div class="project-card__meta"><strong>Nilo Z.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-kappa.vercel.app" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Artin K."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/artin-pro.png" alt="Artin K.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/artin.jpg" alt="Artin K." loading="lazy"></span><div class="project-card__meta"><strong>Artin K.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-coral.vercel.app/" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Arwin F."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/arwin-pro.png" alt="Arwin F.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/arwin.JPG" alt="Arwin F." loading="lazy"></span><div class="project-card__meta"><strong>Arwin F.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-alru.vercel.app/" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Ghazal M."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/ghazal-pro.png" alt="Ghazal M.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/ghazal.jpg" alt="Ghazal M." loading="lazy"></span><div class="project-card__meta"><strong>Ghazal M.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-phi.vercel.app" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Paria S."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/paria.png" alt="Paria S.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/paria.JPG" alt="Paria S." loading="lazy"></span><div class="project-card__meta"><strong>Paria S.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-sepia.vercel.app" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Radean K."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/radean.png" alt="Radean K.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/radean.jpg" alt="Radean K." loading="lazy"></span><div class="project-card__meta"><strong>Radean K.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-2qeg.vercel.app" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-      <article class="project-card" data-name="Wayne E."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/wayne.png" alt="Wayne E.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/Wayne.jpg" alt="Wayne E." loading="lazy"></span><div class="project-card__meta"><strong>Wayne E.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-eight-sigma.vercel.app" target="_blank" rel="noopener">Explore Hub ↗</a></div></article>
-    </div><p class="empty-state" id="emptyState">No student matches that search.</p><p class="showcase-note">✦ Every Project Hub is live and built by the student from scratch. Start exploring →</p>
+      <article class="project-card project-card--flippable" data-name="Arsha A."><div class="project-card__flip"><div class="project-card__face project-card__face--front"><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/arsha.png" alt="Arsha A.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/arsha.JPG" alt="Arsha A." loading="lazy"></span><div class="project-card__meta"><strong>Arsha A.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-wine.vercel.app/" target="_blank" rel="noopener">View Project Hub ↗</a><button class="reflection-toggle" type="button" data-reflection-toggle aria-pressed="false">↻ Read reflection</button></div></div><div class="project-card__face project-card__face--back"><p class="project-card__reflection-eyebrow">IN THEIR OWN WORDS</p><p class="project-card__reflection-quote">This student reflection is coming soon.</p><p class="project-card__reflection-author">— Arsha A.</p><button class="reflection-toggle reflection-toggle--back" type="button" data-reflection-toggle aria-pressed="false" tabindex="-1">← Back to project</button></div></div></article>
+      <article class="project-card" data-name="Towheed B."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/towheed-pro.png" alt="Towheed B.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/towheed.jpg" alt="Towheed B." loading="lazy"></span><div class="project-card__meta"><strong>Towheed B.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-henna.vercel.app/" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Nilo Z."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/nilo.png" alt="Nilo Z.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/nilo.jpg" alt="Nilo Z." loading="lazy"></span><div class="project-card__meta"><strong>Nilo Z.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-kappa.vercel.app" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Artin K."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/artin-pro.png" alt="Artin K.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/artin.jpg" alt="Artin K." loading="lazy"></span><div class="project-card__meta"><strong>Artin K.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-coral.vercel.app/" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Arwin F."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/arwin-pro.png" alt="Arwin F.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img class="student-avatar__image--arwin" src="../assets/summer-2026/students-pic/arwin.JPG" alt="Arwin F." loading="lazy"></span><div class="project-card__meta"><strong>Arwin F.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-alru.vercel.app/" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Ghazal M."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/ghazal-pro.png" alt="Ghazal M.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/ghazal.jpg" alt="Ghazal M." loading="lazy"></span><div class="project-card__meta"><strong>Ghazal M.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-phi.vercel.app" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Paria S."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/paria.png" alt="Paria S.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/paria.JPG" alt="Paria S." loading="lazy"></span><div class="project-card__meta"><strong>Paria S.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-sepia.vercel.app" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Radean K."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/radean.png" alt="Radean K.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/radean.jpg" alt="Radean K." loading="lazy"></span><div class="project-card__meta"><strong>Radean K.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-2qeg.vercel.app" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+      <article class="project-card" data-name="Wayne E."><div class="project-preview project-preview--image"><img src="../assets/summer-2026/projects/wayne.png" alt="Wayne E.'s Project Hub homepage" loading="lazy"></div><div class="project-card__body"><span class="student-avatar"><img src="../assets/summer-2026/students-pic/Wayne.jpg" alt="Wayne E." loading="lazy"></span><div class="project-card__meta"><strong>Wayne E.</strong><span>Project Hub</span></div><a class="project-card__link" href="https://my-home-page-eight-sigma.vercel.app" target="_blank" rel="noopener">View Project Hub ↗</a></div></article>
+    </div><p class="showcase-note">✦ <strong>9 students. 9 live Project Hubs. Built and launched by the students.</strong></p>
   </div></section>
 </main>
 <section class="newsletter-strip" aria-labelledby="newsletter-title"><div class="container"><div class="newsletter-grid"><div class="newsletter-text"><h3 id="newsletter-title">Stay updated.</h3><p>Be first to hear about new cohorts and program announcements.</p></div><form class="newsletter-form" onsubmit="event.preventDefault();"><input type="email" placeholder="your@email.com" aria-label="Email address" required><button type="submit">Subscribe →</button></form></div></div></section>
@@ -84,14 +93,76 @@
 <script>
   (function () { var btn = document.getElementById('navToggle'); var menu = document.getElementById('primaryNav'); if (!btn || !menu) return; function closeMenu() { if (!menu.classList.contains('open')) return; menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }); menu.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); }); window.addEventListener('scroll', closeMenu, { passive: true }); document.addEventListener('click', function (e) { if (!menu.classList.contains('open')) return; if (e.target.closest('#primaryNav') || e.target.closest('#navToggle')) return; closeMenu(); }); })();
   (function () {
-    var grid = document.getElementById('projectsGrid');
-    var search = document.getElementById('studentSearch');
-    var empty = document.getElementById('emptyState');
-    var cards = Array.from(grid.querySelectorAll('.project-card'));
-    function filter() { var term = search.value.toLowerCase(); var shown = 0; cards.forEach(function(card) { var match = card.dataset.name.toLowerCase().includes(term); card.hidden = !match; if (match) shown++; }); empty.style.display = shown ? 'none' : 'block'; }
-    search.addEventListener('input', filter);
-    document.querySelectorAll('[data-sort]').forEach(function(button) { button.addEventListener('click', function() { document.querySelectorAll('[data-sort]').forEach(function(item) { item.classList.toggle('is-active', item === button); }); var mode = button.dataset.sort; if (mode !== 'all') { cards.sort(function(a, b) { return mode === 'az' ? a.dataset.name.localeCompare(b.dataset.name) : b.dataset.name.localeCompare(a.dataset.name); }).forEach(function(card) { grid.appendChild(card); }); } }); });
-    document.querySelectorAll('[data-view]').forEach(function(button) { button.addEventListener('click', function() { document.querySelectorAll('[data-view]').forEach(function(item) { item.classList.toggle('is-active', item === button); }); grid.classList.toggle('is-list', button.dataset.view === 'list'); }); });
+    document.querySelectorAll('.project-card').forEach(function (card) {
+      var link = card.querySelector('.project-card__link');
+      if (!link) return;
+      card.dataset.projectLink = 'true';
+      card.tabIndex = 0;
+      card.setAttribute('role', 'link');
+      card.setAttribute('aria-label', 'Explore ' + card.dataset.name + '\u2019s Project Hub');
+      function openProject() { link.click(); }
+      card.addEventListener('click', function (event) {
+        if (!event.target.closest('a, button') && !card.classList.contains('is-flipped')) openProject();
+      });
+      card.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          if (card.classList.contains('is-flipped')) return;
+          event.preventDefault();
+          openProject();
+        }
+      });
+    });
+  })();
+  (function () {
+    document.querySelectorAll('.project-card:not(.project-card--flippable)').forEach(function (card) {
+      var name = card.dataset.name;
+      var flip = document.createElement('div');
+      var front = document.createElement('div');
+      var back = document.createElement('div');
+      var action = document.createElement('button');
+      var backAction = document.createElement('button');
+
+      card.classList.add('project-card--flippable');
+      flip.className = 'project-card__flip';
+      front.className = 'project-card__face project-card__face--front';
+      back.className = 'project-card__face project-card__face--back';
+      while (card.firstChild) front.appendChild(card.firstChild);
+
+      action.className = 'reflection-toggle';
+      action.type = 'button';
+      action.dataset.reflectionToggle = '';
+      action.setAttribute('aria-pressed', 'false');
+      action.textContent = '↻ Read reflection';
+      front.querySelector('.project-card__body').appendChild(action);
+
+      back.innerHTML = '<p class="project-card__reflection-eyebrow">IN THEIR OWN WORDS</p><p class="project-card__reflection-quote">This student reflection is coming soon.</p><p class="project-card__reflection-author">— ' + name + '</p>';
+      backAction.className = 'reflection-toggle reflection-toggle--back';
+      backAction.type = 'button';
+      backAction.dataset.reflectionToggle = '';
+      backAction.setAttribute('aria-pressed', 'false');
+      backAction.tabIndex = -1;
+      backAction.textContent = '← Back to project';
+      back.appendChild(backAction);
+
+      flip.appendChild(front);
+      flip.appendChild(back);
+      card.appendChild(flip);
+    });
+
+    document.querySelectorAll('.project-card--flippable').forEach(function (card) {
+      var toggles = card.querySelectorAll('[data-reflection-toggle]');
+      var projectLink = card.querySelector('.project-card__link');
+      toggles.forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          var flipped = !card.classList.contains('is-flipped');
+          card.classList.toggle('is-flipped', flipped);
+          toggles.forEach(function (button) { button.setAttribute('aria-pressed', flipped ? 'true' : 'false'); });
+          card.querySelector('.reflection-toggle:not(.reflection-toggle--back)').tabIndex = flipped ? -1 : 0;
+          card.querySelector('.reflection-toggle--back').tabIndex = flipped ? 0 : -1;
+          projectLink.tabIndex = flipped ? -1 : 0;
+        });
+      });
+    });
   })();
 </script>
 <script src="../scripts/newsletter.js" defer></script>
