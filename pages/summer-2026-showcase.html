@@ -538,19 +538,30 @@
   }
 
   /* Quotes — "In their own words" expandable quote wall */
-  .voice-wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); max-width: 1120px; margin: 0 auto; }
-  .voice-note { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: #fff; }
-  .voice-note--featured { grid-column: span 2; background: var(--navy); color: #fff; border-color: var(--navy); }
-  .voice-note--cream { background: #FFF7E7; border-color: #F1D79A; }
-  .voice-note--pink { background: #EAF3FA; border-color: #BED6E8; }
-  .voice-note--green { background: #E8F5F1; border-color: #B9DFD4; }
-  .voice-note summary { list-style: none; cursor: pointer; padding: var(--sp-4); }
+  .voice-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--sp-3); max-width: 1120px; margin: 0 auto; }
+  .voice-note { grid-column: span 6; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: #fff; }
+  .voice-note--featured { grid-column: 1 / span 7; grid-row: 1; background: var(--navy); color: #fff; border-color: var(--navy); }
+  .voice-note--cream { grid-column: 8 / span 5; grid-row: 1; background: #FFF7E7; border-color: #F1D79A; }
+  .voice-note--pink { grid-column: 1 / span 5; grid-row: 2; background: #EAF3FA; border-color: #BED6E8; }
+  .voice-note--green { grid-column: 6 / span 7; grid-row: 2; background: #E8F5F1; border-color: #B9DFD4; }
+  .voice-note:nth-child(5) { grid-column: 1 / span 7; grid-row: 3; }
+  .voice-note:nth-child(6) { grid-column: 8 / span 5; grid-row: 3; }
+  .voice-note:nth-child(5), .voice-note:nth-child(6) { align-self: start; }
+  .voice-note:nth-child(6) summary { padding-top: 16px; padding-bottom: 44px; }
+  .voice-note:nth-child(6) summary::after { bottom: 2px; }
+  .voice-note summary { position: relative; list-style: none; cursor: pointer; padding: 20px 60px 50px 20px; }
   .voice-note summary::-webkit-details-marker { display: none; }
-  .voice-note summary::after { content: "+"; float: right; font-size: 24px; line-height: .8; color: var(--brand-deep); }
+  .voice-note summary::after { content: "+"; position: absolute; right: 12px; bottom: 8px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; line-height: .8; color: var(--brand-deep); }
   .voice-note[open] summary::after { content: "−"; }
   .voice-note--featured summary::after { color: #fff; }
-  .voice-note__meta { display: block; margin-bottom: 14px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-deep); }
+  @media (hover: hover) {
+    .voice-note summary:hover::after, .voice-note summary:focus-visible::after { content: "+ Read more"; width: auto; padding: 0 10px; font-size: 12px; font-weight: 800; line-height: 1.6; }
+    .voice-note[open] summary:hover::after, .voice-note[open] summary:focus-visible::after { content: "− Close"; }
+  }
+  .voice-note__meta { display: block; margin-bottom: 14px; color: var(--brand-deep); }
   .voice-note--featured .voice-note__meta { color: rgba(255,255,255,.8); }
+  .voice-note__name, .voice-note__topic { display: inline; font-size: 12px; font-weight: 800; letter-spacing: .08em; line-height: 1.1; text-transform: uppercase; }
+  .voice-note__name::after { content: " · "; }
   .voice-note__quote { display: block; font-size: 17px; line-height: 1.48; font-weight: 600; }
   .voice-note--featured .voice-note__quote { font-size: 23px; }
   .voice-note__body { padding: 0 var(--sp-4) var(--sp-4); font-size: 14px; line-height: 1.6; color: var(--ink-muted); }
@@ -558,7 +569,7 @@
   .voice-note__body p { margin: 0; }
   .voice-note--sample { background: #fff; border-style: dashed; }
   .voice-note--sample .voice-note__quote { color: var(--ink-muted); font-size: 15px; font-weight: 500; }
-  @media (max-width: 760px) { .voice-wall { grid-template-columns: 1fr; } .voice-note--featured { grid-column: auto; } }
+  @media (max-width: 760px) { .voice-wall { grid-template-columns: 1fr; } .voice-note, .voice-note--featured, .voice-note--cream, .voice-note--pink, .voice-note--green, .voice-note:nth-child(5), .voice-note:nth-child(6) { grid-column: auto; grid-row: auto; } .voice-note summary::after { content: "+ Read more"; width: auto; padding: 0 10px; font-size: 12px; font-weight: 800; line-height: 1.6; } .voice-note[open] summary::after { content: "− Close"; } }
 
   /* Learning journey rail — icon nodes connected by a gradient line */
   .journey-rail {
@@ -1194,15 +1205,12 @@
       </div>
 
       <div class="voice-wall">
-        <details class="voice-note voice-note--featured" open><summary><span class="voice-note__meta">Alex, 15 · Open-mindedness</span><span class="voice-note__quote">&ldquo;Future Wrights gave me a safe space to get interested in something foreign to me.&rdquo;</span></summary><div class="voice-note__body"><p>It gave me a chance and I want everyone to have that kind of open, productive, enlightening experience.</p></div></details>
-        <details class="voice-note voice-note--cream"><summary><span class="voice-note__meta">Sam, 14 · Community</span><span class="voice-note__quote">&ldquo;I looked forward to going to camp each day.&rdquo;</span></summary><div class="voice-note__body"><p>The Future Wrights community is truly special and I felt extremely cared for each step of the way.</p></div></details>
-        <details class="voice-note voice-note--pink"><summary><span class="voice-note__meta">Maya, 15 · Confidence</span><span class="voice-note__quote">&ldquo;I can walk into a computer science class and connect with what I learned in camp.&rdquo;</span></summary><div class="voice-note__body"><p>I have the confidence to answer questions and even teach concepts to others.</p></div></details>
-        <details class="voice-note voice-note--green"><summary><span class="voice-note__meta">Jayden, 16 · Belonging</span><span class="voice-note__quote">&ldquo;This is a community in which I felt truly appreciated.&rdquo;</span></summary><div class="voice-note__body"><p>It is a place I take pride in representing and being part of.</p></div></details>
-        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 05</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
-        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 06</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
-        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 07</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
-        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 08</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
-        <details class="voice-note voice-note--sample"><summary><span class="voice-note__meta">Sample reflection 09</span><span class="voice-note__quote">Student name, age</span></summary><div class="voice-note__body"><p>Replace with the student&rsquo;s full reflection.</p></div></details>
+        <details class="voice-note voice-note--featured"><summary><span class="voice-note__meta"><span class="voice-note__name">Ghazal</span><span class="voice-note__topic">Human + AI</span></span><span class="voice-note__quote">&ldquo;Technology is powerful, but it&rsquo;s the people behind it who make it meaningful.&rdquo;</span></summary><div class="voice-note__body"><p>The camp helped me see AI in a new way&hellip; I&rsquo;m leaving this camp with more curiosity, new ideas, and excitement for what the future can bring.</p></div></details>
+        <details class="voice-note voice-note--cream"><summary><span class="voice-note__meta"><span class="voice-note__name">Towheed</span><span class="voice-note__topic">Launching</span></span><span class="voice-note__quote">&ldquo;I learnt a lot about launching and creating a live website.&rdquo;</span></summary><div class="voice-note__body"><p>I had a great 2 weeks here at the Future Wrights Academy&rsquo;s Summer AI Bootcamp. I learnt a lot about launching and creating a live website. Thank you so much for this opportunity!</p></div></details>
+        <details class="voice-note voice-note--pink"><summary><span class="voice-note__meta"><span class="voice-note__name">Niloofar</span><span class="voice-note__topic">Problem Solving</span></span><span class="voice-note__quote">&ldquo;It helped me improve my problem-solving skills and boosted my creativity.&rdquo;</span></summary><div class="voice-note__body"><p>This AI bootcamp helped me learn about how artificial intelligence works and how I can use AI tools effectively. It also helped me improve my problem-solving skills and boosted my creativity by giving me opportunities to work on different games and websites.</p></div></details>
+        <details class="voice-note voice-note--green"><summary><span class="voice-note__meta"><span class="voice-note__name">Arwin</span><span class="voice-note__topic">Creating with AI</span></span><span class="voice-note__quote">&ldquo;It has enabled me to follow my passion of creating a study website with the assist of AI.&rdquo;</span></summary><div class="voice-note__body"><p>My experience at Future Wrights has taught me more than the use of VSCode or the structure of prompting; it has enabled me to follow my passion of creating a study website with the assist of AI.</p></div></details>
+        <details class="voice-note"><summary><span class="voice-note__meta"><span class="voice-note__name">Wayne</span><span class="voice-note__topic">Building</span></span><span class="voice-note__quote">&ldquo;I built over 15 websites/games thanks to them.&rdquo;</span></summary><div class="voice-note__body"><p>For me, Future Wrights Academy helped me a lot. Whether it was for coding, debugging, or any kind of advice, they were there. I built over 15 websites/games thanks to them. I enjoyed Future Wrights, &amp; hope to come back!</p></div></details>
+        <details class="voice-note"><summary><span class="voice-note__meta"><span class="voice-note__name">Arsha</span><span class="voice-note__topic">Community</span></span><span class="voice-note__quote">&ldquo;Sometimes it did not feel like a class because of how friendly everyone was.&rdquo;</span></summary><div class="voice-note__body"><p>This two weeks were so much fun. Sometimes it did not feel like a class because of how friendly everyone was.</p></div></details>
       </div>
 
     </div>
@@ -1606,6 +1614,56 @@
           visibilityObserver.observe(video.closest('.video-frame'));
         });
       }
+    })();
+
+    /* Keep one student reflection open at a time. */
+    (function () {
+      var notes = Array.from(document.querySelectorAll('.voice-note'));
+      var duration = 300;
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!notes.length) return;
+
+      function closeNote(note) {
+        if (!note.open) return;
+        var body = note.querySelector('.voice-note__body');
+        if (reducedMotion || !body) {
+          note.open = false;
+          return;
+        }
+        body.animate([
+          { opacity: 1, transform: 'translateY(0)' },
+          { opacity: 0, transform: 'translateY(-6px)' }
+        ], { duration: duration, easing: 'ease-out' });
+        window.setTimeout(function () { note.open = false; }, duration);
+      }
+
+      function openNote(note) {
+        var body = note.querySelector('.voice-note__body');
+        note.open = true;
+        if (!reducedMotion && body) {
+          body.animate([
+            { opacity: 0, transform: 'translateY(-6px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ], { duration: duration, easing: 'ease-out' });
+        }
+      }
+
+      notes.forEach(function (note) {
+        note.querySelector('summary').addEventListener('click', function (event) {
+          event.preventDefault();
+          if (note.open) {
+            closeNote(note);
+            return;
+          }
+          var openNotes = notes.filter(function (other) { return other.open; });
+          openNotes.forEach(closeNote);
+          if (openNotes.length && !reducedMotion) {
+            window.setTimeout(function () { openNote(note); }, duration);
+          } else {
+            openNote(note);
+          }
+        });
+      });
     })();
 
     /* Interactive learning-journey stages */
