@@ -489,7 +489,7 @@
   }
   .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(10, 27, 61, .12); }
   .project-card__thumb {
-    aspect-ratio: 5 / 4; background: linear-gradient(135deg, #eef1f8 0%, #e2e7f3 100%);
+    aspect-ratio: 10 / 7; background: linear-gradient(135deg, #eef1f8 0%, #e2e7f3 100%);
     display: grid; place-items: center; color: var(--ink-muted);
     border-bottom: 1px solid var(--line); overflow: hidden;
   }
@@ -700,10 +700,11 @@
   .format-card--4 .format-card__num { background: #FBE0D3; color: #C6531F; }
   .format-card__icon {
     display: flex; align-items: center; justify-content: center;
-    width: 112px; height: 112px; margin: var(--sp-3) auto var(--sp-3);
+    width: 112px; height: 112px; margin: var(--sp-3) auto 6px;
+    color: var(--navy);
     transition: transform var(--dur-micro) var(--ease-out);
   }
-  .format-card__icon svg, .format-card__icon img { width: auto; height: 88px; max-width: 112px; object-fit: contain; }
+  .format-card__icon svg, .format-card__icon img { width: auto; height: 104px; max-width: 112px; object-fit: contain; }
   .format-card h3 {
     font-size: 16px; font-weight: 700; letter-spacing: -0.2px;
     color: var(--navy); margin: 0 0 8px;
@@ -1423,8 +1424,8 @@
       <div class="section-head">
         <span class="eyebrow gold">For schools &amp; education partners</span>
         <h2>What could this look like for <span class="hl-gold">your students</span>?</h2>
-        <p>Summer 2026 demonstrated what happens when students are given the tools, guidance, and space to move beyond consuming AI and begin creating with it.</p>
-        <p>Future Wrights works with schools and education partners to bring hands-on AI learning experiences to their students.</p>
+        <p>Summer 2026 showed what can happen when students are given the tools, guidance, and space to move from <strong>using AI to creating with it.</strong></p>
+        <p>We partner with schools and education organizations to bring these hands-on learning experiences to their students.</p>
       </div>
 
       <div class="partner-formats">
@@ -1436,14 +1437,14 @@
         </article>
         <article class="format-card format-card--2">
           <span class="format-card__num">02</span>
-          <span class="format-card__icon"><img src="../assets/summer-2026/icons/ai-lab.png" alt="" loading="lazy"></span>
+          <span class="format-card__icon"><img src="../assets/summer-2026/icons/workshop.png" alt="" loading="lazy"></span>
           <h3>Workshops &amp; AI Labs</h3>
           <p>Focused hands-on experiences around specific AI capabilities and challenges.</p>
         </article>
         <article class="format-card format-card--3">
           <span class="format-card__num">03</span>
-          <span class="format-card__icon"><img src="../assets/summer-2026/icons/ai-labs.png" alt="" loading="lazy"></span>
-          <h3>Intensive Programs</h3>
+          <span class="format-card__icon"><img src="../assets/summer-2026/icons/bootcamp.png" alt="" loading="lazy"></span>
+          <h3>Bootcamps &amp; Intensives</h3>
           <p>Bootcamp-style experiences for breaks, enrichment weeks, or special programming.</p>
         </article>
         <article class="format-card format-card--4">
@@ -1462,42 +1463,7 @@
     </div>
   </section>
 
-  <!-- FINAL CTA BANNER -->
-  <section class="cta-banner-section">
-    <div class="cta-banner">
-      <div class="cta-banner__bg" aria-hidden="true">
-        <img src="../assets/images/footer_banner.png" alt="" />
-      </div>
-      <div class="cta-banner__inner">
-        <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">Help students move from <span class="gold-word">using AI to creating with it.</span></h2>
-          <p class="cta-banner__lede">Future Wrights develops hands-on AI learning experiences that help students think, build, experiment, solve problems, and create in the AI era.</p>
-          <div class="cta-banner__actions">
-            <a class="btn btn-primary" href="for-partners.html">Discuss a Partnership &rarr;</a>
-            <a class="btn btn-ghost" href="../index.html#ecosystem">Explore Our Programs &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </main>
-
-<!-- NEWSLETTER STRIP -->
-<section class="newsletter-strip" aria-labelledby="newsletter-title">
-  <div class="container">
-    <div class="newsletter-grid">
-      <div class="newsletter-text">
-        <h3 id="newsletter-title">Stay updated.</h3>
-        <p>Be first to hear about new cohorts and program announcements.</p>
-      </div>
-      <form class="newsletter-form" onsubmit="event.preventDefault();">
-        <input type="email" placeholder="your@email.com" aria-label="Email address" required>
-        <button type="submit">Subscribe →</button>
-      </form>
-    </div>
-  </div>
-</section>
 
 <footer class="site">
   <div class="container">
