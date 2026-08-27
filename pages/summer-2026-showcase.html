@@ -47,7 +47,7 @@
     color: #fff; margin: var(--sp-2) 0 var(--sp-3); text-align: left;
     white-space: nowrap;
   }
-  @media (max-width: 520px) { .page-hero h1 { white-space: normal; font-size: clamp(28px, 8vw, 40px); } }
+  @media (max-width: 520px) { .page-hero h1 { white-space: nowrap; font-size: clamp(21px, 6.8vw, 32px); letter-spacing: -1.2px; } }
   .page-hero h1 em { font-style: normal; color: #fff; }
   .page-hero .lede {
     font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.80);
@@ -75,20 +75,19 @@
 
   /* Hero photo */
   .hero-photo {
-    position: relative; isolation: isolate; aspect-ratio: 13 / 8; min-height: 0;
+    position: relative; isolation: isolate;
     border-radius: 28px;
     background: radial-gradient(circle at 70% 24%, rgba(244,180,0,.34), transparent 26%), linear-gradient(135deg, #25477d 0%, #102750 45%, #07152f 100%);
     border: 1px solid rgba(255,255,255,0.28);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    display: block;
     color: rgba(255,255,255,0.7); overflow: hidden;
     box-shadow: -8px 10px 24px rgba(244,180,0,.12), 10px 14px 28px rgba(0,229,255,.10), 0 18px 36px rgba(0,0,0,.22);
   }
   .hero-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5,14,28,.03) 30%, rgba(5,14,28,.62) 100%); }
-  .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: saturate(1.08) contrast(1.06); }
+  .hero-photo img { display: block; width: 100%; height: auto; filter: saturate(1.08) contrast(1.06); }
   .hero-photo svg, .hero-photo span { position: relative; z-index: 3; }
   .hero-photo svg { width: 44px; height: 44px; }
   .hero-photo span { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-  @media (max-width: 920px) { .hero-photo { aspect-ratio: 13 / 8; } }
 
   /* Demo Day feature video + steps + gallery */
   .video-frame.demo-day-video { margin: 0 auto; }
@@ -428,13 +427,17 @@
   .video-frame__play svg { width: 26px; height: 26px; margin-left: 3px; }
   .video-frame__placeholder span { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
   .video-frame__play-button {
-    position: absolute; z-index: 2; width: 78px; height: 78px; border: 0; border-radius: 50%;
+    position: absolute; z-index: 2; width: 64px; height: 64px; border: 0; border-radius: 50%;
     display: grid; place-items: center; background: var(--brand-accent); color: var(--navy); cursor: pointer;
-    box-shadow: 0 10px 28px rgba(0,0,0,.28); transition: opacity .2s var(--ease-out), transform .2s var(--ease-out), background .2s var(--ease-out);
+    box-shadow: 0 4px 12px rgba(5,14,28,.22); transition: opacity .2s var(--ease-out), transform .2s var(--ease-out), background .2s var(--ease-out), filter .2s var(--ease-out);
   }
-  .video-frame__play-button:hover, .video-frame__play-button:focus-visible { background: var(--brand-accent-2); transform: scale(1.08); outline: 2px solid #fff; outline-offset: 4px; }
-  .video-frame__play-button svg { width: 30px; height: 30px; margin-left: 4px; }
-  .video-frame.is-playing .video-frame__play-button { opacity: 0; pointer-events: none; transform: scale(.85); }
+  .video-frame__play-button:hover, .video-frame__play-button:focus-visible { background: var(--brand-accent-2); filter: brightness(1.04); transform: scale(1.06); outline: 2px solid #fff; outline-offset: 4px; }
+  .video-frame__play-button svg { width: 25px; height: 25px; margin-left: 3px; }
+  .video-frame.is-playing .video-frame__play-button { opacity: 0; pointer-events: none; transform: scale(.9); }
+  .video-frame.is-playing .video-frame__play-button:focus-visible { opacity: 1; pointer-events: auto; transform: scale(1); }
+  @media (hover: hover) {
+    .video-frame.is-playing:hover .video-frame__play-button { opacity: 1; pointer-events: auto; transform: scale(1); }
+  }
   .bootcamp-video-intro { max-width: 1120px; }
   .bootcamp-video-intro h2 { white-space: nowrap; }
   .section-head .bootcamp-video-caption { margin: 10px 0 0; text-align: center; font-size: 18px; font-weight: 500; color: var(--ink-muted); }
@@ -476,7 +479,7 @@
   }
   .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(10, 27, 61, .12); }
   .project-card__thumb {
-    aspect-ratio: 16/10; background: linear-gradient(135deg, #eef1f8 0%, #e2e7f3 100%);
+    aspect-ratio: 5 / 4; background: linear-gradient(135deg, #eef1f8 0%, #e2e7f3 100%);
     display: grid; place-items: center; color: var(--ink-muted);
     border-bottom: 1px solid var(--line); overflow: hidden;
   }
@@ -510,6 +513,7 @@
   }
   .showcase-cta__eyebrow { display: block; margin-bottom: 4px; color: var(--gold-ink); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
   .showcase-cta__title { margin: 0; color: var(--navy); font-size: 20px; letter-spacing: -.35px; }
+  .showcase-cta__description { margin: 6px 0 0; color: var(--ink-muted); font-size: 14px; line-height: 1.45; }
   .showcase-cta__link {
     display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; padding: 12px 17px;
     border-radius: 999px; background: var(--brand-accent); color: var(--ink); font-size: 13px; font-weight: 800; text-decoration: none;
@@ -1025,13 +1029,13 @@
       </div>
 
       <div class="video-frame bootcamp-video-frame">
-        <video controls controlsList="nodownload" preload="metadata">
+        <video controlsList="nodownload" preload="metadata">
           <source src="https://nham2kihiqpgl3e4.public.blob.vercel-storage.com/orientation.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <button class="video-frame__play-button" type="button" data-video-play aria-label="Play Orientation Day video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
       </div>
-      <p class="bootcamp-video-description">Hear why they joined, what they hoped to learn, and what they wanted to <span class="hl-gold">create with AI.</span></p>
+      <p class="bootcamp-video-description">Before the first build, we asked students why they joined, what they hoped to learn, and what they wanted to <span class="hl-gold">create with AI.</span></p>
     </div>
   </section>
 
@@ -1069,7 +1073,7 @@
           <span class="journey-node__icon"><img src="../assets/summer-2026/icons/deploy.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Deploy</span>
         </button>
-        <button class="journey-node journey-node--active" type="button" data-journey-stage="Present" data-journey-description="Share the finished project, explain the choices behind it, and reflect on what comes next." aria-pressed="true">
+        <button class="journey-node" type="button" data-journey-stage="Present" data-journey-description="Share the finished project, explain the choices behind it, and reflect on what comes next." aria-pressed="false">
           <span class="journey-node__icon"><img src="../assets/summer-2026/icons/present.png" alt="" loading="lazy"></span>
           <span class="journey-node__label">Present</span>
         </button>
@@ -1078,7 +1082,7 @@
       <div class="learning-trio">
         <article class="learning-trio__col">
           <div class="learning-trio__photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <img src="../assets/summer-2026/gallery/learn.JPG" alt="Students learning together during the Summer 2026 bootcamp" loading="lazy">
           </div>
           <div class="learning-trio__body">
             <h3><span class="learning-trio__num learning-trio__num--navy">01</span> LEARN</h3>
@@ -1087,7 +1091,7 @@
         </article>
         <article class="learning-trio__col">
           <div class="learning-trio__photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <img src="../assets/summer-2026/gallery/build.JPG" alt="Students building projects during the Summer 2026 bootcamp" loading="lazy">
           </div>
           <div class="learning-trio__body">
             <h3><span class="learning-trio__num learning-trio__num--teal">02</span> BUILD</h3>
@@ -1113,7 +1117,7 @@
       <div class="section-head section-head--wide project-intro">
         <span class="eyebrow gold">Student work</span>
         <h2>Built by our students.</h2>
-        <p>Throughout the bootcamp, students built 6+ projects, including their own personal homepage and a series of interactive games. We used games as a creative medium for students to practice building with AI, experiment with their own ideas, and make each project their own.</p>
+        <p>Throughout the bootcamp, students built <strong>6+ projects</strong>, including their own personal homepage and a series of interactive games. Games became a creative medium for learning how to build with AI, experiment with ideas, debug problems, and make each project their own.</p>
       </div>
 
       <div class="project-grid">
@@ -1156,8 +1160,8 @@
       </div>
 
       <div class="showcase-cta">
-        <div><span class="showcase-cta__eyebrow">Student Showcase</span><p class="showcase-cta__title">Explore every student&rsquo;s Project Hub.</p></div>
-        <a class="showcase-cta__link" href="student-showcase.html">View all projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+        <div><span class="showcase-cta__eyebrow">Student Showcase</span><p class="showcase-cta__title">Explore every student&rsquo;s Project Hub.</p><p class="showcase-cta__description">See the projects each student created throughout the bootcamp.</p></div>
+        <a class="showcase-cta__link" href="student-showcase.html">Explore All Project Hubs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </section>
@@ -1192,12 +1196,12 @@
       <div class="section-head">
         <span class="eyebrow gold">Student reflections</span>
         <h2>Hear directly from the <span class="hl-gold">creators</span>.</h2>
-        <p>Our students share what they learned, what challenged them, and what they're most proud of.</p>
+        <p>Students reflect on what they learned, the challenges they worked through, and what they&rsquo;re most proud of.</p>
       </div>
 
       <div class="reflection-grid reflection-grid--single">
         <div class="video-frame video-frame--sm">
-          <video controls controlsList="nodownload" preload="metadata">
+          <video controlsList="nodownload" preload="metadata">
             <source src="https://nham2kihiqpgl3e4.public.blob.vercel-storage.com/Interview.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -1212,7 +1216,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow gold">What students learned</span>
-        <h2>The apps are the evidence.<br>The capabilities are the <span class="hl-gold">outcome</span>.</h2>
+        <h2>The apps are the evidence.<br>The <span class="hl-gold">capabilities</span> are the outcome.</h2>
         <p>Building software gave students something tangible to create. But the broader goal was to develop the ways of thinking required to work effectively with AI.</p>
       </div>
 
@@ -1566,11 +1570,59 @@
         var video = frame && frame.querySelector('video');
         if (!video) return;
 
-        button.addEventListener('click', function () { video.play(); });
-        video.addEventListener('play', function () { frame.classList.add('is-playing'); });
-        video.addEventListener('pause', function () { frame.classList.remove('is-playing'); });
-        video.addEventListener('ended', function () { frame.classList.remove('is-playing'); });
+        function setButtonState(state) {
+          var path = button.querySelector('path');
+          button.dataset.videoState = state;
+          if (state === 'pause') {
+            button.setAttribute('aria-label', 'Pause video');
+            path.setAttribute('d', 'M7 5h4v14H7zM13 5h4v14h-4z');
+          } else if (state === 'replay') {
+            button.setAttribute('aria-label', 'Replay video');
+            path.setAttribute('d', 'M12 5V1L7 6l5 5V7a5 5 0 1 1-4.9 6h-2A7 7 0 1 0 12 5z');
+          } else {
+            button.setAttribute('aria-label', 'Play video');
+            path.setAttribute('d', 'M8 5v14l11-7z');
+          }
+        }
+
+        button.addEventListener('click', function () {
+          video.controls = true;
+          if (video.paused) {
+            if (video.ended) video.currentTime = 0;
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+        video.addEventListener('play', function () {
+          frame.classList.add('is-playing');
+          setButtonState('pause');
+        });
+        video.addEventListener('pause', function () {
+          if (video.ended) return;
+          frame.classList.remove('is-playing');
+          setButtonState('play');
+        });
+        video.addEventListener('ended', function () {
+          frame.classList.remove('is-playing');
+          setButtonState('replay');
+        });
+
       });
+
+      if ('IntersectionObserver' in window) {
+        var visibilityObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var frameVideo = entry.target.querySelector('video');
+            if (entry.intersectionRatio < 0.35 && frameVideo && !frameVideo.paused) {
+              frameVideo.pause();
+            }
+          });
+        }, { threshold: [0, 0.35] });
+        document.querySelectorAll('.video-frame video').forEach(function (video) {
+          visibilityObserver.observe(video.closest('.video-frame'));
+        });
+      }
     })();
 
     /* Interactive learning-journey stages */
@@ -1603,8 +1655,6 @@
       stages.forEach(function (stage) {
         stage.addEventListener('click', function () { selectStage(stage); });
       });
-      selectStage(stages.find(function (stage) { return stage.classList.contains('journey-node--active'); }) || stages[0]);
-
       document.addEventListener('click', function (event) {
         if (!event.target.closest('[data-journey-stage]')) clearStage();
       });
