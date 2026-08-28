@@ -1,58 +1,75 @@
 /* Editorial gallery + lightbox for the "Inside the Classroom" section.
    GALLERY_IMAGES is a fixed, curated case-study composition — each entry's
    "area" maps to a named grid-template-area in the CSS (classroom, building,
-   mentor, collab, screens, moment, group). The one entry with
-   "standalone: true" (Demo Day) renders separately, full-width, below the
-   grid as a transition into its own section. Order in the array is also the
+   mentor, collab, screens, moment, group). Entries with "standalone: true"
+   render as the four-tile mini-gallery below the main grid. Order in the array is also the
    lightbox prev/next order and reading order on mobile. */
 (function () {
   var GALLERY_IMAGES = [
     {
-      src: "assets/summer-2026/gallery/classroom-01.jpg",
+      src: "../assets/summer-2026/gallery/classroom.jpg",
       alt: "Wide view of the Future Wrights classroom during a build session",
       caption: "The classroom, mid-build.",
       area: "classroom"
     },
     {
-      src: "assets/summer-2026/gallery/building-01.jpg",
+      src: "../assets/summer-2026/gallery/DSC00593.JPG",
       alt: "Two students working together on their laptops",
       caption: "Building the day's project.",
       area: "building"
     },
     {
-      src: "assets/summer-2026/gallery/mentoring-01.jpg",
+      src: "../assets/summer-2026/gallery/DSC00550.JPG",
       alt: "An instructor helping a student debug their code",
       caption: "Mentors circulating during build time.",
       area: "mentor"
     },
     {
-      src: "assets/summer-2026/gallery/collaboration-01.jpg",
+      src: "../assets/summer-2026/gallery/DSC00964.JPG",
       alt: "Students collaborating around a shared laptop screen",
       caption: "Working through an idea together.",
       area: "collab"
     },
     {
-      src: "assets/summer-2026/gallery/screens-01.jpg",
-      alt: "Close-up of a student's project running in the browser",
-      caption: "A capstone app, mid-build.",
+      src: "../assets/summer-2026/gallery/student_on_laptop.jpg",
+      alt: "Close-up of a student working on their project on a laptop",
+      caption: "A student project, mid-build.",
       area: "screens"
     },
     {
-      src: "assets/summer-2026/gallery/classroom-02.jpg",
+      src: "../assets/summer-2026/gallery/DSC00917.JPG",
       alt: "A quiet moment of focused work in the classroom",
       caption: "Heads down, building.",
       area: "moment"
     },
     {
-      src: "assets/summer-2026/gallery/group-01.jpg",
+      src: "../assets/summer-2026/gallery/DSC00659.JPG",
       alt: "The full cohort together on the final day",
       caption: "The cohort, together.",
       area: "group"
     },
     {
-      src: "assets/summer-2026/gallery/demo-day-01.jpg",
-      alt: "A student presenting their capstone project on Demo Day",
-      caption: "Demo Day — presenting to the room.",
+      src: "../assets/summer-2026/gallery/DSC00644.JPG",
+      alt: "Future Wrights bootcamp classroom moment",
+      caption: "In the classroom.",
+      standalone: true
+    },
+    {
+      src: "../assets/summer-2026/gallery/DSC00923.JPG",
+      alt: "Future Wrights bootcamp classroom moment",
+      caption: "Learning together.",
+      standalone: true
+    },
+    {
+      src: "../assets/summer-2026/gallery/DSC00912.JPG",
+      alt: "Future Wrights bootcamp classroom moment",
+      caption: "Focused work.",
+      standalone: true
+    },
+    {
+      src: "../assets/summer-2026/gallery/DSC00628.JPG",
+      alt: "Future Wrights bootcamp classroom moment",
+      caption: "In the classroom.",
       standalone: true
     }
   ];

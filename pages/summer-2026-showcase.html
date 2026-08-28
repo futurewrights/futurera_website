@@ -924,12 +924,13 @@
 
   /* Demo Day — standalone cinematic transition image */
   .gallery-standalone {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-3);
     max-width: 1160px; margin: var(--sp-4) auto 0;
   }
   .gallery-standalone .gallery-tile { border-radius: 10px; }
-  .gallery-standalone .gallery-tile__btn { aspect-ratio: 21 / 8; width: 100%; }
+  .gallery-standalone .gallery-tile__btn { aspect-ratio: 4 / 3; width: 100%; }
   @media (max-width: 760px) {
-    .gallery-standalone .gallery-tile__btn { aspect-ratio: 16 / 10; }
+    .gallery-standalone { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* Lightbox */
