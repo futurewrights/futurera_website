@@ -144,10 +144,10 @@
   .demo-day-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 360px 180px;
+    grid-template-rows: 180px 360px;
     grid-template-areas:
-      "a a a a"
-      "b c d e";
+      "b c d e"
+      "a a a a";
     gap: var(--sp-3);
     max-width: 1120px; margin: var(--sp-3) auto 0;
   }
@@ -168,7 +168,7 @@
   .demo-day-gallery__btn img { transition: transform var(--dur-micro) var(--ease-out); }
   .demo-day-gallery__btn:hover img { transform: scale(1.02); }
   .demo-day-gallery__caption { position: absolute; inset: auto 0 0; padding: 28px 16px 12px; text-align: left; background: linear-gradient(180deg, transparent, rgba(10,17,40,.72)); color: #fff; font-size: 12.5px; font-weight: 500; opacity: 0; transition: opacity var(--dur-micro) var(--ease-out); pointer-events: none; }
-  .demo-day-gallery__btn:hover .demo-day-gallery__caption, .demo-day-gallery__btn:focus-visible .demo-day-gallery__caption { opacity: 1; }
+  .demo-day-gallery__caption { display: none; }
   @media (prefers-reduced-motion: reduce) { .demo-day-gallery__btn img, .demo-day-gallery__caption { transition: none; } .demo-day-gallery__btn:hover img { transform: none; } }
   @media (hover: none) { .demo-day-gallery__caption { display: none; } }
   .demo-day-gallery__head { max-width: 1120px; margin: var(--sp-6) auto 0; text-align: center; }
@@ -176,14 +176,14 @@
   .demo-day-gallery__head p { margin: 6px 0 0; color: rgba(255,255,255,.7); font-size: 14px; }
   @media (max-width: 760px) {
     .demo-day-gallery {
-      grid-template-columns: 1fr 1fr; grid-template-rows: 260px 150px 150px;
-      grid-template-areas: "a a" "b c" "d e";
+      grid-template-columns: 1fr 1fr; grid-template-rows: 150px 150px 260px;
+      grid-template-areas: "b c" "d e" "a a";
     }
   }
   @media (max-width: 480px) {
     .demo-day-gallery {
-      grid-template-columns: 1fr; grid-template-rows: repeat(5, 180px);
-      grid-template-areas: "a" "b" "c" "d" "e";
+      grid-template-columns: 1fr; grid-template-rows: repeat(4, 180px) 260px;
+      grid-template-areas: "b" "c" "d" "e" "a";
     }
   }
 
@@ -885,10 +885,7 @@
     opacity: 0; transition: opacity var(--dur-micro) var(--ease-out);
     pointer-events: none;
   }
-  .gallery-tile__btn:hover .gallery-tile__hover-caption,
-  .gallery-tile__btn:focus-visible .gallery-tile__hover-caption {
-    opacity: 1;
-  }
+  .gallery-tile__hover-caption { display: none; }
   @media (prefers-reduced-motion: reduce) {
     .gallery-tile__btn img, .gallery-tile__hover-caption { transition: none; }
     .gallery-tile__btn:hover img { transform: none; }
@@ -954,6 +951,8 @@
     text-align: center;
   }
   .lightbox__caption { color: rgba(255,255,255,0.88); font-size: 14px; margin: 0; }
+  .lightbox--classroom .lightbox__caption,
+  .lightbox--demo .lightbox__caption { display: none; }
   .lightbox__counter { color: rgba(255,255,255,0.55); font-size: 13px; letter-spacing: 0.04em; }
   .lightbox__close, .lightbox__nav {
     position: fixed;
@@ -1131,7 +1130,7 @@
         </article>
         <article class="learning-trio__col">
           <div class="learning-trio__photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <img src="../assets/summer-2026/gallery/DSC06205.jpg" alt="Students presenting their work during the Summer 2026 bootcamp" loading="lazy">
           </div>
           <div class="learning-trio__body">
             <h3><span class="learning-trio__num learning-trio__num--gold">03</span> PRESENT</h3>

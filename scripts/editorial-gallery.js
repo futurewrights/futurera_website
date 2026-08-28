@@ -75,11 +75,11 @@
   ];
 
   var DEMO_DAY_IMAGES = [
-    { src: "assets/summer-2026/gallery/demo-day-01.jpg", alt: "A student presenting their capstone project on Demo Day", caption: "Presenting a finished project." },
-    { src: "assets/summer-2026/gallery/group-01.jpg", alt: "The full cohort together on the final day", caption: "Celebrating the cohort." },
-    { src: "assets/summer-2026/gallery/screens-01.jpg", alt: "A student's project running in the browser", caption: "Projects ready to share." },
-    { src: "assets/summer-2026/gallery/collaboration-01.jpg", alt: "Students collaborating around a shared laptop", caption: "Peers cheering each other on." },
-    { src: "assets/summer-2026/gallery/mentoring-01.jpg", alt: "An instructor helping a student", caption: "Mentors in the room." }
+    { src: "../assets/summer-2026/gallery/DSC06228.jpeg", alt: "A student presenting their capstone project on Demo Day", caption: "Presenting a finished project." },
+    { src: "../assets/summer-2026/gallery/DSC06199.jpeg", alt: "Students celebrating together on Demo Day", caption: "Celebrating the cohort." },
+    { src: "../assets/summer-2026/gallery/DSC06184.jpeg", alt: "A student project ready to share on Demo Day", caption: "Projects ready to share." },
+    { src: "../assets/summer-2026/gallery/DSC06215.jpeg", alt: "Students collaborating on Demo Day", caption: "Peers cheering each other on." },
+    { src: "../assets/summer-2026/gallery/DSC06192.jpeg", alt: "A Demo Day moment at Future Wrights", caption: "Mentors in the room." }
   ];
 
   var grid = document.querySelector("[data-gallery-grid]");
@@ -185,6 +185,8 @@
 
   function openLightbox(index, collection) {
     activeImages = collection || GALLERY_IMAGES;
+    lightbox.classList.toggle("lightbox--classroom", activeImages === GALLERY_IMAGES);
+    lightbox.classList.toggle("lightbox--demo", activeImages === DEMO_DAY_IMAGES);
     currentIndex = index;
     updateLightboxContent();
     lightbox.hidden = false;
