@@ -43,7 +43,7 @@
   -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
           mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%); }
 
-.fw-hero__bgimg { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; object-position:center; opacity:.14; }
+.fw-hero__bgimg { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; object-position:62% center; opacity:.14; }
 .fw-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
   background:linear-gradient(90deg, rgba(10,27,61,.88) 0%, rgba(10,27,61,.64) 42%, rgba(10,27,61,.30) 72%, rgba(10,27,61,.42) 100%); }
 
@@ -100,7 +100,10 @@
   .fw-hero__copy { max-width:none; }
   .fw-hero__title { white-space:normal; }
   .fw-hero__desktop-break { display:none; }
-  .fw-hero__bgimg { opacity:.45; }
+  .fw-hero__bgimg { display: none; }
+}
+@media (min-width:901px) and (max-width:1180px){
+  .fw-hero__bgimg { object-position:72% center; }
 }
 @media (prefers-reduced-motion: reduce){
   .fw-hero__copy > * { animation:none !important; }
