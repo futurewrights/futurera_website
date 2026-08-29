@@ -1378,11 +1378,11 @@
       </div>
 
       <div class="video-frame demo-day-video">
-        <!-- PLACEHOLDER: swap for <video src="..."> or an <iframe> embed (YouTube/Vimeo) -->
-        <div class="video-frame__placeholder">
-          <span class="video-frame__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-          <span>Demo Day video — coming soon</span>
-        </div>
+        <video controlsList="nodownload" preload="metadata">
+          <source src="https://nham2kihiqpgl3e4.public.blob.vercel-storage.com/demo-day.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <button class="video-frame__play-button" type="button" data-video-play aria-label="Play Demo Day video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
       </div>
       <div class="demo-day-gallery__head">
         <h3>Demo Day moments</h3>
