@@ -453,6 +453,10 @@
   @media (hover: hover) {
     .video-frame.is-playing:hover .video-frame__play-button { opacity: 1; pointer-events: auto; transform: scale(1); }
   }
+  @media (max-width: 640px) {
+    .video-frame__play-button { width: 52px; height: 52px; }
+    .video-frame__play-button svg { width: 21px; height: 21px; }
+  }
   .bootcamp-video-intro { max-width: 1120px; }
   .bootcamp-video-intro h2 { white-space: nowrap; }
   .section-head .bootcamp-video-caption { margin: 10px 0 0; text-align: center; font-size: 18px; font-weight: 500; color: var(--ink-muted); }
