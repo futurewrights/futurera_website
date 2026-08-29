@@ -63,6 +63,10 @@
     color: var(--brand-accent);
     margin: 0 0 var(--sp-2);
   }
+  @media (max-width: 520px) {
+    .hero-stats__demo { display: block; margin-top: 5px; }
+    .hero-stats__separator { display: none; }
+  }
   .page-hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: var(--sp-4); }
   .page-hero .btn-primary { background: var(--brand-accent); color: var(--navy); }
   .page-hero .btn-primary:hover { background: var(--brand-accent-2); transform: translateY(-2px); }
@@ -1035,7 +1039,7 @@
             <img src="../assets/summer-2026/gallery/hero.JPG" alt="Summer 2026 Future Wrights Academy bootcamp cohort" />
           </aside>
           <p class="lede">Over two weeks, students learned to turn ideas into plans, build with AI, debug and iterate &mdash; then launch and present their own work.</p>
-          <p class="hero-stats">10 STUDENTS &middot; 30 HOURS &middot; 10 BUILD DAYS &middot; 1 DEMO DAY</p>
+          <p class="hero-stats">10 STUDENTS &middot; 30 HOURS &middot; 10 BUILD DAYS<span class="hero-stats__demo"><span class="hero-stats__separator"> &middot; </span>1 DEMO DAY</span></p>
           <div class="actions">
             <a class="btn btn-primary" href="#projects">Explore the Showcase &rarr;</a>
             <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Bring this to your school</a>
