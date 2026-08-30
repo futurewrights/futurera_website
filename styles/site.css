@@ -656,11 +656,6 @@
                 box-shadow var(--dur-micro) var(--ease-out),
                 border-color var(--dur-micro) var(--ease-out);
   }
-  .stat::before {
-    content: ""; display: block;
-    width: 28px; height: 3px; border-radius: 2px;
-    background: var(--brand-accent); margin-bottom: var(--sp-3);
-  }
   .stat:hover {
     transform: translateY(-3px); border-color: rgba(244,180,0,0.5);
     box-shadow: 0 4px 12px rgba(15,23,66,0.06), 0 22px 46px rgba(15,23,66,0.10);
@@ -675,13 +670,19 @@
     margin-bottom: var(--sp-2);
     font-variant-numeric: tabular-nums;
   }
+  .stat__tag {
+    display: inline-flex; align-items: center;
+    width: fit-content; margin-bottom: 12px; padding: 4px 8px;
+    border-radius: 999px; background: rgba(244,180,0,.14);
+    color: var(--gold-ink); font-size: 10px; font-weight: 800;
+    letter-spacing: .1em; line-height: 1.2; text-transform: uppercase;
+  }
   .stat .label {
     font-size: 15px;
     line-height: 1.5;
     color: var(--ink);
     margin: 0 0 var(--sp-3);
   }
-  .stat .label strong { color: var(--gold-ink); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
   .stat .label em { font-style: italic; color: var(--navy); }
   .stat .source {
     border: 0; padding: 0;
