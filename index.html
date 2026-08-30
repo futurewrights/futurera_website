@@ -6,8 +6,8 @@
 <title>Future Wrights Academy — AI education for high school students | Toronto</title>
 <meta name="description" content="Future Wrights Academy teaches Grade 8–12 students the AI skills universities and employers expect. Toronto-based. Core team includes faculty affiliated with University of Toronto and Toronto Metropolitan University, alongside engineers, founders, and researchers from industry." />
 
-<link rel="icon" type="image/png" href="assets/fw_favicon.png" />
-<link rel="apple-touch-icon" href="assets/fw_favicon.png" />
+<link rel="icon" type="image/png" href="assets/images/fw_favicon.png" />
+<link rel="apple-touch-icon" href="assets/images/fw_favicon.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
   --ink-0: #F5F7FB; --ink-50: rgba(245,247,251,0.62);
   --glass: rgba(255,255,255,0.055); --glass-line: rgba(255,255,255,0.13);
   position: relative; overflow: hidden; isolation: isolate;
-  background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
+  background: radial-gradient(125% 100% at 22% 8%, #28538e 0%, #12326a 46%, #0A1B3D 100%);
   color: var(--ink-0);
   margin-top: -95px; padding: calc(95px + var(--sp-7)) 0 var(--sp-8); min-height: calc(100vh - 76px);
   display: flex; align-items: center;
@@ -43,18 +43,12 @@
   -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
           mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%); }
 
-/* Full-bleed hero photo + legibility scrim */
-.fw-hero__bgimg { position:absolute; inset:0; z-index:0;
-  width:100%; height:100%; object-fit:cover; object-position:62% center;
-  -webkit-mask-image: radial-gradient(150% 150% at 60% 50%, #000 72%, transparent 100%);
-          mask-image: radial-gradient(150% 150% at 60% 50%, #000 72%, transparent 100%); }
+.fw-hero__bgimg { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; object-position:62% center; opacity:.24; }
 .fw-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:
-    linear-gradient(90deg, rgba(10,27,61,0.94) 0%, rgba(10,27,61,0.6) 32%, rgba(10,27,61,0) 60%),
-    linear-gradient(to top, rgba(6,15,36,0.55) 0%, rgba(6,15,36,0) 42%); }
+  background:linear-gradient(90deg, rgba(10,27,61,.76) 0%, rgba(10,27,61,.52) 42%, rgba(10,27,61,.20) 72%, rgba(10,27,61,.30) 100%); }
 
-.fw-hero__inner { position:relative; z-index:2; width:100%; }
-.fw-hero__copy { max-width: 720px; }
+.fw-hero__inner { position:relative; z-index:2; width:100%; transform:translateY(40px); }
+.fw-hero__copy { max-width: 880px; }
 
 .fw-eyebrow { display:inline-flex; align-items:center; gap:9px; font-family:"Inter",sans-serif;
   font-size:13px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); }
@@ -63,22 +57,21 @@
 @media (max-width:480px){ .fw-eyebrow__loc { display:none; } }
 
 .fw-hero__title { font-family:"General Sans","Inter",sans-serif; font-weight:600; color:var(--ink-0);
-  font-size: clamp(38px, 4.8vw, 60px); line-height:1.08; letter-spacing:-.02em; margin:18px 0 0;
+  font-size: clamp(34px, 4.2vw, 52px); line-height:1.08; letter-spacing:-.02em; margin:18px 0 0;
   text-wrap:balance; }
 .fw-hero__title .grad { color:var(--gold); }
 
 .fw-hero__lede { font-family:"Inter",sans-serif; font-size:clamp(17px,1.45vw,20px);
-  line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:40ch; }
+  line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:850px; }
 
 .fw-hero__cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:38px; }
+.fw-hero__journey { display:block; width:min(100%, 320px); height:auto; margin-top:56px; }
 .fw-hero__camp { display:none; }
 @media (max-width:640px){
   .fw-hero__camp { display:inline-flex; }
   .fw-hero__cta { flex-direction:column; align-items:stretch; }
   .fw-hero__cta .btn { justify-content:center; }
-  /* The wide group photo cover-crops to a single zoomed-in face on narrow
-     screens — hide it and let the navy gradient + orbs + grid carry the hero. */
-  .fw-hero__bgimg, .fw-hero__scrim { display:none; }
+  .fw-hero__journey { width:min(100%, 280px); margin:44px auto 0; }
 }
 /* Hero CTAs use the locked .btn system — sized up for the showpiece + dark-bg ghost (cyan glow) */
 .fw-hero .btn { font-size:16px; padding:15px 30px; gap:9px; }
@@ -87,22 +80,10 @@
 .fw-hero .btn-ghost { color:var(--ink-0); border-color:rgba(255,255,255,.24); background:rgba(255,255,255,.04); }
 .fw-hero .btn-ghost:hover { border-color:var(--cyan); background:rgba(255,255,255,.04); transform:translateY(-2px); box-shadow:0 0 0 1px rgba(0,229,255,.45),0 0 26px rgba(0,229,255,.18); }
 
-/* Mobile hero CTAs: one gold primary (Bootcamp) + slimmer outline buttons.
-   Placed after the base .fw-hero .btn rules so the smaller size wins. */
+/* Mobile hero CTAs: keep the primary action in Future Wrights gold. */
 @media (max-width:640px){
   .fw-hero__cta { gap:10px; }
   .fw-hero .btn { font-size:15px; padding:12px 24px; }
-  /* demote "Book a 20-minute session" (the non-camp primary) to an outline button */
-  .fw-hero__cta .btn-primary:not(.fw-hero__camp){
-    background:rgba(255,255,255,0.04); color:var(--ink-0);
-    border-color:rgba(255,255,255,.24); box-shadow:none;
-  }
-  /* ...and give it the same cyan-glow hover as "See our programs" (ghost) */
-  .fw-hero__cta .btn-primary:not(.fw-hero__camp):hover{
-    border-color:var(--cyan); background:rgba(255,255,255,.04);
-    transform:translateY(-2px);
-    box-shadow:0 0 0 1px rgba(0,229,255,.45),0 0 26px rgba(0,229,255,.18);
-  }
 }
 
 /* motion */
@@ -115,9 +96,20 @@
 
 @media (max-width:900px){
   .fw-hero { margin-top:-80px; padding: calc(80px + var(--sp-6)) 0 var(--sp-7); min-height:auto; }
+  .fw-hero__inner { transform:none; }
   .fw-hero__copy { max-width:none; }
   .fw-hero__title { white-space:normal; }
-  .fw-hero__bgimg { opacity:.45; }
+  .fw-hero__desktop-break { display:none; }
+  .fw-hero__bgimg { display: none; }
+}
+@media (min-width:901px) and (max-width:1180px){
+  .fw-hero__bgimg { object-position:72% center; }
+}
+@media (min-width:1729px){
+  .fw-hero__bgimg {
+    width: 1728px; left: 50%; right: auto;
+    transform: translateX(-50%);
+  }
 }
 @media (prefers-reduced-motion: reduce){
   .fw-hero__copy > * { animation:none !important; }
@@ -310,7 +302,7 @@ header.site:not(.scrolled) {
 .vm-card {
   position:relative; overflow:hidden;
   border:1px solid var(--line); border-radius: var(--radius-md);
-  padding: var(--sp-5);
+  padding: 28px;
   box-shadow: 0 1px 2px rgba(15,23,66,.04), 0 16px 36px rgba(15,23,66,.06);
 }
 .vm-card--vision  { background: linear-gradient(165deg, #fffdf4, #ffffff 60%); }
@@ -361,18 +353,23 @@ header.site:not(.scrolled) {
 <header class="site" id="siteHeader">
   <div class="container nav">
     <a class="brand-link" href="index.html" aria-label="Future Wrights Academy home">
-      <img src="assets/fw_logo.png" alt="Future Wrights Academy" />
+      <img src="assets/images/fw_logo.png" alt="Future Wrights Academy" />
     </a>
 
     <nav class="primary" id="primaryNav" aria-label="Primary">
       <div class="item"><a class="link" href="index.html">Home</a></div>
-      <div class="item"><a class="link" href="#ecosystem">Programs</a></div>
-      <div class="item"><a class="link" href="team.html">Team</a></div>
-      <div class="item"><a class="link" href="contact.html">Contact</a></div>
+      <div class="item">
+        <button class="link" type="button">Programs <span class="caret" aria-hidden="true">&#9662;</span></button>
+        <div class="dropdown">
+          <a href="#ecosystem">AI Labs</a>
+          <a href="pages/summer-2026-showcase.html">AI Bootcamp</a>
+        </div>
+      </div>
+      <div class="item"><a class="link" href="pages/team.html">Team</a></div>
+      <div class="item"><a class="link" href="pages/contact.html">Contact</a></div>
     </nav>
 
     <div class="nav-cta">
-      <a class="btn btn-chip" href="bootcamp-summer-2026.html"><span class="cta-full">Summer 2026 Bootcamp →</span><span class="cta-short">Bootcamp →</span></a>
       <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
@@ -389,19 +386,18 @@ header.site:not(.scrolled) {
       <span class="orb orb--cyan"></span>
     </div>
     <div class="fw-hero__grid" aria-hidden="true"></div>
-    <img class="fw-hero__bgimg" src="assets/aa6ac14a0380591cfa7c419fdc7a30ea27c3f87fca74c6328f04c708aee7b1e3.png" alt="High school students collaborating on an AI project around a laptop" />
+    <img class="fw-hero__bgimg" src="assets/images/home_page_hero.jpeg" alt="Students building with AI during the Future Wrights bootcamp">
     <div class="fw-hero__scrim" aria-hidden="true"></div>
-
     <div class="container fw-hero__inner">
       <div class="fw-hero__copy">
         <span class="fw-eyebrow">AI education for high school students<span class="fw-eyebrow__loc"> &middot; Toronto</span></span>
-        <h1 class="fw-hero__title">Prepare for the<br><span class="grad">AI era</span> before your<br>future career begins.</h1>
-        <p class="fw-hero__lede">Most teens are becoming AI consumers. Future Wrights helps high school students understand AI deeply, build real projects, and develop the creativity, confidence, and critical thinking to enter the AI era prepared &mdash; not surprised.</p>
+        <h1 class="fw-hero__title">Developing human capability<br>for the <span class="grad">AI era.</span></h1>
+        <p class="fw-hero__lede">Future Wrights helps students learn deeply, build real things with AI, and<br class="fw-hero__desktop-break"> demonstrate what they actually understand &mdash; developing the judgment,<br class="fw-hero__desktop-break"> creativity, and confidence to become responsible creators of value.</p>
         <div class="fw-hero__cta">
-          <a class="btn btn-primary fw-hero__camp" href="bootcamp-summer-2026.html">Summer 2026 Bootcamp &rarr;</a>
-          <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
-          <a class="btn btn-ghost" href="#ecosystem">See our programs</a>
+          <a class="btn btn-primary" href="#ecosystem">Explore Our Programs</a>
+          <a class="btn btn-ghost" href="pages/student-showcase.html">See Student Work &rarr;</a>
         </div>
+        <img class="fw-hero__journey" src="assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead">
       </div>
     </div>
   </section>
@@ -433,7 +429,7 @@ header.site:not(.scrolled) {
         </span>
         <span class="ticker-item">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-          <strong>UofT- &amp; TMU</strong>-affiliated faculty
+          <strong>UofT &amp; TMU</strong>-affiliated faculty
         </span>
         <span class="ticker-item">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
@@ -453,45 +449,37 @@ header.site:not(.scrolled) {
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow gold">Why it matters</span>
-        <h2>The future <span class="gold-word">careers</span> students are heading into are already being rewritten by AI.</h2>
-        <p>AI isn't something students will deal with later — it's already reshaping how universities admit, how employers hire, and how students are being asked to learn. Four numbers, drawn from Statistics Canada, KPMG, and LinkedIn, show why now matters.</p>
+        <h2>The careers students are heading into<br>are already being rewritten by AI.</h2>
+        <p>AI is changing what it means to be prepared for the future. Students need more than the ability to use AI. They need to think independently, solve problems, question what AI produces, and make responsible decisions about when and how to use it.</p>
       </div>
 
       <div class="stats-row reveal">
         <article class="stat">
-          <div class="num">86%</div>
-          <div class="label">of university-educated Canadian workers are in jobs being transformed by AI</div>
-          <div class="source">Statistics Canada, 2024</div>
+          <span class="stat__tag">AI adoption</span>
+          <div class="num">19.2%</div>
+          <div class="label">of Canadian businesses used AI to produce goods or deliver services&mdash;triple the 2024 rate.</div>
+          <div class="source"><a href="https://www150.statcan.gc.ca/n1/daily-quotidien/260527/dq260527a-eng.htm" target="_blank" rel="noopener">Statistics Canada · 2026 ↗</a></div>
         </article>
         <article class="stat">
-          <div class="num">2×</div>
-          <div class="label">Canadian business AI adoption doubled in one year<br>(6.1% → 12.2%)</div>
-          <div class="source">Statistics Canada, 2024–25</div>
+          <span class="stat__tag">Student use</span>
+          <div class="num">73%</div>
+          <div class="label">of Canadian students now use generative AI for schoolwork, up from 59% in 2024.</div>
+          <div class="source"><a href="https://kpmg.com/ca/en/media/2025/10/generative-ai-boom-among-canadian-students-raises-dilemmas.html" target="_blank" rel="noopener">KPMG Canada · 2025 ↗</a></div>
         </article>
         <article class="stat">
-          <div class="num">+78%</div>
-          <div class="label">AI job postings grew 3× faster than qualified talent (+24%)</div>
-          <div class="source">LinkedIn / Gloat, 2026</div>
+          <span class="stat__tag">Critical thinking</span>
+          <div class="num">48%</div>
+          <div class="label">of student AI users say their critical-thinking skills have declined since they began using AI.</div>
+          <div class="source"><a href="https://kpmg.com/ca/en/media/2025/10/generative-ai-boom-among-canadian-students-raises-dilemmas.html" target="_blank" rel="noopener">KPMG Canada · 2025 ↗</a></div>
         </article>
         <article class="stat">
-          <div class="num">59%</div>
-          <div class="label">of students use AI without guidance, learning <em>less</em>.</div>
-          <div class="source">KPMG Canada, 2024</div>
+          <span class="stat__tag">Students want guidance</span>
+          <div class="num">77%</div>
+          <div class="label">of students want their educational institution to offer courses on how to use AI.</div>
+          <div class="source"><a href="https://kpmg.com/ca/en/media/2025/10/generative-ai-boom-among-canadian-students-raises-dilemmas.html" target="_blank" rel="noopener">KPMG Canada · 2025 ↗</a></div>
         </article>
       </div>
 
-      <p class="stats-conclusion reveal">
-        <span class="hl-gold">AI fluency</span> isn't an advantage anymore — it's <span class="hl-gold">the baseline universities and employers will assume</span>.<br>Best learned in high school, with guidance.
-      </p>
-
-      <p class="stats-link reveal">
-        <a class="text-arrow" href="why-it-matters.html">
-          <span>Read more</span>
-          <span class="arrow-circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-        </a>
-      </p>
     </div>
   </section>
 
@@ -502,7 +490,7 @@ header.site:not(.scrolled) {
         <div class="vm-intro section-head">
           <span class="eyebrow gold">Why Future Wrights</span>
           <h2>Filling the <span class="vm-grad">gap</span> between school and the <span class="vm-grad">future.</span></h2>
-          <p class="vm-sub">We prepare high school students not just to keep up with AI, but to lead with it—<span class="g">ethically</span>, <span class="g">creatively</span>, and <span class="g">confidently</span>.</p>
+          <p class="vm-sub">We prepare high school students not just to keep up with AI, but to <strong>think, create, and lead with it—ethically and confidently.</strong></p>
         </div>
 
         <div class="vm-cards">
@@ -512,16 +500,16 @@ header.site:not(.scrolled) {
               <span class="vm-card__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m10.065 12.493-6.18 1.318a.934.934 0 0 1-1.108-.702l-.537-2.15a1.07 1.07 0 0 1 .691-1.265l13.504-4.44"/><path d="m13.56 11.747 4.332-.924"/><path d="m16 21-3.105-6.21"/><path d="M16.485 5.94a2 2 0 0 1 1.455-2.425l1.09-.272a1 1 0 0 1 1.212.727l1.515 6.06a1 1 0 0 1-.727 1.213l-1.09.272a2 2 0 0 1-2.425-1.455z"/><path d="m6.158 8.633 1.114 4.456"/><path d="m8 21 3.105-6.21"/><circle cx="12" cy="21" r="1"/></svg></span>
             </div>
             <h3>A generation of students who shape the future with AI.</h3>
-            <p>We envision a future where every Canadian student graduates AI-fluent—confident, curious, and ethical creators ready to solve meaningful problems in any field they choose.</p>
+            <p>We envision a future where every student is AI-fluent—confident, curious, and equipped to create meaningful value in whatever field they choose.</p>
           </article>
 
           <article class="vm-card vm-card--mission">
             <div class="vm-card__top">
               <span class="vm-badge vm-badge--cyan">Our mission</span>
-              <span class="vm-card__ico vm-card__ico--art" aria-hidden="true"><img src="assets/puzzle.png" alt="" /></span>
+              <span class="vm-card__ico vm-card__ico--art" aria-hidden="true"><img src="assets/images/puzzle.png" alt="" /></span>
             </div>
-            <h3>Bridge the gap with real skills, real projects, and real mentorship.</h3>
-            <p>We equip high school students with the AI skills, judgment, and portfolio experience universities and employers now expect. We complement school—bringing learning to life through hands-on projects, mentorship, and feedback that matters.</p>
+            <h3>Developing the human capabilities students need to thrive in the AI era.</h3>
+            <p>We prepare students to think independently, build with AI, solve meaningful problems, and take responsibility for what they create.</p>
           </article>
         </div>
       </div>
@@ -549,7 +537,7 @@ header.site:not(.scrolled) {
           <div class="eco-step__rail">
             <span class="eco-step__num">01</span>
             <span class="eco-step__label">Foundation</span>
-            <span class="eco-step__sub">Start your<br>journey</span>
+            <span class="eco-step__sub">Start your <br>journey</span>
             <span class="eco-step__down" aria-hidden="true"></span>
           </div>
           <div class="eco-step__body">
@@ -560,13 +548,13 @@ header.site:not(.scrolled) {
                   <h3>AI Labs</h3>
                   <p>Where curiosity becomes hands-on exploration. <br>Students build AI foundations through project-<br>based courses focused on creativity, problem <br>solving, and modern AI tools.</p>
                 </div>
-                <div class="eco-prog__art" aria-hidden="true"><img src="assets/graphioic_for_ai_lab.png" alt="" /></div>
+                <div class="eco-prog__art" aria-hidden="true"><img src="assets/images/graphioic_for_ai_lab.png" alt="" /></div>
               </div>
               <ul class="eco-feats">
-                <li><img class="eco-feat-ico" src="assets/project_based_leaning.png" alt="" /><span>Project-Based<br>Learning</span></li>
-                <li><img class="eco-feat-ico" src="assets/creative_exploration.png" alt="" /><span>Creative<br>Exploration</span></li>
-                <li><img class="eco-feat-ico" src="assets/ai_tools.png" alt="" /><span>AI Tools &amp;<br>Prompting</span></li>
-                <li><img class="eco-feat-ico" src="assets/protfolio_projects.png" alt="" /><span>Portfolio<br>Projects</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/project_based_leaning.png" alt="" /><span>Project-Based<br>Learning</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/creative_exploration.png" alt="" /><span>Creative<br>Exploration</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/ai_tools.png" alt="" /><span>AI Tools &amp;<br>Prompting</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/protfolio_projects.png" alt="" /><span>Portfolio<br>Projects</span></li>
               </ul>
             </article>
           </div>
@@ -582,28 +570,28 @@ header.site:not(.scrolled) {
           </div>
           <div class="eco-step__body eco-step__body--split">
             <article class="eco-prog eco-prog--cyan">
-              <span class="eco-prog__cardico"><img src="assets/school_hat.png" alt="" /></span>
+              <span class="eco-prog__cardico"><img src="assets/images/school_hat.png" alt="" /></span>
               <span class="eco-badge eco-badge--soon">Coming soon</span>
               <h3>University Track</h3>
               <p>For students aiming to pursue competitive <br>university pathways through advanced <br>mentorship, research exposure, and <br>portfolio-driven projects.</p>
               <ul class="eco-feats eco-feats--2">
-                <li><img class="eco-feat-ico" src="assets/research_expo.png" alt="" /><span>Research<br>Exposure</span></li>
-                <li><img class="eco-feat-ico" src="assets/creative_explo.png" alt="" /><span>Academic<br>Mentorship</span></li>
-                <li><img class="eco-feat-ico" src="assets/advaned_concept.png" alt="" /><span>Advanced<br>Concepts</span></li>
-                <li><img class="eco-feat-ico" src="assets/strong_academic_portfolio.png" alt="" /><span>Strong<br>Portfolio</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/research_expo.png" alt="" /><span>Research<br>Exposure</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/creative_explo.png" alt="" /><span>Academic<br>Mentorship</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/advaned_concept.png" alt="" /><span>Advanced<br>Concepts</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/strong_academic_portfolio.png" alt="" /><span>Strong<br>Portfolio</span></li>
               </ul>
             </article>
             <span class="eco-or">OR</span>
             <article class="eco-prog eco-prog--cyan">
-              <span class="eco-prog__cardico"><img src="assets/breafcase.png" alt="" /></span>
+              <span class="eco-prog__cardico"><img src="assets/images/breafcase.png" alt="" /></span>
               <span class="eco-badge eco-badge--soon">Coming soon</span>
               <h3>Industry Track</h3>
               <p>For students interested in real-world <br>AI skills, entrepreneurship, collaboration, <br>and industry-inspired project <br>experience.</p>
               <ul class="eco-feats eco-feats--2">
-                <li><img class="eco-feat-ico" src="assets/read_skills.png" alt="" /><span>Real-World<br>Skills</span></li>
-                <li><img class="eco-feat-ico" src="assets/industry_mentorship.png" alt="" /><span>Industry<br>Mentorship</span></li>
-                <li><img class="eco-feat-ico" src="assets/team_collaboration.png" alt="" /><span>Team<br>Collaboration</span></li>
-                <li><img class="eco-feat-ico" src="assets/entrepreneurship_mindset.png" alt="" /><span>Entrepreneurship<br>Mindset</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/read_skills.png" alt="" /><span>Real-World<br>Skills</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/industry_mentorship.png" alt="" /><span>Industry<br>Mentorship</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/team_collaboration.png" alt="" /><span>Team<br>Collaboration</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/entrepreneurship_mindset.png" alt="" /><span>Entrepreneurship<br>Mindset</span></li>
               </ul>
             </article>
           </div>
@@ -625,13 +613,13 @@ header.site:not(.scrolled) {
                   <h3>AI Studio</h3>
                   <p>An advanced collaborative environment where top <br>students build ambitious AI projects, work alongside <br>mentors, and transform ideas into real-world outcomes.</p>
                 </div>
-                <div class="eco-prog__art" aria-hidden="true"><img src="assets/graphic_for_ai_studio.png" alt="" /></div>
+                <div class="eco-prog__art" aria-hidden="true"><img src="assets/images/graphic_for_ai_studio.png" alt="" /></div>
               </div>
               <ul class="eco-feats">
-                <li><img class="eco-feat-ico" src="assets/real_projects.png" alt="" /><span>Real<br>Projects</span></li>
-                <li><img class="eco-feat-ico" src="assets/expert_mentorship.png" alt="" /><span>Expert<br>Mentorship</span></li>
-                <li><img class="eco-feat-ico" src="assets/startup_env.png" alt="" /><span>Startup-Style<br>Environment</span></li>
-                <li><img class="eco-feat-ico" src="assets/showcase.png" alt="" /><span>Portfolio<br>Showcase</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/real_projects.png" alt="" /><span>Real<br>Projects</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/expert_mentorship.png" alt="" /><span>Expert<br>Mentorship</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/startup_env.png" alt="" /><span>Startup-Style<br>Environment</span></li>
+                <li><img class="eco-feat-ico" src="assets/images/showcase.png" alt="" /><span>Portfolio<br>Showcase</span></li>
               </ul>
             </article>
           </div>
@@ -649,9 +637,9 @@ header.site:not(.scrolled) {
               <div class="eco-prog__main">
                 <h3>Beyond programs. <span class="hl-cyan">A growing ecosystem for future creators.</span></h3>
                 <p>New programs. New mentors. New connections.<br>The ecosystem grows &mdash; and you grow with it.</p>
-                <a class="btn btn-ghost eco-join" href="contact.html">Join the Community &rarr;</a>
+                <a class="btn btn-ghost eco-join" href="pages/contact.html">Join the Community &rarr;</a>
               </div>
-              <div class="eco-prog__art" aria-hidden="true"><img src="assets/fw_network.png" alt="" /></div>
+              <div class="eco-prog__art" aria-hidden="true"><img src="assets/images/fw_network.png" alt="" /></div>
             </article>
           </div>
         </div>
@@ -660,10 +648,10 @@ header.site:not(.scrolled) {
 
       <div class="eco-strip-wrap">
         <div class="eco-strip reveal">
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/continious_learning.png" alt="" /></span><div><strong>Continuous Learning</strong><small>Always evolving</small></div></div>
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/global_community.png" alt="" /></span><div><strong>Global Community</strong><small>Connect worldwide</small></div></div>
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/real_impact.png" alt="" /></span><div><strong>Real-World Impact</strong><small>Build what matters</small></div></div>
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/future_ready.png" alt="" /></span><div><strong>Future Ready</strong><small>Skills for tomorrow</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/continious_learning.png" alt="" /></span><div><strong>Continuous Learning</strong><small>Always evolving</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/global_community.png" alt="" /></span><div><strong>Global Community</strong><small>Connect worldwide</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/real_impact.png" alt="" /></span><div><strong>Real-World Impact</strong><small>Build what matters</small></div></div>
+          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/future_ready.png" alt="" /></span><div><strong>Future Ready</strong><small>Skills for tomorrow</small></div></div>
         </div>
       </div>
     </div>
@@ -752,32 +740,9 @@ header.site:not(.scrolled) {
         <details class="faq-item">
           <summary>How do I enroll?</summary>
           <div class="answer">
-            <p>Two ways in. If you'd like to talk first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">book a 20-minute info session</a> — we'll discuss the student's goals and point you to the right program. If you already know the program, <a href="apply.html">apply directly</a> through our application form. Either way: no sales pitch, no auto-enroll.</p>
+            <p>Two ways in. If you'd like to talk first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">book a 20-minute info session</a> — we'll discuss the student's goals and point you to the right program. If you already know the program, <a href="pages/apply.html">apply directly</a> through our application form. Either way: no sales pitch, no auto-enroll.</p>
           </div>
         </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA BANNER -->
-  <section class="cta-banner-section">
-    <div class="cta-banner reveal">
-      <div class="cta-banner__bg" aria-hidden="true">
-        <img src="assets/footer_banner.png" alt="" />
-      </div>
-      <div class="cta-banner__inner">
-        <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">The future <span class="gold-word">won't wait.</span></h2>
-          <p class="cta-banner__lede">Give your child the confidence, skills, and mindset to build, think, and lead in the AI era.</p>
-          <div class="cta-banner__actions">
-            <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
-            <a class="btn btn-ghost" href="bootcamp-summer-2026.html">Join the Next Cohort &rarr;</a>
-          </div>
-          <div class="cta-banner__meta">
-            <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
-            <span><i class="cta-banner__dot" aria-hidden="true"></i>Apply early for priority consideration</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -807,7 +772,7 @@ header.site:not(.scrolled) {
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/fw_logo_footer.png" alt="Future Wrights Academy" />
+        <img src="assets/images/fw_logo_footer.png" alt="Future Wrights Academy" />
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
@@ -819,23 +784,22 @@ header.site:not(.scrolled) {
       <div>
         <h4>Program</h4>
         <ul>
-          <li><a href="bootcamp-summer-2026.html">Summer Camp</a></li>
-          <li><a href="apply.html">Apply</a></li>
-          <li><a href="why-it-matters.html">Why it matters</a></li>
+          <li><a href="#ecosystem">AI Labs</a></li>
+          <li><a href="pages/summer-2026-showcase.html">AI Bootcamp</a></li>
         </ul>
       </div>
       <div>
         <h4>For</h4>
         <ul>
-          <li><a href="for-parents.html">Parents</a></li>
-          <li><a href="for-students.html">Students</a></li>
+          <li><a href="pages/for-parents.html">Parents</a></li>
+          <li><a href="pages/for-students.html">Students</a></li>
         </ul>
       </div>
       <div>
         <h4>About</h4>
         <ul>
           <li><a href="index.html#about">About us</a></li>
-          <li><a href="team.html">Our team</a></li>
+          <li><a href="pages/team.html">Our team</a></li>
           <li><a href="index.html#faq">FAQ</a></li>
         </ul>
       </div>
@@ -843,7 +807,7 @@ header.site:not(.scrolled) {
         <h4>Get in touch</h4>
         <ul>
           <li><a href="mailto:hello@futurewrights.ai">hello@futurewrights.ai</a></li>
-          <li><a href="contact.html">Contact form</a></li>
+          <li><a href="pages/contact.html">Contact form</a></li>
           <li><a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book an info session</a></li>
         </ul>
       </div>

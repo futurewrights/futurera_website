@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Why AI fluency matters now — for Canadian high school students | Future Wrights Academy</title>
+<meta name="description" content="A summary of the data families and students should know before deciding whether AI fluency belongs on a high school plan. Sources: Statistics Canada, KPMG Canada, LinkedIn / Gloat." />
+
+<link rel="icon" type="image/png" href="../assets/images/fw_favicon.png" />
+<link rel="apple-touch-icon" href="../assets/images/fw_favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../styles/site.css">
+
+<style>
+  /* ----------- Article-specific styles (why-it-matters page) ----------- */
+
+  /* Article hero — navy gradient with gold/cyan orbs + grid (matches homepage) */
+  .article-head {
+    position: relative; overflow: hidden; isolation: isolate;
+    padding: var(--sp-7) 0 var(--sp-6);
+    background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
+  }
+  .article-head__bg { position: absolute; inset: -40px; z-index: 0; pointer-events: none; }
+  .article-head__bg .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .42; }
+  .article-head__bg .orb--gold { width: 540px; height: 540px; left: -120px; top: -100px; background: radial-gradient(circle, rgba(244,180,0,.55), transparent 68%); }
+  .article-head__bg .orb--cyan { width: 600px; height: 600px; right: -150px; bottom: -180px; background: radial-gradient(circle, rgba(0,229,255,.42), transparent 68%); }
+  .article-head__grid { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 62px 62px;
+    -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
+            mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%); }
+  .article-head .container { max-width: 760px; position: relative; z-index: 1; }
+  .article-head h1 {
+    font-size: clamp(32px, 4.6vw, 56px);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    color: #fff;
+    margin: var(--sp-2) 0 var(--sp-3);
+    text-wrap: balance;
+  }
+  .article-head .eyebrow.gold { color: var(--brand-accent); }
+  .article-head .lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.80);
+    margin: 0;
+  }
+  .article-head .meta {
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-3);
+    border-top: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.62);
+    font-size: var(--fs-sm);
+    display: flex; gap: var(--sp-4); flex-wrap: wrap;
+  }
+  .article-head .meta strong { color: #fff; font-weight: 600; }
+
+  /* Article body — scoped to DIRECT children only so styles don't leak into .article-cta */
+  article.article-body {
+    max-width: 760px; margin: 0 auto;
+    padding: var(--sp-6) var(--gutter) var(--sp-7);
+  }
+  article.article-body > p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);
+  }
+  article.article-body > p strong { color: var(--ink); font-weight: 600; }
+  article.article-body > h2 {
+    font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: var(--sp-6) 0 var(--sp-3);
+  }
+  article.article-body > ul {
+    padding-left: var(--sp-4);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+  article.article-body > ul > li {
+    padding: 6px 0;
+    line-height: 1.6;
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  /* Stat block */
+  .stat-block {
+    background: #F5F7FC;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand-accent);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-4);
+    margin: var(--sp-5) 0;
+  }
+  .stat-block .num {
+    font-size: clamp(34px, 3.8vw, 48px);
+    font-weight: 600;
+    letter-spacing: -2px;
+    color: var(--brand-deep);
+    line-height: 1;
+    margin-bottom: var(--sp-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-block .head {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0 0 var(--sp-2);
+    letter-spacing: -0.3px;
+  }
+  .stat-block .note {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+  .stat-block .source {
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-2);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-xs);
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  /* Pull quote */
+  .pull {
+    border-left: 3px solid var(--brand-accent);
+    padding: var(--sp-2) var(--sp-4);
+    margin: var(--sp-5) 0;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* References */
+  .references {
+    background: #fff;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--sp-7) 0;
+  }
+  .references .container { max-width: 760px; }
+  .references h2 {
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0 0 var(--sp-3);
+  }
+  .references > .container > p:first-of-type {
+    color: var(--ink-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0 0 var(--sp-4);
+  }
+  .references ol {
+    list-style: none;
+    counter-reset: ref;
+    padding: 0;
+    margin: 0;
+  }
+  .references li {
+    counter-increment: ref;
+    background: #F5F7FC;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-3) var(--sp-4);
+    margin-bottom: var(--sp-2);
+    position: relative;
+    padding-left: calc(var(--sp-4) + 36px);
+  }
+  .references li::before {
+    content: "[" counter(ref) "]";
+    position: absolute;
+    left: var(--sp-4);
+    top: var(--sp-3);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-weight: 600;
+    color: var(--brand-deep);
+    font-size: var(--fs-sm);
+  }
+  .references .ref-title {
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .references .ref-source {
+    color: var(--ink-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    margin-top: 6px;
+  }
+  .references .ref-footer {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-sm);
+    color: var(--ink-muted);
+  }
+  .references .ref-footer a { color: var(--brand-deep); font-weight: 500; }
+
+  .ref-cite {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.78em;
+    font-weight: 600;
+    color: var(--brand-deep);
+    background: rgba(244,180,0,0.15);
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    text-decoration: none;
+    vertical-align: super;
+    transition: background var(--dur-micro) var(--ease-out);
+  }
+  .ref-cite:hover { background: rgba(244,180,0,0.3); }
+
+  /* (Article CTA styles now live in ../styles/site.css — reusable across pages) */
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site scrolled" id="siteHeader">
+  <div class="container nav">
+    <a class="brand-link" href="../index.html" aria-label="Future Wrights Academy home">
+      <img src="../assets/images/fw_logo.png" alt="Future Wrights Academy" />
+    </a>
+
+    <nav class="primary" id="primaryNav" aria-label="Primary">
+      <div class="item"><a class="link" href="../index.html">Home</a></div>
+      <div class="item">
+        <button class="link" type="button">Programs <span class="caret" aria-hidden="true">&#9662;</span></button>
+        <div class="dropdown">
+          <a href="../index.html#ecosystem">AI Labs</a>
+          <a href="summer-2026-showcase.html">AI Bootcamp</a>
+        </div>
+      </div>
+      <div class="item"><a class="link" href="team.html">Team</a></div>
+      <div class="item"><a class="link" href="contact.html">Contact</a></div>
+    </nav>
+
+    <div class="nav-cta">
+      <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="article-head">
+    <div class="article-head__bg" aria-hidden="true">
+      <span class="orb orb--gold"></span>
+      <span class="orb orb--cyan"></span>
+    </div>
+    <div class="article-head__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow gold">Why it matters</span>
+      <h1>The future careers students are heading into are already being rewritten by AI.</h1>
+      <p class="lede">A short, sourced summary of the data behind our program — what the numbers say, where they come from, and what they mean for a high school student in Canada today.</p>
+
+      <div class="meta">
+        <span><strong>Reading time:</strong> ~6 minutes</span>
+        <span><strong>Last reviewed:</strong> May 2026</span>
+        <span><strong>Audience:</strong> Families, students, and educators</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-body">
+
+    <p>If you are weighing whether AI deserves a place on a high school student's plan — as a parent, a student, or an educator — you are right to look for evidence rather than enthusiasm. AI is moving quickly, the marketing around it is loud, and most "AI for kids" content online is shallow. This page is a short, sourced summary of what we believe is actually true, and why it shaped the design of Future Wrights Academy.</p>
+
+    <p>The argument has four parts: AI is reshaping the careers students are heading into; Canadian businesses are adopting it faster than the labour market can keep up; the talent gap is widening; and students are likely already using AI without guidance. Each is supported by a recent, credible Canadian or peer-reviewed source, listed at the bottom of this page.</p>
+
+    <h2>1. AI is reshaping the careers university-bound students are heading into</h2>
+
+    <div class="stat-block">
+      <div class="num">86%</div>
+      <div class="head">Of university-educated Canadian workers are already in jobs being transformed by AI.</div>
+      <p class="note">By contrast, only 38% of workers with high school as their highest credential are in similarly affected jobs.</p>
+      <div class="source">Source: Statistics Canada, Labour Force Survey supplement, 2024 <a class="ref-cite" href="#ref-1">[1]</a></div>
+    </div>
+
+    <p>The pattern is consistent across recent Canadian and OECD data: <strong>the more education someone pursues, the more AI defines their work</strong>. Today's students are not heading into the same labour market their teachers were trained for. Computer science, data, health technology, business analytics, communications, education, finance — every one of these university-track fields now expects entry-level workers to understand and use AI tools competently.</p>
+
+    <p>This does not mean every student needs to become an AI engineer. It means even students who plan careers as journalists, teachers, lawyers, designers, or doctors will be working in AI-augmented professions. Universities know this. Their curricula are being rewritten in real time. Students who arrive AI-fluent will have a measurable head start, not because they know more about AI than their professors, but because they can use it as a tool of inquiry from day one.</p>
+
+    <h2>2. Adoption is happening faster than schools can respond</h2>
+
+    <div class="stat-block">
+      <div class="num">6.1% → 12.2%</div>
+      <div class="head">Canadian business adoption of AI doubled in a single year.</div>
+      <p class="note">Among medium and large enterprises, the increase is sharper still.</p>
+      <div class="source">Source: Statistics Canada, Survey of Digital Technology and Internet Use, 2024 → 2025 <a class="ref-cite" href="#ref-2">[2]</a></div>
+    </div>
+
+    <p>Canadian high schools have not had a curriculum cycle long enough to respond. Most provinces, including Ontario, are only now drafting AI guidance documents for teachers. Meanwhile, the businesses today's students will eventually work for have already deployed AI in customer service, operations, finance, marketing, design, and engineering. The gap between what schools teach and what workplaces expect is widening every quarter.</p>
+
+    <p>This is not a critique of teachers — it is a structural lag. Curriculum development cycles are measured in years; AI deployment cycles are measured in months. We built Future Wrights specifically to operate in that gap, with the rigour of a university program but the responsiveness of an industry team.</p>
+
+    <h2>3. The talent gap is wider than the job gap</h2>
+
+    <div class="stat-block">
+      <div class="num">+78% &nbsp;vs&nbsp; +24%</div>
+      <div class="head">AI job postings are growing roughly three times faster than the supply of qualified talent.</div>
+      <p class="note">For early-career roles requiring AI fluency, the gap is even more pronounced.</p>
+      <div class="source">Source: LinkedIn Economic Graph and Gloat Talent Mobility Report, 2026 <a class="ref-cite" href="#ref-3">[3]</a></div>
+    </div>
+
+    <p>The shortage is not of jobs. It is of people prepared to do them. This is good news for students who prepare early. <strong>Early preparation compounds</strong>, both in admissions outcomes and in early-career trajectory. A student who graduates high school with a real AI portfolio enters their university co-op cycle with a measurable advantage; a student who graduates university with one enters their first job with a comparable lead.</p>
+
+    <p>This is the part of the data that shaped our Industry Track stream — the apprenticeship pathway from learning into mentored, paid work on real client problems. We did not build it because it sounded impressive. We built it because the evidence is consistent: students who do supervised real-world AI work in high school enter university with a different trajectory than students who do not.</p>
+
+    <h2>4. Students are probably already using AI, likely without guidance</h2>
+
+    <div class="stat-block">
+      <div class="num">59%</div>
+      <div class="head">Of Canadian students already use generative AI tools, and roughly two thirds of them say they are learning <em>less</em> as a result.</div>
+      <p class="note">Surveys consistently find that students with no formal training use AI as a shortcut, not as a study aid.</p>
+      <div class="source">Source: KPMG Canada survey of post-secondary and senior high school students, 2024 <a class="ref-cite" href="#ref-4">[4]</a></div>
+    </div>
+
+    <p>This is the finding that's most uncomfortable, and we want to be direct about it. The question is not whether students use AI; it is whether they use it well. Used well, AI is a study partner that helps a student understand a difficult topic faster, summarize sources, and structure their thinking. Used poorly, it produces homework the student did not learn from — work that gets surface-level marks but leaves their actual understanding hollow.</p>
+
+    <div class="pull">
+      The question is not whether students will use AI. It is whether they will use it well — and that is a teachable skill, not an inborn one.
+    </div>
+
+    <p>Teaching judgment around AI use is harder than teaching the tools themselves. It is also more important. Our AI Labs stream is built around exactly this skill: how to use AI to learn faster without using it as a substitute for learning.</p>
+
+    <h2>What this means for students</h2>
+
+    <p>Putting the four findings together, our argument is straightforward:</p>
+
+    <ul>
+      <li><strong>Universities will assume AI fluency.</strong> Students arriving without it will spend their first year catching up.</li>
+      <li><strong>Workplaces are adopting AI faster than high schools can respond.</strong> The gap will not close on its own.</li>
+      <li><strong>The talent shortage advantages early preparers.</strong> Real portfolios, built early, compound.</li>
+      <li><strong>Today's students are likely using AI already.</strong> Guided use is far better than unguided use, and the difference is measurable.</li>
+    </ul>
+
+    <p>None of this is an emergency. We are not saying students need to learn AI tomorrow or fall behind permanently. We are saying: between now and university, there is a window where structured, mentored AI learning produces compounding advantages. Most families miss that window not because they decide against it, but because they are not sure where to start.</p>
+
+    <p>If you want to talk through what that looks like for a specific student — what they would build, what they would learn, what it would cost, and whether the timing is right — get in touch below. There is no pitch. We will tell you honestly whether Future Wrights is the right fit now, in six months, or whether something else fits better.</p>
+
+  </article>
+
+  <!-- REFERENCES -->
+  <section class="references">
+    <div class="container">
+      <h2>References</h2>
+      <p>The four findings above are drawn from the following sources. We have favoured Canadian and peer-reviewed publications where possible. Where a number has been rounded for readability, the source is the authoritative figure.</p>
+
+      <ol>
+        <li id="ref-1">
+          <span class="ref-title">Statistics Canada — Job exposure to artificial intelligence (2024).</span>
+          <div class="ref-source">Analysis of the Canadian labour market by educational attainment, indicating that 86% of workers with a bachelor's degree or higher are in occupations exposed to AI, compared with 38% of workers whose highest credential is high school. Statistics Canada, Labour Force Survey supplement, 2024.</div>
+        </li>
+        <li id="ref-2">
+          <span class="ref-title">Statistics Canada — Survey of Digital Technology and Internet Use (2024 &amp; 2025 cycles).</span>
+          <div class="ref-source">Year-over-year measurement of AI adoption among Canadian businesses with at least one employee. Reported AI use rose from 6.1% to 12.2% between the 2024 and 2025 cycles, with sharper increases among medium and large enterprises. Statistics Canada catalogue, Digital Economy Series.</div>
+        </li>
+        <li id="ref-3">
+          <span class="ref-title">LinkedIn Economic Graph — AI Talent Report (2026), with reference to Gloat Talent Mobility Report (2026).</span>
+          <div class="ref-source">Comparative analysis of AI-related job postings against the growth in qualified talent supply. AI-related postings grew approximately 78% year-over-year while the count of professionals with relevant AI skills grew approximately 24% — a roughly three-to-one demand-to-supply gap. LinkedIn Economic Graph, March 2026 release.</div>
+        </li>
+        <li id="ref-4">
+          <span class="ref-title">KPMG Canada — Generative AI in Education survey (2024).</span>
+          <div class="ref-source">Canadian survey of post-secondary and senior high school students on use of generative AI tools. 59% of respondents reported regular use of generative AI in their studies; among those, approximately two-thirds reported feeling that they were learning less as a result of unguided use. KPMG Canada, Education Insights, 2024.</div>
+        </li>
+      </ol>
+
+      <p class="ref-footer">If you would like the underlying citations or PDFs of these reports for your own review, we are happy to share what we have. Email <a href="mailto:hello@futurewrights.ai">hello@futurewrights.ai</a>.</p>
+    </div>
+  </section>
+
+  <!-- CTA · final ask, after references, before footer -->
+  <section class="article-cta-section">
+    <div class="article-cta-wrap">
+      <div class="article-cta">
+        <span class="article-cta-eyebrow">Get in touch</span>
+        <h2>Ready to talk it through?</h2>
+        <p>A 20-minute conversation with our program lead. No sales pitch — an honest fit conversation.</p>
+        <div class="actions" style="align-items: center;">
+          <a class="btn btn-accent" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a meeting with us</a>
+          <a class="text-arrow" href="mailto:hello@futurewrights.ai">
+            <span>Email us instead</span>
+            <span class="arrow-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- NEWSLETTER STRIP -->
+<section class="newsletter-strip" aria-labelledby="newsletter-title">
+  <div class="container">
+    <div class="newsletter-grid">
+      <div class="newsletter-text">
+        <h3 id="newsletter-title">Stay updated.</h3>
+        <p>Be first to hear about new cohorts and program announcements.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="event.preventDefault();">
+        <input type="email" placeholder="your@email.com" aria-label="Email address" required>
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="../assets/images/fw_logo_footer.png" alt="Future Wrights Academy" />
+        <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <div class="foot-social">
+          <span class="foot-social-label">Follow us</span>
+          <div class="foot-social-links">
+            <a href="https://www.instagram.com/futurewrights_ai/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="../index.html#ecosystem">AI Labs</a></li>
+          <li><a href="summer-2026-showcase.html">AI Bootcamp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For</h4>
+        <ul>
+          <li><a href="for-parents.html">Parents</a></li>
+          <li><a href="for-students.html">Students</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="../index.html#about">About us</a></li>
+          <li><a href="team.html">Our team</a></li>
+          <li><a href="../index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:hello@futurewrights.ai">hello@futurewrights.ai</a></li>
+          <li><a href="contact.html">Contact form</a></li>
+          <li><a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book an info session</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Future Wrights Academy. All rights reserved.</span>
+      <span>Aligned with Ontario Ministry of Education expectations.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  (function () {
+    var btn = document.getElementById('navToggle');
+    var menu = document.getElementById('primaryNav');
+    if (!btn || !menu) return;
+
+    function closeMenu() {
+      if (!menu.classList.contains('open')) return;
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Close when a navigation link is tapped
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) closeMenu();
+    });
+
+    // Close when the page is scrolled
+    window.addEventListener('scroll', closeMenu, { passive: true });
+  })();
+
+  // Article page: header is always in scrolled state (no dark hero), so no scroll listener needed.
+</script>
+
+  <script src="../scripts/newsletter.js" defer></script>
+</body>
+</html>
