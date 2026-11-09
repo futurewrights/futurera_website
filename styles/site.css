@@ -323,7 +323,7 @@
   nav.primary .item:focus-within > .link .caret { transform: rotate(180deg); }
 
   .dropdown {
-    position: absolute; top: calc(100% + 8px); left: 0; min-width: 220px;
+    position: absolute; top: calc(100% + 8px); left: 0; min-width: 260px;
     background: #fff; border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     box-shadow: 0 10px 30px rgba(13,23,20,0.08);
@@ -334,11 +334,13 @@
   nav.primary .item:focus-within .dropdown {
     opacity: 1; visibility: visible; transform: translateY(0);
   }
-  .dropdown a {
+  .dropdown a, .dropdown-upcoming {
     display: block; padding: 10px 14px; font-size: var(--fs-sm); font-weight: 500;
     color: var(--ink); border-radius: 8px;
   }
   .dropdown a:hover { background: var(--surface); }
+  .dropdown-upcoming { color: var(--ink-muted); cursor: default; }
+  .dropdown-upcoming small { display: block; font-size: 12px; font-weight: 400; }
 
   .nav-cta { display: flex; gap: 10px; align-items: center; justify-self: end; }
   .nav-cta .btn { padding: 13px 26px; font-size: 15px; }
