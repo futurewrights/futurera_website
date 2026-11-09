@@ -1,0 +1,59 @@
+/* Use the original transparent logo; recolor only its wordmark on dark surfaces. */
+.brand-logo {
+  position: relative;
+  display: block;
+  width: clamp(180px, 20vw, 260px);
+  max-width: 100%;
+}
+
+header.site .brand-logo {
+  width: clamp(144px, 16vw, 208px);
+}
+
+header.site .brand-logo img,
+header.site:not(.scrolled) .brand-logo img,
+footer.site .brand-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  filter: none;
+}
+
+/* The empty gap between the gold symbol and the wordmark starts at 17%.
+   Masking preserves every transparent pixel without changing the symbol. */
+.brand-logo::after {
+  content: "";
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  -webkit-mask: url("../assets/images/fw-logo.png") center / 100% 100% no-repeat;
+  mask: url("../assets/images/fw-logo.png") center / 100% 100% no-repeat;
+  clip-path: inset(0 0 0 18%);
+  pointer-events: none;
+}
+
+/* The existing scroll handler switches the header back to navy and gold. */
+header#siteHeader:not(.scrolled) .brand-logo::after,
+footer.site .brand-logo::after {
+  display: block;
+}
+
+footer.site .brand-logo {
+  width: min(100%, 260px);
+  margin-bottom: 16px;
+}
+
+/* The two older page layouts also need a dark footer for the white wordmark. */
+footer.site.site--legacy {
+  background: #151828;
+  color: rgba(255, 255, 255, .7);
+}
+
+footer.site.site--legacy h4 { color: #fff; }
+footer.site.site--legacy a { color: rgba(255, 255, 255, .85); }
+footer.site.site--legacy a:hover { color: #f4b400; }
