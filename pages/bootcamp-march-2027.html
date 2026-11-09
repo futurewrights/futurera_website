@@ -315,6 +315,34 @@
     .schedule-row { grid-template-columns: 2fr 3fr; }
   }
 
+  /* Completion certificate, portfolio, and personalized skills report */
+  .completion-section { background: #fffdf7; }
+  .completion-grid {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--sp-6); align-items: center;
+    max-width: 1180px; margin: 0 auto;
+  }
+  .completion-certificate { margin: 0; }
+  .completion-certificate img {
+    display: block; width: 100%; height: auto;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 16px 40px rgba(10, 27, 61, .1);
+  }
+  .completion-certificate figcaption {
+    margin-top: 12px; text-align: center; font-size: 12px; color: var(--ink-muted);
+  }
+  .completion-copy h2 {
+    font-size: clamp(28px, 3.2vw, 42px); line-height: 1.15;
+    letter-spacing: -1px; color: var(--navy); margin: 0 0 var(--sp-3);
+    text-wrap: balance;
+  }
+  .completion-copy p { margin: 0; font-size: 17px; line-height: 1.75; color: var(--ink-muted); }
+  .completion-copy p + p { margin-top: var(--sp-3); }
+  .completion-copy .btn { margin-top: var(--sp-3); }
+  @media (max-width: 800px) {
+    .completion-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+  }
+
   /* Instructor section */
   .instructor-grid {
     display: grid;
@@ -637,6 +665,25 @@
   </section>
 
 
+  <!-- COMPLETION CERTIFICATE, PORTFOLIO, AND SKILLS REPORT -->
+  <section class="lab-section completion-section" aria-labelledby="completion-title">
+    <div class="container">
+      <div class="completion-grid">
+        <figure class="completion-certificate">
+          <img src="../assets/images/march-2027-completion-certificate.png" alt="Sample Future Wrights certificate of completion for Build with AI at Webtree Academy" width="1856" height="1286" loading="lazy">
+          <figcaption>Sample certificate of completion</figcaption>
+        </figure>
+        <div class="completion-copy">
+          <span class="eyebrow gold">What they take home</span>
+          <h2 id="completion-title">A Certificate &amp; a Portfolio of Their Work</h2>
+          <p>Your child will leave with a live personal homepage and capstone project they can share, plus their code on GitHub—a portfolio they can keep building.</p>
+          <p>They’ll also receive a certificate of completion and a personalized skills report showing what they learned and what they can do.</p>
+          <a class="btn btn-ghost" href="student-showcase.html">See Summer 2026 Student Work &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="lab-section lab-section--alt">
     <div class="container">
@@ -654,7 +701,7 @@
         <details class="faq-item"><summary>What's the application process?</summary><div class="answer"><p>A short written application (a few sentences about why the applicant wants to take it and what they'd hope to build), then a short conversation with our program lead. Decisions within two business days. Rolling intake until the cohort fills.</p></div></details>
         <details class="faq-item"><summary>What does it cost?</summary><div class="answer"><p>Tuition for the March 2027 cohort is <strong>$899 CAD</strong>. This covers the full five-day bootcamp with all materials and tools included. Payment is collected by <strong>Interac e-Transfer</strong> after we accept your application; we'll send the recipient details with your admission. Need-based scholarships are available; mention this on your application or email us directly.</p></div></details>
         <details class="faq-item"><summary>Refunds &amp; cancellations</summary><div class="answer"><p>All cancellations and refunds are subject to the following policies:</p><ul><li>All cancellations must be made in writing, via email, to Future Wrights Academy at <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</li><li>Refunds, less an administrative fee ($100 CAD), will be issued for all cancellations made at least 30 days before your cohort's start date.</li><li>After the 30-day window, no refunds will be provided.</li><li>Pro-rated refunds or credits are not available for days absent.</li><li>Future Wrights Academy reserves the right to cancel a cohort if the minimum enrollment is not met or in the event of exceptional and/or unforeseen circumstances. If we have to cancel a cohort, we will accommodate the student in an alternate cohort, or provide a full refund.</li></ul></div></details>
-        <details class="faq-item"><summary>Do you issue a certificate of completion?</summary><div class="answer"><p>We don't. Most short-form AI courses do, and most of those certificates aren't worth much. What students leave with — <strong>a deployed app on a real URL, a Demo Day presentation they've delivered, and a portfolio of projects</strong> — is harder to fake and more useful in any college application, interview, or real-world setting.</p><p>If a verification record is needed for a school program or scholarship, we'll provide one on request, signed by the lead instructor.</p></div></details>
+        <details class="faq-item"><summary>Do students receive a certificate of completion and skills report?</summary><div class="answer"><p>Yes. Students receive a Future Wrights certificate of completion and a personalized skills report highlighting the skills and capabilities they developed throughout the week.</p></div></details>
         <details class="faq-item"><summary>What happens after the bootcamp?</summary><div class="answer"><p>The apps each student builds keep running on their public URLs after the bootcamp ends — friends can use them, siblings can use them, students can keep iterating. Many keep building on their capstone or start new projects with the same tools through the school year.</p></div></details>
       </div>
     </div>

@@ -66,6 +66,7 @@
   line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:850px; }
 
 .fw-hero__cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:38px; }
+.fw-hero__tagline { margin:16px 0 0; font-size:14px; line-height:1.5; color:var(--ink-50); }
 .fw-hero__journey { display:block; width:min(100%, 320px); height:auto; margin-top:56px; }
 .fw-hero__camp { display:none; }
 @media (max-width:640px){
@@ -125,8 +126,8 @@ header.site:not(.scrolled) {
   border-bottom: 0;
 }
 
-/* Limit the overlap sequence to the hero and "Why it matters". Once that
-   section has passed, the remaining homepage content scrolls normally. */
+/* Keep the sections after the hero above its sticky background. */
+.home-hero-transition .next-program,
 .home-hero-transition .ticker,
 .home-hero-transition .hero-edge,
 .home-hero-transition #why {
@@ -136,6 +137,25 @@ header.site:not(.scrolled) {
 
 /* Design-system rollout: General Sans for all homepage section headings */
 .section-head h2 { font-family: "General Sans", "Inter", sans-serif; }
+
+/* Next planned program */
+.next-program { padding: var(--sp-6) 0; background: #fffdf7; border-bottom: 1px solid var(--line); }
+.next-program__grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--sp-6); align-items: center; }
+.next-program h2 { font-family: "General Sans", "Inter", sans-serif; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -.02em; color: var(--navy); margin: 0 0 var(--sp-3); text-wrap: balance; }
+.next-program__copy p { max-width: 640px; margin: 0; font-size: 17px; color: var(--ink-muted); }
+.next-program__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--sp-4); }
+.next-program__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); margin: 0; padding: var(--sp-4); border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; }
+.next-program__facts dt { margin-bottom: 5px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); }
+.next-program__facts dd { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--navy); }
+@media (max-width: 900px) {
+  .next-program__grid { grid-template-columns: 1fr; gap: var(--sp-4); }
+}
+@media (max-width: 480px) {
+  .next-program__facts { grid-template-columns: 1fr; padding: var(--sp-3); }
+  .next-program__actions { flex-direction: column; align-items: stretch; }
+  .next-program__actions .btn { justify-content: center; }
+}
+
 /* ============================================================
    Why Future Wrights — intro (left) + stacked Vision/Mission (right)
    ============================================================ */
@@ -277,9 +297,10 @@ header.site:not(.scrolled) {
         <h1 class="fw-hero__title">Developing human capability<br>for the <span class="grad">AI era.</span></h1>
         <p class="fw-hero__lede">At Future Wrights, students use AI to turn meaningful ideas into projects they can build, test, and explain. With instructor guidance, they practise critical thinking, make decisions, and take ownership of what they create.</p>
         <div class="fw-hero__cta">
-          <a class="btn btn-primary" href="pages/student-showcase.html">See Student Work &rarr;</a>
-          <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
+          <a class="btn btn-primary" href="pages/bootcamp-march-2027.html">Explore March Break 2027</a>
+          <a class="btn btn-ghost" href="pages/student-showcase.html">See Student Work &rarr;</a>
         </div>
+        <p class="fw-hero__tagline">Meaningful projects. Guided learning. Student ownership.</p>
         <img class="fw-hero__journey" src="assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead">
       </div>
     </div>
@@ -323,6 +344,27 @@ header.site:not(.scrolled) {
           <strong>Small cohorts</strong>, mentor-led
         </span>
       </div>
+    </div>
+  </section>
+
+  <!-- NEXT PLANNED PROGRAM -->
+  <section class="next-program" aria-labelledby="next-program-title">
+    <div class="container next-program__grid">
+      <div class="next-program__copy">
+        <span class="eyebrow gold">Next planned program</span>
+        <h2 id="next-program-title">Build with AI &mdash; March Break 2027</h2>
+        <p>A five-day, instructor-guided bootcamp where students discover, plan, build, test, and launch their own app with AI. For ages 13–16, with no prior coding experience required.</p>
+        <div class="next-program__actions">
+          <a class="btn btn-primary" href="pages/bootcamp-march-2027.html">Explore the program &rarr;</a>
+          <a class="btn btn-ghost" href="pages/apply-march-2027.html">Apply for March 2027</a>
+        </div>
+      </div>
+      <dl class="next-program__facts">
+        <div><dt>Dates</dt><dd>March 15–19, 2027<br>5 days · 15 hours</dd></div>
+        <div><dt>Choose your time</dt><dd>9 AM–12 PM<br>or 1 PM–4 PM</dd></div>
+        <div><dt>Location</dt><dd>Webtree Academy<br>North York, Toronto</dd></div>
+        <div><dt>Tuition</dt><dd>$899 CAD</dd></div>
+      </dl>
     </div>
   </section>
   <div class="hero-edge" aria-hidden="true"></div>
