@@ -44,11 +44,16 @@
   .page-hero h1 {
     font-size: clamp(30px, 4.4vw, 44px);
     font-weight: 600; letter-spacing: -1.8px; line-height: 1.12;
-    color: #fff; margin: var(--sp-2) 0 var(--sp-3); text-align: left;
+    color: #fff; margin: var(--sp-2) 0 6px; text-align: left;
     white-space: nowrap;
   }
   @media (max-width: 520px) { .page-hero h1 { white-space: normal; font-size: clamp(28px, 8vw, 40px); } }
   .page-hero h1 em { font-style: normal; color: #fff; }
+  .page-hero .hero-subtitle {
+    font-size: clamp(24px, 3.2vw, 34px); line-height: 1.2; letter-spacing: -0.8px;
+    color: #fff; margin: 0 0 var(--sp-3); text-align: left; text-wrap: balance;
+  }
+  .page-hero .hero-copy > .eyebrow { margin-bottom: var(--sp-3); }
   .page-hero .lede {
     font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.80);
     margin: 0 0 var(--sp-3); text-align: left; max-width: 540px;
@@ -106,7 +111,7 @@
   }
 
   /* Section base */
-  .lab-section { padding: var(--sp-7) 0; }
+  .lab-section { padding: var(--sp-7) 0; background: #fff; }
   .lab-section--alt {
     background: var(--surface);
     border-top: 1px solid var(--line);
@@ -166,6 +171,12 @@
     color: var(--teal);
     margin: 0 0 5px;
   }
+  .diff-card .label--single-line {
+    white-space: nowrap; font-size: 10px; letter-spacing: 0.04em;
+  }
+  @media (min-width: 881px) and (max-width: 1100px), (max-width: 400px) {
+    .diff-card:has(.label--single-line) .diff-card__head { flex-direction: column; align-items: flex-start; }
+  }
   .diff-card h3 {
     font-size: 17px; font-weight: 600;
     letter-spacing: -0.3px;
@@ -177,6 +188,17 @@
     font-size: 14px; line-height: 1.55;
     color: var(--ink-muted);
     margin: 0;
+  }
+  .learning-step {
+    flex: none; display: inline-grid; place-items: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(17,146,173,0.12); color: var(--teal);
+    font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .project-examples__intro { text-align: center; margin: 0 0 var(--sp-3); color: var(--ink-muted); }
+  .project-examples__note {
+    max-width: 760px; margin: var(--sp-4) auto 0; text-align: center;
+    font-size: 17px; line-height: 1.55; color: var(--navy);
   }
 
   /* Long-form perspective blocks (For students / For parents) */
@@ -225,98 +247,61 @@
     padding: 0 0.12em;
   }
 
-  /* Five-day curriculum: full comparison table on desktop, stacked days on mobile. */
-  .curriculum-table-wrap {
-    max-width: 1180px; margin: 0 auto;
+  /* Five-day curriculum — summer bootcamp timeline pattern. */
+  .weeks { max-width: 1080px; margin: 0 auto; }
+  .week-col {
     background: #fff; border: 1px solid var(--line);
     border-radius: var(--radius-md); overflow: hidden;
   }
-  .curriculum-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  .curriculum-table caption {
-    padding: 18px; text-align: left; font-size: 14px;
-    font-weight: 600; color: var(--navy); background: #fffdf4;
+  .week-head {
+    text-align: center; color: #fff; background: var(--navy);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px var(--sp-3);
   }
-  .curriculum-table thead { background: var(--navy); color: #fff; }
-  .curriculum-table th, .curriculum-table td {
-    padding: 16px 12px; vertical-align: top; text-align: left;
-    overflow-wrap: break-word; font-size: 13px; line-height: 1.6;
+  .day-row {
+    --day-column: 128px;
+    position: relative; display: grid; grid-template-columns: var(--day-column) minmax(0, 1fr) 200px;
+    gap: var(--sp-3); align-items: start; padding: var(--sp-3) var(--sp-4);
   }
-  .curriculum-table thead th {
-    font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  .day-row + .day-row { border-top: 1px solid var(--line); }
+  .day-row::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--sp-4) + var(--day-column) - 17.5px);
+    width: 3px; z-index: 0;
+    background-image: radial-gradient(circle, #c2cad9 1.4px, transparent 1.6px);
+    background-size: 3px 11px;
   }
-  .curriculum-table tbody tr + tr { border-top: 1px solid var(--line); }
-  .curriculum-table tbody tr:nth-child(even) { background: #f8fafc; }
-  .curriculum-table tbody th { color: var(--navy); font-weight: 700; }
-  .curriculum-table td { color: var(--ink-muted); }
-  .curriculum-table .curriculum-session { color: var(--navy); font-weight: 600; }
-  .curriculum-table .curriculum-question { color: var(--ink); }
-  .curriculum-table col:nth-child(1) { width: 5%; }
-  .curriculum-table col:nth-child(2) { width: 12%; }
-  .curriculum-table col:nth-child(3) { width: 16%; }
-  .curriculum-table col:nth-child(4) { width: 23%; }
-  .curriculum-table col:nth-child(5) { width: 19%; }
-  .curriculum-table col:nth-child(6) { width: 25%; }
-  @media (max-width: 980px) {
-    .curriculum-table-wrap { border: 0; border-radius: 0; background: transparent; overflow: visible; }
-    .curriculum-table { display: block; }
-    .curriculum-table caption { display: block; border-radius: var(--radius-sm); margin-bottom: 16px; }
-    .curriculum-table colgroup { display: none; }
-    .curriculum-table thead {
-      position: absolute; width: 1px; height: 1px; padding: 0;
-      overflow: hidden; clip-path: inset(50%); white-space: nowrap;
-    }
-    .curriculum-table tbody { display: grid; gap: 20px; }
-    .curriculum-table tbody tr {
-      display: block; background: #fff; border: 1px solid var(--line);
-      border-radius: var(--radius-md); overflow: hidden;
-    }
-    .curriculum-table tbody tr:nth-child(even) { background: #fff; }
-    .curriculum-table tbody th { display: block; padding: 12px 18px; background: var(--navy); color: #fff; }
-    .curriculum-table tbody th::before { content: "Day "; }
-    .curriculum-table tbody td { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 14px; padding: 12px 18px; }
-    .curriculum-table tbody td + td { border-top: 1px solid var(--line); }
-    .curriculum-table tbody td::before { content: attr(data-label); font-weight: 600; color: var(--navy); }
+  .day-row:nth-child(2)::before { top: 40px; }
+  .day-row:last-child::before { bottom: auto; height: 40px; }
+  .day-row__when { display: grid; grid-template-columns: minmax(0, 1fr) 32px; align-items: center; gap: 9px; }
+  .day-row__day {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--navy); line-height: 1.3; text-align: center;
   }
-  @media (max-width: 520px) {
-    .curriculum-table tbody td { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .day-row__num {
+    position: relative; z-index: 1; width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 15px; font-weight: 700; flex: none;
+    background: #e7eaf1; color: var(--navy);
   }
-
-  /* Typical day schedule */
-  .day-schedule {
-    max-width: 720px; margin: 0 auto;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: var(--sp-4);
+  .day-row__body h3 {
+    font-size: 15px; font-weight: 600; letter-spacing: -0.2px;
+    line-height: 1.25; color: var(--navy); margin: 0 0 5px;
   }
-  .day-schedule h3 {
-    font-size: 18px; font-weight: 600;
-    color: var(--ink);
-    margin: 0 0 var(--sp-3);
-    padding-bottom: var(--sp-2);
-    border-bottom: 1px solid var(--line);
+  .day-row__body p { font-size: 12.5px; line-height: 1.5; color: var(--ink-muted); margin: 0; }
+  .day-row__build {
+    display: flex; gap: 9px; align-items: flex-start; align-self: stretch;
+    border-left: 1px solid var(--line); padding-left: 16px;
   }
-  .schedule-row {
-    display: grid; grid-template-columns: 140px 1fr;
-    gap: var(--sp-2);
-    padding: 8px 0;
-    font-size: 14px;
-  }
-  .schedule-row + .schedule-row { border-top: 1px dashed var(--line); }
-  .schedule-row .time {
-    color: var(--brand-deep); font-weight: 600;
-  }
-  .schedule-row .activity {
-    color: var(--ink); line-height: 1.5;
-  }
-  /* Phones: drop the fixed 140px time column to a 40/60 split so the
-     activity (right) column gets ~60% width instead of being cramped */
-  @media (max-width: 600px) {
-    .schedule-row { grid-template-columns: 2fr 3fr; }
+  .day-row__build svg { width: 28px; height: 28px; color: var(--teal); flex: none; }
+  .day-row__build span { font-size: 11px; line-height: 1.45; color: var(--ink-muted); }
+  .day-row__build strong { display: block; color: var(--ink); font-weight: 600; }
+  @media (max-width: 640px) {
+    .day-row { grid-template-columns: 1fr; gap: 8px; }
+    .day-row::before { display: none; }
+    .day-row__when { grid-template-columns: 87px 32px; justify-content: start; }
+    .day-row__build { border-left: none; padding-left: 0; }
   }
 
   /* Completion certificate, portfolio, and personalized skills report */
-  .completion-section { background: #fffdf7; }
   .completion-grid {
     display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: var(--sp-6); align-items: center;
@@ -331,7 +316,7 @@
   .completion-certificate figcaption {
     margin-top: 12px; text-align: center; font-size: 12px; color: var(--ink-muted);
   }
-  .completion-copy h2 {
+  .completion-section .section-head h2 {
     font-size: clamp(28px, 3.2vw, 42px); line-height: 1.15;
     letter-spacing: -1px; color: var(--navy); margin: 0 0 var(--sp-3);
     text-wrap: balance;
@@ -505,10 +490,12 @@
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow gold">March 2027 Bootcamp</span>
-          <h1><em>Build with AI</em> &mdash;<br>From Idea to Launched App</h1>
-          <p class="lede">A five-day in-person bootcamp for students <strong>ages 13–16</strong> to build real apps with AI — <strong>no prior coding experience required</strong>.</p>
-          <p class="lede">Students build a first mini-app, then plan, build, test, and launch a <strong>capstone app live</strong> on the internet.</p>
+          <span class="eyebrow gold">MARCH BREAK BOOTCAMP · MARCH 15–19, 2027</span>
+          <h1>Build with AI</h1>
+          <h2 class="hero-subtitle">From Idea to Launched App</h2>
+          <p class="lede">Turn an idea into a working web app—with AI as your coding collaborator and you making the decisions.</p>
+          <p class="lede">A five-day, in-person bootcamp for students <strong>ages 13–16</strong>. Students start with a mini-app, then develop their own project: choosing features, directing AI, testing results and preparing an app they can demonstrate and share.</p>
+          <p class="lede"><strong>No prior coding experience required. MacBooks and course software provided.</strong></p>
           <div class="actions">
             <a class="btn btn-primary" href="apply-march-2027.html">Apply Now &rarr;</a>
             <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
@@ -531,13 +518,13 @@
     </div>
   </section>
 
-  <!-- WHAT MAKES IT DIFFERENT -->
+  <!-- THE FUTURE WRIGHTS EXPERIENCE -->
   <section class="lab-section">
     <div class="container">
       <div class="section-head section-head--wide">
-        <span class="eyebrow gold">What makes this cohort different</span>
-        <h2>A small, in-person cohort, not a self-paced video.</h2>
-        <p>Three things distinguish Future Wrights from the AI courses parents see advertised online.</p>
+        <span class="eyebrow gold">THE FUTURE WRIGHTS EXPERIENCE</span>
+        <h2>Build with AI. Learn to make the decisions.</h2>
+        <p>In-person guidance, purposeful projects and opportunities for students to show the thinking behind what they create.</p>
       </div>
 
       <div class="diff-grid">
@@ -545,136 +532,186 @@
           <div class="diff-card__head">
             <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
             <div>
-              <span class="label">Small Cohorts</span>
-              <h3>Real mentorship. Real attention.</h3>
+              <span class="label">SMALL COHORTS</span>
+              <h3>Guidance throughout the build.</h3>
             </div>
           </div>
-          <p>Small in-person groups capped at around 15 students, so every learner is seen, supported, and guided throughout the program.</p>
+          <p>With up to 15 students per group, learners can ask questions, discuss ideas and get help moving forward. Instructors demonstrate the process and guide students as they plan, build, test and improve their apps.</p>
         </article>
 
         <article class="diff-card">
           <div class="diff-card__head">
             <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
             <div>
-              <span class="label">Faculty + Practitioners</span>
-              <h3>Taught by educators and builders.</h3>
+              <span class="label label--single-line">EDUCATORS + PRACTITIONERS</span>
+              <h3>Learn how to build—and how to think through it.</h3>
             </div>
           </div>
-          <p>University-affiliated faculty shape the curriculum, while industry practitioners and graduate mentors bring real AI workflows into the room.</p>
+          <p>University-affiliated faculty help shape the curriculum, while educators and industry practitioners connect learning to practical AI workflows. Students practise choosing priorities, evaluating AI suggestions and understanding how their app works.</p>
         </article>
 
         <article class="diff-card">
           <div class="diff-card__head">
             <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
             <div>
-              <span class="label">Real Shipped Work</span>
-              <h3>Build daily. Launch publicly.</h3>
+              <span class="label">CREATE · TEST · EXPLAIN</span>
+              <h3>A working app. A story of how it was built.</h3>
             </div>
           </div>
-          <p>Students create working projects throughout the bootcamp and launch a final capstone app with a real URL on Demo Day.</p>
+          <p>Students develop their own app, test its features and improve it through feedback. In their final demonstration, they show what works, explain their decisions and describe how AI helped. Online sharing follows agreed consent and privacy arrangements.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- CURRICULUM -->
-  <section class="lab-section lab-section--alt" id="curriculum">
+  <!-- WHAT STUDENTS CREATE -->
+  <section class="lab-section lab-section--alt" id="student-projects" aria-labelledby="student-projects-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">Day-by-day</span>
-        <h2>From discovering AI<br>to launching your own app.</h2>
-        <p>Five days, three hours each — 15 hours in total. Discover what AI can do, define your idea, build with understanding, test and improve, then launch and explain your app. Each day ends with a concrete deliverable and evidence of learning.</p>
+        <span class="eyebrow gold">WHAT STUDENTS CREATE</span>
+        <h2 id="student-projects-title">An idea they choose. An app they can show.</h2>
+        <p>Students begin with a mini-app to learn the process, then develop their own small browser app with instructor guidance. They choose its purpose, plan essential features, test the results and improve it.</p>
       </div>
 
-      <div class="curriculum-table-wrap">
-        <table class="curriculum-table">
-          <caption>March 15–19, 2027 · Five days · Three hours each · 15 hours total</caption>
-          <colgroup><col><col><col><col><col><col></colgroup>
-          <thead>
-            <tr><th scope="col">Day</th><th scope="col">Session</th><th scope="col">Driving question</th><th scope="col">Main experience</th><th scope="col">Capability focus</th><th scope="col">Session deliverable</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td class="curriculum-session" data-label="Session">Discover &amp; Judge</td>
-              <td class="curriculum-question" data-label="Driving question">What can I create with AI, and how do I judge the result?</td>
-              <td data-label="Main experience">Understand AI&#x27;s capabilities and limitations; experience building and modifying a first app</td>
-              <td data-label="Capability focus">Learning and Judgment (Creativity and Responsibility integrated).</td>
-              <td data-label="Session deliverable">Running mini-app, explanation of one AI limitation, and early Show · Explain · Change checkpoint.</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td class="curriculum-session" data-label="Session">Define and plan</td>
-              <td class="curriculum-question" data-label="Driving question">How do I make sure AI builds my idea?</td>
-              <td data-label="Main experience">Select a project route, sketch it, write a Basic Version brief, inspect an AI plan, and build a small prototype</td>
-              <td data-label="Capability focus">Agency and Judgment (Creativity and Learning integrated).</td>
-              <td data-label="Session deliverable">Approved capstone brief, reviewed AI plan, and initial prototype.</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td class="curriculum-session" data-label="Session">Build &amp; Understand</td>
-              <td class="curriculum-question" data-label="Driving question">How can I build with AI while understanding the app?</td>
-              <td data-label="Main experience">Break features into pieces, build incrementally, learn relevant software concepts</td>
-              <td data-label="Capability focus">Problem-solving and learning (agency and judgment integrated).</td>
-              <td data-label="Session deliverable">Functional Basic Version; any remaining essential feature triggers the recovery path before release testing.</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td class="curriculum-session" data-label="Session">Test &amp; Improve</td>
-              <td class="curriculum-question" data-label="Driving question">What should I do when AI-generated software fails?</td>
-              <td data-label="Main experience">Diagnose errors, test functionality, compare solutions, improve design</td>
-              <td data-label="Capability focus">Problem-solving and judgment (learning and responsibility integrated).</td>
-              <td data-label="Session deliverable">Tested release candidate; documented issue, AI-supported fix and independently verified result.</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td class="curriculum-session" data-label="Session">Launch and explain</td>
-              <td class="curriculum-question" data-label="Driving question">Can I publish and explain something I built with AI?</td>
-              <td data-label="Main experience">Finalize, deploy, demonstrate, explain decisions, complete a small modification challenge</td>
-              <td data-label="Capability focus">Agency and Judgment (Responsibility and Learning integrated).</td>
-              <td data-label="Session deliverable">Verified live URL, project repository, demonstration and final learning evidence.</td>
-            </tr>
-          </tbody>
-        </table>
+      <p class="project-examples__intro">Possible projects include:</p>
+      <div class="diff-grid">
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <h3>A game to play</h3>
+          </div>
+          <p>Create a memory challenge with rules, a score and a restart button. Decide how it should work, then test the player’s experience.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <h3>A tool for learning</h3>
+          </div>
+          <p>Build a quiz or flashcards around a topic they enjoy. Choose the content, design the interaction and check the feedback.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <h3>A story to explore</h3>
+          </div>
+          <p>Design an interactive adventure where choices lead to different outcomes. Plan the paths and test what happens at each decision.</p>
+        </article>
       </div>
+      <p class="project-examples__note"><strong>Each project gives students something to demonstrate—and decisions, tests and improvements they can explain.</strong></p>
     </div>
   </section>
 
-
-  <!-- TYPICAL DAY -->
-  <section class="lab-section">
+  <!-- WHAT STUDENTS LEARN -->
+  <section class="lab-section" id="student-learning" aria-labelledby="student-learning-title">
     <div class="container">
-      <div class="section-head section-head--wide">
-        <span class="eyebrow gold">A typical day</span>
-        <h2>Three hours, and you're building by minute fifteen.</h2>
+      <div class="section-head">
+        <span class="eyebrow gold">WHAT STUDENTS LEARN</span>
+        <h2 id="student-learning-title">Learn to direct AI—and understand what you build.</h2>
+        <p>Through their own project, students practise turning ideas into clear instructions, making thoughtful decisions and checking whether the results work.</p>
       </div>
 
-      <div class="day-schedule">
-        <h3>Choose mornings: 9 AM–12 PM or afternoons: 1 PM–4 PM</h3>
-        <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Warm-up — recap yesterday's project, preview today's build</div></div>
-        <div class="schedule-row"><div class="time">~1 hour</div><div class="activity">Concept + mini-builds — learn the idea, then try it right away in quick builds together</div></div>
-        <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Break</div></div>
-        <div class="schedule-row"><div class="time">~1 hr 15</div><div class="activity">Hands-on project — build the day's project in VS Code with Codex and the OpenAI API, with mentors circulating</div></div>
-        <div class="schedule-row"><div class="time">~15 min</div><div class="activity">Wrap — demo what you made and set tomorrow's goal</div></div>
+      <div class="diff-grid">
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <span class="learning-step">01</span>
+            <h3>Define the idea</h3>
+          </div>
+          <p>Decide who the app is for, what it should do and which features belong in the first version.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <span class="learning-step">02</span>
+            <h3>Guide the AI</h3>
+          </div>
+          <p>Write clear instructions, review AI’s proposed plan and decide which suggestions to accept, change or question.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <span class="learning-step">03</span>
+            <h3>Understand the app</h3>
+          </div>
+          <p>Explain how a user’s actions connect to the app’s rules, what it remembers and what appears on screen.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <span class="learning-step">04</span>
+            <h3>Build step by step</h3>
+          </div>
+          <p>Break the project into manageable parts, check each addition and save working versions along the way.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <span class="learning-step">05</span>
+            <h3>Test and improve</h3>
+          </div>
+          <p>Compare what should happen with what actually happens. Investigate problems, test repairs and use peer feedback to improve the experience.</p>
+        </article>
+        <article class="diff-card">
+          <div class="diff-card__head">
+            <span class="learning-step">06</span>
+            <h3>Launch and explain</h3>
+          </div>
+          <p>Prepare the app for sharing, demonstrate its features and explain key decisions, AI contributions and remaining limitations.</p>
+        </article>
       </div>
-
     </div>
   </section>
 
+  <!-- YOUR WEEK AT A GLANCE -->
+  <section class="lab-section lab-section--alt" id="curriculum" aria-labelledby="curriculum-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow gold">YOUR WEEK AT A GLANCE</span>
+        <h2 id="curriculum-title">Five days from idea to launch.</h2>
+        <p>Each day combines instructor demonstrations, hands-on building, feedback and time to explain what students are learning.</p>
+      </div>
+
+      <div class="weeks">
+        <div class="week-col">
+          <div class="week-head">March 15–19, 2027 · From idea to launch</div>
+          <div class="day-row">
+            <div class="day-row__when"><time class="day-row__day" datetime="2027-03-15">Monday<br>March 15</time><span class="day-row__num" aria-label="Day 1">1</span></div>
+            <div class="day-row__body"><h3>Discover and create</h3><p>Explore what AI can help build and why its results need checking. Create a first mini-app, request a change and test whether it works as intended.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v6L3.6 18.4A2 2 0 0 0 5.3 21.5h13.4a2 2 0 0 0 1.7-3.1L15 9V3"/><path d="M9 3h6"/><path d="M8 14h8"/></svg><span><strong>Build today:</strong>A first mini-app with a tested change.</span></div>
+          </div>
+          <div class="day-row">
+            <div class="day-row__when"><time class="day-row__day" datetime="2027-03-16">Tuesday<br>March 16</time><span class="day-row__num" aria-label="Day 2">2</span></div>
+            <div class="day-row__body"><h3>Define and plan</h3><p>Choose a project and its intended user. Sketch the experience, select essential features and define what success looks like. Review an AI-generated plan before beginning the build.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span><strong>Build today:</strong>A project sketch, essential features and a reviewed plan.</span></div>
+          </div>
+          <div class="day-row">
+            <div class="day-row__when"><time class="day-row__day" datetime="2027-03-17">Wednesday<br>March 17</time><span class="day-row__num" aria-label="Day 3">3</span></div>
+            <div class="day-row__body"><h3>Build and understand</h3><p>Develop the app one feature at a time. Explore how user actions connect to rules and results. Check each addition, explain how a feature works and save progress.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/></svg><span><strong>Build today:</strong>Working features and saved progress.</span></div>
+          </div>
+          <div class="day-row">
+            <div class="day-row__when"><time class="day-row__day" datetime="2027-03-18">Thursday<br>March 18</time><span class="day-row__num" aria-label="Day 4">4</span></div>
+            <div class="day-row__body"><h3>Test and improve</h3><p>Exchange apps with a peer and observe their experience. Investigate problems, use AI to help make repairs and verify the results. Choose improvements based on feedback.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9.5 9a2.5 2.5 0 1 1 3.3 2.4c-.6.2-1.3.7-1.3 1.6"/><line x1="11.5" y1="16" x2="11.51" y2="16"/></svg><span><strong>Build today:</strong>Tested repairs and improvements from peer feedback.</span></div>
+          </div>
+          <div class="day-row">
+            <div class="day-row__when"><time class="day-row__day" datetime="2027-03-19">Friday<br>March 19</time><span class="day-row__num" aria-label="Day 5">5</span></div>
+            <div class="day-row__body"><h3>Launch and explain</h3><p>Prepare the final version, publish with instructor guidance and agreed privacy settings, and check the live app. Demonstrate the project, explain key decisions and show how AI contributed.</p></div>
+            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span><strong>Build today:</strong>A published app and a final demonstration.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- COMPLETION CERTIFICATE, PORTFOLIO, AND SKILLS REPORT -->
   <section class="lab-section completion-section" aria-labelledby="completion-title">
     <div class="container">
+      <div class="section-head">
+        <span class="eyebrow gold">What they take home</span>
+        <h2 id="completion-title">An App to Share. Learning to Show.</h2>
+      </div>
       <div class="completion-grid">
         <figure class="completion-certificate">
           <img src="../assets/images/march-2027-completion-certificate.png" alt="Sample Future Wrights certificate of completion for Build with AI, presented in partnership with Webtree Academy" width="1686" height="1178" loading="lazy">
           <figcaption>Sample certificate of completion</figcaption>
         </figure>
         <div class="completion-copy">
-          <span class="eyebrow gold">What they take home</span>
-          <h2 id="completion-title">A Certificate &amp; a Portfolio of Their Work</h2>
-          <p>Your child will leave with a live personal homepage and capstone project they can share, plus their code on GitHub—a portfolio they can keep building.</p>
-          <p>They’ll also receive a certificate of completion and a personalized skills report showing what they learned and what they can do.</p>
+          <p>Your child will leave with their app project, code and saved versions on GitHub—a portfolio they can continue developing. Where online publication is approved, a live link lets others try what they built.</p>
+          <p>They’ll also receive a <strong>certificate of completion</strong>, presented by Future Wrights in partnership with Webtree Academy, and a <strong>personalised learning report</strong>.</p>
+          <p>The report highlights what your child demonstrated through their project: how they explained a feature, made decisions, tested results and used feedback. Instructor comments identify the support provided and suggest next steps for learning.</p>
           <a class="btn btn-ghost" href="student-showcase.html">See Summer 2026 Student Work &rarr;</a>
         </div>
       </div>
@@ -682,24 +719,50 @@
   </section>
 
   <!-- FAQ -->
-  <section class="lab-section lab-section--alt">
+  <section class="lab-section lab-section--alt" aria-labelledby="faq-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">Bootcamp FAQ</span>
+        <span class="eyebrow gold">QUESTIONS PARENTS ASK</span>
+        <h2 id="faq-title">Everything you need to know.</h2>
       </div>
 
       <div class="faq">
-        <details class="faq-item"><summary>Is a coding background required?</summary><div class="answer"><p>No prior coding required. You build by describing what you want in plain English, and <strong>Codex</strong> — the same AI coding assistant used by professional developers worldwide — helps turn it into real, working code. The skills students practice (clear prompting, planning a build, breaking it into components, and finding and fixing bugs) are exactly what working builders do.</p></div></details>
-        <details class="faq-item"><summary>What do students need to bring?</summary><div class="answer"><p>A MacBook is provided by Future Wrights for the bootcamp. Codex and OpenAI API access are included, and students use <strong>Visual Studio Code</strong> as their editor.</p></div></details>
-        <details class="faq-item"><summary>What tools are used?</summary><div class="answer"><p>Students use <strong>Codex</strong> to help write and refine code in <strong>Visual Studio Code</strong>, and the <strong>OpenAI API</strong> to add AI features to their apps. Alongside these tools, we introduce <strong>ChatGPT</strong> for planning and brainstorming. Each student's account is set up with parental consent captured on the application. Codex and OpenAI API access are included in tuition — there's no software fee on top.</p></div></details>
-        <details class="faq-item"><summary>Where does it run? Can students from across the GTA attend?</summary><div class="answer"><p>Yes — students from across the GTA are welcome. Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Oakville, and beyond. We pick venues that are transit-accessible (subway and GO Transit), with a real classroom space — not a hotel ballroom.</p><p>The venue is <strong>Webtree Academy</strong>, at <strong>60 Scarsdale Rd, Unit 100, North York, ON, M3B 2R7</strong> — a real classroom space in North York, transit-accessible by subway and bus.</p></div></details>
-        <details class="faq-item"><summary>What if a student misses a day?</summary><div class="answer"><p>We provide a recap and a 1:1 catch-up session with a mentor. The bootcamp is intensive — we strongly encourage full attendance, but life happens, and we don't penalize for one missed day. Missing more than two days is usually a sign the timing isn't right; we'd rather defer enrollment than rush.</p></div></details>
-        <details class="faq-item"><summary>Is parent attendance required or invited?</summary><div class="answer"><p>Not required. Parents are warmly invited to <strong>Demo Day</strong> on the final day — students give a short pitch and parents try the app each student built, live, in front of the room. The day is loud. There are stakes. It's the moment that makes the whole bootcamp make sense.</p></div></details>
-        <details class="faq-item"><summary>What's the application process?</summary><div class="answer"><p>Submit a short written application with a few sentences about why you'd like to join and what you'd hope to build. Most applicants receive a response within two business days. If needed, we may invite families to a short conversation with our program lead before making a decision. Applications are accepted on a rolling basis until the cohort fills.</p></div></details>
-        <details class="faq-item"><summary>What does it cost?</summary><div class="answer"><p>Tuition for the March 2027 cohort is <strong>$999 CAD, including applicable taxes</strong>. This covers the full five-day bootcamp with all materials and tools included. Payment is collected by <strong>Interac e-Transfer</strong> after we accept your application; we'll send the recipient details with your admission. Need-based scholarships are available; mention this on your application or email us directly.</p></div></details>
-        <details class="faq-item"><summary>Refunds &amp; cancellations</summary><div class="answer"><p>All cancellations and refunds are subject to the following policies:</p><ul><li>All cancellations must be made in writing, via email, to Future Wrights Academy at <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</li><li>Refunds, less an administrative fee ($100 CAD), will be issued for all cancellations made at least 30 days before your cohort's start date.</li><li>After the 30-day window, no refunds will be provided.</li><li>Pro-rated refunds or credits are not available for days absent.</li><li>Future Wrights Academy reserves the right to cancel a cohort if the minimum enrollment is not met or in the event of exceptional and/or unforeseen circumstances. If we have to cancel a cohort, we will accommodate the student in an alternate cohort, or provide a full refund.</li></ul></div></details>
-        <details class="faq-item"><summary>Do students receive a certificate of completion and skills report?</summary><div class="answer"><p>Yes. Students receive a Future Wrights certificate of completion and a personalized skills report highlighting the skills and capabilities they developed throughout the week.</p></div></details>
-        <details class="faq-item"><summary>What happens after the bootcamp?</summary><div class="answer"><p>The apps each student builds keep running on their public URLs after the bootcamp ends — friends can use them, siblings can use them, students can keep iterating. Many keep building on their capstone or start new projects with the same tools through the school year.</p></div></details>
+        <details class="faq-item">
+          <summary>Does my child need coding experience?</summary>
+          <div class="answer"><p>No. The program is designed for students ages 13–16 with no prior coding experience. Instructors help students get started, communicate their ideas to AI and understand the essential behaviour of their app.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What will my child build?</summary>
+          <div class="answer"><p>Students begin with a mini-app, then develop an individual browser app with instructor guidance. Possible projects include a game, learning tool or interactive story. Instructors help keep the project achievable within the week.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do you check that students understand what they build?</summary>
+          <div class="answer"><p>Students explain their goals, review AI suggestions and test the results. During short <strong>Show · Explain · Change</strong> checkpoints, they demonstrate a feature, explain their thinking and respond to a small new requirement. Instructors use these conversations to guide feedback and support.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Does my child need to bring a laptop?</summary>
+          <div class="answer"><p>No. Future Wrights provides a MacBook for use during the program, along with the required course software, Codex and OpenAI API access.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Is this a full-day program?</summary>
+          <div class="answer"><p>Students attend one three-hour session each day, Monday–Friday, <strong>March 15–19, 2027</strong>. Choose either the <strong>morning group, 9:00 AM–12:00 PM</strong>, or the <strong>afternoon group, 1:00–4:00 PM</strong>.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Will my child’s app be available online?</summary>
+          <div class="answer"><p>Students work toward publishing a small web app with instructor guidance. Online sharing follows agreed consent and privacy arrangements. Where publication is approved, students receive a live link others can use to try their app.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What does the tuition include?</summary>
+          <div class="answer"><p>The <strong>$999 CAD tuition, including applicable taxes</strong>, covers the five-day bootcamp, use of a MacBook, required course software and access, a certificate of completion and a personalised learning report.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do we apply?</summary>
+          <div class="answer"><p>Select <a href="apply-march-2027.html"><strong>Apply Now</strong></a> to submit an application. Each group has up to 15 students, with applications accepted on a rolling basis until full.</p><p>If you would like to discuss the program first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><strong>book a 20-minute information session</strong></a> or email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What is your refund and cancellation policy?</summary>
+          <div class="answer"><p>All cancellations and refunds are subject to the following policy:</p><ul><li><strong>Cancellation requests:</strong> All cancellations must be submitted in writing by email to <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</li><li><strong>At least 30 days before the cohort starts:</strong> A refund will be issued, less a <strong>$100 CAD administrative fee</strong>.</li><li><strong>Fewer than 30 days before the cohort starts:</strong> No refunds will be provided.</li><li><strong>Missed days:</strong> Pro-rated refunds or credits are not available for days absent.</li><li><strong>Cancellation by Future Wrights Academy:</strong> We reserve the right to cancel a cohort if minimum enrolment is not met or exceptional or unforeseen circumstances arise. If we cancel, we will accommodate the student in an alternate cohort or provide a <strong>full refund</strong>.</li></ul></div>
+        </details>
       </div>
     </div>
   </section>
