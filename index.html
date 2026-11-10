@@ -22,15 +22,16 @@
    Scoped to .fw-hero / .fw-* — does not affect the rest of the site.
    Palette: navy #0A1B3D · gold #F4B400 · cyan #00E5FF · off-white text
    ============================================================ */
+.home-hero-transition { position:relative; isolation:isolate; }
+.home-hero-intro { position:sticky; top:var(--hero-sticky-top, 0px); z-index:0; margin-top:-95px; }
 .fw-hero {
   --navy: #0A1B3D; --gold: #F4B400; --cyan: #00E5FF;
   --ink-0: #F5F7FB; --ink-50: rgba(245,247,251,0.62);
   --glass: rgba(255,255,255,0.055); --glass-line: rgba(255,255,255,0.13);
-  /* Keep the hero in view while the following content scrolls over it. */
-  position: sticky; top: 0; z-index: 0; overflow: hidden; isolation: isolate;
+  position: relative; overflow: hidden; isolation: isolate;
   background: radial-gradient(125% 100% at 22% 8%, #28538e 0%, #12326a 46%, #0A1B3D 100%);
   color: var(--ink-0);
-  margin-top: -95px; padding: calc(95px + var(--sp-7)) 0 var(--sp-8); min-height: calc(100vh - 76px);
+  padding: calc(95px + var(--sp-7)) 0 var(--sp-8); min-height: calc(100vh - 76px);
   display: flex; align-items: center;
 }
 .fw-hero__bg { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
@@ -97,7 +98,8 @@
 .fw-hero__copy > *:nth-child(5){ animation-delay:.32s }
 
 @media (max-width:900px){
-  .fw-hero { margin-top:-80px; padding: calc(80px + var(--sp-6)) 0 var(--sp-7); min-height:auto; }
+  .home-hero-intro { margin-top:-80px; }
+  .fw-hero { padding: calc(80px + var(--sp-6)) 0 var(--sp-7); min-height:auto; }
   .fw-hero__inner { transform:none; }
   .fw-hero__copy { max-width:none; }
   .fw-hero__title { white-space:normal; }
@@ -126,9 +128,8 @@ header.site:not(.scrolled) {
   border-bottom: 0;
 }
 
-/* Keep the sections after the hero above its sticky background. */
+/* The program section and following content scroll over the hero and trust bar. */
 .home-hero-transition .next-program,
-.home-hero-transition .ticker,
 .home-hero-transition .hero-edge,
 .home-hero-transition #why {
   position: relative;
@@ -282,6 +283,8 @@ header.site:not(.scrolled) {
 
   <div class="home-hero-transition">
 
+  <div class="home-hero-intro">
+
   <!-- HERO · cinematic redesign -->
   <section class="fw-hero">
     <div class="fw-hero__bg" aria-hidden="true">
@@ -346,6 +349,24 @@ header.site:not(.scrolled) {
       </div>
     </div>
   </section>
+
+  </div>
+  <script>
+    /* Let tall hero content scroll fully into view before it stays behind the program. */
+    (function () {
+      var intro = document.querySelector('.home-hero-intro');
+      if (!intro) return;
+      function updateStickyOffset() {
+        intro.style.setProperty('--hero-sticky-top', Math.min(0, window.innerHeight - intro.offsetHeight) + 'px');
+      }
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(updateStickyOffset).observe(intro);
+      }
+      window.addEventListener('resize', updateStickyOffset, { passive: true });
+      window.addEventListener('load', updateStickyOffset, { once: true });
+      updateStickyOffset();
+    })();
+  </script>
 
   <!-- NEXT PLANNED PROGRAM -->
   <section class="next-program" aria-labelledby="next-program-title">
