@@ -265,6 +265,13 @@ header.site:not(.scrolled) {
 /* Keep the closing banner headline on two lines, including narrow screens. */
 .cta-banner__title { font-size: clamp(24px, 3.2vw, 42px); }
 .cta-banner__title-line { display: block; white-space: nowrap; }
+@media (max-width: 760px) {
+  .cta-banner__actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 24px; }
+  .cta-banner__actions .btn { width: 100%; min-width: 0; padding-inline: 20px; justify-content: center; text-align: center; }
+  .cta-banner__meta { flex-direction: column; gap: 12px; }
+  .cta-banner__meta span { align-items: flex-start; }
+  .cta-banner__dot { margin-top: 8px; }
+}
 </style>
 <link rel="stylesheet" href="styles/footer.css">
 <link rel="stylesheet" href="styles/brand.css">
