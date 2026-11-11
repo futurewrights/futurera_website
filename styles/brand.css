@@ -48,12 +48,57 @@ footer.site .brand-logo {
   margin-bottom: 16px;
 }
 
-/* The two older page layouts also need a dark footer for the white wordmark. */
-footer.site.site--legacy {
-  background: #151828;
-  color: rgba(255, 255, 255, .7);
+/* Secondary actions share the homepage hero's outline and cyan hover glow. */
+.btn.btn-ghost {
+  --secondary-text: #0e0e0f;
+  --secondary-border: rgba(13,23,20,.16);
+  --secondary-bg: transparent;
+  --secondary-active-text: #07677c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  border: 1px solid var(--secondary-border);
+  border-radius: 14px;
+  background: var(--secondary-bg);
+  color: var(--secondary-text);
+  text-align: center;
+  text-decoration: none;
+  transition: color 200ms cubic-bezier(.22,1,.36,1),
+              background-color 200ms cubic-bezier(.22,1,.36,1),
+              border-color 200ms cubic-bezier(.22,1,.36,1),
+              box-shadow 200ms cubic-bezier(.22,1,.36,1),
+              transform 200ms cubic-bezier(.22,1,.36,1);
 }
-
-footer.site.site--legacy h4 { color: #fff; }
-footer.site.site--legacy a { color: rgba(255, 255, 255, .85); }
-footer.site.site--legacy a:hover { color: #f4b400; }
+:where(.fw-hero, .page-hero, .cta-banner, .article-cta, .cta-band, .section--dark) .btn.btn-ghost {
+  --secondary-text: #f5f7fb;
+  --secondary-border: rgba(255,255,255,.24);
+  --secondary-bg: rgba(255,255,255,.04);
+  --secondary-active-text: #00e5ff;
+}
+.btn.btn-ghost .btn__label { min-width: 0; }
+.btn.btn-ghost .btn__arrow {
+  flex: none;
+  line-height: 1;
+  transition: transform 200ms cubic-bezier(.22,1,.36,1);
+}
+.btn.btn-ghost:is(:hover, :focus-visible, :active) {
+  color: var(--secondary-active-text);
+  border-color: var(--secondary-active-text);
+  background: rgba(0,229,255,.08);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18);
+}
+.btn.btn-ghost:focus-visible {
+  outline: 2px solid var(--secondary-active-text);
+  outline-offset: 3px;
+}
+.btn.btn-ghost:is(:hover, :focus-visible) .btn__arrow { transform: translateX(3px); }
+.btn.btn-ghost:active { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .btn.btn-ghost, .btn.btn-ghost .btn__arrow { transition: none; }
+  .btn.btn-ghost:is(:hover, :focus-visible, :active),
+  .btn.btn-ghost:is(:hover, :focus-visible) .btn__arrow { transform: none; }
+}

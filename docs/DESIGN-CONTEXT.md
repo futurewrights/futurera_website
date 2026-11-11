@@ -156,18 +156,22 @@ records the decision).
   - **Shape:** rounded-rect, **14px** radius (`--radius-btn`). No pills.
   - **Primary** (`.btn-primary`; `.btn-accent` is a gold alias): solid brand gold `#F4B400`
     + near-black/navy text (`--ink`), soft gold drop-shadow. (`.btn-primary` was flipped
-    from slate `#353447` to gold.)
+    from slate `#353447` to gold.) Primary labels have no trailing arrow.
   - **Secondary** (`.btn-ghost`): transparent + 1px outline — ink on light, white on dark
-    (`.section--dark`, hero).
+    (`.section--dark`, hero). Shared across all pages in `styles/brand.css`, with a
+    `.btn__label` and a decorative `.btn__arrow` pointing right.
   - **Hover (all):** lift `translateY(-2px)` + shadow **deepens**; **no color change** on the
     primary (gold stays gold — not the old darken-to-`#D19A00`). Removed the
     `.final-cta`/`.article-cta` darken-on-hover overrides.
+    Secondary hover/focus changes the text and outline to cyan on dark backgrounds
+    or deep teal on light backgrounds, with a cyan glow and a 3px arrow movement.
+    Reduced-motion preferences disable the lift and arrow movement.
   - **Nav CTA** (`.btn-chip`): same 14px shape; translucent-white over the dark hero,
     flips to gold primary when the header turns solid on scroll.
   - **Hero CTAs** reuse `.btn` via a `.fw-hero .btn` scope (larger 16px/15×30, dark-bg ghost
     with a cyan-glow hover). The old `.fw-btn*` classes were **retired**.
-  - **Out of scope:** `for-partners.html` / `industry-track.html` keep their own parked
-    button styles (separate `tokens.css` system).
+  - **Legacy pages:** `for-partners.html` / `industry-track.html` retain their local
+    primary-button styles; their secondary buttons use the shared brand styles.
 - **Headline keyword emphasis — LOCKED (2026-05):** ONE device — a **solid gold word**
   (never a highlighter on headlines). Reusable `.gold-word` class: deep gold `--gold-ink`
   `#b8860a` on light sections, bright `--brand-accent` `#F4B400` on dark (`.section--dark`).

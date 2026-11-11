@@ -70,16 +70,8 @@
   .page-hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: var(--sp-4); }
   .page-hero .btn-primary { background: var(--brand-accent); color: var(--navy); }
   .page-hero .btn-primary:hover { background: var(--brand-accent-2); transform: translateY(-2px); }
-  .page-hero .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.32); }
-  .page-hero .btn-ghost:hover { border-color: var(--cyan); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); }
   .seats-note { font-size: 13px; color: var(--ink-muted); font-style: italic; }
 
-  /* Cyan-border ghost hover (light-background sections) — matches .page-hero .btn-ghost:hover */
-  .cyan-hover-actions .btn-ghost:hover {
-    border-color: var(--cyan);
-    box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18);
-    transform: translateY(-2px);
-  }
 
   /* Hero photo */
   .hero-photo {
@@ -994,6 +986,7 @@
   .photo-grid__item img { width: 100%; height: 100%; object-fit: cover; }
   .photo-grid__item svg { width: 26px; height: 26px; opacity: .5; }
 </style>
+<link rel="stylesheet" href="../styles/footer.css">
 <link rel="stylesheet" href="../styles/brand.css">
 </head>
 <body>
@@ -1020,7 +1013,7 @@
       <div class="item"><a class="link" href="contact.html">Contact</a></div>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-chip" href="apply-march-2027.html"><span class="cta-full">Apply for March 2027</span><span class="cta-short">Apply →</span></a>
+      <a class="btn btn-chip" href="apply-march-2027.html"><span class="cta-full">Apply for March 2027</span><span class="cta-short">Apply</span></a>
 
       <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -1050,8 +1043,8 @@
           <p class="lede">Over two weeks, they learned to turn ideas into plans, build with AI, debug and iterate &mdash; then launch and present their own work.</p>
           <p class="hero-stats">30 HOURS &middot; 10 BUILD DAYS<span class="hero-stats__demo"><span class="hero-stats__separator"> &middot; </span>1 DEMO DAY</span></p>
           <div class="actions">
-            <a class="btn btn-primary" href="#projects">Explore the Showcase &rarr;</a>
-            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Bring this to your school</a>
+            <a class="btn btn-primary" href="#projects">Explore the Showcase</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><span class="btn__label">Bring this to your school</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
 
@@ -1478,7 +1471,7 @@
       </div>
 
       <div class="cta-banner__actions cyan-hover-actions" style="justify-content:center;margin-top:var(--sp-5);">
-        <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a Conversation &rarr;</a>
+        <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><span class="btn__label">Book a Conversation</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
       </div>
 
     </div>
@@ -1492,6 +1485,7 @@
       <div class="foot-brand">
         <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="../assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">

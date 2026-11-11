@@ -102,7 +102,6 @@
 /* community card (step 04, light) */
 .eco-prog--community { background: linear-gradient(165deg, #eefbfb, #ffffff 62%); border-color: rgba(17,146,173,0.28); align-items: center; padding-block: 12px; gap: 14px; }
 .eco-join { margin-top: 6px; }
-.eco-join:hover { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); transform: translateY(-2px); }
 .eco-prog--community h3 { color: var(--navy); line-height:1.2; text-wrap: balance; }
 .eco-prog--community h3 .hl-cyan { color: var(--teal); }
 .eco-prog--community p { color: var(--ink-muted); }

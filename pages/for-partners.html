@@ -75,8 +75,6 @@
   .btn-primary:hover { background: var(--color-navy-900); text-decoration: none; }
   .btn-gold { background: var(--color-gold-500); color: var(--color-ink); }
   .btn-gold:hover { background: var(--color-gold-600); text-decoration: none; }
-  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-line); }
-  .btn-ghost:hover { border-color: var(--color-ink); text-decoration: none; }
 
   /* Header */
   .topstrip {
@@ -193,33 +191,6 @@
   .cta-band .actions { display: flex; flex-direction: column; gap: var(--space-2); }
   .cta-band .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
   .cta-band .btn-primary:hover { background: var(--color-gold-600); }
-  .cta-band .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.25); }
-  .cta-band .btn-ghost:hover { border-color: #fff; }
-
-  /* Footer */
-  footer.site {
-    padding: var(--space-12) 0 var(--space-8);
-    border-top: 1px solid var(--color-line);
-    color: var(--color-text-muted); font-size: var(--fs-sm);
-  }
-  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--space-6); }
-  @media (max-width: 980px) { .foot-grid { grid-template-columns: 1fr 1fr 1fr; } }
-  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
-  footer.site h4 {
-    font-family: var(--font-sans); font-size: var(--fs-xs);
-    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
-    color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-4);
-  }
-  footer.site ul { list-style: none; padding: 0; margin: 0; }
-  footer.site ul li { margin-bottom: var(--space-2); }
-  footer.site a { color: var(--color-ink-2); }
-  .foot-brand img { height: 44px; width: auto; margin-bottom: var(--space-4); }
-  .legal {
-    margin-top: var(--space-8); padding-top: var(--space-5);
-    border-top: 1px solid var(--color-line);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
-    font-size: var(--fs-xs);
-  }
 
   .skip-link {
     position: absolute; top: -40px; left: 8px;
@@ -228,6 +199,7 @@
   }
   .skip-link:focus { top: 8px; }
 </style>
+<link rel="stylesheet" href="../styles/footer.css">
 <link rel="stylesheet" href="../styles/brand.css">
 </head>
 <body>
@@ -415,8 +387,8 @@
         <p>School pilot, AI Studio brief, or sponsorship — we'll respond within two business days.</p>
       </div>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:hello@futurewrights.ai?subject=Future%20Wrights%20partnership%20enquiry">Send us a brief →</a>
-        <a class="btn btn-ghost" href="../index.html#contact">Book an info call</a>
+        <a class="btn btn-primary" href="mailto:hello@futurewrights.ai?subject=Future%20Wrights%20partnership%20enquiry">Send us a brief</a>
+        <a class="btn btn-ghost" href="../index.html#contact"><span class="btn__label">Book an info call</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
 
@@ -424,12 +396,13 @@
 
 </main>
 
-<footer class="site site--legacy">
+<footer class="site">
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
         <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="../assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
