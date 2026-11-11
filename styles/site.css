@@ -729,32 +729,6 @@
   .featured-actions .btn-accent { width: 100%; justify-content: center; }
   .featured-actions .btn-ghost { width: 100%; justify-content: center; }
 
-  /* ---------- Parents note ---------- */
-  .parents-note {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md); padding: var(--sp-6);
-    max-width: 800px; margin: 0 auto;
-    position: relative;
-  }
-  .parents-note::before {
-    content: ""; position: absolute; left: 0; top: var(--sp-5); bottom: var(--sp-5);
-    width: 4px; background: var(--brand-accent); border-radius: 0 4px 4px 0;
-  }
-  @media (max-width: 760px) { .parents-note { padding: var(--sp-4); } }
-  .parents-note .salutation {
-    font-size: 20px; font-weight: 600; letter-spacing: -0.5px;
-    color: var(--brand-deep); margin-bottom: var(--sp-3);
-  }
-  .parents-note p {
-    font-size: var(--fs-body); line-height: 1.7; color: var(--ink);
-  }
-  .parents-note .parents-cta {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
-    margin-top: var(--sp-5); padding-top: var(--sp-4);
-    border-top: 1px solid var(--line);
-  }
-
   /* Gold highlighter for key phrases */
   .hl-gold {
     background-image: linear-gradient(

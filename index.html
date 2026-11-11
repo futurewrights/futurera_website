@@ -199,6 +199,7 @@ header.site:not(.scrolled) {
 }
 
 /* Summer 2026 feature */
+.summer-faq-wrap { background: var(--surface); }
 .summer-feature { padding: 76px 0 80px; background: linear-gradient(135deg, #061a36 0%, #0a315e 55%, #071d3c 100%); color: #fff; }
 .summer-feature .section-head { max-width: 850px; margin-bottom: 20px; }
 .summer-feature .eyebrow { color: var(--brand-accent); }
@@ -224,7 +225,10 @@ header.site:not(.scrolled) {
 .summer-collage img:nth-child(2) { top: 2px; right: 4%; transform: rotate(5deg); }
 .summer-collage img:nth-child(3) { bottom: 0; left: 18%; transform: rotate(-3deg); }
 .summer-collage img:nth-child(4) { bottom: 2px; right: 13%; transform: rotate(5deg); }
-@media (min-width: 761px) { .summer-feature { margin-bottom: 160px; } }
+@media (min-width: 761px) {
+  .summer-feature { margin-bottom: 160px; }
+  #faq { padding-top: var(--sp-6); }
+}
 @media (max-width: 760px) { .summer-feature { padding: 62px 0; } .summer-highlight-video { margin-top: 26px; } .summer-highlight-video__caption { left: 20px; bottom: 18px; } .summer-highlight-video__caption strong { font-size: 20px; } .summer-highlight-video__caption span { font-size: 14px; } .summer-highlight-video__play { width: 52px; height: 52px; } .summer-highlight-video__play svg { width: 21px; height: 21px; } .summer-showcase-card { grid-template-columns: 1fr; margin: 44px auto -120px; padding: 32px 24px; } .summer-collage { min-height: 240px; } }
 
 @media (max-width:900px){
@@ -236,6 +240,9 @@ header.site:not(.scrolled) {
   .vm-card__ico svg, .vm-card__ico--art img { width:56px; height:56px; }
   .vm-badge { white-space:nowrap; }
 }
+/* Keep the closing banner headline on two lines, including narrow screens. */
+.cta-banner__title { font-size: clamp(24px, 3.2vw, 42px); }
+.cta-banner__title-line { display: block; white-space: nowrap; }
 </style>
 <link rel="stylesheet" href="styles/footer.css">
 <link rel="stylesheet" href="styles/brand.css">
@@ -453,11 +460,13 @@ header.site:not(.scrolled) {
     </div>
   </section>
 
+  <!-- Shared background fills the gap beneath the overlapping showcase card. -->
+  <div class="summer-faq-wrap">
   <!-- SUMMER 2026 HIGHLIGHTS -->
   <section class="summer-feature" aria-labelledby="summer-highlights-title">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow gold">IN ACTION &middot; SUMMER 2026</span>
+        <span class="eyebrow gold">REAL STUDENT WORK &middot; SUMMER 2026</span>
         <h2 id="summer-highlights-title">This is what building with AI<br>looks like.</h2>
         <p>In our Summer 2026 flagship program, students turned their ideas into real projects &mdash; designing, building, debugging, launching, and presenting along the way.</p>
       </div>
@@ -490,39 +499,11 @@ header.site:not(.scrolled) {
       </div>
     </div>
   </section>
-
-
-
-    <section class="section" id="parents">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow gold">A note for parents</span>
-        <h2>The questions you're already asking, answered honestly.</h2>
-      </div>
-
-      <div class="parents-note reveal">
-        <div class="salutation">If you're weighing whether AI belongs on your child's plate at all, you're right to be careful. The technology is moving quickly, and many "AI for kids" courses promise transformation without showing what students actually leave with.</div>
-
-        <p>At Future Wrights, students leave with <strong>real portfolio projects</strong> they can discuss with university admissions teams, co-op interviewers, and future mentors.</p>
-
-        <p>Each program is led by <strong>qualified educators and working practitioners</strong>, not generic tutors following a script. Our curriculum complements school and is aligned with Ontario Ministry expectations.</p>
-
-        <p>Cohorts are intentionally small, with regular mentor feedback so students are supported as individuals. And your child does not need to be a "tech kid" to begin — AI Labs is built around using AI well across subjects, interests, and future paths.</p>
-
-        <p>Still unsure? Book a 20-minute conversation. We'll tell you honestly whether your child is ready now, in six months, or whether another path is the better fit.</p>
-
-        <div class="parents-cta">
-          <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute call</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section class="section section--alt" id="faq">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow gold">Common questions</span>
+        <span class="eyebrow gold">Parent FAQs</span>
         <h2>The questions families and students ask first.</h2>
       </div>
 
@@ -593,6 +574,8 @@ header.site:not(.scrolled) {
     </div>
   </section>
 
+  </div>
+
   <!-- FINAL CTA BANNER -->
   <section class="cta-banner-section">
     <div class="cta-banner">
@@ -601,7 +584,10 @@ header.site:not(.scrolled) {
       </div>
       <div class="cta-banner__inner">
         <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">Help your child <span class="gold-word">create and learn with AI.</span></h2>
+          <h2 class="cta-banner__title">
+            <span class="cta-banner__title-line">Help your child <span class="gold-word">create</span></span>
+            <span class="cta-banner__title-line gold-word">and learn with AI.</span>
+          </h2>
           <p class="cta-banner__lede">Give your child the guidance to build with AI, think critically, and create work they’re proud to share.</p>
           <div class="cta-banner__actions">
             <a class="btn btn-primary" href="#programs">Explore our programs</a>
