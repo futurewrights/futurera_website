@@ -18,7 +18,7 @@ footer.site > .container {
 
 footer.site .foot-grid {
   display: grid;
-  grid-template-columns: 2.2fr 1fr 1fr 1fr 1.4fr;
+  grid-template-columns: 2.2fr 1fr 1fr 1.4fr;
   column-gap: 32px;
   row-gap: 48px;
   align-items: start;
@@ -106,7 +106,7 @@ footer.site .legal {
 }
 
 @media (max-width: 980px) {
-  footer.site .foot-grid { grid-template-columns: repeat(4, 1fr); }
+  footer.site .foot-grid { grid-template-columns: repeat(3, 1fr); }
   footer.site .foot-brand {
     grid-column: 1 / -1;
     padding-bottom: 32px;
