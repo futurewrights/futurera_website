@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Apply — March 2027 Bootcamp | Future Wrights Academy</title>
-<meta name="description" content="Apply for the March 2027 cohort of Build with AI — From Idea to Launched App. March 15–19, 2027. Choose 9 AM–12 PM or 1 PM–4 PM. Five three-hour sessions, 15 hours total, for $899 CAD at Webtree Academy in North York. Small cohort, rolling intake. Most applicants receive a response within two business days." />
+<meta name="description" content="Apply for Build with AI, March 15–19, 2027, for ages 13–16 at Webtree Academy in North York. Choose morning or afternoon sessions. Five sessions, 15 hours total. $999 CAD, including applicable taxes." />
 
 <link rel="icon" type="image/png" href="../assets/images/fw_favicon.png" />
 <link rel="apple-touch-icon" href="../assets/images/fw_favicon.png" />
@@ -16,177 +16,132 @@
 <link rel="stylesheet" href="../styles/site.css">
 
 <style>
-  /* Apply page styles */
-  /* Page hero */
-  .page-hero {
-    background: var(--surface);
-    padding: var(--sp-7) 0;
-    border-bottom: 1px solid var(--line);
+  /* Focused application entry; shared navigation, buttons and footer stay in use. */
+  .apply-page main { background: #fff; color: var(--ink); font-size: 16px; }
+  .apply-page main h1,
+  .apply-page main h2,
+  .apply-page main h3 { font-family: var(--font-sans); color: var(--navy); }
+  .apply-page main a:focus-visible { outline: 2px solid #07677c; outline-offset: 4px; }
+
+  .apply-entry {
+    position: relative; overflow: hidden; isolation: isolate; padding: 40px 0 48px;
+    color: #f5f7fb;
+    background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
   }
-  .page-hero .container { max-width: 1080px; text-align: center; }
-  .page-hero h1 {
-    font-size: clamp(30px, 4.6vw, 48px);
-    font-weight: 600; letter-spacing: -1.5px; line-height: 1.12;
-    color: var(--navy); margin: var(--sp-2) 0 var(--sp-3);
+  .apply-entry::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 62px 62px;
+    -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
+    mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
   }
-  .page-hero h1 em { font-style: italic; }
-  .page-hero .lede {
-    font-size: 17px; line-height: 1.6; color: var(--ink-muted);
-    margin: 0 auto; max-width: 640px;
+  .apply-entry .container { position: relative; z-index: 1; }
+  .apply-page .apply-entry a:focus-visible { outline-color: var(--brand-accent); }
+  .apply-back {
+    display: flex; align-items: center; gap: 8px; width: fit-content;
+    margin-bottom: 28px; color: rgba(255,255,255,.72); font-size: 16px;
+    text-decoration: underline; text-underline-offset: 4px;
   }
-  /* facts bar under the description */
-  .apply-facts {
-    text-align: left;
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    background: #fff; border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    box-shadow: 0 18px 50px rgba(15,23,66,0.08);
-    margin-top: var(--sp-5);
+  .apply-back:hover { color: #fff; }
+  .apply-entry__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    grid-template-areas: "copy details" "action details";
+    grid-template-rows: auto 1fr;
+    gap: 24px var(--sp-6);
+    align-items: start; max-width: 1180px; margin-inline: auto;
   }
-  .apply-fact { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: start; padding: var(--sp-3) var(--sp-3); }
-  .apply-fact--location { padding-right: 0; }
-  .apply-fact + .apply-fact { border-left: 1px solid var(--line); }
-  .apply-fact__ico { flex: none; width: 40px; height: 40px; border-radius: 50%; background: #eef1f7; display: grid; place-items: center; }
-  .apply-fact__ico svg { width: 20px; height: 20px; color: var(--navy); }
-  .apply-fact__txt { min-width: 0; text-align: left; }
-  .apply-fact__txt strong { display: block; font-size: 15px; font-weight: 700; color: var(--navy); letter-spacing: -0.2px; }
-  .apply-fact__txt span { display: block; font-size: 12.5px; color: var(--ink-muted); margin-top: 1px; }
-  @media (min-width: 761px) and (max-width: 1024px) {
-    .apply-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .apply-fact:nth-child(3) { border-left: none; }
-    .apply-fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .apply-intro { grid-area: copy; }
+  .apply-intro .eyebrow { font-size: 13px; margin-bottom: 16px; color: var(--brand-accent); }
+  .apply-page .apply-intro h1 { color: #fff; }
+  .apply-intro h1 {
+    font-size: clamp(36px, 3.3vw, 44px); font-weight: 600;
+    line-height: 1.12; letter-spacing: -.025em; text-wrap: balance;
+    max-width: 16ch; margin: 0 0 20px;
+  }
+  .apply-intro p { max-width: 45ch; font-size: 18px; line-height: 1.65; margin: 0; color: rgba(255,255,255,.80); }
+  .apply-action { grid-area: action; }
+  .apply-action .btn { font-size: 16px; min-height: 54px; justify-content: center; }
+  .apply-action__notice { margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.72); }
+
+  .apply-details {
+    grid-area: details; padding: var(--sp-4) var(--sp-5);
+    background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius-md);
+    box-shadow: 0 24px 60px rgba(0,0,0,.34);
+  }
+  .apply-details h2 { font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; margin: 0 0 var(--sp-2); padding-bottom: var(--sp-2); border-bottom: 1px solid var(--line); }
+  .apply-details dl { margin: 0; }
+  .apply-details__row { display: grid; grid-template-columns: 126px minmax(0, 1fr); gap: 12px; padding: 7px 0; font-size: 16px; line-height: 1.5; }
+  .apply-details__row + .apply-details__row { border-top: 1px solid #eef0f5; }
+  .apply-details__row:last-child { padding-bottom: 0; }
+  .apply-details dt { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 12px; align-items: start; font-weight: 600; color: var(--navy); }
+  .apply-details dt svg { width: 16px; height: 16px; color: var(--brand-accent-2); margin-top: 3px; }
+  .apply-details dd { margin: 0; }
+  .apply-details strong { font-weight: 600; color: var(--navy); }
+  .apply-session { display: block; }
+  .apply-details__note { display: block; margin-top: 6px; color: var(--ink-muted); }
+  .apply-details__tuition strong { font-weight: 700; }
+
+  .apply-next { padding: var(--sp-6) 0; background: #fff; }
+  .apply-next h2 { font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; line-height: 1.2; letter-spacing: -.02em; text-align: center; margin: 0 0 32px; }
+  .apply-steps { --apply-step-gap: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--apply-step-gap); list-style: none; padding: 0; max-width: 1080px; margin: 0 auto; }
+  .apply-step { position: relative; min-width: 0; padding: var(--sp-4) var(--sp-4) var(--sp-5); background: #f7f9fd; border: 1px solid #e7ecf6; border-radius: var(--radius-md); }
+  .apply-step__arrow { position: absolute; top: 50%; left: calc(100% + var(--apply-step-gap) / 2); width: 24px; height: 24px; color: var(--gold-ink); pointer-events: none; transform: translate(-50%, -50%); }
+  .apply-step__number {
+    display: grid; place-items: center; width: 34px; height: 34px;
+    border-radius: 50%; background: var(--brand-accent); color: var(--navy);
+    font-size: 16px; font-weight: 600; margin-bottom: 16px;
+  }
+  .apply-step h3 { font-size: 20px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; margin: 0 0 10px; }
+  .apply-step p { font-size: 16px; line-height: 1.6; margin: 0; }
+  .apply-policies {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px;
+    padding: 18px 24px; max-width: 1080px; margin: 32px auto 0;
+    border: 1px solid var(--line); border-radius: 12px;
+    font-size: 16px; line-height: 1.5;
+  }
+  .apply-policies a { color: var(--navy); font-weight: 500; text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
+  .apply-policies a:hover { color: #07677c; }
+  .apply-policies__separator { color: var(--ink-muted); }
+
+  @media (min-width: 921px) and (max-width: 1180px) {
+    .apply-entry__grid { gap: 24px var(--sp-4); }
+    .apply-details { padding-inline: var(--sp-4); }
+    .apply-details__row { grid-template-columns: 108px minmax(0, 1fr); }
+  }
+  @media (max-width: 920px) {
+    .apply-entry__grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "details" "action"; grid-template-rows: auto; gap: 28px; }
+    .apply-intro h1 { max-width: none; }
+    .apply-intro p { max-width: 60ch; }
+  }
+  @media (max-width: 880px) {
+    .apply-steps { grid-template-columns: minmax(0, 1fr); }
+    .apply-step__arrow { top: calc(100% + var(--apply-step-gap) / 2); left: 50%; transform: translate(-50%, -50%) rotate(90deg); }
   }
   @media (max-width: 760px) {
-    .apply-facts { grid-template-columns: 1fr; }
-    .apply-fact + .apply-fact { border-left: none; border-top: 1px solid var(--line); }
+    .apply-entry { padding: 24px 0 32px; }
+    .apply-back { margin-bottom: 24px; }
+    .apply-intro h1 { font-size: clamp(28px, 5.5vw, 32px); }
+    .apply-intro p { font-size: 16px; line-height: 1.6; }
+    .apply-details { padding: 20px; }
+    .apply-details__row { grid-template-columns: 88px minmax(0, 1fr); gap: 12px; }
+    .apply-details dt { grid-template-columns: 16px minmax(0, 1fr); gap: 8px; }
+    .apply-action .btn { width: 100%; }
+    .apply-action__notice { text-align: center; }
+    .apply-next { padding: 40px 0; }
+    .apply-step { padding: 24px; }
+    .apply-policies { flex-direction: column; align-items: flex-start; padding: 20px; margin-top: 28px; }
+    .apply-policies__separator { display: none; }
   }
-
-  /* Application section — single column */
-  .apply-section { padding: var(--sp-6) 0 var(--sp-7); }
-  .apply-section .container { max-width: 880px; }
-
-  /* "How it works" — 3-step cards */
-  .apply-eyebrow {
-    display: block;
-    font-size: 12px; font-weight: 700;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--gold-ink);
-    text-align: center;
-    margin: 0 0 var(--sp-4);
+  @media (prefers-reduced-motion: reduce) {
+    .apply-action .btn { transition: none; }
+    .apply-action .btn:hover { transform: none; }
   }
-  .apply-steps {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-4);
-    padding: 0;
-    margin: 0 0 var(--sp-6);
-  }
-  @media (max-width: 720px) {
-    .apply-steps { grid-template-columns: 1fr; gap: var(--sp-3); }
-  }
-  .apply-step {
-    position: relative;
-    background: linear-gradient(165deg, #fffdf4, #ffffff 60%);
-    border: 1px solid rgba(244,180,0,0.22);
-    border-radius: var(--radius-md);
-    padding: var(--sp-4);
-  }
-  .apply-step:not(:last-child)::after {
-    content: "→";
-    position: absolute; top: 50%;
-    left: calc(100% + var(--sp-4) / 2);
-    transform: translate(-50%, -50%);
-    color: var(--brand-accent);
-    font-size: 26px; font-weight: 700; line-height: 1;
-  }
-  @media (max-width: 720px) { .apply-step:not(:last-child)::after { display: none; } }
-  .apply-step .num {
-    display: inline-block;
-    background: rgba(244,180,0,0.18);
-    color: var(--gold-ink);
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 999px;
-    margin-bottom: var(--sp-3);
-  }
-  .apply-step strong {
-    display: block; font-size: 17px; font-weight: 700;
-    color: var(--navy); margin-bottom: 8px; letter-spacing: -0.2px; line-height: 1.25;
-  }
-  .apply-step span {
-    display: block; font-size: 14px; line-height: 1.55; color: var(--ink-muted);
-  }
-
-  /* Footnote below the form */
-  .apply-footnote {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-muted);
-    margin: var(--sp-3) 0 0;
-    text-align: center;
-  }
-  .apply-footnote a {
-    color: var(--brand-deep);
-    font-weight: 600;
-  }
-
-  /* Apply CTA card — same navy hero background as the camp page:
-     navy radial gradient + gold/cyan orbs + faint masked grid */
-  .apply-cta {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    max-width: 640px;
-    margin: var(--sp-5) auto var(--sp-3);
-    padding: var(--sp-4) var(--sp-5);
-    background: radial-gradient(125% 100% at 22% 8%, #16356b 0%, #0A1B3D 46%, #050e1c 100%);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 24px 60px rgba(10,27,61,0.30);
-  }
-  .apply-cta__bg { position: absolute; inset: -30px; z-index: 0; pointer-events: none; }
-  .apply-cta__bg .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .42; }
-  .apply-cta__bg .orb--gold { width: 260px; height: 260px; left: -60px; top: -50px; background: radial-gradient(circle, rgba(244,180,0,.55), transparent 68%); }
-  .apply-cta__bg .orb--cyan { width: 280px; height: 280px; right: -80px; bottom: -90px; background: radial-gradient(circle, rgba(0,229,255,.42), transparent 68%); }
-  .apply-cta__grid {
-    position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
-    background-size: 48px 48px;
-    -webkit-mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
-            mask-image: radial-gradient(78% 62% at 50% 32%, #000 0%, transparent 82%);
-  }
-  .apply-cta > h3,
-  .apply-cta > p,
-  .apply-cta > a { position: relative; z-index: 1; }
-  .apply-cta h3 {
-    font-family: "General Sans", "Inter", sans-serif;
-    font-size: clamp(26px, 3vw, 34px);
-    font-weight: 600;
-    letter-spacing: -0.6px;
-    line-height: 1.15;
-    color: #fff;
-    margin: 0 0 var(--sp-2);
-  }
-  .apply-cta > p {
-    color: rgba(255,255,255,0.78);
-    font-size: 17px;
-    line-height: 1.55;
-    margin: 0 auto var(--sp-3);
-    max-width: 460px;
-  }
-  .apply-cta__btn { font-size: 17px; padding: 16px 32px; }
-
 </style>
 <link rel="stylesheet" href="../styles/footer.css">
 <link rel="stylesheet" href="../styles/brand.css">
 </head>
-<body>
+<body class="apply-page">
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
@@ -210,7 +165,7 @@
       <div class="item"><a class="link" href="contact.html">Contact</a></div>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-chip" href="apply-march-2027.html"><span class="cta-full">Apply for March 2027</span><span class="cta-short">Apply</span></a>
+      <a class="btn btn-chip" href="https://docs.google.com/forms/d/e/1FAIpQLSe4EEtDLbbQ6luzcKhaC-45xm0T48kCPZDY72P0YoihgSSMZQ/viewform?usp=header" target="_blank" rel="noopener" aria-label="Start application in Google Forms">Start application</a>
       <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
@@ -219,101 +174,69 @@
 </header>
 
 <main id="main">
-
-  <!-- HERO -->
-  <section class="page-hero">
+  <section class="apply-entry" aria-labelledby="apply-title">
     <div class="container">
-      <span class="eyebrow gold">Apply · March 2027</span>
-      <h1>Apply for Build with AI &mdash;<br><em>From Idea to Launched App.</em></h1>
-      <p class="lede">Small cohorts. Thoughtful admissions.</p>
-      <p class="lede">Most applicants receive a response within two business days.</p>
-      <div class="apply-facts">
-        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="apply-fact__txt"><strong>15 students max</strong><span>Small, in-person cohorts</span></div></div>
-        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span><div class="apply-fact__txt"><strong>15 hours</strong><span>5 sessions · 3 hours each</span></div></div>
-        <div class="apply-fact apply-fact--location"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div class="apply-fact__txt"><strong>Webtree Academy</strong><span>60 Scarsdale Rd, Unit 100<br>North York, ON, M3B 2R7</span></div></div>
-        <div class="apply-fact"><span class="apply-fact__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="apply-fact__txt"><strong>Ages 13–16</strong><span>No prior coding required</span></div></div>
+      <div class="apply-entry__grid">
+        <div class="apply-intro">
+          <a class="apply-back" href="bootcamp-march-2027.html"><span aria-hidden="true">&larr;</span> Back to course details</a>
+          <span class="eyebrow gold">March Break 2027</span>
+          <h1 id="apply-title">Apply for Build with AI</h1>
+          <p>Complete a short application to tell us about your child and their preferred session. Our team will review it and contact you about the next steps.</p>
+        </div>
+
+        <section class="apply-details" aria-labelledby="program-details-title">
+          <h2 id="program-details-title">Program details</h2>
+          <dl>
+            <div class="apply-details__row"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Dates</span></dt><dd>March 15–19, 2027</dd></div>
+            <div class="apply-details__row"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Ages</span></dt><dd>13–16</dd></div>
+            <div class="apply-details__row"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg><span>Session</span></dt><dd><span class="apply-session"><strong>Morning:</strong> 9 AM–12 PM</span><span class="apply-session"><strong>Afternoon:</strong> 1–4 PM</span><em class="apply-details__note">Choose one group for all five days.</em></dd></div>
+            <div class="apply-details__row"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2M9 2h6M12 2v4M18 6l2-2"/></svg><span>Duration</span></dt><dd>Five sessions · 15 hours total</dd></div>
+            <div class="apply-details__row"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Location</span></dt><dd>Webtree Academy,<br>60 Scarsdale Road, Unit 100, North York</dd></div>
+            <div class="apply-details__row apply-details__tuition"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Tuition</span></dt><dd><strong>$999 CAD, including applicable taxes</strong></dd></div>
+          </dl>
+        </section>
+
+        <div class="apply-action">
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe4EEtDLbbQ6luzcKhaC-45xm0T48kCPZDY72P0YoihgSSMZQ/viewform?usp=header" target="_blank" rel="noopener" aria-describedby="application-form-notice">Start application</a>
+          <p class="apply-action__notice" id="application-form-notice">Opens our application form in Google Forms.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- APPLICATION -->
-  <section class="apply-section" id="application">
+  <section class="apply-next" aria-labelledby="apply-next-title">
     <div class="container">
-
-      <!-- How it works — 3-step cards -->
-      <span class="apply-eyebrow">How it works</span>
-      <ol class="apply-steps">
+      <h2 id="apply-next-title">What happens next</h2>
+      <ol class="apply-steps" role="list">
         <li class="apply-step">
-          <span class="num">Step 1</span>
-          <strong>Submit the application</strong>
-          <span>Takes about five minutes. No essays. No technical experience required.</span>
+          <span class="apply-step__number" aria-hidden="true">1</span>
+          <h3>Submit the application</h3>
+          <p>Tell us about your child, their interests and preferred session.</p>
+          <svg class="apply-step__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
         </li>
         <li class="apply-step">
-          <span class="num">Step 2</span>
-          <strong>We review &amp; reply</strong>
-          <span>Most applicants receive a response within two business days. If needed, we may invite families to a short conversation with our program lead before making a decision.</span>
+          <span class="apply-step__number" aria-hidden="true">2</span>
+          <h3>Hear from our team</h3>
+          <p>We review the application and contact you about the next steps.</p>
+          <svg class="apply-step__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
         </li>
         <li class="apply-step">
-          <span class="num">Step 3</span>
-          <strong>Confirm your spot</strong>
-          <span>Once tuition is processed, your place in the cohort is secured.</span>
+          <span class="apply-step__number" aria-hidden="true">3</span>
+          <h3>Confirm their place</h3>
+          <p>Following acceptance, tuition payment secures your child’s place.</p>
         </li>
       </ol>
 
-      <!--
-        Application form button below. The form opens in a new tab on
-        Google Forms (cleaner than embedding — Google's form layout
-        handles section navigation natively).
-        To swap the form, replace the href URL on the .apply-cta__btn link.
-
-        AFTER SUBMISSION (manual workflow):
-          1. Review the application in the linked Google Sheet
-          2. Reply within 2 business days with EITHER:
-             (a) Acceptance email with Interac e-Transfer instructions to confirm their spot, OR
-             (b) A 20-minute conversation invite first
-          3. Once the e-Transfer is received, their spot is confirmed.
-
-        INTERAC E-TRANSFER:
-          Recipient email: admissions@futurewrights.ai (or whatever you set)
-          Subject line for senders: "March 2027 Bootcamp - <Student Name>"
-          Auto-deposit recommended so no security question is needed.
-          Save the full e-Transfer instructions in a Gmail draft template.
-      -->
-      <div class="apply-cta">
-        <div class="apply-cta__bg" aria-hidden="true">
-          <span class="orb orb--gold"></span>
-          <span class="orb orb--cyan"></span>
-        </div>
-        <div class="apply-cta__grid" aria-hidden="true"></div>
-        <h3>Ready to apply?</h3>
-        <p>Apply in five minutes. Build across five three-hour sessions. Launch your capstone live.</p>
-        <a class="btn btn-primary apply-cta__btn" href="https://docs.google.com/forms/d/e/1FAIpQLSe4EEtDLbbQ6luzcKhaC-45xm0T48kCPZDY72P0YoihgSSMZQ/viewform?usp=header" target="_blank" rel="noopener">
-          Start application
-        </a>
-      </div>
-
-      <p class="apply-footnote">Questions about your application? Email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p>
-
+      <nav class="apply-policies" aria-label="Application policies and questions">
+        <a href="bootcamp-march-2027.html#refund-cancellation">Refunds &amp; cancellations</a>
+        <span class="apply-policies__separator" aria-hidden="true">&middot;</span>
+        <a href="bootcamp-march-2027.html#privacy-consent">Privacy &amp; consent</a>
+        <span class="apply-policies__separator" aria-hidden="true">&middot;</span>
+        <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>
+      </nav>
     </div>
   </section>
-
 </main>
-
-<!-- NEWSLETTER STRIP -->
-<section class="newsletter-strip" aria-labelledby="newsletter-title">
-  <div class="container">
-    <div class="newsletter-grid">
-      <div class="newsletter-text">
-        <h3 id="newsletter-title">Stay updated.</h3>
-        <p>Be first to hear about new cohorts and program announcements.</p>
-      </div>
-      <form class="newsletter-form" onsubmit="event.preventDefault();">
-        <input type="email" placeholder="your@email.com" aria-label="Email address" required>
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
-  </div>
-</section>
 
 <footer class="site">
   <div class="container">
@@ -397,6 +320,5 @@
   })();
 </script>
 
-  <script src="../scripts/newsletter.js" defer></script>
 </body>
 </html>

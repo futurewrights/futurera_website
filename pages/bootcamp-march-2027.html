@@ -583,6 +583,7 @@
     transition: border-color var(--dur-micro) var(--ease-out);
   }
   details.faq-item[open] { border-color: var(--brand-deep); }
+  details.faq-item[id] { scroll-margin-top: 104px; }
   details.faq-item summary {
     list-style: none; cursor: pointer;
     padding: var(--sp-3) var(--sp-4);
@@ -972,7 +973,7 @@
           <summary>Will my child’s app be available online?</summary>
           <div class="answer"><p>Students work toward publishing a small web app with instructor guidance. Online sharing follows agreed consent and privacy arrangements. Where publication is approved, students receive a live link others can use to try their app.</p></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" id="privacy-consent">
           <summary>How do you handle privacy and consent?</summary>
           <div class="answer">
             <p>Student projects may be shared through live web links and GitHub repositories. Before publication, we explain what will be publicly visible and request parent or guardian consent.</p>
@@ -989,7 +990,7 @@
           <summary>How do we apply?</summary>
           <div class="answer"><p>Select <a href="apply-march-2027.html"><strong>Apply Now</strong></a> to submit an application. Each group has up to 15 students, with applications accepted on a rolling basis until full.</p><p>If you would like to discuss the program first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><strong>book a 20-minute parent information session</strong></a> or email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" id="refund-cancellation">
           <summary>What is your refund and cancellation policy?</summary>
           <div class="answer"><p>All cancellations and refunds are subject to the following policy:</p><ul><li><strong>Cancellation requests:</strong> All cancellations must be submitted in writing by email to <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</li><li><strong>At least 30 days before the cohort starts:</strong> A refund will be issued, less a <strong>$100 CAD administrative fee</strong>.</li><li><strong>Fewer than 30 days before the cohort starts:</strong> No refunds will be provided.</li><li><strong>Missed days:</strong> Pro-rated refunds or credits are not available for days absent.</li><li><strong>Cancellation by Future Wrights Academy:</strong> We reserve the right to cancel a cohort if minimum enrolment is not met or exceptional or unforeseen circumstances arise. If we cancel, we will accommodate the student in an alternate cohort or provide a <strong>full refund</strong>.</li></ul></div>
         </details>
@@ -1200,6 +1201,21 @@
         visibilityObserver.observe(frame);
       });
     }
+  })();
+</script>
+
+<script>
+  /* Open policy answers when families follow a direct link from the Apply page. */
+  (function () {
+    function openLinkedFaq() {
+      var item = document.getElementById(window.location.hash.slice(1));
+      if (!item || !item.matches('details.faq-item')) return;
+      item.open = true;
+      item.scrollIntoView({ block: 'start', behavior: 'instant' });
+      item.querySelector('summary').focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', openLinkedFaq);
+    openLinkedFaq();
   })();
 </script>
 

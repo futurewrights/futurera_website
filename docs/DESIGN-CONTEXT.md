@@ -114,6 +114,24 @@ Newsletter, contact, social, secondary nav.
 
 # Part B — Implementation Status & Decisions
 
+### March 2027 application entry (2026-11)
+
+- The Apply page uses the course page’s navy gradient and subtle grid: introduction and
+  a gold Google Forms action on the left, with a white program-details card on the right
+  (roughly 55/45). The hero uses the same 1180px content width as the course hero.
+  Keep the back link above the gold label, with a white heading and light introductory text.
+- The details card matches the course information box’s radius, padding, gold icons and
+  thin dividers. Show morning and afternoon times on separate lines and keep tuition bold.
+  On phones the order is introduction, details, action, steps, policy links, footer.
+- Keep the shared navigation and footer. The header’s Start application button links
+  directly to Google Forms. Omit the newsletter, promotional banner and full-height hero.
+- Below the hero, use a white background, a centred “What happens next” heading and three
+  pale step cards with gold number circles. Gold arrows connect the cards, pointing down
+  when they stack on smaller screens. Cards and the understated policy/contact strip
+  share the course page’s 1080px card-grid width. Refund and privacy links open the relevant
+  answers on the March course page, below the header.
+- Start application buttons follow the shared primary-button treatment, without a trailing arrow.
+
 **Branch:** `redesign` (isolated; the minimal site on `main` is untouched).
 **Scope so far:** Hero section on `index.html` only, as a proof of the visual language.
 **Isolation:** all new styles are scoped under `.fw-*` classes in an inline `<style>`
