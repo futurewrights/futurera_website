@@ -75,8 +75,6 @@
   .btn-primary:hover { background: var(--color-navy-900); text-decoration: none; }
   .btn-gold { background: var(--color-gold-500); color: var(--color-ink); }
   .btn-gold:hover { background: var(--color-gold-600); text-decoration: none; }
-  .btn-ghost { background: transparent; color: var(--color-ink); border-color: var(--color-line); }
-  .btn-ghost:hover { border-color: var(--color-ink); text-decoration: none; }
 
   /* Header */
   .topstrip {
@@ -193,33 +191,6 @@
   .cta-band .actions { display: flex; flex-direction: column; gap: var(--space-2); }
   .cta-band .btn-primary { background: var(--color-gold-500); color: var(--color-ink); }
   .cta-band .btn-primary:hover { background: var(--color-gold-600); }
-  .cta-band .btn-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.25); }
-  .cta-band .btn-ghost:hover { border-color: #fff; }
-
-  /* Footer */
-  footer.site {
-    padding: var(--space-12) 0 var(--space-8);
-    border-top: 1px solid var(--color-line);
-    color: var(--color-text-muted); font-size: var(--fs-sm);
-  }
-  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--space-6); }
-  @media (max-width: 980px) { .foot-grid { grid-template-columns: 1fr 1fr 1fr; } }
-  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
-  footer.site h4 {
-    font-family: var(--font-sans); font-size: var(--fs-xs);
-    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase;
-    color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-4);
-  }
-  footer.site ul { list-style: none; padding: 0; margin: 0; }
-  footer.site ul li { margin-bottom: var(--space-2); }
-  footer.site a { color: var(--color-ink-2); }
-  .foot-brand img { height: 44px; width: auto; margin-bottom: var(--space-4); }
-  .legal {
-    margin-top: var(--space-8); padding-top: var(--space-5);
-    border-top: 1px solid var(--color-line);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
-    font-size: var(--fs-xs);
-  }
 
   .skip-link {
     position: absolute; top: -40px; left: 8px;
@@ -228,6 +199,8 @@
   }
   .skip-link:focus { top: 8px; }
 </style>
+<link rel="stylesheet" href="../styles/footer.css">
+<link rel="stylesheet" href="../styles/brand.css">
 </head>
 <body>
 
@@ -236,11 +209,11 @@
 <header class="site">
   <div class="container-wide nav">
     <a class="brand-link" href="../index.html" aria-label="Future Wrights Academy home">
-      <img src="../assets/images/fw_logo.png" alt="Future Wrights Academy" />
+      <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
     </a>
     <div class="nav-cta">
       <a class="nav-back" href="../index.html">← Back to home</a>
-      <a class="btn btn-gold" href="bootcamp-summer-2026.html">Summer 2026 Bootcamp →</a>
+      <a class="btn btn-gold" href="bootcamp-march-2027.html">Apply for March 2027</a>
     </div>
   </div>
 </header>
@@ -414,8 +387,8 @@
         <p>School pilot, AI Studio brief, or sponsorship — we'll respond within two business days.</p>
       </div>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:hello@futurewrights.ai?subject=Future%20Wrights%20partnership%20enquiry">Send us a brief →</a>
-        <a class="btn btn-ghost" href="../index.html#contact">Book an info call</a>
+        <a class="btn btn-primary" href="mailto:hello@futurewrights.ai?subject=Future%20Wrights%20partnership%20enquiry">Send us a brief</a>
+        <a class="btn btn-ghost" href="../index.html#contact"><span class="btn__label">Book an info call</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
 
@@ -427,27 +400,23 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="../assets/images/fw_logo_footer.png" alt="Future Wrights Academy" />
+        <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="../assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
             <a href="https://www.instagram.com/futurewrights_ai/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="https://www.linkedin.com/company/futurewrights/" target="_blank" rel="noopener" aria-label="Future Wrights on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
           </div>
         </div>
       </div>
       <div>
-        <h4>Program</h4>
+        <h4>Programs</h4>
         <ul>
-          <li><a href="../index.html#ecosystem">AI Labs</a></li>
-          <li><a href="summer-2026-showcase.html">AI Bootcamp</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>For</h4>
-        <ul>
-          <li><a href="for-parents.html">Parents</a></li>
-          <li><a href="for-students.html">Students</a></li>
+          <li><a href="bootcamp-march-2027.html">AI Bootcamp March 2027</a></li>
+          <li><span role="link" aria-disabled="true">AI Bootcamp Summer 2027 <small>(Coming soon)</small></span></li>
+          <li><a href="summer-2026-showcase.html">AI Bootcamp Summer 2026</a></li>
         </ul>
       </div>
       <div>

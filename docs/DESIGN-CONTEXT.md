@@ -114,6 +114,24 @@ Newsletter, contact, social, secondary nav.
 
 # Part B — Implementation Status & Decisions
 
+### March 2027 application entry (2026-11)
+
+- The Apply page uses the course page’s navy gradient and subtle grid: introduction and
+  a gold Google Forms action on the left, with a white program-details card on the right
+  (roughly 55/45). The hero uses the same 1180px content width as the course hero.
+  Keep the back link above the gold label, with a white heading and light introductory text.
+- The details card matches the course information box’s radius, padding, gold icons and
+  thin dividers. Show morning and afternoon times on separate lines and keep tuition bold.
+  On phones the order is introduction, details, action, steps, policy links, footer.
+- Keep the shared navigation and footer. The header’s Start application button links
+  directly to Google Forms. Omit the newsletter, promotional banner and full-height hero.
+- Below the hero, use a white background, a centred “What happens next” heading and three
+  pale step cards with gold number circles. Gold arrows connect the cards, pointing down
+  when they stack on smaller screens. Cards and the understated policy/contact strip
+  share the course page’s 1080px card-grid width. Refund and privacy links open the relevant
+  answers on the March course page, below the header.
+- Start application buttons follow the shared primary-button treatment, without a trailing arrow.
+
 **Branch:** `redesign` (isolated; the minimal site on `main` is untouched).
 **Scope so far:** Hero section on `index.html` only, as a proof of the visual language.
 **Isolation:** all new styles are scoped under `.fw-*` classes in an inline `<style>`
@@ -156,18 +174,22 @@ records the decision).
   - **Shape:** rounded-rect, **14px** radius (`--radius-btn`). No pills.
   - **Primary** (`.btn-primary`; `.btn-accent` is a gold alias): solid brand gold `#F4B400`
     + near-black/navy text (`--ink`), soft gold drop-shadow. (`.btn-primary` was flipped
-    from slate `#353447` to gold.)
+    from slate `#353447` to gold.) Primary labels have no trailing arrow.
   - **Secondary** (`.btn-ghost`): transparent + 1px outline — ink on light, white on dark
-    (`.section--dark`, hero).
+    (`.section--dark`, hero). Shared across all pages in `styles/brand.css`, with a
+    `.btn__label` and a decorative `.btn__arrow` pointing right.
   - **Hover (all):** lift `translateY(-2px)` + shadow **deepens**; **no color change** on the
     primary (gold stays gold — not the old darken-to-`#D19A00`). Removed the
     `.final-cta`/`.article-cta` darken-on-hover overrides.
+    Secondary hover/focus changes the text and outline to cyan on dark backgrounds
+    or deep teal on light backgrounds, with a cyan glow and a 3px arrow movement.
+    Reduced-motion preferences disable the lift and arrow movement.
   - **Nav CTA** (`.btn-chip`): same 14px shape; translucent-white over the dark hero,
     flips to gold primary when the header turns solid on scroll.
   - **Hero CTAs** reuse `.btn` via a `.fw-hero .btn` scope (larger 16px/15×30, dark-bg ghost
     with a cyan-glow hover). The old `.fw-btn*` classes were **retired**.
-  - **Out of scope:** `for-partners.html` / `industry-track.html` keep their own parked
-    button styles (separate `tokens.css` system).
+  - **Legacy pages:** `for-partners.html` / `industry-track.html` retain their local
+    primary-button styles; their secondary buttons use the shared brand styles.
 - **Headline keyword emphasis — LOCKED (2026-05):** ONE device — a **solid gold word**
   (never a highlighter on headlines). Reusable `.gold-word` class: deep gold `--gold-ink`
   `#b8860a` on light sections, bright `--brand-accent` `#F4B400` on dark (`.section--dark`).

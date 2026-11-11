@@ -221,11 +221,7 @@
     box-shadow: 0 12px 34px rgba(244,180,0,0.40);
   }
 
-  /* Secondary = outline ghost */
-  .btn-ghost { background: transparent; color: var(--ink); border-color: rgba(13,23,20,0.16); }
-  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,23,66,0.10); }
-  .section--dark .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.3); }
-  .section--dark .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.06); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
+  /* Secondary button appearance and interactions are shared in brand.css. */
 
   /* Nav CTA — same 14px shape; gold when header is solid, ghost over hero (header rules below) */
   .btn-chip { padding: 10px 20px; font-size: var(--fs-sm); border-radius: var(--radius-btn); background: var(--brand-accent); color: var(--ink); }
@@ -323,7 +319,7 @@
   nav.primary .item:focus-within > .link .caret { transform: rotate(180deg); }
 
   .dropdown {
-    position: absolute; top: calc(100% + 8px); left: 0; min-width: 220px;
+    position: absolute; top: calc(100% + 8px); left: 0; min-width: 260px;
     background: #fff; border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     box-shadow: 0 10px 30px rgba(13,23,20,0.08);
@@ -334,11 +330,13 @@
   nav.primary .item:focus-within .dropdown {
     opacity: 1; visibility: visible; transform: translateY(0);
   }
-  .dropdown a {
+  .dropdown a, .dropdown-upcoming {
     display: block; padding: 10px 14px; font-size: var(--fs-sm); font-weight: 500;
     color: var(--ink); border-radius: 8px;
   }
   .dropdown a:hover { background: var(--surface); }
+  .dropdown-upcoming { color: var(--ink-muted); cursor: default; }
+  .dropdown-upcoming small { display: block; font-size: 12px; font-weight: 400; }
 
   .nav-cta { display: flex; gap: 10px; align-items: center; justify-self: end; }
   .nav-cta .btn { padding: 13px 26px; font-size: 15px; }
@@ -507,69 +505,6 @@
   }
   .hero .btn-primary { background: var(--brand-accent); color: var(--ink); }
   .hero .btn-primary:hover { background: var(--brand-accent-2); }
-  .hero .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.35); }
-  .hero .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.14); }
-
-  /* Text link + arrow circle (hover slides arrow right)
-     Default = dark text on light bg. Hero overrides to white. */
-  .text-arrow {
-    display: inline-flex; align-items: center; gap: 12px;
-    color: var(--ink); font-weight: 500; font-size: 15px;
-    text-decoration: none;
-    padding: 6px 4px;
-    transition: opacity var(--dur-micro) var(--ease-out);
-  }
-  .arrow-circle {
-    display: grid; place-items: center;
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    border: 1px solid rgba(14,14,15,0.2);
-    background: rgba(14,14,15,0.03);
-    transition: background var(--dur-micro) var(--ease-out),
-                border-color var(--dur-micro) var(--ease-out);
-  }
-  .arrow-circle svg {
-    width: 18px; height: 18px; color: var(--ink);
-    transition: transform var(--dur-micro) var(--ease-out);
-  }
-  .text-arrow:hover .arrow-circle {
-    background: var(--navy);
-    border-color: var(--navy);
-  }
-  .text-arrow:hover .arrow-circle svg {
-    transform: translateX(3px);
-    color: #fff;
-  }
-  .text-arrow:focus-visible { outline: none; }
-  .text-arrow:focus-visible .arrow-circle { box-shadow: var(--focus-ring); }
-
-  /* Dark-bg variant (hero, featured cohort, final CTA, article CTA) — white text + circle */
-  .hero .text-arrow,
-  .featured .text-arrow,
-  .final-cta .text-arrow,
-  .article-cta .text-arrow { color: #fff; }
-  .hero .text-arrow > span:first-child,
-  .featured .text-arrow > span:first-child,
-  .final-cta .text-arrow > span:first-child,
-  .article-cta .text-arrow > span:first-child { text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
-  .hero .arrow-circle,
-  .featured .arrow-circle,
-  .final-cta .arrow-circle,
-  .article-cta .arrow-circle {
-    border-color: rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.06);
-  }
-  .hero .arrow-circle svg,
-  .featured .arrow-circle svg,
-  .final-cta .arrow-circle svg,
-  .article-cta .arrow-circle svg { color: #fff; }
-  .hero .text-arrow:hover .arrow-circle,
-  .featured .text-arrow:hover .arrow-circle,
-  .final-cta .text-arrow:hover .arrow-circle,
-  .article-cta .text-arrow:hover .arrow-circle {
-    background: rgba(255,255,255,0.18);
-    border-color: #fff;
-  }
 
   /* ---------- Trust ticker (continues the navy block) ---------- */
   .ticker {
@@ -794,37 +729,6 @@
   .featured-actions .btn-accent { width: 100%; justify-content: center; }
   .featured-actions .btn-ghost { width: 100%; justify-content: center; }
 
-  /* ---------- Parents note ---------- */
-  .parents-note {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md); padding: var(--sp-6);
-    max-width: 800px; margin: 0 auto;
-    position: relative;
-  }
-  .parents-note::before {
-    content: ""; position: absolute; left: 0; top: var(--sp-5); bottom: var(--sp-5);
-    width: 4px; background: var(--brand-accent); border-radius: 0 4px 4px 0;
-  }
-  @media (max-width: 760px) { .parents-note { padding: var(--sp-4); } }
-  .parents-note .salutation {
-    font-size: 20px; font-weight: 600; letter-spacing: -0.5px;
-    color: var(--brand-deep); margin-bottom: var(--sp-3);
-  }
-  .parents-note p {
-    font-size: var(--fs-body); line-height: 1.7; color: var(--ink);
-  }
-  .parents-note .parents-cta {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
-    margin-top: var(--sp-5); padding-top: var(--sp-4);
-    border-top: 1px solid var(--line);
-  }
-  .parents-note .parents-cta .btn-ghost:hover {
-    border-color: var(--cyan);
-    box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18);
-    transform: translateY(-2px);
-  }
-
   /* Gold highlighter for key phrases */
   .hl-gold {
     background-image: linear-gradient(
@@ -1037,11 +941,6 @@
     text-shadow: 0 1px 12px rgba(0,0,0,0.5);
   }
   .cta-banner__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: var(--sp-4); }
-  .cta-banner .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.06); }
-  .cta-banner .btn-ghost:hover {
-    border-color: var(--cyan); background: rgba(255,255,255,0.08); transform: translateY(-2px);
-    box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18);
-  }
   .cta-banner__meta { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
   .cta-banner__meta span { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.78); text-shadow: 0 1px 8px rgba(0,0,0,0.55); }
   .cta-banner__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-accent); flex: none; display: inline-block; }
@@ -1114,96 +1013,6 @@
     font-size: 14px; font-weight: 600; color: var(--brand-deep);
   }
 
-  /* ---------- Footer (dark) ---------- */
-  footer.site {
-    background: #151828cc;
-    padding: var(--sp-7) 0 var(--sp-4);
-    color: rgba(255,255,255,0.7); font-size: var(--fs-sm);
-    border-top: 0;
-    margin-top: 0;
-  }
-  .foot-grid {
-    display: grid;
-    grid-template-columns: 2.2fr 1fr 1fr 1fr 1.4fr;
-    column-gap: var(--sp-4);
-    row-gap: var(--sp-5);
-    align-items: start;
-  }
-  /* Tablet: brand spans full width, 4 link columns sit in a row beneath */
-  @media (max-width: 980px) {
-    .foot-grid { grid-template-columns: repeat(4, 1fr); }
-    .foot-brand {
-      grid-column: 1 / -1;
-      padding-bottom: var(--sp-4);
-      margin-bottom: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    /* Size the logo to the description's width so they read as one aligned
-       block (instead of a small logo lost in the full-width row); cap so it
-       never overflows narrow phones. */
-    .foot-brand img { width: min(100%, 340px); height: auto; }
-  }
-  /* Small tablet: 2×2 grid for link columns */
-  @media (max-width: 720px) {
-    .foot-grid { grid-template-columns: 1fr 1fr; }
-    .foot-brand { grid-column: 1 / -1; }
-  }
-  /* Phone: everything stacks */
-  @media (max-width: 480px) {
-    .foot-grid { grid-template-columns: 1fr; row-gap: var(--sp-4); }
-  }
-  footer.site h4 {
-    font-size: 13px;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(255,255,255,0.95);
-    margin-bottom: var(--sp-3);
-    font-weight: 600;
-  }
-  footer.site ul li { margin-bottom: 10px; }
-  footer.site a {
-    color: rgba(255,255,255,0.85);
-    transition: color var(--dur-micro) var(--ease-out);
-  }
-  footer.site a:hover { color: var(--brand-accent); }
-
-  /* Brand column */
-  .foot-brand img {
-    height: 40px; width: auto;
-    margin-bottom: var(--sp-3);
-    filter: brightness(0) invert(1);
-  }
-  .foot-brand p {
-    color: rgba(255,255,255,0.65);
-    line-height: 1.6; max-width: 46ch; margin: 0 0 var(--sp-3);
-  }
-
-  /* Social links */
-  .foot-social-label {
-    display: block;
-    font-size: 12px; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: var(--sp-2);
-  }
-  .foot-social-links { display: flex; gap: 10px; }
-  .foot-social-links a {
-    width: 36px; height: 36px;
-    display: grid; place-items: center;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.85) !important;
-    transition: background var(--dur-micro) var(--ease-out),
-                border-color var(--dur-micro) var(--ease-out),
-                color var(--dur-micro) var(--ease-out);
-  }
-  .foot-social-links a:hover {
-    background: var(--brand-accent);
-    border-color: var(--brand-accent);
-    color: var(--ink) !important;
-  }
-  .foot-social-links svg { width: 16px; height: 16px; }
-
   /* Newsletter / Get in touch input */
   .foot-email {
     display: flex; align-items: stretch;
@@ -1233,14 +1042,6 @@
     transition: background var(--dur-micro) var(--ease-out);
   }
   .foot-email button:hover { background: var(--brand-accent-2); }
-
-  .legal {
-    margin-top: var(--sp-5); padding-top: var(--sp-3);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-  }
 
   /* ---------- Article CTA · dark navy conversion footer for content pages ----------
      Full-width section with hairline divider on top + a centered inner wrap that

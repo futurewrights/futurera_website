@@ -47,12 +47,24 @@
   .team-card[data-member="2"] { order: 3; }
   .team-card[data-member="3"] { order: 4; }
   .team-card[data-member="4"] { order: 5; }
-  .team-card[data-member="5"] { order: 6; }
+  .team-card[data-member="5"] { order: 8; }
   .team-card[data-member="6"] { order: 7; }
-  .team-card[data-member="8"] { order: 8; }
+  .team-card[data-member="8"] { order: 6; }
   .team-card[data-member="7"] { order: 2; }
 
+  .team-card[data-member="6"] .info-overlay h3 { font-size: 14px; }
+
+  /* Closing banner */
+  .cta-banner--team .cta-banner__title { text-wrap: balance; }
+  .cta-banner--team .cta-banner__actions { margin-bottom: 0; }
+  .cta-banner--team .btn { max-width: 100%; justify-content: center; text-align: center; }
+  @media (max-width: 760px) {
+    .cta-banner--team .btn { width: 100%; }
+  }
+
 </style>
+<link rel="stylesheet" href="../styles/footer.css">
+<link rel="stylesheet" href="../styles/brand.css">
 </head>
 <body>
 
@@ -61,21 +73,24 @@
 <header class="site scrolled" id="siteHeader">
   <div class="container nav">
     <a class="brand-link" href="../index.html" aria-label="Future Wrights Academy home">
-      <img src="../assets/images/fw_logo.png" alt="Future Wrights Academy" />
+      <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
     </a>
     <nav class="primary" id="primaryNav" aria-label="Primary">
       <div class="item"><a class="link" href="../index.html">Home</a></div>
       <div class="item">
         <button class="link" type="button">Programs <span class="caret" aria-hidden="true">&#9662;</span></button>
         <div class="dropdown">
-          <a href="../index.html#ecosystem">AI Labs</a>
-          <a href="summer-2026-showcase.html">AI Bootcamp</a>
+          <a href="bootcamp-march-2027.html">AI Bootcamp March 2027</a>
+          <span class="dropdown-upcoming" role="link" aria-disabled="true">AI Bootcamp Summer 2027<small>Coming soon</small></span>
+          <a href="summer-2026-showcase.html">AI Bootcamp Summer 2026</a>
         </div>
       </div>
       <div class="item"><a class="link" href="team.html">Team</a></div>
       <div class="item"><a class="link" href="contact.html">Contact</a></div>
     </nav>
     <div class="nav-cta">
+      <a class="btn btn-chip" href="apply-march-2027.html"><span class="cta-full">Apply for March 2027</span><span class="cta-short">Apply</span></a>
+
       <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
@@ -106,7 +121,7 @@
             <img class="photo" src="../assets/team/mehdi.jpg" alt="Mahdi Noorian" onerror="this.style.display='none'">
             <div class="info-overlay">
               <div class="info-text">
-                <h3>Mahdi Noorian, Ph.D.</h3>
+                <h3>Mahdi Noorian, PhD</h3>
                 <p class="affiliation">Founder &amp; Executive Director</p>
                 <p class="title">Former AI Engineer at RBC</p>
               </div>
@@ -121,7 +136,7 @@
             <img class="photo" src="../assets/team/amir.jpg" alt="Amir Bazyar" onerror="this.style.display='none'">
             <div class="info-overlay">
               <div class="info-text">
-                <h3>Amir Bazyar</h3>
+                <h3>Amir Bazyar, PhD</h3>
                 <p class="affiliation">Operations &amp; Programs Lead</p>
                 <p class="title">Former Research Scientist at TMU</p>
               </div>
@@ -136,7 +151,7 @@
             <img class="photo" src="../assets/team/ebrahim.jpg" alt="Ebrahim Bagheri" onerror="this.style.display='none'">
             <div class="info-overlay">
               <div class="info-text">
-                <h3>Ebrahim Bagheri</h3>
+                <h3>Ebrahim Bagheri, PhD</h3>
                 <p class="affiliation">Founding Academic Advisor</p>
                 <p class="title">Professor at University of Toronto</p>
               </div>
@@ -151,7 +166,7 @@
             <img class="photo" src="../assets/team/zeinab.jpg" alt="Zeinab Noorian" onerror="this.style.display='none'">
             <div class="info-overlay">
               <div class="info-text">
-                <h3>Zeinab Noorian</h3>
+                <h3>Zeinab Noorian, PhD</h3>
                 <p class="affiliation">AI &amp; Research Advisor</p>
                 <p class="title">Associate Professor at TMU</p>
               </div>
@@ -166,11 +181,41 @@
             <img class="photo" src="../assets/team/soudeh.jpg" alt="Soudeh Oladi" onerror="this.style.display='none'">
             <div class="info-overlay">
               <div class="info-text">
-                <h3>Soudeh Oladi, Ph.D.</h3>
+                <h3>Soudeh Oladi, PhD</h3>
                 <p class="affiliation">Education Advisor</p>
                 <p class="title">University of Toronto, OISE</p>
               </div>
               <a class="linkedin-link" href="https://www.linkedin.com/in/soudeh-oladi-79680b104/" target="_blank" rel="noopener" aria-label="Soudeh Oladi on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="8">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="../assets/team/yvonne-guo-pencil-v3.png" alt="Yvonne Guo" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Yvonne Guo</h3>
+                <p class="affiliation">Strategic Education Partner</p>
+                <p class="title">Founder at Webtree Academy</p>
+              </div>
+              <a class="linkedin-link" href="https://ca.linkedin.com/company/webtreeacademy" target="_blank" rel="noopener" aria-label="Webtree Academy on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card" data-member="6">
+          <div class="photo-frame">
+            <div class="photo-placeholder" aria-hidden="true"></div>
+            <img class="photo" src="../assets/team/hossein.jpg" alt="Hosein Rezazade Mehrizi" onerror="this.style.display='none'">
+            <div class="info-overlay">
+              <div class="info-text">
+                <h3>Hosein Rezazade Mehrizi, PhD</h3>
+                <p class="affiliation">Learning Experience Advisor</p>
+                <p class="title">Associate Professor at VU Amsterdam</p>
+              </div>
+              <a class="linkedin-link" href="https://www.linkedin.com/in/mohammad-hosein-rezazade-mehrizi-1734b010a/" target="_blank" rel="noopener" aria-label="Hosein Rezazade Mehrizi on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
             </div>
           </div>
         </article>
@@ -190,55 +235,23 @@
           </div>
         </article>
 
-        <article class="team-card" data-member="6">
-          <div class="photo-frame">
-            <div class="photo-placeholder" aria-hidden="true"></div>
-            <img class="photo" src="../assets/team/hossein.jpg" alt="Hosein Rezazade Mehrizi" onerror="this.style.display='none'">
-            <div class="info-overlay">
-              <div class="info-text">
-                <h3>Hosein Rezazade Mehrizi</h3>
-                <p class="affiliation">Learning Experience Advisor</p>
-                <p class="title">Associate Professor at VU Amsterdam</p>
-              </div>
-              <a class="linkedin-link" href="https://www.linkedin.com/in/mohammad-hosein-rezazade-mehrizi-1734b010a/" target="_blank" rel="noopener" aria-label="Hosein Rezazade Mehrizi on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="team-card" data-member="8">
-          <div class="photo-frame">
-            <div class="photo-placeholder" aria-hidden="true"></div>
-            <img class="photo" src="../assets/team/yvonne-guo-pencil-v2.png" alt="Yvonne Guo" onerror="this.style.display='none'">
-            <div class="info-overlay">
-              <div class="info-text">
-                <h3>Yvonne Guo</h3>
-                <p class="affiliation">Strategic Education Partner</p>
-                <p class="title">Founder &amp; School Director, Webtree Academy</p>
-              </div>
-              <a class="linkedin-link" href="https://ca.linkedin.com/company/webtreeacademy" target="_blank" rel="noopener" aria-label="Webtree Academy on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-            </div>
-          </div>
-        </article>
-
       </div>
     </div>
   </section>
 
-  <!-- CTA · standard "Get in touch" block -->
-  <section class="article-cta-section">
-    <div class="article-cta-wrap">
-      <div class="article-cta">
-        <span class="article-cta-eyebrow">Get in touch</span>
-        <h2>Want to meet the team?</h2>
-        <p>A 20-minute conversation with our program lead. No sales pitch — an honest fit conversation.</p>
-        <div class="actions" style="align-items: center;">
-          <a class="btn btn-accent" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a meeting with us</a>
-          <a class="text-arrow" href="mailto:hello@futurewrights.ai">
-            <span>Email us instead</span>
-            <span class="arrow-circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </span>
-          </a>
+  <!-- FINAL CTA BANNER -->
+  <section class="cta-banner-section" aria-labelledby="team-cta-title">
+    <div class="cta-banner cta-banner--team">
+      <div class="cta-banner__bg" aria-hidden="true">
+        <img src="../assets/images/footer_banner.png" alt="" loading="lazy" />
+      </div>
+      <div class="cta-banner__inner">
+        <div class="cta-banner__panel">
+          <h2 class="cta-banner__title" id="team-cta-title">Have questions about the <span class="gold-word">right program for your child?</span></h2>
+          <p class="cta-banner__lede">Talk with our team for 20 minutes about your child’s interests, our programs and what to expect.</p>
+          <div class="cta-banner__actions">
+            <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a parent information session</a>
+          </div>
         </div>
       </div>
     </div>
@@ -256,7 +269,7 @@
       </div>
       <form class="newsletter-form" onsubmit="event.preventDefault();">
         <input type="email" placeholder="your@email.com" aria-label="Email address" required>
-        <button type="submit">Subscribe →</button>
+        <button type="submit">Subscribe</button>
       </form>
     </div>
   </div>
@@ -266,27 +279,23 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="../assets/images/fw_logo_footer.png" alt="Future Wrights Academy" />
+        <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="../assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
             <a href="https://www.instagram.com/futurewrights_ai/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="https://www.linkedin.com/company/futurewrights/" target="_blank" rel="noopener" aria-label="Future Wrights on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
           </div>
         </div>
       </div>
       <div>
-        <h4>Program</h4>
+        <h4>Programs</h4>
         <ul>
-          <li><a href="../index.html#ecosystem">AI Labs</a></li>
-          <li><a href="summer-2026-showcase.html">AI Bootcamp</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>For</h4>
-        <ul>
-          <li><a href="for-parents.html">Parents</a></li>
-          <li><a href="for-students.html">Students</a></li>
+          <li><a href="bootcamp-march-2027.html">AI Bootcamp March 2027</a></li>
+          <li><span role="link" aria-disabled="true">AI Bootcamp Summer 2027 <small>(Coming soon)</small></span></li>
+          <li><a href="summer-2026-showcase.html">AI Bootcamp Summer 2026</a></li>
         </ul>
       </div>
       <div>

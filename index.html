@@ -22,15 +22,16 @@
    Scoped to .fw-hero / .fw-* — does not affect the rest of the site.
    Palette: navy #0A1B3D · gold #F4B400 · cyan #00E5FF · off-white text
    ============================================================ */
+.home-hero-transition { --home-header-height:82px; position:relative; isolation:isolate; }
+.home-hero-intro { position:sticky; top:var(--hero-sticky-top, 0px); z-index:0; margin-top:calc(0px - var(--home-header-height)); }
 .fw-hero {
   --navy: #0A1B3D; --gold: #F4B400; --cyan: #00E5FF;
   --ink-0: #F5F7FB; --ink-50: rgba(245,247,251,0.62);
   --glass: rgba(255,255,255,0.055); --glass-line: rgba(255,255,255,0.13);
-  /* Keep the hero in view while the following content scrolls over it. */
-  position: sticky; top: 0; z-index: 0; overflow: hidden; isolation: isolate;
+  position: relative; overflow: hidden; isolation: isolate;
   background: radial-gradient(125% 100% at 22% 8%, #28538e 0%, #12326a 46%, #0A1B3D 100%);
   color: var(--ink-0);
-  margin-top: -95px; padding: calc(95px + var(--sp-7)) 0 var(--sp-8); min-height: calc(100vh - 76px);
+  padding: calc(var(--home-header-height) + clamp(24px, 4vh, 48px)) 0 clamp(24px, 5vh, 64px);
   display: flex; align-items: center;
 }
 .fw-hero__bg { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
@@ -48,7 +49,7 @@
 .fw-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
   background:linear-gradient(90deg, rgba(10,27,61,.76) 0%, rgba(10,27,61,.52) 42%, rgba(10,27,61,.20) 72%, rgba(10,27,61,.30) 100%); }
 
-.fw-hero__inner { position:relative; z-index:2; width:100%; transform:translateY(40px); }
+.fw-hero__inner { position:relative; z-index:2; width:100%; }
 .fw-hero__copy { max-width: 880px; }
 
 .fw-eyebrow { display:inline-flex; align-items:center; gap:9px; font-family:"Inter",sans-serif;
@@ -63,23 +64,19 @@
 .fw-hero__title .grad { color:var(--gold); }
 
 .fw-hero__lede { font-family:"Inter",sans-serif; font-size:clamp(17px,1.45vw,20px);
-  line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:850px; }
+  line-height:1.62; color:var(--ink-0); margin:26px 0 0; max-width:850px; }
 
 .fw-hero__cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:38px; }
-.fw-hero__journey { display:block; width:min(100%, 320px); height:auto; margin-top:56px; }
 .fw-hero__camp { display:none; }
 @media (max-width:640px){
   .fw-hero__camp { display:inline-flex; }
   .fw-hero__cta { flex-direction:column; align-items:stretch; }
   .fw-hero__cta .btn { justify-content:center; }
-  .fw-hero__journey { width:min(100%, 280px); margin:44px auto 0; }
 }
 /* Hero CTAs use the locked .btn system — sized up for the showpiece + dark-bg ghost (cyan glow) */
 .fw-hero .btn { font-size:16px; padding:15px 30px; gap:9px; }
 .fw-hero .btn-primary { box-shadow:0 10px 34px rgba(244,180,0,.30); }
 .fw-hero .btn-primary:hover { box-shadow:0 16px 44px rgba(244,180,0,.45); }
-.fw-hero .btn-ghost { color:var(--ink-0); border-color:rgba(255,255,255,.24); background:rgba(255,255,255,.04); }
-.fw-hero .btn-ghost:hover { border-color:var(--cyan); background:rgba(255,255,255,.04); transform:translateY(-2px); box-shadow:0 0 0 1px rgba(0,229,255,.45),0 0 26px rgba(0,229,255,.18); }
 
 /* Mobile hero CTAs: keep the primary action in Future Wrights gold. */
 @media (max-width:640px){
@@ -95,9 +92,29 @@
 .fw-hero__copy > *:nth-child(4){ animation-delay:.24s }
 .fw-hero__copy > *:nth-child(5){ animation-delay:.32s }
 
+/* Hero and trust bar fill one laptop viewport, growing only if the copy needs it. */
+@media (min-width:901px){
+  .home-hero-intro {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  .home-hero-intro .fw-hero { flex: 1 0 auto; }
+  .home-hero-intro .ticker { flex: 0 0 auto; }
+  .fw-hero__lede { text-wrap: balance; }
+}
+@media (min-width:901px) and (max-height:800px){
+  .fw-hero { padding: calc(var(--home-header-height) + 24px) 0 24px; }
+  .fw-hero__title { font-size: clamp(34px, 6.5vh, 48px); }
+  .fw-hero__lede { font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; margin-top: 18px; }
+  .fw-hero__cta { margin-top: 24px; }
+}
+@media (max-width:980px){
+  .home-hero-transition { --home-header-height:72px; }
+}
 @media (max-width:900px){
-  .fw-hero { margin-top:-80px; padding: calc(80px + var(--sp-6)) 0 var(--sp-7); min-height:auto; }
-  .fw-hero__inner { transform:none; }
+  .fw-hero { padding: calc(var(--home-header-height) + var(--sp-4)) 0 var(--sp-5); }
   .fw-hero__copy { max-width:none; }
   .fw-hero__title { white-space:normal; }
   .fw-hero__desktop-break { display:none; }
@@ -125,9 +142,8 @@ header.site:not(.scrolled) {
   border-bottom: 0;
 }
 
-/* Limit the overlap sequence to the hero and "Why it matters". Once that
-   section has passed, the remaining homepage content scrolls normally. */
-.home-hero-transition .ticker,
+/* The program section and following content scroll over the hero and trust bar. */
+.home-hero-transition .next-program,
 .home-hero-transition .hero-edge,
 .home-hero-transition #why {
   position: relative;
@@ -136,166 +152,23 @@ header.site:not(.scrolled) {
 
 /* Design-system rollout: General Sans for all homepage section headings */
 .section-head h2 { font-family: "General Sans", "Inter", sans-serif; }
-#ecosystem .section-head { max-width: 880px; margin-bottom: var(--sp-3); }
-#ecosystem .section-head p + p { margin-top: var(--sp-3); }
 
-/* ============================================================
-   Ecosystem journey — callout + timeline rail + step cards (light)
-   ============================================================ */
-.eco-callout {
-  display: flex; align-items: center; gap: 18px;
-  max-width: 880px; margin: 0 auto var(--sp-4);
-  background: transparent; border: 1px solid var(--line); border-radius: var(--radius-md);
-  padding: 16px 22px; box-shadow: none;
+/* Upcoming program */
+.next-program { padding: var(--sp-6) 0; background: #fffdf7; border-bottom: 1px solid var(--line); scroll-margin-top: 96px; }
+.next-program__grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--sp-6); align-items: center; }
+.next-program h2 { font-family: "General Sans", "Inter", sans-serif; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -.02em; color: var(--navy); margin: 0 0 var(--sp-3); text-wrap: balance; }
+.next-program__copy p { max-width: 640px; margin: 0; font-size: 17px; color: var(--ink-muted); }
+.next-program__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--sp-4); }
+.next-program__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); margin: 0; padding: var(--sp-4); border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; }
+.next-program__facts dt { margin-bottom: 5px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); }
+.next-program__facts dd { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--navy); }
+@media (max-width: 900px) {
+  .next-program__grid { grid-template-columns: 1fr; gap: var(--sp-4); }
 }
-.eco-callout__ico { flex: none; width: 56px; height: 56px; display:inline-flex; align-items:center; justify-content:center; color: var(--teal); }
-.eco-callout__ico svg { width: 44px; height: 44px; }
-.eco-callout p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-muted); }
-.eco-callout strong { color: var(--navy); font-weight: 600; }
-
-.eco-steps { max-width: 1172px; margin: 0 auto; }
-.eco-step { display: grid; grid-template-columns: 132px 1fr; gap: 28px; padding-bottom: 16px; --node: var(--teal); }
-.eco-step:first-child { --node: var(--gold-ink); }   /* 01 gold · 02-04 teal */
-.eco-step__rail { position: relative; padding-top: 4px; text-align: center; }
-.eco-step__down { display:block; width:18px; height:132px; margin:16px auto 0; position:relative; }
-.eco-step__down::before {   /* gradient vertical line */
-  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%);
-  width:2px; height:120px; background:linear-gradient(to bottom, transparent, var(--node));
-}
-.eco-step__down::after {    /* down arrowhead */
-  content:""; position:absolute; left:50%; top:113px; transform:translateX(-50%) rotate(45deg);
-  width:10px; height:10px; border-right:2.5px solid var(--node); border-bottom:2.5px solid var(--node);
-}
-.eco-step__rail::before {   /* dotted connector — runs node→next-node so it reads continuous (nodes hide the joins) */
-  content: ""; position: absolute; left: 131px; top: 34px; bottom: -54px; width: 3px;
-  background-image: radial-gradient(circle, #bcc4d4 1.4px, transparent 1.6px);
-  background-size: 3px 9px; background-repeat: repeat-y;
-}
-.eco-step:last-child .eco-step__rail::before { display: none; }
-.eco-step__rail::after {    /* stage node (ring + dot) beside the card */
-  content: ""; position: absolute; left: 123px; top: 18px; box-sizing: border-box;
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--node); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--node);
-}
-.eco-step__body { position: relative; }
-.eco-step__body::before {   /* short connector: node -> card */
-  content: ""; position: absolute; left: -19px; top: 26px; width: 19px; height: 2px;
-  background: #bcc4d4;
-}
-.eco-step__num { display:block; font-family:"General Sans","Inter",sans-serif; font-size:54px; font-weight:700; line-height:1; letter-spacing:-.03em; color: var(--gold-ink); }
-.eco-step__num--cyan { color: var(--teal); }
-.eco-step__label { display:inline-block; margin-top:10px; font-size:15px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color: var(--ink); border-bottom:2px solid var(--node); padding-bottom:7px; }
-.eco-step__sub { display:block; margin-top:10px; font-size:13px; color: var(--ink-muted); }
-
-.eco-prog { background:#fff; border:1px solid var(--line); border-radius: var(--radius-md); padding: var(--sp-5); display:flex; gap:24px; align-items:flex-start;
-  box-shadow: 0 1px 2px rgba(15,23,66,.04), 0 12px 28px rgba(15,23,66,.05); }
-.eco-prog--gold { background: linear-gradient(165deg, #fffdf4, #ffffff 60%); border-color: rgba(244,180,0,0.40); }
-.eco-prog--cyan { background: linear-gradient(165deg, #f3fdff, #ffffff 60%); border-color: rgba(17,146,173,0.28); }
-.eco-prog__main { flex:1; min-width:0; }
-.eco-prog h3 { font-family:"General Sans","Inter",sans-serif; font-size:29px; font-weight:600; letter-spacing:-.02em; color: var(--ink); margin: 10px 0 8px; }
-.eco-prog p { font-size:18px; line-height:1.6; color: var(--ink-muted); margin: 0 0 16px; }
-.eco-prog__art { flex:none; width:38%; max-width:280px; }
-.eco-prog__art img { width:100%; height:auto; display:block; border-radius:12px; }
-.eco-prog--community .eco-prog__art img { box-shadow:none; }
-.eco-prog__cardico { float:right; color: var(--teal); }
-
-/* Feature cards (AI Labs / AI Studio) - text left, graphic right, feature row underneath */
-.eco-prog--feat { display:block; }
-.eco-prog--feat .eco-prog__head { display:flex; gap:24px; align-items:flex-start; }
-.eco-prog--feat .eco-prog__art { width:38%; max-width:330px; }
-.eco-prog--feat .eco-prog__art img { opacity:0.7; }
-.eco-prog--feat .eco-feats { margin-top:0; }
-.eco-prog--feat .eco-feats li { flex-direction:row; align-items:center; text-align:left; }
-.eco-prog--gold .eco-feats li { align-items:center; }
-.eco-prog--gold .eco-feats svg { color: var(--brand-accent); width:24px; height:24px; }
-/* AI Labs (gold) — larger card content */
-.eco-prog--gold h3 { font-size:29px; }
-.eco-prog--gold p { font-size:18px; line-height:1.6; }
-.eco-prog--gold .eco-feats { gap:18px; margin-top:0; }
-.eco-prog--gold .eco-feats li { font-size:13px; gap:10px; flex-direction:row; align-items:center; text-align:left; }
-.eco-prog--gold .eco-badge { font-size:12.5px; padding:6px 14px; }
-.eco-prog--gold .eco-prog__art { width:32%; max-width:270px; }
-.eco-prog--gold .eco-prog__art img { opacity:0.7; }
-.eco-prog__cardico svg { width:32px; height:32px; }
-.eco-prog__cardico img { width:96px; height:96px; object-fit:contain; display:block; }
-
-.eco-step__body--split { position:relative; display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:12px; align-items:start; }
-.eco-step__body--split .eco-prog { display:block; position:relative; padding: var(--sp-5); }
-.eco-step__body--split .eco-prog__cardico { position:absolute; top:40px; right:26px; float:none; }
-.eco-step__body--split .eco-feats { margin-top:0; width:100%; align-self:stretch; }
-.eco-or { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; width:72px; height:72px; flex:none; display:grid; place-items:center; border-radius:50%; background:rgba(255,255,255,0.6); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); border:1px solid var(--line); font-size:17px; font-weight:700; color: var(--ink-muted); letter-spacing:.08em; }
-
-.eco-badge { display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; border-radius:999px; }
-.eco-badge--open { background: rgba(244,180,0,0.16); color: var(--gold-ink); }
-.eco-badge--soon { background: rgba(0,229,255,0.12); color: var(--teal); }
-
-.eco-feats { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin:0; padding:0; list-style:none; }
-.eco-feats--2 { grid-template-columns: repeat(4, 1fr); gap:10px; }
-.eco-feats--2 li { align-items:center; }
-.eco-feats--2 svg { width:16px; height:16px; }
-.eco-feats li { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; font-size:13px; line-height:1.3; color: var(--ink); }
-.eco-feats svg { width:18px; height:18px; flex:none; color: var(--teal); margin-top:1px; }
-.eco-feats .eco-feat-ico { width:52px; height:52px; flex:none; object-fit:contain; }
-
-/* community card (step 04, light) */
-.eco-prog--community { background: linear-gradient(165deg, #eefbfb, #ffffff 62%); border-color: rgba(17,146,173,0.28); align-items: center; padding-block: 12px; gap: 14px; }
-.eco-join { margin-top: 6px; }
-.eco-join:hover { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); transform: translateY(-2px); }
-.eco-prog--community h3 { color: var(--navy); line-height:1.2; text-wrap: balance; }
-.eco-prog--community h3 .hl-cyan { color: var(--teal); }
-.eco-prog--community p { color: var(--ink-muted); }
-.eco-prog--community .eco-prog__art { width:50%; max-width:500px; }
-
-/* bottom strip */
-.eco-strip-wrap { max-width:1172px; margin: var(--sp-4) auto 0; }
-.eco-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-left:160px; padding: 20px 26px; border:1px solid var(--line); border-radius: var(--radius-md); }
-.eco-strip__item { display:flex; align-items:center; gap:12px; }
-.eco-strip__item > span { flex:none; color: var(--navy); }
-.eco-strip__item svg { width:24px; height:24px; }
-.eco-strip__item .eco-strip-ico { width:54px; height:54px; object-fit:contain; display:block; }
-.eco-strip__item strong { display:block; font-size:14px; color: var(--ink); }
-.eco-strip__item small { font-size:12px; color: var(--ink-muted); }
-
-@media (max-width: 860px) {
-  /* let the centered heading wrap & balance naturally instead of the forced desktop break */
-  #ecosystem .section-head h2 br { display: none; }
-  .eco-step { grid-template-columns: 1fr; gap: 14px; }
-  .eco-step__rail { display:flex; align-items:baseline; gap:12px; padding-top:0; }
-  .eco-step__rail::before, .eco-step__rail::after, .eco-step__body::before, .eco-step__down { display:none; }
-  .eco-step__num { font-size:30px; }
-  .eco-step__label, .eco-step__sub { margin-top:0; }
-  .eco-step__sub br { display:none; }
-  .eco-prog { flex-direction:column; padding: var(--sp-4); }
-  /* drop forced desktop <br>s in card descriptions (AI Labs, University/
-     Industry Track, AI Studio) so the text wraps & aligns naturally */
-  .eco-prog p br { display:none; }
-  .eco-prog p { text-wrap: pretty; }
-  .eco-step__body--split .eco-prog { padding: var(--sp-4); }
-  .eco-prog__art { width:100%; max-width:none; }
-  .eco-prog--feat .eco-prog__head { flex-direction:column; }
-  .eco-prog--feat .eco-prog__art { width:100%; max-width:280px; }
-  .eco-prog--community { text-align:center; padding: 18px var(--sp-4) 24px; }
-  /* heading balances on its own; keep the paragraph's sentence break so
-     "The ecosystem grows…" starts a fresh line instead of orphaning "The" */
-  .eco-prog--community h3 br { display:none; }
-  .eco-prog--community p br { display:inline; }
-  .eco-prog--community h3 { text-wrap: balance; }
-  .eco-prog--community p { text-wrap: pretty; }
-  .eco-prog--community .eco-prog__main { width:100%; }
-  .eco-prog--community .eco-prog__art { width:100%; max-width:440px; }
-  .eco-step__body--split { grid-template-columns:1fr; }
-  .eco-step__body--split .eco-prog__cardico { position: static; display: block; margin-bottom: 10px; }
-  .eco-step__body--split .eco-prog__cardico img { width: 54px; height: 54px; }
-  .eco-or { display:none; }
-  .eco-feats, .eco-feats--2 { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
-  .eco-strip { grid-template-columns: 1fr 1fr; margin-left:0; }
-}
-@media (max-width: 560px) {
-  /* feat-card (AI Labs / AI Studio) chips: stack icon over text so they fit & align */
-  .eco-prog--feat .eco-feats li, .eco-prog--gold .eco-feats li {
-    flex-direction: column; align-items: center; text-align: center; gap: 8px;
-  }
-  .eco-feats .eco-feat-ico { width: 46px; height: 46px; }
+@media (max-width: 480px) {
+  .next-program__facts { grid-template-columns: 1fr; padding: var(--sp-3); }
+  .next-program__actions { flex-direction: column; align-items: stretch; }
+  .next-program__actions .btn { justify-content: center; }
 }
 
 /* ============================================================
@@ -346,6 +219,7 @@ header.site:not(.scrolled) {
 }
 
 /* Summer 2026 feature */
+.summer-faq-wrap { background: var(--surface); }
 .summer-feature { padding: 76px 0 80px; background: linear-gradient(135deg, #061a36 0%, #0a315e 55%, #071d3c 100%); color: #fff; }
 .summer-feature .section-head { max-width: 850px; margin-bottom: 20px; }
 .summer-feature .eyebrow { color: var(--brand-accent); }
@@ -365,14 +239,19 @@ header.site:not(.scrolled) {
 .summer-showcase-card .eyebrow { color: var(--gold-ink); }
 .summer-showcase-card h2 { max-width: 470px; font-family: var(--font-sans); font-size: var(--fs-h2); font-weight: 600; line-height: var(--lh-heading); letter-spacing: var(--ls-heading); }
 .summer-showcase-card p { max-width: 460px; margin: 18px 0 27px; color: var(--ink-muted); font-size: 18px; line-height: 1.55; }
-.summer-collage { position: relative; min-height: 275px; }
-.summer-collage img { position: absolute; width: 46%; height: 170px; object-fit: cover; border: 4px solid #fff; border-radius: 12px; box-shadow: 0 10px 22px rgba(9,27,57,.16); }
-.summer-collage img:nth-child(1) { top: 0; left: 7%; transform: rotate(-5deg); }
-.summer-collage img:nth-child(2) { top: 2px; right: 4%; transform: rotate(5deg); }
-.summer-collage img:nth-child(3) { bottom: 0; left: 18%; transform: rotate(-3deg); }
-.summer-collage img:nth-child(4) { bottom: 2px; right: 13%; transform: rotate(5deg); }
-@media (min-width: 761px) { .summer-feature { margin-bottom: 160px; } }
-@media (max-width: 760px) { .summer-feature { padding: 62px 0; } .summer-highlight-video { margin-top: 26px; } .summer-highlight-video__caption { left: 20px; bottom: 18px; } .summer-highlight-video__caption strong { font-size: 20px; } .summer-highlight-video__caption span { font-size: 14px; } .summer-highlight-video__play { width: 52px; height: 52px; } .summer-highlight-video__play svg { width: 21px; height: 21px; } .summer-showcase-card { grid-template-columns: 1fr; margin: 44px auto -120px; padding: 32px 24px; } .summer-collage { min-height: 240px; } }
+.summer-collage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; align-self: center; width: 100%; max-width: 560px; margin-inline: auto; padding: 18px 12px; }
+.summer-collage__photo { position: relative; margin: 0; padding: 8px 8px 20px; background: #fff; border: 1px solid rgba(9,27,57,.08); border-radius: 2px; box-shadow: 2px 6px 12px rgba(9,27,57,.16), 0 1px 2px rgba(9,27,57,.08); transform-origin: 50% 8px; }
+.summer-collage__photo::before { content: ""; position: absolute; z-index: 1; top: 2px; left: 50%; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff0b4 0%, #f4b400 45%, #a77300 100%); box-shadow: 1px 3px 3px rgba(9,27,57,.3); transform: translateX(-50%); }
+.summer-collage__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.summer-collage__photo:nth-child(1) { transform: rotate(-5deg); }
+.summer-collage__photo:nth-child(2) { transform: rotate(4deg); }
+.summer-collage__photo:nth-child(3) { transform: rotate(-3deg); }
+.summer-collage__photo:nth-child(4) { transform: rotate(5deg); }
+@media (min-width: 761px) {
+  .summer-feature { margin-bottom: 160px; }
+  #faq { padding-top: var(--sp-6); }
+}
+@media (max-width: 760px) { .summer-feature { padding: 62px 0; } .summer-highlight-video { margin-top: 26px; } .summer-highlight-video__caption { left: 20px; bottom: 18px; } .summer-highlight-video__caption strong { font-size: 20px; } .summer-highlight-video__caption span { font-size: 14px; } .summer-highlight-video__play { width: 52px; height: 52px; } .summer-highlight-video__play svg { width: 21px; height: 21px; } .summer-showcase-card { grid-template-columns: 1fr; margin: 44px auto -120px; padding: 32px 24px; } .summer-collage { gap: 22px 14px; } }
 
 @media (max-width:900px){
   #about .vm-wrap { grid-template-columns:1fr; gap:36px; }
@@ -383,7 +262,12 @@ header.site:not(.scrolled) {
   .vm-card__ico svg, .vm-card__ico--art img { width:56px; height:56px; }
   .vm-badge { white-space:nowrap; }
 }
+/* Keep the closing banner headline on two lines, including narrow screens. */
+.cta-banner__title { font-size: clamp(24px, 3.2vw, 42px); }
+.cta-banner__title-line { display: block; white-space: nowrap; }
 </style>
+<link rel="stylesheet" href="styles/footer.css">
+<link rel="stylesheet" href="styles/brand.css">
 </head>
 <body>
 
@@ -392,7 +276,7 @@ header.site:not(.scrolled) {
 <header class="site" id="siteHeader">
   <div class="container nav">
     <a class="brand-link" href="index.html" aria-label="Future Wrights Academy home">
-      <img src="assets/images/fw_logo.png" alt="Future Wrights Academy" />
+      <span class="brand-logo"><img src="assets/images/fw-logo.png" alt="Future Wrights" /></span>
     </a>
 
     <nav class="primary" id="primaryNav" aria-label="Primary">
@@ -400,8 +284,9 @@ header.site:not(.scrolled) {
       <div class="item">
         <button class="link" type="button">Programs <span class="caret" aria-hidden="true">&#9662;</span></button>
         <div class="dropdown">
-          <a href="#ecosystem">AI Labs</a>
-          <a href="pages/summer-2026-showcase.html">AI Bootcamp</a>
+          <a href="pages/bootcamp-march-2027.html">AI Bootcamp March 2027</a>
+          <span class="dropdown-upcoming" role="link" aria-disabled="true">AI Bootcamp Summer 2027<small>Coming soon</small></span>
+          <a href="pages/summer-2026-showcase.html">AI Bootcamp Summer 2026</a>
         </div>
       </div>
       <div class="item"><a class="link" href="pages/team.html">Team</a></div>
@@ -409,6 +294,7 @@ header.site:not(.scrolled) {
     </nav>
 
     <div class="nav-cta">
+      <a class="btn btn-chip" href="pages/apply-march-2027.html"><span class="cta-full">Apply for March 2027</span><span class="cta-short">Apply</span></a>
       <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
@@ -419,6 +305,8 @@ header.site:not(.scrolled) {
 <main id="main">
 
   <div class="home-hero-transition">
+
+  <div class="home-hero-intro">
 
   <!-- HERO · cinematic redesign -->
   <section class="fw-hero">
@@ -431,14 +319,13 @@ header.site:not(.scrolled) {
     <div class="fw-hero__scrim" aria-hidden="true"></div>
     <div class="container fw-hero__inner">
       <div class="fw-hero__copy">
-        <span class="fw-eyebrow">AI education for high school students<span class="fw-eyebrow__loc"> &middot; Toronto</span></span>
+        <span class="fw-eyebrow">AI education for students in Grades 8–12<span class="fw-eyebrow__loc"> &middot; Toronto</span></span>
         <h1 class="fw-hero__title">Developing human capability<br>for the <span class="grad">AI era.</span></h1>
-        <p class="fw-hero__lede">Future Wrights helps students build real things with AI &mdash; while developing the understanding, judgment, creativity, and confidence to become responsible creators of value.</p>
+        <p class="fw-hero__lede">Your child learns to work thoughtfully with AI through meaningful projects and practical challenges. Guided by university educators and industry mentors, they explore ideas, make decisions, evaluate results and take responsibility for their work.</p>
         <div class="fw-hero__cta">
-          <a class="btn btn-primary" href="#ecosystem">Explore Our Programs</a>
-          <a class="btn btn-ghost" href="pages/student-showcase.html">See Student Work &rarr;</a>
+          <a class="btn btn-primary" href="pages/bootcamp-march-2027.html">Explore March Break 2027</a>
+          <a class="btn btn-ghost" href="pages/student-showcase.html"><span class="btn__label">See Student Work</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
         </div>
-        <img class="fw-hero__journey" src="assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead">
       </div>
     </div>
   </section>
@@ -465,12 +352,8 @@ header.site:not(.scrolled) {
     <div class="container">
       <div class="ticker-row">
         <span class="ticker-item">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          <strong>Ontario curriculum</strong>-aligned
-        </span>
-        <span class="ticker-item">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-          <strong>UofT &amp; TMU</strong>-affiliated faculty
+          <span><strong>University educators</strong> and industry mentors.</span>
         </span>
         <span class="ticker-item">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
@@ -481,6 +364,45 @@ header.site:not(.scrolled) {
           <strong>Small cohorts</strong>, mentor-led
         </span>
       </div>
+    </div>
+  </section>
+
+  </div>
+  <script>
+    /* Let tall hero content scroll fully into view before it stays behind the program. */
+    (function () {
+      var intro = document.querySelector('.home-hero-intro');
+      if (!intro) return;
+      function updateStickyOffset() {
+        intro.style.setProperty('--hero-sticky-top', Math.min(0, window.innerHeight - intro.offsetHeight) + 'px');
+      }
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(updateStickyOffset).observe(intro);
+      }
+      window.addEventListener('resize', updateStickyOffset, { passive: true });
+      window.addEventListener('load', updateStickyOffset, { once: true });
+      updateStickyOffset();
+    })();
+  </script>
+
+  <!-- UPCOMING PROGRAM -->
+  <section class="next-program" id="programs" aria-labelledby="next-program-title">
+    <div class="container next-program__grid">
+      <div class="next-program__copy">
+        <span class="eyebrow gold">Upcoming program</span>
+        <h2 id="next-program-title">Build with AI &mdash; March Break 2027</h2>
+        <p>A five-day, instructor-guided bootcamp where students discover, plan, build, test, and launch their own app with AI. For ages 13–16, with no prior coding experience required.</p>
+        <div class="next-program__actions">
+          <a class="btn btn-primary" href="pages/bootcamp-march-2027.html">Explore the program</a>
+          <a class="btn btn-ghost" href="pages/apply-march-2027.html"><span class="btn__label">Apply for March 2027</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <dl class="next-program__facts">
+        <div><dt>Dates</dt><dd>March 15–19, 2027<br>5 days · 15 hours</dd></div>
+        <div><dt>Choose your time</dt><dd>9 AM–12 PM<br>or 1 PM–4 PM</dd></div>
+        <div><dt>Location</dt><dd>Webtree Academy<br>North York, Toronto</dd></div>
+        <div><dt>Tuition</dt><dd>$999 CAD, including applicable taxes</dd></div>
+      </dl>
     </div>
   </section>
   <div class="hero-edge" aria-hidden="true"></div>
@@ -559,11 +481,13 @@ header.site:not(.scrolled) {
     </div>
   </section>
 
+  <!-- Shared background fills the gap beneath the overlapping showcase card. -->
+  <div class="summer-faq-wrap">
   <!-- SUMMER 2026 HIGHLIGHTS -->
   <section class="summer-feature" aria-labelledby="summer-highlights-title">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow gold">IN ACTION &middot; SUMMER 2026</span>
+        <span class="eyebrow gold">REAL STUDENT WORK &middot; SUMMER 2026</span>
         <h2 id="summer-highlights-title">This is what building with AI<br>looks like.</h2>
         <p>In our Summer 2026 flagship program, students turned their ideas into real projects &mdash; designing, building, debugging, launching, and presenting along the way.</p>
       </div>
@@ -582,248 +506,119 @@ header.site:not(.scrolled) {
       </div>
       <div class="summer-showcase-card reveal">
         <div>
-          <span class="eyebrow">REAL WORK &middot; REAL OUTCOMES</span>
-          <h2>See what the students created.</h2>
-          <p>Explore student Project Hubs, individual projects, reflections, and highlights from Demo Day.</p>
-          <a class="btn btn-primary" href="pages/summer-2026-showcase.html">Explore the Summer 2026 Showcase &nbsp;&rarr;</a>
+          <span class="eyebrow">SUMMER 2026</span>
+          <h2>See our students at work</h2>
+          <p>Explore the games and personal homepages students created, hear their reflections and watch highlights from their final demonstrations.</p>
+          <a class="btn btn-primary" href="pages/summer-2026-showcase.html">Explore the Summer 2026 Showcase</a>
         </div>
         <div class="summer-collage" aria-hidden="true">
-          <img src="assets/summer-2026/gallery/DSC00593.jpeg" alt="">
-          <img src="assets/summer-2026/gallery/DSC00628.jpeg" alt="">
-          <img src="assets/summer-2026/gallery/DSC00644.jpeg" alt="">
-          <img src="assets/summer-2026/gallery/DSC00659.jpeg" alt="">
+          <figure class="summer-collage__photo"><img src="assets/summer-2026/gallery/DSC00593.jpeg" alt="" loading="lazy"></figure>
+          <figure class="summer-collage__photo"><img src="assets/summer-2026/gallery/DSC00628.jpeg" alt="" loading="lazy"></figure>
+          <figure class="summer-collage__photo"><img src="assets/summer-2026/gallery/DSC00644.jpeg" alt="" loading="lazy"></figure>
+          <figure class="summer-collage__photo"><img src="assets/summer-2026/gallery/DSC00659.jpeg" alt="" loading="lazy"></figure>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ECOSYSTEM (where this leads) -->
-  <section class="section section--alt" id="ecosystem">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow gold">The Future Wrights ecosystem</span>
-        <h2>A journey from AI Foundations <br>to Real-World <span class="gold-word">Creation</span>.</h2>
-        <p>Students begin in AI Labs, where curiosity becomes hands-on exploration and creative confidence. From there, they specialize through mentorship-driven University or Industry Tracks before advancing into AI Studio — a collaborative environment where ambitious students build real-world projects, gain experience, and bring ideas to life.</p>
-      </div>
-
-      <div class="eco-callout reveal">
-        <span class="eco-callout__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="9" r="2.2"/><path d="M1.6 18.5v-1a3 3 0 0 1 3-3h1"/><circle cx="19" cy="9" r="2.2"/><path d="M22.4 18.5v-1a3 3 0 0 0-3-3h-1"/><circle cx="12" cy="7.3" r="3.1"/><path d="M6.5 18.5v-1.2a4.3 4.3 0 0 1 4.3-4.3h2.4a4.3 4.3 0 0 1 4.3 4.3v1.2"/></svg></span>
-        <p>Future Wrights is more than a program — it's a <strong>growing ecosystem and community</strong> designed to help students continuously learn, connect, build, and evolve together.</p>
-      </div>
-
-      <div class="eco-steps reveal">
-
-        <!-- 01 Foundation -->
-        <div class="eco-step">
-          <div class="eco-step__rail">
-            <span class="eco-step__num">01</span>
-            <span class="eco-step__label">Foundation</span>
-            <span class="eco-step__sub">Start your <br>journey</span>
-            <span class="eco-step__down" aria-hidden="true"></span>
-          </div>
-          <div class="eco-step__body">
-            <article class="eco-prog eco-prog--gold eco-prog--feat">
-              <div class="eco-prog__head">
-                <div class="eco-prog__main">
-                  <span class="eco-badge eco-badge--open">Open now</span>
-                  <h3>AI Labs</h3>
-                  <p>Where curiosity becomes hands-on exploration. <br>Students build AI foundations through project-<br>based courses focused on creativity, problem <br>solving, and modern AI tools.</p>
-                </div>
-                <div class="eco-prog__art" aria-hidden="true"><img src="assets/images/graphioic_for_ai_lab.png" alt="" /></div>
-              </div>
-              <ul class="eco-feats">
-                <li><img class="eco-feat-ico" src="assets/images/project_based_leaning.png" alt="" /><span>Project-Based<br>Learning</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/creative_exploration.png" alt="" /><span>Creative<br>Exploration</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/ai_tools.png" alt="" /><span>AI Tools &amp;<br>Prompting</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/protfolio_projects.png" alt="" /><span>Portfolio<br>Projects</span></li>
-              </ul>
-            </article>
-          </div>
-        </div>
-
-        <!-- 02 Specialize -->
-        <div class="eco-step">
-          <div class="eco-step__rail">
-            <span class="eco-step__num eco-step__num--cyan">02</span>
-            <span class="eco-step__label">Specialize</span>
-            <span class="eco-step__sub">Choose your <br>path</span>
-            <span class="eco-step__down" aria-hidden="true"></span>
-          </div>
-          <div class="eco-step__body eco-step__body--split">
-            <article class="eco-prog eco-prog--cyan">
-              <span class="eco-prog__cardico"><img src="assets/images/school_hat.png" alt="" /></span>
-              <span class="eco-badge eco-badge--soon">Coming soon</span>
-              <h3>University Track</h3>
-              <p>For students aiming to pursue competitive <br>university pathways through advanced <br>mentorship, research exposure, and <br>portfolio-driven projects.</p>
-              <ul class="eco-feats eco-feats--2">
-                <li><img class="eco-feat-ico" src="assets/images/research_expo.png" alt="" /><span>Research<br>Exposure</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/creative_explo.png" alt="" /><span>Academic<br>Mentorship</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/advaned_concept.png" alt="" /><span>Advanced<br>Concepts</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/strong_academic_portfolio.png" alt="" /><span>Strong<br>Portfolio</span></li>
-              </ul>
-            </article>
-            <span class="eco-or">OR</span>
-            <article class="eco-prog eco-prog--cyan">
-              <span class="eco-prog__cardico"><img src="assets/images/breafcase.png" alt="" /></span>
-              <span class="eco-badge eco-badge--soon">Coming soon</span>
-              <h3>Industry Track</h3>
-              <p>For students interested in real-world <br>AI skills, entrepreneurship, collaboration, <br>and industry-inspired project <br>experience.</p>
-              <ul class="eco-feats eco-feats--2">
-                <li><img class="eco-feat-ico" src="assets/images/read_skills.png" alt="" /><span>Real-World<br>Skills</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/industry_mentorship.png" alt="" /><span>Industry<br>Mentorship</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/team_collaboration.png" alt="" /><span>Team<br>Collaboration</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/entrepreneurship_mindset.png" alt="" /><span>Entrepreneurship<br>Mindset</span></li>
-              </ul>
-            </article>
-          </div>
-        </div>
-
-        <!-- 03 Create -->
-        <div class="eco-step">
-          <div class="eco-step__rail">
-            <span class="eco-step__num eco-step__num--cyan">03</span>
-            <span class="eco-step__label">Create</span>
-            <span class="eco-step__sub">Build real <br>impact</span>
-            <span class="eco-step__down" aria-hidden="true"></span>
-          </div>
-          <div class="eco-step__body">
-            <article class="eco-prog eco-prog--cyan eco-prog--feat">
-              <div class="eco-prog__head">
-                <div class="eco-prog__main">
-                  <span class="eco-badge eco-badge--soon">Future &middot; paid &middot; ages 16+</span>
-                  <h3>AI Studio</h3>
-                  <p>An advanced collaborative environment where top <br>students build ambitious AI projects, work alongside <br>mentors, and transform ideas into real-world outcomes.</p>
-                </div>
-                <div class="eco-prog__art" aria-hidden="true"><img src="assets/images/graphic_for_ai_studio.png" alt="" /></div>
-              </div>
-              <ul class="eco-feats">
-                <li><img class="eco-feat-ico" src="assets/images/real_projects.png" alt="" /><span>Real<br>Projects</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/expert_mentorship.png" alt="" /><span>Expert<br>Mentorship</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/startup_env.png" alt="" /><span>Startup-Style<br>Environment</span></li>
-                <li><img class="eco-feat-ico" src="assets/images/showcase.png" alt="" /><span>Portfolio<br>Showcase</span></li>
-              </ul>
-            </article>
-          </div>
-        </div>
-
-        <!-- 04 Connect -->
-        <div class="eco-step">
-          <div class="eco-step__rail">
-            <span class="eco-step__num eco-step__num--cyan">04</span>
-            <span class="eco-step__label">Connect</span>
-            <span class="eco-step__sub">Grow together <br>forever</span>
-          </div>
-          <div class="eco-step__body">
-            <article class="eco-prog eco-prog--community">
-              <div class="eco-prog__main">
-                <h3>Beyond programs. <span class="hl-cyan">A growing ecosystem for future creators.</span></h3>
-                <p>New programs. New mentors. New connections.<br>The ecosystem grows &mdash; and you grow with it.</p>
-                <a class="btn btn-ghost eco-join" href="pages/contact.html">Join the Community &rarr;</a>
-              </div>
-              <div class="eco-prog__art" aria-hidden="true"><img src="assets/images/fw_network.png" alt="" /></div>
-            </article>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="eco-strip-wrap">
-        <div class="eco-strip reveal">
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/continious_learning.png" alt="" /></span><div><strong>Continuous Learning</strong><small>Always evolving</small></div></div>
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/global_community.png" alt="" /></span><div><strong>Global Community</strong><small>Connect worldwide</small></div></div>
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/real_impact.png" alt="" /></span><div><strong>Real-World Impact</strong><small>Build what matters</small></div></div>
-          <div class="eco-strip__item"><span><img class="eco-strip-ico" src="assets/images/future_ready.png" alt="" /></span><div><strong>Future Ready</strong><small>Skills for tomorrow</small></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <section class="section" id="parents">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow gold">A note for parents</span>
-        <h2>The questions you're already asking, answered honestly.</h2>
-      </div>
-
-      <div class="parents-note reveal">
-        <div class="salutation">If you're weighing whether AI belongs on your child's plate at all, you're right to be careful. The technology is moving quickly, and many "AI for kids" courses promise transformation without showing what students actually leave with.</div>
-
-        <p>At Future Wrights, students leave with <strong>real portfolio projects</strong> they can discuss with university admissions teams, co-op interviewers, and future mentors.</p>
-
-        <p>Each program is led by <strong>qualified educators and working practitioners</strong>, not generic tutors following a script. Our curriculum complements school and is aligned with Ontario Ministry expectations.</p>
-
-        <p>Cohorts are intentionally small, with regular mentor feedback so students are supported as individuals. And your child does not need to be a "tech kid" to begin — AI Labs is built around using AI well across subjects, interests, and future paths.</p>
-
-        <p>Still unsure? Book a 20-minute conversation. We'll tell you honestly whether your child is ready now, in six months, or whether another path is the better fit.</p>
-
-        <div class="parents-cta">
-          <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute call</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section class="section section--alt" id="faq">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow gold">Common questions</span>
-        <h2>The questions families and students ask first.</h2>
+        <span class="eyebrow gold">Parent FAQs</span>
+        <h2>Questions parents ask</h2>
       </div>
 
       <div class="faq reveal">
         <details class="faq-item">
-          <summary>Is AI even a good thing for teens to learn right now?</summary>
+          <summary>Who are your programs for?</summary>
           <div class="answer">
-            <p>It is the right question to ask. AI is already part of the academic and working life today's students are heading into. They'll either learn to use it well, or use it badly without guidance. Two thirds of Canadian students already use AI tools and report that they are learning <em>less</em> as a result, because nobody taught them how. That is the gap we close.</p>
-            <p>We don't teach AI as a magic productivity hack. We teach it as a skill set with judgment, ethics, and limits, the same way good schools used to teach research before the internet.</p>
+            <p>Our programs are designed for students in Grades 8–12, with specific age ranges and requirements listed for each program. They welcome young people interested in creating, exploring ideas and learning how to work with AI. Your child does not need to be planning a career in technology.</p>
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>What credentials do your instructors have?</summary>
+          <summary>Does my child need coding or technical experience?</summary>
           <div class="answer">
-            <p>Our curriculum is <strong>designed and managed by senior faculty on our core team</strong>: university professors with appointments at the University of Toronto and Toronto Metropolitan University. Courses are <strong>led and taught by those same faculty members</strong>, supported by <strong>qualified graduate students</strong> from their labs and by <strong>AI practitioners from industry</strong> who have shipped real products.</p>
-            <p>All instructors are <strong>police-checked</strong>. We are happy to introduce you to the likely instructor on your info call.</p>
+            <p>Our introductory <strong>Build with AI</strong> course requires no prior coding experience. Instructors help students get started and explain unfamiliar concepts as they work. Requirements may differ across programs, so check the relevant program page before applying.</p>
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>How is this different from a YouTube course or a generic AI bootcamp?</summary>
+          <summary>What will my child do in a program?</summary>
           <div class="answer">
-            <p>Three things. First, students <strong>do, they don't watch</strong>. Every cohort is built around projects students actually finish, taught in real time by senior faculty. Second, the curriculum is mapped to Ontario Ministry expectations and built around portfolio pieces students can show on a university application. Third, top students continue into mentored, paid work on real client problems through our AI Studio.</p>
+            <p>Students take part in guided projects and practical challenges, with time to explore ideas, make decisions and use feedback. Activities depend on the program. In Build with AI, for example, students develop a small web app, test its features and demonstrate their work.</p>
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>Is it safe? What about screen time, privacy, and AI ethics?</summary>
+          <summary>How do you help students use AI thoughtfully?</summary>
           <div class="answer">
-            <p>Safety is a starting point, not an add-on. We use age-appropriate tools, follow data-handling practices appropriate for under-18 students, and teach the judgment to use AI ethically as part of every module. Parents have visibility into what their child is working on and with whom.</p>
-            <p>On screen time: our programs are <em>doing</em>-focused, not video-watching. Students spend time building, discussing, and presenting.</p>
+            <p>Students practise setting goals, giving AI clear instructions and checking what it produces. Instructors help them question suggestions, recognise limitations and decide what to accept or change. Students remain responsible for their choices and for explaining their work, while AI supports exploration and creation.</p>
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>What does it cost, and are scholarships available?</summary>
+          <summary>How will you know what my child understands?</summary>
           <div class="answer">
-            <p>Pricing depends on the stream and format. AI Labs short modules start at the workshop level; the University Track is a semester-long program. Industry Track placements are by invitation and may include paid stipends.</p>
-            <p>We are pursuing IRAP and OCI innovation funding to subsidize spots for partner schools and need-based students. Sibling discounts and need-based scholarships are available; please ask on your info call.</p>
+            <p>Instructors ask students to explain their goals, decisions and results throughout the learning experience. During project work, students may demonstrate a feature, describe how it works or explain how they checked an AI-generated result. These conversations guide feedback and further support. Each program page explains the learning records included.</p>
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>What if a student isn't a "tech kid"?</summary>
+          <summary>Who designs and teaches your programs?</summary>
           <div class="answer">
-            <p>That is most of our students. AI Labs is built around using AI well in <em>any</em> subject: writing essays, doing research, organizing schoolwork, exploring complex topics. No prior coding required.</p>
+            <p>Our programs are designed and delivered by university educators and industry mentors. Team members contribute teaching, research and practical technology experience, with roles varying by program. Our <a href="pages/team.html">team page</a> introduces the people involved and distinguishes program leadership, teaching and advisory roles.</p>
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>How do I enroll?</summary>
+          <summary>How do you handle privacy and consent?</summary>
           <div class="answer">
-            <p>Two ways in. If you'd like to talk first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">book a 20-minute info session</a> — we'll discuss the student's goals and point you to the right program. If you already know the program, <a href="pages/apply.html">apply directly</a> through our application form. Either way: no sales pitch, no auto-enroll.</p>
+            <p>Students are guided to avoid sharing personal information with AI tools and to use fictional sample data in projects. Before publishing student work, we explain what will be publicly visible and request parent or guardian consent. Permission to use names, photographs, videos or testimonials for promotion is requested separately.</p>
           </div>
         </details>
+
+        <details class="faq-item">
+          <summary>Where can I find fees and financial-support information?</summary>
+          <div class="answer">
+            <p>Each program page lists its tuition and what is included. Please <a href="pages/contact.html">contact us</a> to ask whether discounts or financial support are available for a particular cohort. Program-specific payment, cancellation and refund terms are provided with the enrolment information.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I choose a program and apply?</summary>
+          <div class="answer">
+            <p><a href="#programs">Explore the available programs</a> and review their age range, activities, schedule and fees. When you find a suitable option, follow its application link. If you would like help deciding, book a <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><strong>20-minute parent information session</strong></a> to discuss your child’s interests, experience and what to expect.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- FINAL CTA BANNER -->
+  <section class="cta-banner-section">
+    <div class="cta-banner">
+      <div class="cta-banner__bg" aria-hidden="true">
+        <img src="assets/images/footer_banner.png" alt="" />
+      </div>
+      <div class="cta-banner__inner">
+        <div class="cta-banner__panel">
+          <h2 class="cta-banner__title">
+            <span class="cta-banner__title-line">Help your child <span class="gold-word">create</span></span>
+            <span class="cta-banner__title-line gold-word">and learn with AI.</span>
+          </h2>
+          <p class="cta-banner__lede">Give your child the guidance to build with AI, think critically, and create work they’re proud to share.</p>
+          <div class="cta-banner__actions">
+            <a class="btn btn-primary" href="#programs">Explore our programs</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><span class="btn__label">Book a 20-minute session</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+          </div>
+          <div class="cta-banner__meta">
+            <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
+            <span><i class="cta-banner__dot" aria-hidden="true"></i>Apply early for priority consideration</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -843,7 +638,7 @@ header.site:not(.scrolled) {
       </div>
       <form class="newsletter-form" onsubmit="event.preventDefault();">
         <input type="email" placeholder="your@email.com" aria-label="Email address" required>
-        <button type="submit">Subscribe →</button>
+        <button type="submit">Subscribe</button>
       </form>
     </div>
   </div>
@@ -853,27 +648,23 @@ header.site:not(.scrolled) {
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/images/fw_logo_footer.png" alt="Future Wrights Academy" />
+        <span class="brand-logo"><img src="assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
             <a href="https://www.instagram.com/futurewrights_ai/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="https://www.linkedin.com/company/futurewrights/" target="_blank" rel="noopener" aria-label="Future Wrights on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
           </div>
         </div>
       </div>
       <div>
-        <h4>Program</h4>
+        <h4>Programs</h4>
         <ul>
-          <li><a href="#ecosystem">AI Labs</a></li>
-          <li><a href="pages/summer-2026-showcase.html">AI Bootcamp</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>For</h4>
-        <ul>
-          <li><a href="pages/for-parents.html">Parents</a></li>
-          <li><a href="pages/for-students.html">Students</a></li>
+          <li><a href="pages/bootcamp-march-2027.html">AI Bootcamp March 2027</a></li>
+          <li><span role="link" aria-disabled="true">AI Bootcamp Summer 2027 <small>(Coming soon)</small></span></li>
+          <li><a href="pages/summer-2026-showcase.html">AI Bootcamp Summer 2026</a></li>
         </ul>
       </div>
       <div>

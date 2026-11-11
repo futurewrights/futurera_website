@@ -57,8 +57,6 @@
   .page-hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: var(--sp-4); }
   .page-hero .btn-primary { background: var(--brand-accent); color: var(--navy); }
   .page-hero .btn-primary:hover { background: var(--brand-accent-2); transform: translateY(-2px); }
-  .page-hero .btn-ghost { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.32); }
-  .page-hero .btn-ghost:hover { border-color: var(--cyan); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(0,229,255,.45), 0 0 26px rgba(0,229,255,.18); }
   .seats-note { font-size: 13px; color: var(--ink-muted); font-style: italic; }
 
   /* At-a-glance card */
@@ -442,6 +440,8 @@
   details.faq-item .answer ul li:last-child { padding-bottom: 0; }
   details.faq-item .answer a { color: var(--brand-deep); font-weight: 600; }
 </style>
+<link rel="stylesheet" href="../styles/footer.css">
+<link rel="stylesheet" href="../styles/brand.css">
 </head>
 <body>
 
@@ -450,22 +450,23 @@
 <header class="site scrolled" id="siteHeader">
   <div class="container nav">
     <a class="brand-link" href="../index.html" aria-label="Future Wrights Academy home">
-      <img src="../assets/images/fw_logo.png" alt="Future Wrights Academy" />
+      <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
     </a>
     <nav class="primary" id="primaryNav" aria-label="Primary">
       <div class="item"><a class="link" href="../index.html">Home</a></div>
       <div class="item">
         <button class="link" type="button">Programs <span class="caret" aria-hidden="true">&#9662;</span></button>
         <div class="dropdown">
-          <a href="../index.html#ecosystem">AI Labs</a>
-          <a href="summer-2026-showcase.html">AI Bootcamp</a>
+          <a href="bootcamp-march-2027.html">AI Bootcamp March 2027</a>
+          <span class="dropdown-upcoming" role="link" aria-disabled="true">AI Bootcamp Summer 2027<small>Coming soon</small></span>
+          <a href="summer-2026-showcase.html">AI Bootcamp Summer 2026</a>
         </div>
       </div>
       <div class="item"><a class="link" href="team.html">Team</a></div>
       <div class="item"><a class="link" href="contact.html">Contact</a></div>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-chip" href="apply.html"><span class="cta-full">Apply for Summer 2026 →</span><span class="cta-short">Apply →</span></a>
+      <a class="btn btn-chip" href="apply-march-2027.html"><span class="cta-full">Apply for March 2027</span><span class="cta-short">Apply</span></a>
       <button class="mobile-toggle" aria-label="Open menu" aria-controls="primaryNav" aria-expanded="false" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
@@ -490,8 +491,8 @@
           <p class="lede">A 2-week in-person bootcamp for students <strong>ages 13–16</strong> to build real apps with AI — <strong>no prior coding experience required</strong>.</p>
           <p class="lede">Every student builds something new each day and launches a final <strong>capstone app live</strong> on the internet.</p>
           <div class="actions">
-            <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
-            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
+            <a class="btn btn-primary" href="apply-march-2027.html">Apply Now</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><span class="btn__label">Book a 20-minute session</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
 
@@ -507,8 +508,6 @@
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="glance__k">Ages</div><div class="glance__v">13–16 · no coding required</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><div class="glance__k">Bring</div><div class="glance__v">A laptop (any model &middot; no Chromebooks)</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg><div class="glance__k">Tools cost</div><div class="glance__v">GitHub Copilot included</div></div>
-          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><div class="glance__k">Tuition</div><div class="glance__v glance__v--list"><span>$1,299 CAD</span><span class="gsep"> &middot; </span><span>Launch cohort discount</span><span class="gsep"> &middot; </span><span>Save $400</span></div></div>
-          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg><div class="glance__k">Application</div><div class="glance__v">Rolling, until full</div></div>
         </aside>
       </div>
     </div>
@@ -678,8 +677,7 @@
         <details class="faq-item"><summary>Where does it run? Can students from across the GTA attend?</summary><div class="answer"><p>Yes — students from across the GTA are welcome. Toronto, Mississauga, Brampton, Markham, Vaughan, Richmond Hill, Oakville, and beyond. We pick venues that are transit-accessible (subway and GO Transit), with a real classroom space — not a hotel ballroom.</p><p>The venue is <strong>60 Scarsdale Rd, Unit 100, North York, ON M3B 2R7</strong> — a real classroom space in North York, transit-accessible by subway and bus.</p></div></details>
         <details class="faq-item"><summary>What if a student misses a day?</summary><div class="answer"><p>We provide a recap and a 1:1 catch-up session with a mentor. The bootcamp is intensive — we strongly encourage full attendance, but life happens, and we don't penalize for one missed day. Missing more than two days is usually a sign the timing isn't right; we'd rather defer enrollment than rush.</p></div></details>
         <details class="faq-item"><summary>Is parent attendance required or invited?</summary><div class="answer"><p>Not required. Parents are warmly invited to <strong>Demo Day</strong> on the final day — students give a short pitch and parents try the app each student built, live, in front of the room. The day is loud. There are stakes. It's the moment that makes the whole two weeks make sense.</p></div></details>
-        <details class="faq-item"><summary>What's the application process?</summary><div class="answer"><p>A short written application (a few sentences about why the applicant wants to take it and what they'd hope to build), then a short conversation with our program lead. Decisions within two business days. Rolling intake until the cohort fills.</p></div></details>
-        <details class="faq-item"><summary>What does it cost?</summary><div class="answer"><p>Tuition for the 2026 launch cohort is <strong>$1,299 CAD</strong> &mdash; a $400 discount off the standard $1,699 rate. This is the price for our first-ever summer cohort, and it covers the full 2-week bootcamp with all materials and tools included. Payment is collected by <strong>Interac e-Transfer</strong> after we accept your application; we'll send the recipient details with your admission. Need-based scholarships are available; mention this on your application or email us directly.</p></div></details>
+        <details class="faq-item"><summary>What's the application process?</summary><div class="answer"><p>A short written application (a few sentences about why the applicant wants to take it and what they'd hope to build), then a short conversation with our program lead. Decisions within two business days.</p></div></details>
         <details class="faq-item"><summary>Refunds &amp; cancellations</summary><div class="answer"><p>All cancellations and refunds are subject to the following policies:</p><ul><li>All cancellations must be made in writing, via email, to Future Wrights Academy at <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</li><li>Refunds, less an administrative fee ($100 CAD), will be issued for all cancellations made at least 30 days before your cohort's start date.</li><li>After the 30-day window, no refunds will be provided.</li><li>Pro-rated refunds or credits are not available for days absent.</li><li>Future Wrights Academy reserves the right to cancel a cohort if the minimum enrollment is not met or in the event of exceptional and/or unforeseen circumstances. If we have to cancel a cohort, we will accommodate the student in an alternate cohort, or provide a full refund.</li></ul></div></details>
         <details class="faq-item"><summary>Do you issue a certificate of completion?</summary><div class="answer"><p>We don't. Most short-form AI courses do, and most of those certificates aren't worth much. What students leave with — <strong>a deployed app on a real URL, a Demo Day presentation they've delivered, and a portfolio of projects</strong> — is harder to fake and more useful in any college application, interview, or real-world setting.</p><p>If a verification record is needed for a school program or scholarship, we'll provide one on request, signed by the lead instructor.</p></div></details>
         <details class="faq-item"><summary>What happens after the bootcamp?</summary><div class="answer"><p>The apps each student builds keep running on their public URLs after the bootcamp ends — friends can use them, siblings can use them, students can keep iterating. Many keep building on their capstone or start new projects with the same tools through the school year.</p></div></details>
@@ -695,11 +693,11 @@
       </div>
       <div class="cta-banner__inner">
         <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">The future <span class="gold-word">won't wait.</span></h2>
-          <p class="cta-banner__lede">Give your child the confidence, skills, and mindset to build, think, and lead in the AI era.</p>
+          <h2 class="cta-banner__title">Help your child bring <span class="gold-word">an idea to life.</span></h2>
+          <p class="cta-banner__lede">Give your child the guidance to build with AI, think critically, and create work they’re proud to share.</p>
           <div class="cta-banner__actions">
-            <a class="btn btn-primary" href="apply.html">Apply Now &rarr;</a>
-            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
+            <a class="btn btn-primary" href="apply-march-2027.html">Apply Now</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><span class="btn__label">Book a 20-minute session</span><span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
           </div>
           <div class="cta-banner__meta">
             <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
@@ -722,7 +720,7 @@
       </div>
       <form class="newsletter-form" onsubmit="event.preventDefault();">
         <input type="email" placeholder="your@email.com" aria-label="Email address" required>
-        <button type="submit">Subscribe →</button>
+        <button type="submit">Subscribe</button>
       </form>
     </div>
   </div>
@@ -732,27 +730,23 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="../assets/images/fw_logo_footer.png" alt="Future Wrights Academy" />
+        <span class="brand-logo"><img src="../assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="../assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">
             <a href="https://www.instagram.com/futurewrights_ai/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="https://www.linkedin.com/company/futurewrights/" target="_blank" rel="noopener" aria-label="Future Wrights on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
           </div>
         </div>
       </div>
       <div>
-        <h4>Program</h4>
+        <h4>Programs</h4>
         <ul>
-          <li><a href="../index.html#ecosystem">AI Labs</a></li>
-          <li><a href="summer-2026-showcase.html">AI Bootcamp</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>For</h4>
-        <ul>
-          <li><a href="for-parents.html">Parents</a></li>
-          <li><a href="for-students.html">Students</a></li>
+          <li><a href="bootcamp-march-2027.html">AI Bootcamp March 2027</a></li>
+          <li><span role="link" aria-disabled="true">AI Bootcamp Summer 2027 <small>(Coming soon)</small></span></li>
+          <li><a href="summer-2026-showcase.html">AI Bootcamp Summer 2026</a></li>
         </ul>
       </div>
       <div>
