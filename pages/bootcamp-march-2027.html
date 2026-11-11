@@ -137,7 +137,7 @@
   .section-head p a { color: var(--brand-deep); font-weight: 600; }
   .section-head--wide { max-width: 1120px; }
   .section-head--wide h2 { white-space: nowrap; font-size: clamp(24px, 3.4vw, 40px); }
-  .section-head--wide p { white-space: nowrap; }
+  .section-head--wide p { max-width: 860px; margin-inline: auto; white-space: normal; }
   @media (max-width: 1000px) {
     .section-head--wide h2, .section-head--wide p { white-space: normal; }
   }
@@ -156,6 +156,20 @@
     border: 1px solid #e7ecf6;
     border-radius: var(--radius-md);
     padding: var(--sp-4) var(--sp-4) var(--sp-5);
+    transition: transform var(--dur-micro) var(--ease-out),
+                box-shadow var(--dur-micro) var(--ease-out),
+                border-color var(--dur-micro) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .diff-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(17,146,173,0.45);
+      box-shadow: 0 16px 32px rgba(10,27,61,0.10);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .diff-card { transition: none; }
+    .diff-card:hover { transform: none; }
   }
   .diff-card__head { display: flex; gap: 16px; align-items: center; margin-bottom: var(--sp-3); }
   .diff-card__ico {
@@ -164,19 +178,6 @@
     display: grid; place-items: center;
   }
   .diff-card__ico svg { width: 30px; height: 30px; color: var(--teal); }
-  .diff-card .label {
-    display: block;
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--teal);
-    margin: 0 0 5px;
-  }
-  .diff-card .label--single-line {
-    white-space: nowrap; font-size: 10px; letter-spacing: 0.04em;
-  }
-  @media (min-width: 881px) and (max-width: 1100px), (max-width: 400px) {
-    .diff-card:has(.label--single-line) .diff-card__head { flex-direction: column; align-items: flex-start; }
-  }
   .diff-card h3 {
     font-size: 17px; font-weight: 600;
     letter-spacing: -0.3px;
@@ -189,16 +190,168 @@
     color: var(--ink-muted);
     margin: 0;
   }
-  .learning-step {
-    flex: none; display: inline-grid; place-items: center;
-    width: 36px; height: 36px; border-radius: 10px;
-    background: rgba(17,146,173,0.12); color: var(--teal);
-    font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums;
+  .team-link-actions { margin-top: var(--sp-4); text-align: center; }
+  .student-reflections-grid {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--sp-3); max-width: 1120px; margin: 0 auto;
+  }
+  .student-reflection {
+    display: flex; flex-direction: column; min-width: 0; margin: 0; padding: var(--sp-3);
+    background: #fff; border: 1px solid var(--line); border-radius: 22px; color: var(--navy);
+  }
+  .student-reflection--featured { grid-column: span 7; background: var(--navy); border-color: var(--navy); color: #fff; }
+  .student-reflection--cream { grid-column: span 5; background: #fff7e7; border-color: #f1d79a; }
+  .student-reflection--blue { grid-column: span 5; background: #eaf3fa; border-color: #bed6e8; }
+  .student-reflection--green { grid-column: span 7; background: #e8f5f1; border-color: #b9dfd4; }
+  .student-reflection__meta { margin: 0 0 16px; font-size: 12px; line-height: 1.5; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .student-reflection--featured .student-reflection__meta { color: rgba(255,255,255,.8); }
+  .student-reflection blockquote { margin: 0; font-size: 17px; line-height: 1.5; font-weight: 500; }
+  .student-reflection--featured blockquote { font-size: 22px; font-weight: 600; }
+  .student-reflection blockquote p { margin: 0; }
+  .student-reflection__more { margin-top: auto; padding-top: 18px; }
+  .student-reflection__more summary {
+    display: flex; align-items: center; justify-content: flex-end; min-height: 32px;
+    list-style: none; cursor: pointer; font-size: 13px; font-weight: 600;
+  }
+  .student-reflection__more summary::-webkit-details-marker { display: none; }
+  .student-reflection__more summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .student-reflection__more summary:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
+  .student-reflection__close { display: none; }
+  .student-reflection__more[open] .student-reflection__read { display: none; }
+  .student-reflection__more[open] .student-reflection__close { display: inline; }
+  .student-reflection__body { margin: 14px 0 0; padding-top: 16px; border-top: 1px solid rgba(10,27,61,.16); font-size: 15px; line-height: 1.65; }
+  .student-reflection--featured .student-reflection__body { border-color: rgba(255,255,255,.25); }
+  @media (max-width: 760px) {
+    .student-reflections-grid { grid-template-columns: minmax(0, 1fr); }
+    .student-reflection { grid-column: auto; }
+    .student-reflection blockquote { font-size: 18px; font-weight: 500; }
+    .student-reflection__more summary { min-height: 44px; }
+  }
+  /* Project categories: matching cards with aligned options and student choices. */
+  .project-card {
+    --project-accent: #9a6800; --project-tint: #fff6df;
+    display: flex; flex-direction: column; gap: 20px; min-width: 0;
+    padding: 28px; background: #fff; border-top: 3px solid var(--project-accent);
+  }
+  .project-card--learning { --project-accent: var(--navy); --project-tint: #edf1fa; }
+  .project-card--tools { --project-accent: #08758c; --project-tint: #e8f6f8; }
+  .project-card__head { display: flex; align-items: center; gap: 14px; }
+  .project-card__icon {
+    display: grid; place-items: center; flex: none; width: 44px; height: 44px;
+    border-radius: 12px; color: var(--project-accent); background: var(--project-tint);
+  }
+  .project-card__icon svg { width: 26px; height: 26px; }
+  .project-card h3 { font-size: 21px; line-height: 1.2; }
+  .project-card .project-card__options {
+    padding: 16px; border-radius: 12px; background: #f7f9fd;
+  }
+  .project-card__options strong { display: block; margin-bottom: 6px; color: var(--navy); }
+  .project-card .project-card__choice { padding-top: 18px; border-top: 1px solid #e7ecf6; }
+  @supports (grid-template-rows: subgrid) {
+    .project-card { display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: 20px; }
   }
   .project-examples__intro { text-align: center; margin: 0 0 var(--sp-3); color: var(--ink-muted); }
   .project-examples__note {
     max-width: 760px; margin: var(--sp-4) auto 0; text-align: center;
     font-size: 17px; line-height: 1.55; color: var(--navy);
+  }
+  .student-work-section { background: #faf7f0; padding-block: clamp(64px, 7vw, 96px); }
+  .showcase-callout { max-width: 1120px; margin: 0 auto; }
+  .showcase-callout .section-head { margin-bottom: var(--sp-5); }
+  .student-work-grid {
+    display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 16px var(--sp-4); align-items: start;
+  }
+  .student-work-video { display: contents; }
+  .student-work-video .video-frame { grid-column: 1; grid-row: 1; margin-bottom: 0; }
+  .student-work-video figcaption { grid-column: 1; grid-row: 2; align-self: center; font-size: 14px; line-height: 1.5; color: var(--ink-muted); text-align: center; }
+  .student-work-samples {
+    display: grid; grid-column: 2; grid-row: 1; grid-template-rows: repeat(2, 1fr);
+    gap: 16px; min-width: 0; align-self: stretch;
+  }
+  .showcase-sample {
+    display: grid; grid-template-columns: 40% minmax(0, 1fr); min-height: 156px;
+    background: #fff; border: 1px solid #e2dfd6; border-radius: 16px; overflow: hidden;
+    text-decoration: none; transition: border-color var(--dur-micro) var(--ease-out);
+  }
+  .showcase-sample:hover { border-color: #aaa491; }
+  .showcase-sample:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+  .showcase-sample__preview {
+    position: relative; display: block; min-width: 0; min-height: 156px; overflow: hidden;
+    background: #eeefe7;
+  }
+  .showcase-sample__preview--game { background: #0b526b; }
+  .showcase-sample__image {
+    position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+    object-fit: contain; object-position: center; transform: scale(var(--preview-zoom, 1.2)); transform-origin: center;
+    transition: transform 300ms var(--ease-out);
+  }
+  .showcase-sample__image--homepage { --preview-zoom: 1.4; --preview-hover-zoom: 1.5; }
+  .showcase-sample:focus-visible .showcase-sample__image { transform: scale(var(--preview-hover-zoom, 1.3)); }
+  @media (hover: hover) and (pointer: fine) {
+    .showcase-sample:hover .showcase-sample__image { transform: scale(var(--preview-hover-zoom, 1.3)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-sample__image { transition: none; }
+    .showcase-sample:hover .showcase-sample__image,
+    .showcase-sample:focus-visible .showcase-sample__image { transform: scale(var(--preview-zoom, 1.2)); }
+  }
+  .showcase-sample__body { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 14px 16px; min-width: 0; }
+  .showcase-sample h3 { margin: 0 0 4px; font-size: 19px; line-height: 1.3; letter-spacing: -0.3px; color: var(--navy); }
+  .showcase-sample p { margin: 0 0 8px; font-size: 14px; line-height: 1.4; color: var(--ink-muted); }
+  .showcase-sample .showcase-sample__attribution { margin-bottom: 6px; font-size: 13px; }
+  .showcase-sample__link { font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--navy); text-decoration: underline; text-underline-offset: 4px; }
+  .showcase-sample:hover .showcase-sample__link { color: #08758c; }
+  .student-work-actions { grid-column: 2; grid-row: 2; align-self: center; display: flex; align-items: center; justify-content: center; margin: 0; text-align: center; }
+  .student-work-actions .btn { max-width: 100%; justify-content: center; }
+  @media (max-width: 980px) {
+    .student-work-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+    .student-work-video { display: block; margin: 0; min-width: 0; }
+    .student-work-video .video-frame { margin-bottom: 12px; }
+    .student-work-samples, .student-work-actions { grid-column: auto; grid-row: auto; }
+    .student-work-actions { margin-top: -8px; }
+    .showcase-sample { grid-template-columns: minmax(100px, 40%) minmax(0, 1fr); }
+    .showcase-sample__body { padding: 16px; }
+  }
+  @media (max-width: 380px) {
+    .showcase-sample__body { padding: 12px; }
+    .showcase-sample h3 { font-size: 17px; }
+  }
+  .video-frame {
+    position: relative; display: grid; place-items: center;
+    width: 100%; max-width: 980px; aspect-ratio: 16 / 9;
+    margin: 0 auto var(--sp-3); border-radius: var(--radius-md); overflow: hidden;
+    background: linear-gradient(135deg, var(--navy) 0%, #16356b 100%);
+    border: 1px solid var(--brand-deep);
+  }
+  .video-frame video {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover;
+  }
+  .video-frame__play-button {
+    position: absolute; z-index: 2; border: 0; border-radius: 999px; padding: 0;
+    display: flex; align-items: center; gap: 10px; background: transparent; cursor: pointer;
+    transition: opacity .2s var(--ease-out), transform .2s var(--ease-out);
+  }
+  .video-frame__play-button[hidden] { display: none; }
+  .video-frame__play-icon {
+    display: grid; place-items: center; width: 64px; height: 64px; flex: none; border-radius: 50%;
+    background: var(--brand-accent); color: var(--navy); box-shadow: 0 4px 12px rgba(5,14,28,.22);
+  }
+  .video-frame__label { padding: 9px 12px; border-radius: 999px; background: rgba(10,27,61,.88); color: #fff; font: 600 13px/1.4 var(--font-sans); white-space: nowrap; }
+  .video-frame__play-button:hover .video-frame__play-icon { background: var(--brand-accent-2); }
+  .video-frame__play-button:focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+  .video-frame__play-button svg { width: 25px; height: 25px; margin-left: 3px; }
+  .video-frame.is-playing .video-frame__play-button { opacity: 0; pointer-events: none; transform: scale(.9); }
+  .video-frame.is-playing .video-frame__play-button:focus-visible { opacity: 1; pointer-events: auto; transform: scale(1); }
+  @media (hover: hover) {
+    .video-frame.is-playing:hover .video-frame__play-button { opacity: 1; pointer-events: auto; transform: scale(1); }
+  }
+  @media (max-width: 640px) {
+    .video-frame__play-icon { width: 52px; height: 52px; }
+    .video-frame__play-button svg { width: 21px; height: 21px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-frame__play-button { transition: none; }
   }
 
   /* Long-form perspective blocks (For students / For parents) */
@@ -302,30 +455,32 @@
   }
 
   /* Completion certificate, portfolio, and personalized skills report */
+  .completion-section { background: #faf7f0; padding-block: clamp(64px, 7vw, 96px); border-color: #e8e1d4; }
   .completion-grid {
-    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    grid-template-areas: "certificate takeaways";
     gap: var(--sp-6); align-items: center;
     max-width: 1180px; margin: 0 auto;
   }
-  .completion-certificate { margin: 0; }
+  .completion-certificate { grid-area: certificate; width: 100%; max-width: 420px; justify-self: center; margin: 0; }
   .completion-certificate img {
     display: block; width: 100%; height: auto;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 16px 40px rgba(10, 27, 61, .1);
+    border: 1px solid #ded8cc; border-radius: var(--radius-sm);
+    box-shadow: 0 6px 18px rgba(10, 27, 61, .06);
   }
   .completion-certificate figcaption {
     margin-top: 12px; text-align: center; font-size: 12px; color: var(--ink-muted);
   }
-  .completion-section .section-head h2 {
-    font-size: clamp(28px, 3.2vw, 42px); line-height: 1.15;
-    letter-spacing: -1px; color: var(--navy); margin: 0 0 var(--sp-3);
-    text-wrap: balance;
+  .completion-outcome + .completion-outcome { margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid #e2dccf; }
+  .completion-outcome h3 {
+    display: flex; align-items: center; gap: 12px; margin: 0 0 10px;
+    font-size: 20px; line-height: 1.3; letter-spacing: -0.3px; color: var(--navy);
   }
-  .completion-copy p { margin: 0; font-size: 17px; line-height: 1.75; color: var(--ink-muted); }
-  .completion-copy p + p { margin-top: var(--sp-3); }
-  .completion-copy .btn { margin-top: var(--sp-3); }
+  .completion-outcome h3 svg { width: 24px; height: 24px; flex: none; color: var(--teal); }
+  .completion-copy { grid-area: takeaways; }
+  .completion-copy p { max-width: 64ch; margin: 0; font-size: 16px; line-height: 1.65; color: var(--ink-muted); }
   @media (max-width: 800px) {
-    .completion-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+    .completion-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "takeaways" "certificate"; gap: var(--sp-4); }
   }
 
   /* Instructor section */
@@ -404,6 +559,22 @@
     font-size: 14px;
     color: var(--ink-muted);
     margin: 0;
+  }
+
+  /* March bootcamp closing banner */
+  .cta-banner--march .cta-banner__title { font-size: clamp(24px, 3.2vw, 42px); }
+  .cta-banner--march .cta-banner__title-line { display: block; white-space: nowrap; }
+  .cta-banner--march .cta-banner__program { margin: 0 0 var(--sp-2); font-size: 15px; line-height: 1.5; color: #fff; }
+  .cta-banner--march .cta-banner__lede strong { color: #fff; }
+  .cta-banner--march .cta-banner__actions { display: grid; grid-template-columns: max-content max-content; justify-content: start; align-items: stretch; gap: 12px; }
+  .cta-banner--march .cta-banner__actions .btn { min-width: 0; max-width: 100%; padding-inline: 20px; justify-content: center; text-align: center; }
+  .cta-banner--march .cta-banner__actions .btn-primary { white-space: nowrap; }
+  .cta-banner--march .cta-banner__contact { margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.85); }
+  .cta-banner--march .cta-banner__contact a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .cta-banner--march .cta-banner__contact a:hover { color: var(--brand-accent); }
+  @media (max-width: 760px) {
+    .cta-banner--march .cta-banner__actions { grid-template-columns: minmax(0, 1fr); justify-content: stretch; }
+    .cta-banner--march .cta-banner__actions .btn { width: 100%; }
   }
 
   /* FAQ */
@@ -490,15 +661,16 @@
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow gold">MARCH BREAK BOOTCAMP · MARCH 15–19, 2027</span>
+          <span class="eyebrow gold">March 15–19, 2027 · Ages 13–16 · In person</span>
           <h1>Build with AI</h1>
           <h2 class="hero-subtitle">From Idea to Launched App</h2>
-          <p class="lede">Turn an idea into a working web app—with AI as your coding collaborator and you making the decisions.</p>
-          <p class="lede">A five-day, in-person bootcamp for students <strong>ages 13–16</strong>. Students start with a mini-app, then develop their own project: choosing features, directing AI, testing results and preparing an app they can demonstrate and share.</p>
-          <p class="lede"><strong>No prior coding experience required. MacBooks and course software provided.</strong></p>
+          <p class="lede">In this five-day, in-person bootcamp, your child will turn an idea into a small working web app, with instructor guidance throughout the week.</p>
+          <p class="lede">AI helps write the code. Your child decides what to build, checks the results and learns to explain how it works.</p>
+          <p class="lede">Students begin with a mini-app, then develop a project of their own.</p>
+          <p class="lede"><strong>No coding experience needed. MacBooks and course software provided.</strong></p>
           <div class="actions">
             <a class="btn btn-primary" href="apply-march-2027.html">Apply Now &rarr;</a>
-            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute parent information session</a>
           </div>
         </div>
 
@@ -508,9 +680,8 @@
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><div class="glance__k">Format</div><div class="glance__v">Five-day, in-person bootcamp · 15 hours total</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg><div class="glance__k">Schedule</div><div class="glance__v">Morning group: 9:00 AM–12:00 PM<br>Afternoon group: 1:00 PM–4:00 PM</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><div class="glance__k">Group size</div><div class="glance__v">Up to 15 students per group</div></div>
-          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="glance__k">Ages and experience</div><div class="glance__v">Ages 13–16 · No prior coding experience required</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="glance__k">Location</div><div class="glance__v glance__v--location"><strong>Webtree Academy</strong><span>60 Scarsdale Road, Unit 100</span><span>North York, ON M3B 2R7</span></div></div>
-          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><div class="glance__k">Computer and software</div><div class="glance__v">A MacBook is provided by Future Wrights. Codex and OpenAI API access are included.</div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><div class="glance__k">Equipment</div><div class="glance__v">A MacBook and required course software are provided for use during the program.</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><div class="glance__k">Tuition</div><div class="glance__v">$999 CAD, including applicable taxes</div></div>
           <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg><div class="glance__k">Applications</div><div class="glance__v">Accepted on a rolling basis until full.</div></div>
         </aside>
@@ -518,48 +689,40 @@
     </div>
   </section>
 
-  <!-- THE FUTURE WRIGHTS EXPERIENCE -->
+  <!-- HOW YOUR CHILD WILL LEARN -->
   <section class="lab-section">
     <div class="container">
       <div class="section-head section-head--wide">
-        <span class="eyebrow gold">THE FUTURE WRIGHTS EXPERIENCE</span>
+        <span class="eyebrow gold">How your child will learn</span>
         <h2>Build with AI. Learn to make the decisions.</h2>
-        <p>In-person guidance, purposeful projects and opportunities for students to show the thinking behind what they create.</p>
+        <p>This course helps your child turn an idea into a working app they can understand and explain. Along the way, they learn to direct AI, test its work and make their own decisions.</p>
       </div>
 
       <div class="diff-grid">
         <article class="diff-card">
           <div class="diff-card__head">
             <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-            <div>
-              <span class="label">SMALL COHORTS</span>
-              <h3>Guidance throughout the build.</h3>
-            </div>
+            <h3>Guidance from university and industry mentors</h3>
           </div>
-          <p>With up to 15 students per group, learners can ask questions, discuss ideas and get help moving forward. Instructors demonstrate the process and guide students as they plan, build, test and improve their apps.</p>
+          <p>University educators and industry mentors deliver the course in person. They demonstrate new concepts, answer questions and give feedback as students develop their projects step by step.</p>
         </article>
-
         <article class="diff-card">
           <div class="diff-card__head">
-            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
-            <div>
-              <span class="label label--single-line">EDUCATORS + PRACTITIONERS</span>
-              <h3>Learn how to build—and how to think through it.</h3>
-            </div>
+            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-7a4 4 0 0 0-4-4H4V3"/><path d="M12 14a4 4 0 0 1 4-4h4V3"/><polyline points="1 6 4 3 7 6"/><polyline points="17 6 20 3 23 6"/></svg></span>
+            <h3>Decisions your child makes</h3>
           </div>
-          <p>University-affiliated faculty help shape the curriculum, while educators and industry practitioners connect learning to practical AI workflows. Students practise choosing priorities, evaluating AI suggestions and understanding how their app works.</p>
+          <p>Your child chooses what the app should do, gives AI instructions and reviews its suggestions. They learn how a feature works and explain why they accepted or changed an AI-generated result.</p>
         </article>
-
         <article class="diff-card">
           <div class="diff-card__head">
-            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
-            <div>
-              <span class="label">CREATE · TEST · EXPLAIN</span>
-              <h3>A working app. A story of how it was built.</h3>
-            </div>
+            <span class="diff-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M8 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><polyline points="8 13 11 16 16 11"/></svg></span>
+            <h3>Results they learn to check</h3>
           </div>
-          <p>Students develop their own app, test its features and improve it through feedback. In their final demonstration, they show what works, explain their decisions and describe how AI helped. Online sharing follows agreed consent and privacy arrangements.</p>
+          <p>Students test whether their app works as intended. For a quiz, that might mean trying correct and incorrect answers and checking the score. They investigate problems, verify improvements and explain what they found.</p>
         </article>
+      </div>
+      <div class="team-link-actions">
+        <a class="btn btn-ghost" href="team.html">Meet our team &rarr;</a>
       </div>
     </div>
   </section>
@@ -568,98 +731,151 @@
   <section class="lab-section lab-section--alt" id="student-projects" aria-labelledby="student-projects-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">WHAT STUDENTS CREATE</span>
-        <h2 id="student-projects-title">An idea they choose. An app they can show.</h2>
-        <p>Students begin with a mini-app to learn the process, then develop their own small browser app with instructor guidance. They choose its purpose, plan essential features, test the results and improve it.</p>
+        <span class="eyebrow gold" id="student-projects-title">What your child could build</span>
+        <p>Your child will choose a project from three categories, with instructor guidance to keep it achievable within the week. Each category offers a small selection of project ideas, with room for their own interests and decisions.</p>
       </div>
 
-      <p class="project-examples__intro">Possible projects include:</p>
       <div class="diff-grid">
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <h3>A game to play</h3>
+        <article class="diff-card project-card project-card--games">
+          <div class="project-card__head">
+            <span class="project-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="10" r="1"/><circle cx="18" cy="14" r="1"/></svg></span>
+            <h3>Games</h3>
           </div>
-          <p>Create a memory challenge with rules, a score and a restart button. Decide how it should work, then test the player’s experience.</p>
+          <p>A game with clear rules, player actions and a score or result.</p>
+          <p class="project-card__options"><strong>Project options:</strong> A memory-matching game or a reaction-time challenge.</p>
+          <p class="project-card__choice">Your child chooses the theme and shapes the rules, difficulty and player experience.</p>
         </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <h3>A tool for learning</h3>
+        <article class="diff-card project-card project-card--learning">
+          <div class="project-card__head">
+            <span class="project-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-3-2-6-3-10-2v15c4-1 7 0 10 2 3-2 6-3 10-2V5c-4-1-7 0-10 2z"/><path d="M12 7v15M5 9l4 1M5 13l4 1M15 10l4-1M15 14l4-1"/></svg></span>
+            <h3>Learning Tools</h3>
           </div>
-          <p>Build a quiz or flashcards around a topic they enjoy. Choose the content, design the interaction and check the feedback.</p>
+          <p>An app that helps someone practise a topic or check their understanding.</p>
+          <p class="project-card__options"><strong>Project options:</strong> A practice quiz or a flashcard app.</p>
+          <p class="project-card__choice">Your child chooses the subject, develops and checks the content, and decides how questions and feedback appear.</p>
         </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <h3>A story to explore</h3>
+        <article class="diff-card project-card project-card--tools">
+          <div class="project-card__head">
+            <span class="project-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2M9 2h6M12 2v4M18 6l2-2"/></svg></span>
+            <h3>Everyday Tools</h3>
           </div>
-          <p>Design an interactive adventure where choices lead to different outcomes. Plan the paths and test what happens at each decision.</p>
+          <p>A useful app that helps someone organise a task or manage their time.</p>
+          <p class="project-card__options"><strong>Project options:</strong> A study timer or a task-priority helper.</p>
+          <p class="project-card__choice">Your child decides who the tool is for, how it should work and what makes it useful.</p>
         </article>
       </div>
-      <p class="project-examples__note"><strong>Each project gives students something to demonstrate—and decisions, tests and improvements they can explain.</strong></p>
+      <p class="project-examples__note"><strong>Each student develops one main project, starting with two or three essential features, then testing and improving it with instructor guidance.</strong></p>
     </div>
   </section>
 
-  <!-- WHAT STUDENTS LEARN -->
-  <section class="lab-section" id="student-learning" aria-labelledby="student-learning-title">
+  <!-- SUMMER 2026 SHOWCASE -->
+  <section class="lab-section student-work-section" id="summer-showcase" aria-labelledby="summer-showcase-title">
+    <div class="container">
+      <div class="showcase-callout">
+        <div class="section-head">
+          <span class="eyebrow gold">SUMMER 2026 STUDENT WORK</span>
+          <h2 id="summer-showcase-title">See what our students built</h2>
+          <p>A glimpse inside our two-week summer bootcamp, with projects you can explore.</p>
+        </div>
+        <div class="student-work-grid">
+          <figure class="student-work-video">
+            <div class="video-frame">
+              <video controls controlsList="nodownload" playsinline preload="metadata" poster="../assets/summer-2026/gallery/demo-day-poster.jpg" aria-label="Summer 2026: building, sharing and celebrating student projects" aria-describedby="student-video-caption">
+                <source src="https://nham2kihiqpgl3e4.public.blob.vercel-storage.com/demo-day.mp4" type="video/mp4">
+                <!-- Captions placeholder: enable this track after adding verified timed captions to the WebVTT file.
+                <track kind="captions" src="../assets/summer-2026/videos/demo-day.en.vtt" srclang="en" label="English">
+                -->
+                Your browser does not support embedded video. <a href="https://nham2kihiqpgl3e4.public.blob.vercel-storage.com/demo-day.mp4">Watch the Summer 2026 Demo Day video.</a>
+              </video>
+              <button class="video-frame__play-button" type="button" data-video-play data-video-duration="0:44" aria-label="Watch video · 0:44" hidden>
+                <span class="video-frame__play-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                <span class="video-frame__label" data-video-label>Watch video · 0:44</span>
+              </button>
+            </div>
+            <figcaption id="student-video-caption">Summer 2026: building, sharing and celebrating student projects.</figcaption>
+          </figure>
+          <div class="student-work-samples">
+            <a class="showcase-sample" href="https://endless-octopus.vercel.app/" target="_blank" rel="noopener" aria-labelledby="octodrift-title octodrift-link">
+              <span class="showcase-sample__preview showcase-sample__preview--game">
+                <img class="showcase-sample__image" src="../assets/summer-2026/projects/endless-runner-nilo.png" alt="OctoDrift game: a purple octopus swimming between underwater obstacles" width="810" height="593" loading="lazy">
+              </span>
+              <div class="showcase-sample__body">
+                <h3 id="octodrift-title">OctoDrift</h3>
+                <p class="showcase-sample__attribution">Built by Nilo Z.</p>
+                <p>An underwater game created during the summer bootcamp.</p>
+                <span class="showcase-sample__link" id="octodrift-link">Play game ↗</span>
+              </div>
+            </a>
+            <a class="showcase-sample" href="https://my-home-page-wine.vercel.app/" target="_blank" rel="noopener" aria-labelledby="personal-homepage-title personal-homepage-link">
+              <span class="showcase-sample__preview">
+                <img class="showcase-sample__image showcase-sample__image--homepage" src="../assets/summer-2026/projects/arsha.jpg" alt="Arsha’s personal homepage with a colourful grid of projects" width="2272" height="1604" loading="lazy">
+              </span>
+              <div class="showcase-sample__body">
+                <h3 id="personal-homepage-title">Personal Homepage</h3>
+                <p class="showcase-sample__attribution">Built by Arsha A.</p>
+                <p>A student-designed home for their projects and interests.</p>
+                <span class="showcase-sample__link" id="personal-homepage-link">View homepage ↗</span>
+              </div>
+            </a>
+          </div>
+          <div class="student-work-actions">
+            <a class="btn btn-ghost" href="student-showcase.html#projects">Explore all student projects &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT REFLECTIONS -->
+  <section class="lab-section lab-section--alt" id="student-reflections" aria-labelledby="student-reflections-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">WHAT STUDENTS LEARN</span>
-        <h2 id="student-learning-title">Learn to direct AI—and understand what you build.</h2>
-        <p>Through their own project, students practise turning ideas into clear instructions, making thoughtful decisions and checking whether the results work.</p>
+        <span class="eyebrow gold" id="student-reflections-title">Hear from our students</span>
+        <p>Reflections from our two-week Summer 2026 bootcamp.</p>
       </div>
 
-      <div class="diff-grid">
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <span class="learning-step">01</span>
-            <h3>Define the idea</h3>
-          </div>
-          <p>Decide who the app is for, what it should do and which features belong in the first version.</p>
+      <div class="student-reflections-grid">
+        <article class="student-reflection student-reflection--featured" aria-labelledby="reflection-arwin">
+          <p class="student-reflection__meta" id="reflection-arwin">Arwin · Creating with AI</p>
+          <blockquote><p>“It has enabled me to follow my passion of creating a study website with the assist of AI.”</p></blockquote>
+          <details class="student-reflection__more">
+            <summary><span class="student-reflection__read">Read full reflection <span aria-hidden="true">+</span></span><span class="student-reflection__close">Close reflection <span aria-hidden="true">−</span></span></summary>
+            <p class="student-reflection__body">My experience at Future Wrights has taught me more than the use of VSCode or the structure of prompting; it has enabled me to follow my passion of creating a study website with the assist of AI.</p>
+          </details>
         </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <span class="learning-step">02</span>
-            <h3>Guide the AI</h3>
-          </div>
-          <p>Write clear instructions, review AI’s proposed plan and decide which suggestions to accept, change or question.</p>
+        <article class="student-reflection student-reflection--cream" aria-labelledby="reflection-towheed">
+          <p class="student-reflection__meta" id="reflection-towheed">Towheed · Launching</p>
+          <blockquote><p>“I learnt a lot about launching and creating a live website.”</p></blockquote>
+          <details class="student-reflection__more">
+            <summary><span class="student-reflection__read">Read full reflection <span aria-hidden="true">+</span></span><span class="student-reflection__close">Close reflection <span aria-hidden="true">−</span></span></summary>
+            <p class="student-reflection__body">I had a great 2 weeks here at the Future Wrights Academy’s Summer AI Bootcamp. I learnt a lot about launching and creating a live website. Thank you so much for this opportunity!</p>
+          </details>
         </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <span class="learning-step">03</span>
-            <h3>Understand the app</h3>
-          </div>
-          <p>Explain how a user’s actions connect to the app’s rules, what it remembers and what appears on screen.</p>
+        <article class="student-reflection student-reflection--blue" aria-labelledby="reflection-niloofar">
+          <p class="student-reflection__meta" id="reflection-niloofar">Niloofar · Problem Solving</p>
+          <blockquote><p>“It helped me improve my problem-solving skills and boosted my creativity.”</p></blockquote>
+          <details class="student-reflection__more">
+            <summary><span class="student-reflection__read">Read full reflection <span aria-hidden="true">+</span></span><span class="student-reflection__close">Close reflection <span aria-hidden="true">−</span></span></summary>
+            <p class="student-reflection__body">This AI bootcamp helped me learn about how artificial intelligence works and how I can use AI tools effectively. It also helped me improve my problem-solving skills and boosted my creativity by giving me opportunities to work on different games and websites.</p>
+          </details>
         </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <span class="learning-step">04</span>
-            <h3>Build step by step</h3>
-          </div>
-          <p>Break the project into manageable parts, check each addition and save working versions along the way.</p>
-        </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <span class="learning-step">05</span>
-            <h3>Test and improve</h3>
-          </div>
-          <p>Compare what should happen with what actually happens. Investigate problems, test repairs and use peer feedback to improve the experience.</p>
-        </article>
-        <article class="diff-card">
-          <div class="diff-card__head">
-            <span class="learning-step">06</span>
-            <h3>Launch and explain</h3>
-          </div>
-          <p>Prepare the app for sharing, demonstrate its features and explain key decisions, AI contributions and remaining limitations.</p>
+        <article class="student-reflection student-reflection--green" aria-labelledby="reflection-ghazal">
+          <p class="student-reflection__meta" id="reflection-ghazal">Ghazal · Human + AI</p>
+          <blockquote><p>“Technology is powerful, but it’s the people behind it who make it meaningful.”</p></blockquote>
+          <details class="student-reflection__more">
+            <summary><span class="student-reflection__read">Read full reflection <span aria-hidden="true">+</span></span><span class="student-reflection__close">Close reflection <span aria-hidden="true">−</span></span></summary>
+            <p class="student-reflection__body">The camp helped me see AI in a new way… I’m leaving this camp with more curiosity, new ideas, and excitement for what the future can bring.</p>
+          </details>
         </article>
       </div>
     </div>
   </section>
 
   <!-- YOUR WEEK AT A GLANCE -->
-  <section class="lab-section lab-section--alt" id="curriculum" aria-labelledby="curriculum-title">
+  <section class="lab-section" id="curriculum" aria-labelledby="curriculum-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">YOUR WEEK AT A GLANCE</span>
-        <h2 id="curriculum-title">Five days from idea to launch.</h2>
+        <span class="eyebrow gold" id="curriculum-title">Your child’s week, day by day</span>
         <p>Each day combines instructor demonstrations, hands-on building, feedback and time to explain what students are learning.</p>
       </div>
 
@@ -668,28 +884,23 @@
           <div class="week-head">March 15–19, 2027 · From idea to launch</div>
           <div class="day-row">
             <div class="day-row__when"><time class="day-row__day" datetime="2027-03-15">Monday<br>March 15</time><span class="day-row__num" aria-label="Day 1">1</span></div>
-            <div class="day-row__body"><h3>Discover and create</h3><p>Explore what AI can help build and why its results need checking. Create a first mini-app, request a change and test whether it works as intended.</p></div>
-            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v6L3.6 18.4A2 2 0 0 0 5.3 21.5h13.4a2 2 0 0 0 1.7-3.1L15 9V3"/><path d="M9 3h6"/><path d="M8 14h8"/></svg><span><strong>Build today:</strong>A first mini-app with a tested change.</span></div>
+            <div class="day-row__body"><h3>Discover and create</h3><p>Students explore how AI can help build an app and where its results need checking. They create a first mini-app, request a change and test what happens.</p></div>
           </div>
           <div class="day-row">
             <div class="day-row__when"><time class="day-row__day" datetime="2027-03-16">Tuesday<br>March 16</time><span class="day-row__num" aria-label="Day 2">2</span></div>
-            <div class="day-row__body"><h3>Define and plan</h3><p>Choose a project and its intended user. Sketch the experience, select essential features and define what success looks like. Review an AI-generated plan before beginning the build.</p></div>
-            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span><strong>Build today:</strong>A project sketch, essential features and a reviewed plan.</span></div>
+            <div class="day-row__body"><h3>Choose and plan</h3><p>Your child selects a project, sketches the experience and chooses two or three essential features. With instructor guidance, they review AI’s proposed plan before building.</p></div>
           </div>
           <div class="day-row">
             <div class="day-row__when"><time class="day-row__day" datetime="2027-03-17">Wednesday<br>March 17</time><span class="day-row__num" aria-label="Day 3">3</span></div>
-            <div class="day-row__body"><h3>Build and understand</h3><p>Develop the app one feature at a time. Explore how user actions connect to rules and results. Check each addition, explain how a feature works and save progress.</p></div>
-            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/></svg><span><strong>Build today:</strong>Working features and saved progress.</span></div>
+            <div class="day-row__body"><h3>Build and understand</h3><p>Students develop their app one feature at a time, checking and saving progress. They learn to explain how a user’s action produces a result on screen.</p></div>
           </div>
           <div class="day-row">
             <div class="day-row__when"><time class="day-row__day" datetime="2027-03-18">Thursday<br>March 18</time><span class="day-row__num" aria-label="Day 4">4</span></div>
-            <div class="day-row__body"><h3>Test and improve</h3><p>Exchange apps with a peer and observe their experience. Investigate problems, use AI to help make repairs and verify the results. Choose improvements based on feedback.</p></div>
-            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9.5 9a2.5 2.5 0 1 1 3.3 2.4c-.6.2-1.3.7-1.3 1.6"/><line x1="11.5" y1="16" x2="11.51" y2="16"/></svg><span><strong>Build today:</strong>Tested repairs and improvements from peer feedback.</span></div>
+            <div class="day-row__body"><h3>Test and improve</h3><p>Students exchange feedback with a peer and investigate problems in their app. They use AI to help make repairs, then test whether the changes work.</p></div>
           </div>
           <div class="day-row">
             <div class="day-row__when"><time class="day-row__day" datetime="2027-03-19">Friday<br>March 19</time><span class="day-row__num" aria-label="Day 5">5</span></div>
-            <div class="day-row__body"><h3>Launch and explain</h3><p>Prepare the final version, publish with instructor guidance and agreed privacy settings, and check the live app. Demonstrate the project, explain key decisions and show how AI contributed.</p></div>
-            <div class="day-row__build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span><strong>Build today:</strong>A published app and a final demonstration.</span></div>
+            <div class="day-row__body"><h3>Launch and share</h3><p>With instructor support, students prepare their app for sharing and publish where approved. They demonstrate their project, explain important decisions and describe how AI helped.</p></div>
           </div>
         </div>
       </div>
@@ -697,29 +908,36 @@
   </section>
 
   <!-- COMPLETION CERTIFICATE, PORTFOLIO, AND SKILLS REPORT -->
-  <section class="lab-section completion-section" aria-labelledby="completion-title">
+  <section class="lab-section lab-section--alt completion-section" aria-labelledby="completion-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow gold">What they take home</span>
-        <h2 id="completion-title">An App to Share. Learning to Show.</h2>
+        <span class="eyebrow gold" id="completion-title">What your child takes home</span>
       </div>
       <div class="completion-grid">
+        <div class="completion-copy">
+          <div class="completion-outcome">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M9 13l-2 2 2 2M15 13l2 2-2 2"/></svg><span>Their app project</span></h3>
+            <p>A GitHub repository containing their project code and version history, plus a live link to their deployed app that they can open and share.</p>
+          </div>
+          <div class="completion-outcome">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8M13 2l5 5v3M13 2v5h5M7 7h2M7 11h5M7 15h2"/><path d="M13 13h8v6h-3l-3 3v-3h-2z"/></svg><span>A personalised learning report</span></h3>
+            <p>A short report with project examples of your child’s decisions, testing and understanding. Instructor feedback outlines support provided and next steps.</p>
+          </div>
+          <div class="completion-outcome">
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18H3V3h18v10M7 7h10M7 11h5"/><circle cx="17" cy="16" r="3"/><path d="m15 18.2-1 4.8 3-1.5 3 1.5-1-4.8"/></svg><span>A certificate of completion</span></h3>
+            <p>Presented by Future Wrights in partnership with Webtree Academy, recognising completion of <strong>Build with AI: From Idea to Launched App</strong>.</p>
+          </div>
+        </div>
         <figure class="completion-certificate">
           <img src="../assets/images/march-2027-completion-certificate.png" alt="Sample Future Wrights certificate of completion for Build with AI, presented in partnership with Webtree Academy" width="1686" height="1178" loading="lazy">
-          <figcaption>Sample certificate of completion</figcaption>
+          <figcaption>Sample certificate of completion.</figcaption>
         </figure>
-        <div class="completion-copy">
-          <p>Your child will leave with their app project, code and saved versions on GitHub—a portfolio they can continue developing. Where online publication is approved, a live link lets others try what they built.</p>
-          <p>They’ll also receive a <strong>certificate of completion</strong>, presented by Future Wrights in partnership with Webtree Academy, and a <strong>personalised learning report</strong>.</p>
-          <p>The report highlights what your child demonstrated through their project: how they explained a feature, made decisions, tested results and used feedback. Instructor comments identify the support provided and suggest next steps for learning.</p>
-          <a class="btn btn-ghost" href="student-showcase.html">See Summer 2026 Student Work &rarr;</a>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="lab-section lab-section--alt" aria-labelledby="faq-title">
+  <section class="lab-section" aria-labelledby="faq-title">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow gold">QUESTIONS PARENTS ASK</span>
@@ -734,6 +952,10 @@
         <details class="faq-item">
           <summary>What will my child build?</summary>
           <div class="answer"><p>Students begin with a mini-app, then develop an individual browser app with instructor guidance. Possible projects include a game, learning tool or interactive story. Instructors help keep the project achievable within the week.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Will my child keep their project code and app?</summary>
+          <div class="answer"><p>Yes. Your child will receive a GitHub repository containing their project code and version history, plus a live link to their deployed app that they can open and share.</p></div>
         </details>
         <details class="faq-item">
           <summary>How do you check that students understand what they build?</summary>
@@ -752,12 +974,21 @@
           <div class="answer"><p>Students work toward publishing a small web app with instructor guidance. Online sharing follows agreed consent and privacy arrangements. Where publication is approved, students receive a live link others can use to try their app.</p></div>
         </details>
         <details class="faq-item">
+          <summary>How do you handle privacy and consent?</summary>
+          <div class="answer">
+            <p>Student projects may be shared through live web links and GitHub repositories. Before publication, we explain what will be publicly visible and request parent or guardian consent.</p>
+            <p>Students are guided to use fictional sample data in their projects and avoid sharing personal information with AI tools or including it in published work.</p>
+            <p>Permission to use a student’s name, photograph, video or testimonial in promotional materials is requested separately.</p>
+            <p>For questions or to discuss sharing preferences, contact <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p>
+          </div>
+        </details>
+        <details class="faq-item">
           <summary>What does the tuition include?</summary>
           <div class="answer"><p>The <strong>$999 CAD tuition, including applicable taxes</strong>, covers the five-day bootcamp, use of a MacBook, required course software and access, a certificate of completion and a personalised learning report.</p></div>
         </details>
         <details class="faq-item">
           <summary>How do we apply?</summary>
-          <div class="answer"><p>Select <a href="apply-march-2027.html"><strong>Apply Now</strong></a> to submit an application. Each group has up to 15 students, with applications accepted on a rolling basis until full.</p><p>If you would like to discuss the program first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><strong>book a 20-minute information session</strong></a> or email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p></div>
+          <div class="answer"><p>Select <a href="apply-march-2027.html"><strong>Apply Now</strong></a> to submit an application. Each group has up to 15 students, with applications accepted on a rolling basis until full.</p><p>If you would like to discuss the program first, <a href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener"><strong>book a 20-minute parent information session</strong></a> or email <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a>.</p></div>
         </details>
         <details class="faq-item">
           <summary>What is your refund and cancellation policy?</summary>
@@ -769,22 +1000,23 @@
 
   <!-- FINAL CTA BANNER -->
   <section class="cta-banner-section">
-    <div class="cta-banner">
+    <div class="cta-banner cta-banner--march">
       <div class="cta-banner__bg" aria-hidden="true">
         <img src="../assets/images/footer_banner.png" alt="" />
       </div>
       <div class="cta-banner__inner">
         <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">Help them turn ideas into <span class="gold-word">something real.</span></h2>
-          <p class="cta-banner__lede">Give your child the guidance to build with AI, think critically, and create work they’re proud to share.</p>
+          <h2 class="cta-banner__title">
+            <span class="cta-banner__title-line">Help your child</span>
+            <span class="cta-banner__title-line">bring <span class="gold-word">an idea to life.</span></span>
+          </h2>
+          <p class="cta-banner__program"><strong>Build with AI · March 15–19, 2027 · Ages 13–16</strong></p>
+          <p class="cta-banner__lede">Five in-person sessions at Webtree Academy, North York.<br><strong>$999 CAD, including applicable taxes.</strong></p>
           <div class="cta-banner__actions">
             <a class="btn btn-primary" href="apply-march-2027.html">Apply Now &rarr;</a>
-            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
+            <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a parent info session</a>
           </div>
-          <div class="cta-banner__meta">
-            <span><i class="cta-banner__dot" aria-hidden="true"></i>Spaces are limited</span>
-            <span><i class="cta-banner__dot" aria-hidden="true"></i>Apply early for priority consideration</span>
-          </div>
+          <p class="cta-banner__contact">Questions? <a href="mailto:admissions@futurewrights.ai">admissions@futurewrights.ai</a></p>
         </div>
       </div>
     </div>
@@ -885,6 +1117,88 @@
 
     // Close when the page is scrolled
     window.addEventListener('scroll', closeMenu, { passive: true });
+  })();
+</script>
+
+<script>
+  /* Match the Summer 2026 showcase player controls and visibility behaviour. */
+  (function () {
+    document.querySelectorAll('#summer-showcase [data-video-play]').forEach(function (button) {
+      var frame = button.closest('.video-frame');
+      var video = frame && frame.querySelector('video');
+      if (!video) return;
+      var durationLabel = button.dataset.videoDuration;
+      var label = button.querySelector('[data-video-label]');
+
+      function setButtonState(state) {
+        var path = button.querySelector('path');
+        button.dataset.videoState = state;
+        var action = state === 'pause' ? 'Pause video' : state === 'replay' ? 'Replay video' : 'Watch video';
+        var text = action + (state !== 'pause' && durationLabel ? ' · ' + durationLabel : '');
+        button.setAttribute('aria-label', text);
+        label.textContent = text;
+        if (state === 'pause') {
+          path.setAttribute('d', 'M7 5h4v14H7zM13 5h4v14h-4z');
+        } else if (state === 'replay') {
+          path.setAttribute('d', 'M12 5V1L7 6l5 5V7a5 5 0 1 1-4.9 6h-2A7 7 0 1 0 12 5z');
+        } else {
+          path.setAttribute('d', 'M8 5v14l11-7z');
+        }
+      }
+
+      function updateDuration() {
+        if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+        var seconds = Math.round(video.duration);
+        durationLabel = Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+        setButtonState(button.dataset.videoState || 'play');
+      }
+      video.addEventListener('loadedmetadata', updateDuration);
+      video.addEventListener('durationchange', updateDuration);
+      setButtonState('play');
+      updateDuration();
+
+      button.addEventListener('click', function () {
+        video.controls = true;
+        if (video.paused) {
+          if (video.ended) video.currentTime = 0;
+          video.play().catch(function () {
+            frame.classList.remove('is-playing');
+            setButtonState('play');
+          });
+        } else {
+          video.pause();
+        }
+      });
+      video.addEventListener('play', function () {
+        frame.classList.add('is-playing');
+        setButtonState('pause');
+      });
+      video.addEventListener('pause', function () {
+        if (video.ended) return;
+        frame.classList.remove('is-playing');
+        setButtonState('play');
+      });
+      video.addEventListener('ended', function () {
+        frame.classList.remove('is-playing');
+        setButtonState('replay');
+      });
+      video.controls = false;
+      button.hidden = false;
+    });
+
+    if ('IntersectionObserver' in window) {
+      var visibilityObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var frameVideo = entry.target.querySelector('video');
+          if (entry.intersectionRatio < 0.35 && frameVideo && !frameVideo.paused) {
+            frameVideo.pause();
+          }
+        });
+      }, { threshold: [0, 0.35] });
+      document.querySelectorAll('#summer-showcase .video-frame').forEach(function (frame) {
+        visibilityObserver.observe(frame);
+      });
+    }
   })();
 </script>
 

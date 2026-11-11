@@ -31,7 +31,7 @@
   position: relative; overflow: hidden; isolation: isolate;
   background: radial-gradient(125% 100% at 22% 8%, #28538e 0%, #12326a 46%, #0A1B3D 100%);
   color: var(--ink-0);
-  padding: calc(95px + var(--sp-7)) 0 var(--sp-8); min-height: calc(100vh - 76px);
+  padding: calc(95px + var(--sp-5)) 0 var(--sp-6); min-height: clamp(660px, 82vh, 820px);
   display: flex; align-items: center;
 }
 .fw-hero__bg { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
@@ -49,7 +49,7 @@
 .fw-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
   background:linear-gradient(90deg, rgba(10,27,61,.76) 0%, rgba(10,27,61,.52) 42%, rgba(10,27,61,.20) 72%, rgba(10,27,61,.30) 100%); }
 
-.fw-hero__inner { position:relative; z-index:2; width:100%; transform:translateY(40px); }
+.fw-hero__inner { position:relative; z-index:2; width:100%; }
 .fw-hero__copy { max-width: 880px; }
 
 .fw-eyebrow { display:inline-flex; align-items:center; gap:9px; font-family:"Inter",sans-serif;
@@ -64,17 +64,14 @@
 .fw-hero__title .grad { color:var(--gold); }
 
 .fw-hero__lede { font-family:"Inter",sans-serif; font-size:clamp(17px,1.45vw,20px);
-  line-height:1.62; color:var(--ink-50); margin:26px 0 0; max-width:850px; }
+  line-height:1.62; color:var(--ink-0); margin:26px 0 0; max-width:850px; }
 
 .fw-hero__cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:38px; }
-.fw-hero__tagline { margin:16px 0 0; font-size:14px; line-height:1.5; color:var(--ink-50); }
-.fw-hero__journey { display:block; width:min(100%, 320px); height:auto; margin-top:56px; }
 .fw-hero__camp { display:none; }
 @media (max-width:640px){
   .fw-hero__camp { display:inline-flex; }
   .fw-hero__cta { flex-direction:column; align-items:stretch; }
   .fw-hero__cta .btn { justify-content:center; }
-  .fw-hero__journey { width:min(100%, 280px); margin:44px auto 0; }
 }
 /* Hero CTAs use the locked .btn system — sized up for the showpiece + dark-bg ghost (cyan glow) */
 .fw-hero .btn { font-size:16px; padding:15px 30px; gap:9px; }
@@ -99,8 +96,7 @@
 
 @media (max-width:900px){
   .home-hero-intro { margin-top:-80px; }
-  .fw-hero { padding: calc(80px + var(--sp-6)) 0 var(--sp-7); min-height:auto; }
-  .fw-hero__inner { transform:none; }
+  .fw-hero { padding: calc(80px + var(--sp-4)) 0 var(--sp-5); min-height: 0; }
   .fw-hero__copy { max-width:none; }
   .fw-hero__title { white-space:normal; }
   .fw-hero__desktop-break { display:none; }
@@ -140,7 +136,7 @@ header.site:not(.scrolled) {
 .section-head h2 { font-family: "General Sans", "Inter", sans-serif; }
 
 /* Next planned program */
-.next-program { padding: var(--sp-6) 0; background: #fffdf7; border-bottom: 1px solid var(--line); }
+.next-program { padding: var(--sp-6) 0; background: #fffdf7; border-bottom: 1px solid var(--line); scroll-margin-top: 96px; }
 .next-program__grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--sp-6); align-items: center; }
 .next-program h2 { font-family: "General Sans", "Inter", sans-serif; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; letter-spacing: -.02em; color: var(--navy); margin: 0 0 var(--sp-3); text-wrap: balance; }
 .next-program__copy p { max-width: 640px; margin: 0; font-size: 17px; color: var(--ink-muted); }
@@ -242,6 +238,8 @@ header.site:not(.scrolled) {
   .vm-card__ico svg, .vm-card__ico--art img { width:56px; height:56px; }
   .vm-badge { white-space:nowrap; }
 }
+/* Learning journey graphic in the footer brand column. */
+.foot-brand .foot-journey { display:block; width:min(100%, 320px); height:auto; margin:0 0 var(--sp-3); filter:none; }
 </style>
 <link rel="stylesheet" href="styles/brand.css">
 </head>
@@ -296,15 +294,13 @@ header.site:not(.scrolled) {
     <div class="fw-hero__scrim" aria-hidden="true"></div>
     <div class="container fw-hero__inner">
       <div class="fw-hero__copy">
-        <span class="fw-eyebrow">AI-integrated programs for students in Grades 8–12<span class="fw-eyebrow__loc"> &middot; Toronto</span></span>
+        <span class="fw-eyebrow">AI education for students in Grades 8–12<span class="fw-eyebrow__loc"> &middot; Toronto</span></span>
         <h1 class="fw-hero__title">Developing human capability<br>for the <span class="grad">AI era.</span></h1>
-        <p class="fw-hero__lede">At Future Wrights, students use AI to turn meaningful ideas into projects they can build, test, and explain. With instructor guidance, they practise critical thinking, make decisions, and take ownership of what they create.</p>
+        <p class="fw-hero__lede">Your child learns to work thoughtfully with AI through meaningful projects and practical challenges. Guided by university educators and industry mentors, they explore ideas, make decisions, evaluate results and take responsibility for their work.</p>
         <div class="fw-hero__cta">
           <a class="btn btn-primary" href="pages/bootcamp-march-2027.html">Explore March Break 2027</a>
           <a class="btn btn-ghost" href="pages/student-showcase.html">See Student Work &rarr;</a>
         </div>
-        <p class="fw-hero__tagline">Meaningful projects. Guided learning. Student ownership.</p>
-        <img class="fw-hero__journey" src="assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead">
       </div>
     </div>
   </section>
@@ -331,12 +327,8 @@ header.site:not(.scrolled) {
     <div class="container">
       <div class="ticker-row">
         <span class="ticker-item">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          <strong>Ontario curriculum</strong>-aligned
-        </span>
-        <span class="ticker-item">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-          <strong>UofT &amp; TMU</strong>-affiliated faculty
+          <span><strong>University educators</strong> and industry mentors.</span>
         </span>
         <span class="ticker-item">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
@@ -369,7 +361,7 @@ header.site:not(.scrolled) {
   </script>
 
   <!-- NEXT PLANNED PROGRAM -->
-  <section class="next-program" aria-labelledby="next-program-title">
+  <section class="next-program" id="programs" aria-labelledby="next-program-title">
     <div class="container next-program__grid">
       <div class="next-program__copy">
         <span class="eyebrow gold">Next planned program</span>
@@ -602,10 +594,10 @@ header.site:not(.scrolled) {
       </div>
       <div class="cta-banner__inner">
         <div class="cta-banner__panel">
-          <h2 class="cta-banner__title">Help them turn ideas into <span class="gold-word">something real.</span></h2>
+          <h2 class="cta-banner__title">Help your child <span class="gold-word">create and learn with AI.</span></h2>
           <p class="cta-banner__lede">Give your child the guidance to build with AI, think critically, and create work they’re proud to share.</p>
           <div class="cta-banner__actions">
-            <a class="btn btn-primary" href="pages/apply-march-2027.html">Apply Now &rarr;</a>
+            <a class="btn btn-primary" href="#programs">Explore our programs &rarr;</a>
             <a class="btn btn-ghost" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a 20-minute session</a>
           </div>
           <div class="cta-banner__meta">
@@ -644,6 +636,7 @@ header.site:not(.scrolled) {
       <div class="foot-brand">
         <span class="brand-logo"><img src="assets/images/fw-logo.png" alt="Future Wrights" /></span>
         <p>AI education for Grade 8–12 students. Proudly built&nbsp;in&nbsp;Toronto. Future Wrights brings together university-affiliated educators, engineers, researchers, and industry practitioners to help students prepare for the AI era.</p>
+        <img class="foot-journey" src="assets/images/learn-build-launch-lead.png" alt="Learn, build, launch, lead" loading="lazy">
         <div class="foot-social">
           <span class="foot-social-label">Follow us</span>
           <div class="foot-social-links">

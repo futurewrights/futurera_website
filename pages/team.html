@@ -54,6 +54,14 @@
 
   .team-card[data-member="6"] .info-overlay h3 { font-size: 14px; }
 
+  /* Closing banner */
+  .cta-banner--team .cta-banner__title { text-wrap: balance; }
+  .cta-banner--team .cta-banner__actions { margin-bottom: 0; }
+  .cta-banner--team .btn { max-width: 100%; justify-content: center; text-align: center; }
+  @media (max-width: 760px) {
+    .cta-banner--team .btn { width: 100%; }
+  }
+
 </style>
 <link rel="stylesheet" href="../styles/brand.css">
 </head>
@@ -231,21 +239,19 @@
     </div>
   </section>
 
-  <!-- CTA · standard "Get in touch" block -->
-  <section class="article-cta-section">
-    <div class="article-cta-wrap">
-      <div class="article-cta">
-        <span class="article-cta-eyebrow">Get in touch</span>
-        <h2>Want to meet the team?</h2>
-        <p>A 20-minute conversation with our program lead. No sales pitch — an honest fit conversation.</p>
-        <div class="actions" style="align-items: center;">
-          <a class="btn btn-accent" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a meeting with us</a>
-          <a class="text-arrow" href="mailto:hello@futurewrights.ai">
-            <span>Email us instead</span>
-            <span class="arrow-circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </span>
-          </a>
+  <!-- FINAL CTA BANNER -->
+  <section class="cta-banner-section" aria-labelledby="team-cta-title">
+    <div class="cta-banner cta-banner--team">
+      <div class="cta-banner__bg" aria-hidden="true">
+        <img src="../assets/images/footer_banner.png" alt="" loading="lazy" />
+      </div>
+      <div class="cta-banner__inner">
+        <div class="cta-banner__panel">
+          <h2 class="cta-banner__title" id="team-cta-title">Have questions about the <span class="gold-word">right program for your child?</span></h2>
+          <p class="cta-banner__lede">Talk with our team for 20 minutes about your child’s interests, our programs and what to expect.</p>
+          <div class="cta-banner__actions">
+            <a class="btn btn-primary" href="https://calendar.app.google/FEvjxSPjLg7RLPNZ6" target="_blank" rel="noopener">Book a parent information session</a>
+          </div>
         </div>
       </div>
     </div>
